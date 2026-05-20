@@ -1,19 +1,19 @@
 # GROK BUILD HANDOFF PROMPT — Jett Optics Neuromorphic Interface
 
-**Project**: Jett Optics (OPTX) — Neuromorphic Gaze Interface + Objective Gaze Tensor + Dual Token Economy
+**Project**: Jett Optics (OPTX) — Neuromorphic Gaze Interface + Adaptive Gaze Tensor (AGT) + Dual Token Economy
 **Date**: 2026-05-20
 **Strict Constraint**: Use **ONLY existing repositories** in the jettoptx GitHub org. No new repos. Only refine, upgrade, conform, or modulate **current skills and connectors**.
 
 ## Core Principle
 Everything new must conform to and route through the existing **HEDGEHOG** gateway. HEDGEHOG is the single source of truth for skill discovery and secure delegation.
 
-## Exact HEDGEHOG Definition (Conform to this)
+## Exact HEDGEHOG Definition (Conform to this exactly)
 **HEDGEHOG = HANDSHAKE Encrypted DELEGATED GESTURE ENVELOPE HANDLER OPTX GATEWAY**
 
-HEDGEHOG is the mandatory central MCP (Model Context Protocol) gateway. All gaze vectors, Objective Gaze Tensors, gesture envelopes, batch training data, biometrics correlation, token operations, and agent harness calls must pass through HEDGEHOG for encryption, delegation, validation, and uniform skill registration.
+HEDGEHOG is the mandatory central MCP (Model Context Protocol) gateway. All gaze vectors, Adaptive Gaze Tensors (AGT), gesture envelopes, batch training data, biometrics correlation, token operations, and agent harness calls must pass through HEDGEHOG for encryption, delegation, validation, and uniform skill registration.
 
 ## Repos to Refine / Upgrade (No New Repos)
-- `jettoptx-aaron-router` — Refine AARON with Objective Gaze Tensor (OGT) upgrade from AGT, Jet Cursor logic, and HEDGEHOG-compliant connectors.
+- `jettoptx-aaron-router` — Refine AARON with Adaptive Gaze Tensor (AGT) processing, Jet Cursor logic, and HEDGEHOG-compliant connectors.
 - `jettoptx-core` — Upgrade JOE Agentic Core. Make Joe the central orchestrator that consumes HEDGEHOG-registered skills.
 - `jettoptx-context` — Refine existing skills in `.agents/skills/`, update CLAUDE.md / AGENTS.md with new conformed modules, add HEDGEHOG MCP skill definitions.
 - `jettoptx-docs` — Update architecture docs and this prompt.
@@ -24,14 +24,14 @@ HEDGEHOG is the mandatory central MCP (Model Context Protocol) gateway. All gaze
 
 ## Refined Architecture (All Modules Modulated to HEDGEHOG)
 
-### 1. Objective Gaze Tensor (OGT) — Upgrade from AGT
-- Project 3D gaze vectors (from JEO-adapted tracker) onto visual 2D simplex.
+### 1. Adaptive Gaze Tensor (AGT) — Core Processing Layer
+- Project 3D gaze vectors (from JEO-adapted tracker in aaron-router) onto visual 2D simplex.
 - User deliberately looks at divided screen zones via **Jet Cursor**:
   - Bottom-left zone → Emotional
   - Bottom-right zone → Environmental
   - Top zone → Cognitive
 - Supports hold-and-swipe gesture for explicit instant classification (overrides spatial inference).
-- Timestamp every capture (initial 2.22s window, later shrink to 1.11s after training data accumulates). Use timestamps for resonance in JetOptimal Encryption.
+- Timestamp every capture (initial 2.22s window, later shrink to 1.11s after sufficient training data). Use timestamps for resonance in JetOptimal Encryption.
 
 ### 2. PIN-Triggered Batching + SpaceTimeDB
 - 6-digit PIN entry triggers batch capture: gaze vectors + gaze-centered screenshot/frame + biometric snapshot.
@@ -52,18 +52,18 @@ HEDGEHOG is the mandatory central MCP (Model Context Protocol) gateway. All gaze
 ### 5. Joe Orchestrator on DGX
 - Pulls batches from SpaceTimeDB via HEDGEHOG.
 - Runs VLM (Grok vision base) on gaze-centered screenshots when needed.
-- Updates OGT model and P-value weights.
+- Updates AGT model and P-value weights.
 - Handles token minting/rewards and agent spawning.
 
 ### 6. Mobile Bootstrap + Fallback
 - Start with ARKit (iOS) / ARCore (Android) in jettoptx-mojo for high-fidelity training data.
-- Once enough labeled batches exist, fall back to webcam + trained OGT model.
+- Once enough labeled batches exist, fall back to webcam + trained AGT model.
 
 ## Skills & Connectors to Refine/Upgrade in Current Structure
 
 Refine existing patterns in `jettoptx-context/.agents/skills/` and `jettoptx-core`:
 
-- Add/Modulate: `objective-gaze-tensor` skill (3D→2D projection + zone classification + swipe override)
+- Add/Modulate: `adaptive-gaze-tensor` skill (3D→2D projection + zone classification + swipe override)
 - Add/Modulate: `jet-cursor-visual-feedback` module
 - Add/Modulate: `pin-swipe-batch-capture` skill (with timestamp resonance for encryption)
 - Add/Modulate: `hedgehog-mcp-connector` (central registration point)
@@ -76,7 +76,7 @@ Refine existing patterns in `jettoptx-context/.agents/skills/` and `jettoptx-cor
 All new or refined skills **must register with HEDGEHOG** and be discoverable via MCP.
 
 ## Data Flow (HEDGEHOG Compliant)
-Mobile (ARKit/ARCore) or Browser → JEO-adapted tracker (aaron-router) → Objective Gaze Tensor + Jet Cursor → User-directed classification or swipe → PIN trigger → Batch (vectors + screenshot + biometrics) → HEDGEHOG gateway → SpaceTimeDB → Joe (core) pulls via HEDGEHOG → VLM analysis + training update → Token reward + agent orchestration.
+Mobile (ARKit/ARCore) or Browser → JEO-adapted tracker (aaron-router) → Adaptive Gaze Tensor + Jet Cursor → User-directed classification or swipe → PIN trigger → Batch (vectors + screenshot + biometrics) → HEDGEHOG gateway → SpaceTimeDB → Joe (core) pulls via HEDGEHOG → VLM analysis + training update → Token reward + agent orchestration.
 
 ## Tokenomics Implementation Rules
 - Training earns capped OPTX (biofeedback reward).
