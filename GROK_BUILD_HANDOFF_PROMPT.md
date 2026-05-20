@@ -1,77 +1,96 @@
-# GROK BUILD HANDOFF PROMPT
+# GROK BUILD HANDOFF PROMPT — Jett Optics Neuromorphic Interface
 
-**Project**: Jett Optics / OPTX Neuromorphic Interface + Dual Token Economy (OPTX + JTX)
+**Project**: Jett Optics (OPTX) — Neuromorphic Gaze Interface + Objective Gaze Tensor + Dual Token Economy
 **Date**: 2026-05-20
-**Goal**: Implement the full production system using **only existing repositories** in the jettoptx GitHub org. No new repos.
+**Strict Constraint**: Use **ONLY existing repositories** in the jettoptx GitHub org. No new repos. Only refine, upgrade, conform, or modulate **current skills and connectors**.
 
-## Core Repos to Update (Do NOT create new ones)
-- `jettoptx-aaron-router` — Core gaze verification, AARON router, Jett Auth with AGT/OGT, Solana bridge.
-- `jettoptx-core` — JOE Agentic Core (brain.py, skills, soul). Make Joe the central orchestrator.
-- `jettoptx-context` — Skills, agents, plans, Tailscale helpers. Add new skills here.
-- `jettoptx-docs` — Documentation. Update with architecture.
-- `jettoptx-mojo` — Mobile iOS app (Expo/React Native). Add widget and ARKit gaze.
-- `jettoptx-jettauth` — Auth SDK. Extend for gaze + token gating.
-- `jettoptx-hermes-api` — Hermes bridge.
-- `jettoptx-cstb-depin` — On-chain DePIN / CSTB contracts. Extend for OPTX/JTX logic.
-- `jettoptx-jettchat-app` and SDKs — For chat integration if needed.
+## Core Principle
+Everything new must conform to and route through the existing **HEDGEHOG** gateway. HEDGEHOG is the single source of truth for skill discovery and secure delegation.
 
-## Key Concepts from Conversation
-- **Objective Gaze Tensor (OGT)**: Upgrade from Adaptive Gaze Tensor (AGT). 3D gaze vector projected to 2D simplex with 3 zones:
-  - Bottom-left: Emotional
-  - Bottom-right: Environmental
-  - Top: Cognitive
-- User sees **Jet Cursor** on a divided screen (visual 2D simplex) and deliberately gazes into zones or uses hold-and-swipe gesture for explicit classification.
-- **Batching**: Triggered by 6-digit PIN entry. Capture 2.22s window (later shrink to 1.11s). Includes gaze vectors, timestamped screenshot (gaze-centered), biometrics snapshot.
-- **Platforms**: Start with ARKit (iOS) / ARCore (Android) in `jettoptx-mojo` for high-fidelity bootstrap. Later fallback to webcam + trained OGT model.
-- **Storage**: SpaceTimeDB (Rust reducers) for real-time batches. Correlate with EEG/Whoop biometrics for P-value weighting (environmental, cognitive, emotional).
-- **Joe (Orchestrator)**: Runs on DGX Spark. Pulls batches, runs VLM (Grok vision or LLaVA) on screenshots when needed, updates OGT model, handles training loop.
-- **Tokens**:
-  - **OPTX**: Utility token. Used for subscriptions, agent spin-ups, biofeedback rewards (mint on successful training/login). High circulation.
-  - **JTX**: Premium/governance token, fixed 4.4M supply. Holding unlocks better tiers, revenue share, or priority.
-- **Subscriptions**: Free (limited OPTX earn), $8.88/mo, $28/mo Dojo (unlimited + custom emojis/augmentations).
-- **Widget**: Home-screen widget (iOS WidgetKit / Android) for quick emoji tagging (brain= cognitive, heart=emotional, clover=environmental) without opening app.
-- **MCP Connector**: Expose all modules as discoverable skills for Joe via Model Context Protocol. HEDGEHOG gateway becomes MCP gateway.
-- **Biofeedback Reward**: On successful OpenTX login + training, mint limited OPTX on Solana.
-- **Agent Spawning**: Users stake/burn OPTX or hold JTX to spin up Hermes-style agents or connect augmentations to Grok harness.
+## Exact HEDGEHOG Definition (Conform to this)
+**HEDGEHOG = HANDSHAKE Encrypted DELEGATED GESTURE ENVELOPE HANDLER OPTX GATEWAY**
 
-## Implementation Priorities for Grok Build
-1. Extend `jettoptx-aaron-router` with Objective Gaze Tensor processor and Jet Cursor projection logic.
-2. Add PIN + Swipe batch capture skill in `jettoptx-core` or `jettoptx-context`.
-3. Create MCP server connector in `jettoptx-core` so Joe can uniformly call skills.
-4. Update mobile in `jettoptx-mojo`: Add ARKit/ARCore face tracking + widget support.
-5. Token logic in `jettoptx-cstb-depin` or new Anchor programs (update existing).
-6. Training pipeline + biometrics correlation in `jettoptx-core` (Joe brain).
-7. Documentation in `jettoptx-docs`.
+HEDGEHOG is the mandatory central MCP (Model Context Protocol) gateway. All gaze vectors, Objective Gaze Tensors, gesture envelopes, batch training data, biometrics correlation, token operations, and agent harness calls must pass through HEDGEHOG for encryption, delegation, validation, and uniform skill registration.
 
-## Full Architecture Data Flow
-Browser/Mobile (ARKit) → JEO-adapted eye tracker (in aaron-router) → Objective Gaze Tensor → Jet Cursor visual feedback → PIN/Swipe trigger → Batch (gaze vectors + screenshot + biometrics) → SpaceTimeDB → Joe (DGX, jettoptx-core) → VLM analysis (if needed) → P-value update → Token mint/reward → Agent orchestration via Hermes/MCP.
+## Repos to Refine / Upgrade (No New Repos)
+- `jettoptx-aaron-router` — Refine AARON with Objective Gaze Tensor (OGT) upgrade from AGT, Jet Cursor logic, and HEDGEHOG-compliant connectors.
+- `jettoptx-core` — Upgrade JOE Agentic Core. Make Joe the central orchestrator that consumes HEDGEHOG-registered skills.
+- `jettoptx-context` — Refine existing skills in `.agents/skills/`, update CLAUDE.md / AGENTS.md with new conformed modules, add HEDGEHOG MCP skill definitions.
+- `jettoptx-docs` — Update architecture docs and this prompt.
+- `jettoptx-mojo` — Refine mobile app with ARKit/ARCore bootstrap + home-screen widget for quick emoji tagging.
+- `jettoptx-jettauth` — Extend auth for gaze + token gating via HEDGEHOG.
+- `jettoptx-hermes-api` — Modulate for agent spawning harness that routes through HEDGEHOG.
+- `jettoptx-cstb-depin` — Upgrade on-chain logic for OPTX utility + JTX premium tokens and biofeedback rewards.
 
-## Tokenomics Rules (Implement in contracts + backend)
-- Users earn limited OPTX via training (capped monthly).
-- Paying subscribers get higher/unlimited OPTX allocation.
-- OPTX used to pay for or discount agent containers.
-- JTX for premium access / governance.
+## Refined Architecture (All Modules Modulated to HEDGEHOG)
 
-## MCP Connector Spec
-Create a lightweight MCP server that registers skills from:
-- Gaze tensor processing
-- Batch capture
-- Biometrics fusion
-- Token gating
-- Agent spawning
-Joe can discover and call them uniformly.
+### 1. Objective Gaze Tensor (OGT) — Upgrade from AGT
+- Project 3D gaze vectors (from JEO-adapted tracker) onto visual 2D simplex.
+- User deliberately looks at divided screen zones via **Jet Cursor**:
+  - Bottom-left zone → Emotional
+  - Bottom-right zone → Environmental
+  - Top zone → Cognitive
+- Supports hold-and-swipe gesture for explicit instant classification (overrides spatial inference).
+- Timestamp every capture (initial 2.22s window, later shrink to 1.11s after training data accumulates). Use timestamps for resonance in JetOptimal Encryption.
 
-## Constraints
-- Use ONLY existing repos listed above. Update them with new modules/files.
-- Keep browser/mobile side lightweight.
-- Client sends batches on PIN entry (not continuous screenshots).
-- Support deliberate user classification via Jet Cursor or swipe.
-- Make Joe the true swarm orchestrator using Grok as vision base.
+### 2. PIN-Triggered Batching + SpaceTimeDB
+- 6-digit PIN entry triggers batch capture: gaze vectors + gaze-centered screenshot/frame + biometric snapshot.
+- Store via Rust reducers in SpaceTimeDB.
+- Later correlate batches with EEG / Whoop HRV for P-value weighting (environmental, cognitive, emotional states).
 
-## Output Expected from Grok Build
-- Updated code in the listed repos.
-- New files like `objective_gaze_tensor.py`, `jet_cursor.py`, `mcp_connector.py`, `training_pipeline.py` placed in appropriate existing repos.
-- Updated READMEs and docs.
-- Clear instructions for deploying Joe on DGX and connecting to SpaceTimeDB.
+### 3. HEDGEHOG MCP Server Connector (Central Upgrade)
+- Expose every module above as discoverable MCP skills.
+- Joe (on DGX) discovers and calls them uniformly through HEDGEHOG.
+- All gesture envelopes are encrypted and delegated via HEDGEHOG.
 
-This prompt is self-contained. Start implementing immediately using the current codebase structure.
+### 4. Dual Token Economy (OPTX + JTX)
+- **OPTX** (utility): High circulation. Used for subscriptions, agent spin-up, daily operations, biofeedback rewards (mint on successful training/login, monthly caps).
+- **JTX** (premium/governance): Fixed 4.4M supply. Holding unlocks higher tiers, priority, or revenue share.
+- Subscription tiers: Free (earn limited OPTX via training), ~$8.88/mo, $28/mo Dojo (unlimited OPTX + custom emoji augmentations).
+- Widget: Quick emoji tagging (brain=cognitive, heart=emotional, clover=environmental) writes directly to SpaceTimeDB.
+
+### 5. Joe Orchestrator on DGX
+- Pulls batches from SpaceTimeDB via HEDGEHOG.
+- Runs VLM (Grok vision base) on gaze-centered screenshots when needed.
+- Updates OGT model and P-value weights.
+- Handles token minting/rewards and agent spawning.
+
+### 6. Mobile Bootstrap + Fallback
+- Start with ARKit (iOS) / ARCore (Android) in jettoptx-mojo for high-fidelity training data.
+- Once enough labeled batches exist, fall back to webcam + trained OGT model.
+
+## Skills & Connectors to Refine/Upgrade in Current Structure
+
+Refine existing patterns in `jettoptx-context/.agents/skills/` and `jettoptx-core`:
+
+- Add/Modulate: `objective-gaze-tensor` skill (3D→2D projection + zone classification + swipe override)
+- Add/Modulate: `jet-cursor-visual-feedback` module
+- Add/Modulate: `pin-swipe-batch-capture` skill (with timestamp resonance for encryption)
+- Add/Modulate: `hedgehog-mcp-connector` (central registration point)
+- Add/Modulate: `biometrics-fusion-pvalue` skill
+- Add/Modulate: `dual-token-economy` + subscription engine (in core + on-chain)
+- Add/Modulate: `biofeedback-reward-mint` connector
+- Add/Modulate: `agent-spawning-harness` (routes through HEDGEHOG + Hermes)
+- Add/Modulate: `mobile-widget-emoji-tagger`
+
+All new or refined skills **must register with HEDGEHOG** and be discoverable via MCP.
+
+## Data Flow (HEDGEHOG Compliant)
+Mobile (ARKit/ARCore) or Browser → JEO-adapted tracker (aaron-router) → Objective Gaze Tensor + Jet Cursor → User-directed classification or swipe → PIN trigger → Batch (vectors + screenshot + biometrics) → HEDGEHOG gateway → SpaceTimeDB → Joe (core) pulls via HEDGEHOG → VLM analysis + training update → Token reward + agent orchestration.
+
+## Tokenomics Implementation Rules
+- Training earns capped OPTX (biofeedback reward).
+- Paying subscribers receive higher/unlimited OPTX allocation.
+- OPTX used to spin up or discount agent containers.
+- JTX for premium access/governance.
+
+## Output Expected
+- Updated code across the listed existing repos only.
+- Refined skills registered in HEDGEHOG MCP.
+- Joe fully functional as HEDGEHOG-aware orchestrator on DGX.
+- Clear deployment notes for SpaceTimeDB + DGX Joe.
+- Updated docs in jettoptx-docs and jettoptx-context.
+
+**Start immediately. Conform everything to HEDGEHOG. Use only current repos and modulate existing skills/connectors.**
+
+This is the complete, self-contained prompt for a fresh Grok Build session.
