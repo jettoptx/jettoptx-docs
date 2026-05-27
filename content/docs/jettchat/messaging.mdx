@@ -13,7 +13,7 @@ All messages are encrypted client-side before leaving the device. The server nev
 - **xChat Native**: TLS to JettChat server + per-conversation E2EE keys (X25519 + AEAD).
 - **Phantom Mode**: Triple Tor onion + per-conversation **X25519 + ML-KEM-1024** hybrid (PQC).
 
-The SDK layer is [`jettoptx/joe-jettchat-sdk`](https://github.com/jettoptx/joe-jettchat-sdk), which describes its construction as "X25519 + TKDF hybrid".
+The SDK layer describes its construction as "X25519 + TKDF hybrid".
 
 ## Gaze cursor typing
 

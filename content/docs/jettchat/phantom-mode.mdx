@@ -32,7 +32,7 @@ This means a single Phantom Mode identity can be reachable across multiple devic
 
 Session keys use a **hybrid construction**: classical X25519 ECDH combined with **ML-KEM-1024** (the NIST-standardized lattice KEM, FIPS 203). A future quantum adversary would need to break both to recover keys.
 
-This same construction is sometimes referred to as **TKDF** in the [`joe-jettchat-sdk`](https://github.com/jettoptx/joe-jettchat-sdk) repo — TKDF is the SDK-layer name; Secure-Legion is the org-level brand wrapping the primitive plus Tor and hardware key storage.
+This same construction is sometimes referred to as **TKDF** in the encryption SDK — TKDF is the SDK-layer name; Secure-Legion is the org-level brand wrapping the primitive plus Tor and hardware key storage.
 
 ## Hardware-backed keys
 

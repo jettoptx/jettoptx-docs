@@ -21,7 +21,7 @@ Both modes share the same **[E2EE messaging primitives](/docs/jettchat/messaging
 | **Keys** | Software-managed | StrongBox / Secure Enclave / TEE |
 | **Wake** | Standard session | Ping-Pong biometric + duress PIN with wipe |
 | **Best for** | Faster onboarding | Maximum metadata resistance |
-| **Repo** | [`jettoptx/joe-jettchat-app`](https://github.com/jettoptx/joe-jettchat-app) | [`Secure-Legion/android`](https://github.com/Secure-Legion/android) |
+| **Repo** | Private | [`Secure-Legion/android`](https://github.com/Secure-Legion/android) |
 
 ## Access flow (JETT Hub)
 
@@ -29,7 +29,7 @@ After **Sign in with X**, the user picks any one of:
 
 - **Connect wallet · Hold 1 JTX**
 - **Pay $8.88** via Stripe (no wallet)
-- **Pay $8.88** via [Tempo CLI](https://github.com/jettoptx/tempo)
+- **Pay $8.88** via Tempo CLI
 
 See [JETT Auth](/docs/authentication/jett-auth) for the full auth surface and [Token / Tiers](/docs/token/tiers) for subscription upgrades.
 
@@ -37,7 +37,7 @@ See [JETT Auth](/docs/authentication/jett-auth) for the full auth surface and [T
 
 The cryptographic primitive behind Phantom Mode is referred to in two places:
 
-- **TKDF** — the SDK's name for the X25519 + ML-KEM-1024 hybrid construction, used in [`joe-jettchat-sdk`](https://github.com/jettoptx/joe-jettchat-sdk).
+- **TKDF** — the SDK's name for the X25519 + ML-KEM-1024 hybrid construction.
 - **Secure-Legion** — the org-level brand for the same primitive plus Tor + StrongBox + Ping-Pong wake.
 
 They refer to the same underlying construction at different layers.

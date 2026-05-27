@@ -15,7 +15,7 @@ JettChat supports two modes. Both share the AGT gaze pipeline, JTX gating, and S
 | **Crypto** | TLS + Ed25519 JWT | X25519 + ML-KEM-1024 (PQC), StrongBox/TEE keys |
 | **Wake** | Standard session | Ping-Pong biometric + duress PIN with wipe |
 | **Best for** | Faster onboarding, public networks | Maximum privacy and metadata resistance |
-| **Implementation** | [jettoptx/joe-jettchat-app](https://github.com/jettoptx/joe-jettchat-app) | [Secure-Legion/android](https://github.com/Secure-Legion/android) |
+| **Implementation** | Private | [Secure-Legion/android](https://github.com/Secure-Legion/android) |
 
 **Phantom Mode flow:** `JettChat → Jett Auth Hub (Gaze Triad + Jett Hub visual + JTX check) → Secure-Legion Core (Tor + PQC + StrongBox + Ping-Pong + duress wipe) → Solana (JTX token gate + attestation)`.
 
