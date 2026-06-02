@@ -1,43 +1,34 @@
 ---
 title: $JTX Token
-description: $JTX is the access and governance token for JettChat — Solana mainnet, four-tier gating, stake-or-subscribe duality.
+description: $JTX is the governance and access token for JettChat — Solana mainnet, fixed supply, free-floating price.
 icon: Coins
 ---
 
-**$JTX** is the JettChat access and governance token. It lives on **Solana mainnet** at:
+**$JTX** is the JettChat governance and access token. It lives on **Solana mainnet** at:
 
 ```
 9XpJiKEYzq5yDo5pJzRfjSRMPL2yPfDQXgiN7uYtBhUj
 ```
 
-Standard SPL token, 6 decimals.
+SPL token, 9 decimals. **Total supply: 4,400,000 JTX. Mint authority revoked.**
 
-## Why a token gate
+## No price peg
 
-JettChat is gated to keep the network costly to abuse and aligned with users who want it to exist. Holding **1 JTX** is the lowest bar to entry, and that's by design — the gate is meant to filter automated abuse, not paywall users. Stripe and [Tempo CLI](https://github.com/jettoptx/tempo) fallbacks at $8.88 give wallet-less paths in.
+JTX has **no artificial price floor, ceiling, or dollar peg**. Its price floats freely on Solana DEXes (Jupiter, Raydium). Supply is fixed and deflationary — JTX is permanently removed from circulation whenever a Space Cowboy NFT is minted.
 
-## Four tiers, three of them stakeable
+## What JTX does
 
-JettChat enforces four code-level tiers at the middleware. The top three map directly to the [staking tiers](/docs/token/tiers) on [astroknots.space/stake](https://www.astroknots.space/stake):
+- **Space Cowboy NFT minting** — Burn 1,111 JTX to mint one of 1,111 Space Cowboy NFTs (lifetime platform access + governance rights). JTX goes to treasury permanently.
+- **Governance** — Space Cowboy NFT holders vote on protocol direction, feature priority, and treasury allocation.
+- **Trading** — Freely tradeable on Solana DEXes.
 
-| Code tier | JTX held | Maps to |
-|-----------|---------|---------|
-| `basic` | ≥ 1 | Base entry — JettChat access (both modes) |
-| `mojo` | ≥ 12 | [MOJO](/docs/token/tiers) subscription tier |
-| `dojo` | ≥ 444 | [DOJO](/docs/token/tiers) subscription tier |
-| `spaceCowboy` | ≥ 1,111 | [SPACE COWBOY](/docs/token/tiers) subscription tier |
+## Subscription tiers (fiat)
 
-The staking page is the **source of truth** for prices, durations, and unlocks. The code values mirror the staking model, not the other way around.
+JettChat access is primarily gated by **Stripe subscription** ($8.88 / $28.88 / $88.88 per month). No wallet required. See [Subscriptions](/docs/token/subscriptions) for details.
 
 ## Founder bypass
 
-The protocol-treasury wallet `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` is auto-tiered to `spaceCowboy` regardless of balance. This is documented in [On-Chain Addresses](/docs/getting-started/on-chain-addresses).
-
-## Where $JTX is used
-
-- **JettChat gating** — [JETT Auth](/docs/authentication/jett-auth) middleware on protected routes
-- **DePIN earning** — staked JTX earns OPTX rewards (see [DePIN](/docs/infrastructure/depin))
-- **Governance** — SPACE COWBOY tier unlocks governance voting
+The founder wallet `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` is auto-tiered to `spaceCowboy` regardless of balance. See [On-Chain Addresses](/docs/getting-started/on-chain-addresses).
 
 ## On-chain program
 
