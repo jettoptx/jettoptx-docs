@@ -49,9 +49,22 @@ cd joe-jtx-cstb-depin
 # Build and publish to local SpacetimeDB
 spacetime publish optx-cortex --project-path .
 
+# Configure validator environment from the template
+cp .env.example .env   # then fill in AARON_VALIDATOR_KEY and RPC_URL
+
 # Start the AARON Router
 cd ../tools
 python3 aaron_router.py --network devnet
+```
+
+The validator reads its configuration from a `.env` file. Copy the provided
+[`.env.example`](https://github.com/jettoptx/jettoptx-docs/blob/main/.env.example)
+template and fill in your own values — never commit a real `.env`:
+
+```bash
+AARON_VALIDATOR_KEY=<your-validator-key>
+RPC_URL=<your-rpc-url>
+NETWORK=devnet
 ```
 
 ### Devnet RPC
