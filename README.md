@@ -1,4 +1,4 @@
-# joe-docs
+# jettoptx-docs
 
 The official documentation engine for the **OPTX ecosystem** — built on [Next.js](https://nextjs.org) + [Fumadocs](https://fumadocs.vercel.app) with MDX content pages.
 
@@ -10,9 +10,8 @@ Live at **[jettoptx.dev](https://jettoptx.dev)**
 
 | Repo | Type | Description |
 |------|------|-------------|
-| **[jettoptx-docs](https://github.com/jettoptx/jettoptx-docs)** | Docs Engine | Next.js 16 + Fumadocs + MDX — this repo |
-| **[hermes-xai-oauth-wsl](https://github.com/jettoptx/hermes-xai-oauth-wsl)** | Hermes WSL Tool | Workaround + Hyper-V firewall fix for logging into xAI SuperGrok via Hermes Agent on WSL2 |
-| **[jettoptx-cstb-depin](https://github.com/jettoptx/jettoptx-cstb-depin)** | On-chain Program | DePIN Anchor program for $JTX/$CSTB compute-trust bonding on Solana |
+| **[jettoptx-docs](https://github.com/jettoptx/jettoptx-docs)** | Docs Engine | Next.js + Fumadocs + MDX — this repo |
+| **[jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin)** | On-chain Program | JTX Trust Protocol Anchor program for $JTX/$CSTB compute-trust bonding on Solana |
 | **[jettoptx-aaron-router](https://github.com/jettoptx/jettoptx-aaron-router)** | Edge Router | AARON gaze verification router — FastAPI, Proof-of-Insight, AGT pipeline |
 
 ### Internal Modules (documented here)
@@ -22,15 +21,15 @@ Live at **[jettoptx.dev](https://jettoptx.dev)**
 | **AARON Protocol** | Trust & PoI | Attestation layer with Proof-of-Insight consensus |
 | **JOE Engine** | Core Runtime | Orchestration engine for OPTX agents |
 | **HEDGEHOG** | MCP Gateway | Model Context Protocol router + gaze analytics |
-| **CSTB** | DePIN / Trust | Compute-backed trust bonding for validators |
+| **JTX Trust Protocol** | DePIN / Trust | Compute-backed trust bonding for validators ($CSTB) |
 | **Hermes OPTX API** | Agent Comms | Pay-per-request agent messaging over MPP |
 
 ## Project Structure (Next.js + MDX)
 
-joe-docs is a **Next.js App Router** project. Documentation pages are written in **MDX** (Markdown + JSX) and rendered by Fumadocs.
+jettoptx-docs is a **Next.js App Router** project. Documentation pages are written in **MDX** (Markdown + JSX) and rendered by Fumadocs.
 
 ```
-joe-docs/
+jettoptx-docs/
 ├── app/                    # Next.js App Router
 │   ├── layout.tsx          # Root layout + providers
 │   ├── page.tsx            # Landing page
@@ -81,7 +80,7 @@ Frontmatter fields: `title`, `description`, `icon` (Lucide icon name for sidebar
 - **D2 Diagrams** — Architecture diagrams rendered with ELK layout + click-to-enlarge lightbox
 - **Copy for Agents** — One-click page content copy for LLM/agent consumption
 
-## Using joe-docs as a Template
+## Using jettoptx-docs as a Template
 
 Want to spin up docs for your own agent, SDK, or CLI? Follow these steps:
 
@@ -119,7 +118,7 @@ This section describes the full docs stack so an AI agent or open-source contrib
 
 | Layer | Choice | Notes |
 |-------|--------|-------|
-| Framework | Next.js 14+ (App Router) | Server Components, file-based routing |
+| Framework | Next.js 16 (App Router) | Server Components, file-based routing |
 | Docs Engine | Fumadocs | MDX parsing, sidebar, TOC, full-text search |
 | Content Format | MDX | Markdown + JSX, frontmatter for metadata |
 | Styling | Tailwind CSS | OPTX color tokens, dark/light theme |
@@ -217,18 +216,17 @@ to the DePIN program on Solana.
 
 ## Prerequisites
 
-- NVIDIA Jetson edge device (or equivalent ARM64 agentic GPU)
-- Tailscale mesh membership
+- OPTX/JTX edge node (or equivalent ARM64 agentic GPU)
 - Minimum 10 $CSTB staked (devnet: airdrop available)
 
 ## Install
 
 ```bash
 git clone https://github.com/jettoptx/jettoptx-aaron-router.git
-cd joe-aaron-router
+cd jettoptx-aaron-router
 pip install -r requirements.txt
-cp .env.example .env   # fill AARON_VALIDATOR_KEY and HELIUS_RPC_URL
-uvicorn main:app --host 0.0.0.0 --port 8888
+cp .env.example .env   # fill in the values documented in .env.example
+uvicorn main:app
 ```
 
 ## Verify
@@ -236,7 +234,7 @@ uvicorn main:app --host 0.0.0.0 --port 8888
 Call the health endpoint to confirm the node is attestation-ready:
 
 ```bash
-curl http://localhost:8888/health
+curl http://localhost:<port>/health
 # {"status":"ok","validator":"active","cstb_staked":10}
 ```
 ```
