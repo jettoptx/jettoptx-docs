@@ -8,7 +8,7 @@
 Everything new must conform to and route through the existing **HEDGEHOG** gateway. HEDGEHOG is the single source of truth for skill discovery and secure delegation.
 
 ## Exact HEDGEHOG Definition (Conform to this exactly)
-**HEDGEHOG = HANDSHAKE Encrypted DELEGATED GESTURE ENVELOPE HANDLER OPTX GATEWAY**
+**HEDGEHOG = Handshake Encrypted Delegated Gesture Envelope Handler Optical Gateway**
 
 HEDGEHOG is the mandatory central MCP (Model Context Protocol) gateway. All gaze vectors, Adaptive Gaze Tensors (AGT), gesture envelopes, batch training data, biometrics correlation, token operations, and agent harness calls must pass through HEDGEHOG for encryption, delegation, validation, and uniform skill registration.
 
