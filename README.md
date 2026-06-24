@@ -1,8 +1,10 @@
-# joe-docs
+# jettoptx-docs
 
-The official documentation engine for the **OPTX ecosystem** — built on [Next.js](https://nextjs.org) + [Fumadocs](https://fumadocs.vercel.app) with MDX content pages.
+The official documentation engine for the **Jett Optics / OPTX ecosystem** — built on [Next.js](https://nextjs.org) + [Fumadocs](https://fumadocs.vercel.app) with MDX content pages.
 
 Live at **[jettoptx.dev](https://jettoptx.dev)**
+
+> **Note:** Some MDX pages may still reference $JTX v1 during the v2 migration sweep. Canonical mainnet mint: `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe`.
 
 > **[What is OPTX?](https://jettoptx.dev/docs/getting-started/what-is-optx)** — Start here for the full overview of the OPTX protocol, gaze biometrics, and agentic architecture.
 
@@ -12,7 +14,7 @@ Live at **[jettoptx.dev](https://jettoptx.dev)**
 |------|------|-------------|
 | **[jettoptx-docs](https://github.com/jettoptx/jettoptx-docs)** | Docs Engine | Next.js 16 + Fumadocs + MDX — this repo |
 | **[hermes-xai-oauth-wsl](https://github.com/jettoptx/hermes-xai-oauth-wsl)** | Hermes WSL Tool | Workaround + Hyper-V firewall fix for logging into xAI SuperGrok via Hermes Agent on WSL2 |
-| **[jettoptx-cstb-depin](https://github.com/jettoptx/jettoptx-cstb-depin)** | On-chain Program | DePIN Anchor program for $JTX/$CSTB compute-trust bonding on Solana |
+| **[jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin)** | On-chain Program | DePIN Anchor program for $JTX/$OPTX/$CSTB on Solana |
 | **[jettoptx-aaron-router](https://github.com/jettoptx/jettoptx-aaron-router)** | Edge Router | AARON gaze verification router — FastAPI, Proof-of-Insight, AGT pipeline |
 
 ### Internal Modules (documented here)
@@ -225,7 +227,7 @@ to the DePIN program on Solana.
 
 ```bash
 git clone https://github.com/jettoptx/jettoptx-aaron-router.git
-cd joe-aaron-router
+cd jettoptx-aaron-router
 pip install -r requirements.txt
 cp .env.example .env   # fill AARON_VALIDATOR_KEY and HELIUS_RPC_URL
 uvicorn main:app --host 0.0.0.0 --port 8888
