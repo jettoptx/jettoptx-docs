@@ -1,0 +1,58 @@
+---
+title: SDK Overview
+description: Canonical jettoptx-sdk monorepo — @jettoptx/auth, @jettoptx/chat, and @jettoptx/jett-augment-registry.
+icon: Package
+---
+
+The **[jettoptx-sdk](https://github.com/jettoptx/jettoptx-sdk)** monorepo is the canonical developer entry point for building on OPTX. It consolidates three packages that were previously split across separate repos (merged 2026-06-03).
+
+## Packages
+
+| Package | npm | Purpose |
+|---------|-----|---------|
+| `@jettoptx/auth` | [auth](/docs/sdk/auth) | X OAuth PKCE + Solana signMessage + Ed25519 JWT |
+| `@jettoptx/chat` | [chat](/docs/sdk/chat) | E2E messaging transports and channel models |
+| `@jettoptx/jett-augment-registry` | [augment-registry](/docs/sdk/augment-registry) | JETT Augments 00–09 runtime topology |
+
+## Install
+
+```bash
+git clone https://github.com/jettoptx/jettoptx-sdk.git
+cd jettoptx-sdk
+npm install
+```
+
+Or install individual packages from npm when published:
+
+```bash
+npm install @jettoptx/auth @jettoptx/chat @jettoptx/jett-augment-registry
+```
+
+## Developer Quickstart
+
+1. **Acquire JTX** — [Platform Access](/docs/getting-started/access) (≥1 JTX for DOJO entry)
+2. **Install `@jettoptx/auth`** — wire X OAuth + Solana wallet auth
+3. **Create an AARON session** — [Client Integration](/docs/protocol/client-integration)
+4. **Optional on-chain attestation** — [On-Chain Bridge](/docs/on-chain-bridge)
+
+## Canonical Addresses
+
+| Token | Address | Network |
+|-------|---------|---------|
+| $JTX v2 | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` | Mainnet |
+| $OPTX | `DSyauRAZwUd2BrTk3P8k2yUxxvcx5X4BBg3Gh3VbeRG3` | Devnet |
+
+## Platform URLs
+
+| Surface | URL |
+|---------|-----|
+| DOJO / JettChat | https://jettoptx.chat |
+| Docs | https://jettoptx.dev |
+| AARON Router | https://aaron.jettoptics.ai |
+| HEDGEHOG MCP | https://hedgehog.jettoptics.ai |
+
+## Archived Source Repos
+
+| Old Repo | Status |
+|----------|--------|
+| [jettoptx-jettauth](https://github.com/jettoptx/jettoptx-jettauth) | Archived → use `@jettoptx/auth` in SDK monorepo |

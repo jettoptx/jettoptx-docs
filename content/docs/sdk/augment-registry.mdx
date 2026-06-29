@@ -1,0 +1,82 @@
+---
+title: Augment Registry
+description: JETT Augments 00–09 — runtime agent lobes, V/S/W hotkeys, and AGT topology.
+icon: Grid3x3
+---
+
+The `@jettoptx/jett-augment-registry` package defines the **runtime augment topology** for the JOE Agentic Operating System — distinct from the **docs MOA graph** on this site.
+
+| System | What it maps |
+|--------|--------------|
+| **Docs MOA** | Documentation pages (this site's knowledge graph) |
+| **JETT Augments 00–09** | Runtime agent lobes in DOJO, MOJO, and HEDGEHOG MCP |
+
+Source: [jettoptx-sdk/packages/jett-augment-registry](https://github.com/jettoptx/jettoptx-sdk/tree/main/packages/jett-augment-registry)
+
+## Install
+
+```bash
+npm install @jettoptx/jett-augment-registry
+```
+
+## Usage
+
+```typescript
+import {
+  JETT_AUGMENTS,
+  getAugmentByDigit,
+  augmentStatusPayload,
+} from "@jettoptx/jett-augment-registry";
+
+const vision = getAugmentByDigit("01");
+const mcpStatus = augmentStatusPayload();
+```
+
+## Augments 00–09
+
+| Digit | Name | AGT | Role |
+|-------|------|-----|------|
+| 00 | Core | — | Session anchor (south pole) |
+| 01 | Vision | COG | Strategic foresight, gaze pipeline |
+| 02 | Shield | COG | Security, policy enforcement |
+| 03 | Weights | COG | Model routing, inference |
+| 04 | Vibe | EMO | Social, community, federation channels |
+| 05 | Send | EMO | Messaging, notifications |
+| 06 | Wealth | EMO | Token ops, DePIN rewards |
+| 07 | Vector | ENV | Infrastructure, deployment |
+| 08 | Search | ENV | Retrieval, RAG, knowledge |
+| 09 | Warp | ENV | Cross-chain, bridge flows |
+
+## HEAT Hotkeys (V / S / W)
+
+Per-lobe position macros for agent prompting:
+
+| Lobe | V | S | W |
+|------|---|---|---|
+| COG | Vision | Shield | Weights |
+| EMO | Vibe | Send | Wealth |
+| ENV | Vector | Search | Warp |
+
+Digit **00 Core** has no hotkey.
+
+## Not an Augment
+
+These are infrastructure planes, not augment digits:
+
+- **SpacetimeDB** — operational plane (chat reducers, auth, devlogs)
+- **Helix Cloud** (planned) — knowledge plane (MOA graph, vector RAG)
+- **Federation transport** — optional inter-agent messaging plane (not an augment digit)
+
+## MCP Exposure
+
+The edge gateway exposes augment status via `jett_augment_status` MCP tool. See [Edge Gateway](/docs/infrastructure/edge-gateway).
+
+## Related Docs
+
+| Augment topic | Doc page |
+|---------------|----------|
+| Gaze / Vision | [Gaze Auth](/docs/authentication/gaze) |
+| Messaging / Send | [JettChat](/docs/jettchat) |
+| Token / Wealth | [Token](/docs/token) |
+| Bridge / Warp | [On-Chain Bridge](/docs/on-chain-bridge) |
+| Docs knowledge graph | [Map of Augments](/docs/dojo/moa) |

@@ -1,5 +1,4 @@
 {
   "title": "Infrastructure",
-  "icon": "Server",
-  "pages": ["edge", "depin"]
+  "pages": ["edge", "edge-gateway", "depin"]
 }

@@ -22,83 +22,18 @@ import {
   BookOpen,
   MessageCircle,
   Coins,
+  Package,
 } from "lucide-react";
+import { MOBILE_SUB_PAGES } from "@/lib/moa-registry";
 
 /* ── AGT color system ── */
 const AGT_COLORS = { COG: "#eab308", EMO: "#f43f5e", ENV: "#60a5fa" } as const;
 type AGT = keyof typeof AGT_COLORS;
 
-/* ── Sub-page definitions per section ── */
+/* ── Sub-page definitions per section (from lib/moa-registry.ts) ── */
 interface SubPage { label: string; href: string; agt: AGT }
 
-const SUB_PAGES: Record<string, SubPage[]> = {
-  "/docs/dojo": [
-    { label: "DOJO Overview", href: "/docs/dojo", agt: "ENV" },
-    { label: "Map of Augments", href: "/docs/dojo/moa", agt: "COG" },
-    { label: "MOJO", href: "/docs/dojo/mojo", agt: "EMO" },
-  ],
-  "/docs/getting-started/what-is-optx": [
-    { label: "What is OPTX?", href: "/docs/getting-started/what-is-optx", agt: "COG" },
-    { label: "System Architecture", href: "/docs/getting-started/architecture", agt: "COG" },
-    { label: "On-Chain Addresses", href: "/docs/getting-started/on-chain-addresses", agt: "ENV" },
-  ],
-  "/docs/jettchat": [
-    { label: "JettChat Overview", href: "/docs/jettchat", agt: "EMO" },
-    { label: "xChat Native", href: "/docs/jettchat/xchat-native", agt: "EMO" },
-    { label: "Phantom Mode", href: "/docs/jettchat/phantom-mode", agt: "ENV" },
-    { label: "Messaging Features", href: "/docs/jettchat/messaging", agt: "EMO" },
-  ],
-  "/docs/authentication/gaze": [
-    { label: "JETT Auth", href: "/docs/authentication/jett-auth", agt: "EMO" },
-    { label: "Gaze Verification", href: "/docs/authentication/gaze", agt: "EMO" },
-    { label: "Agent Wallet (Roadmap)", href: "/docs/authentication/wallet", agt: "EMO" },
-  ],
-  "/docs/token": [
-    { label: "$JTX Token", href: "/docs/token", agt: "ENV" },
-    { label: "Tiers", href: "/docs/token/tiers", agt: "COG" },
-    { label: "Subscriptions", href: "/docs/token/subscriptions", agt: "COG" },
-  ],
-  "/docs/protocol": [
-    { label: "Protocol Overview", href: "/docs/protocol", agt: "COG" },
-    { label: "How It Works", href: "/docs/protocol/how-it-works", agt: "COG" },
-    { label: "Biometric Proof", href: "/docs/protocol/biometric-proof", agt: "EMO" },
-    { label: "Client Integration", href: "/docs/protocol/client-integration", agt: "COG" },
-    { label: "Architecture", href: "/docs/protocol/architecture", agt: "COG" },
-  ],
-  "/docs/astrojoe": [
-    { label: "JOE Overview", href: "/docs/astrojoe", agt: "EMO" },
-    { label: "Hermes OPTX API", href: "/docs/astrojoe/api", agt: "COG" },
-    { label: "Hermes v0.12.0 Features", href: "/docs/astrojoe/hermes-features", agt: "COG" },
-    { label: "HEDGEHOG Gateway", href: "/docs/astrojoe/hedgehog", agt: "ENV" },
-    { label: "Memory System", href: "/docs/astrojoe/memory", agt: "COG" },
-    { label: "Task Orchestration", href: "/docs/astrojoe/orchestration", agt: "COG" },
-    { label: "Skills System", href: "/docs/astrojoe/skills", agt: "COG" },
-  ],
-  "/docs/architecture": [
-    { label: "Architecture Flows", href: "/docs/architecture", agt: "COG" },
-    { label: "Agent Identity", href: "/docs/architecture/agent-identity", agt: "EMO" },
-    { label: "Cross-Chain Bridge", href: "/docs/architecture/bridge-flow", agt: "EMO" },
-    { label: "Gaze-Gated Policy", href: "/docs/architecture/gaze-policy", agt: "EMO" },
-    { label: "Swarm DAG", href: "/docs/architecture/swarm-dag", agt: "COG" },
-    { label: "Task Lifecycle", href: "/docs/architecture/task-lifecycle", agt: "COG" },
-    { label: "Task State Machine", href: "/docs/architecture/task-states", agt: "COG" },
-    { label: "Topology", href: "/docs/architecture/topology", agt: "ENV" },
-  ],
-  "/docs/on-chain-bridge": [
-    { label: "Bridge Hub", href: "/docs/on-chain-bridge", agt: "EMO" },
-    { label: "Solana Native", href: "/docs/on-chain-bridge/solana-native", agt: "EMO" },
-  ],
-  "/docs/infrastructure/edge": [
-    { label: "Edge MCP Overview", href: "/docs/infrastructure/edge", agt: "ENV" },
-    { label: "CSTB Trust DePIN", href: "/docs/infrastructure/depin", agt: "ENV" },
-  ],
-  "/docs/reference/api": [
-    { label: "API Reference", href: "/docs/reference/api", agt: "COG" },
-    { label: "Documentation Index", href: "/docs/reference", agt: "COG" },
-    { label: "Ecosystem Repos", href: "/docs/reference/ecosystem", agt: "ENV" },
-    { label: "Changelog", href: "/docs/reference/changelog", agt: "COG" },
-  ],
-};
+const SUB_PAGES = MOBILE_SUB_PAGES;
 
 /* ── Section definitions ── */
 interface NavSection {
@@ -108,17 +43,19 @@ interface NavSection {
 }
 
 const NAV_SECTIONS: NavSection[] = [
-  { label: "Jett Optics", href: "/docs/dojo", icon: Atom },
   { label: "Getting Started", href: "/docs/getting-started/what-is-optx", icon: Rocket },
-  { label: "JettChat", href: "/docs/jettchat", icon: MessageCircle },
+  { label: "SDK Reference", href: "/docs/sdk", icon: Package },
   { label: "Authentication", href: "/docs/authentication/gaze", icon: Lock },
-  { label: "Token", href: "/docs/token", icon: Coins },
   { label: "AARON Protocol", href: "/docs/protocol", icon: Cpu },
+  { label: "On-Chain Bridge", href: "/docs/on-chain-bridge", icon: Share2 },
+  { label: "JettChat", href: "/docs/jettchat", icon: MessageCircle },
+  { label: "Token", href: "/docs/token", icon: Coins },
+  { label: "DOJO Platform", href: "/docs/dojo", icon: Atom },
   { label: "JOE Engine", href: "/docs/astrojoe", icon: BrainCircuit },
   { label: "Architecture", href: "/docs/architecture", icon: Workflow },
-  { label: "On-Chain Bridge", href: "/docs/on-chain-bridge", icon: Share2 },
   { label: "Infrastructure", href: "/docs/infrastructure/edge", icon: Server },
   { label: "Reference", href: "/docs/reference/api", icon: Code },
+  { label: "DOCS Rules", href: "/docs/rules", icon: BookOpen },
 ];
 
 function isActive(pathname: string, href: string): boolean {

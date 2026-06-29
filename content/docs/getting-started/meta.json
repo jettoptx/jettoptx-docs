@@ -1,5 +1,4 @@
 {
   "title": "Getting Started",
-  "icon": "Rocket",
-  "pages": ["what-is-optx", "architecture", "on-chain-addresses"]
+  "pages": ["what-is-optx", "access", "architecture", "on-chain-addresses"]
 }

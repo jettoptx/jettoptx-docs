@@ -12,16 +12,15 @@ Solana is the home chain for OPTX. All verification, staking, and agent identity
 
 | Token | Standard | Purpose | Network |
 |-------|----------|---------|---------|
-| **$OPTX** | Token-2022 (SPL) | Utility — DePIN rewards, bridge fees, gaze attestations | Devnet |
-| **$JTX** | SPL Token | Governance — staking for minting/access, AARON priority | Mainnet |
-| **$CSTB** | Token-2022 (SPL) | Attestation — DePIN validator staking via CSTB Trust | Devnet |
+| **$JTX v2** | Token-2022 (SPL) | Governance + DOJO access gate | **Mainnet** |
+| **$OPTX** | Token-2022 (SPL) | Utility — DePIN rewards, gaze attestations | Devnet |
+| **$CSTB** | Token-2022 (SPL) | Attestation — DePIN validator staking | Devnet |
 
 ### Token-2022 Transfer Hooks
 
 $OPTX and $CSTB use **transfer hooks** — programmable logic that executes on every token transfer. This enables:
 
 - **DePIN reward distribution** on validator attestation
-- **Bridge fee deduction** before LayerZero OFT wrapping
 - **Gaze attestation stamps** embedded in transfer metadata
 
 ## Metaplex Agent Identity
@@ -53,7 +52,10 @@ Validators stake $CSTB to participate in the DePIN network. AARON validates thei
 
 | Program | Address | Network |
 |---------|---------|---------|
-| **CSTB DePIN** | `91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq` | Devnet |
+| **DePIN (jtx_cstb_trust)** | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` | **Mainnet** |
+| **jett_vault** | `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7` | **Mainnet** |
+| DePIN (devnet) | `91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq` | Devnet |
+| **$JTX v2** | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` | **Mainnet** |
 
 ## RPC Configuration
 

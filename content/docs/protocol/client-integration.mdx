@@ -1,87 +1,85 @@
 ---
 title: Client Integration
-description: Submit JOULE templates to the AARON registry for on-chain attestation.
+description: Connect your app to the AARON router — session, verify, and on-chain attestation.
 icon: Plug
 ---
 
-After the browser CV pipeline produces a **JOULE template**, submit it to the AARON registry for on-chain attestation.
+Integrate gaze attestation using the official AARON router at `https://aaron.jettoptics.ai`. Source: [jettoptx-aaron-router](https://github.com/jettoptx/jettoptx-aaron-router).
 
-## Submit JOULE Template
-
-```typescript
-// Submit JOULE template to AARON registry
-import type { JOULETemplate } from "@/lib/joule/types";
-
-async function submitToAARON(template: JOULETemplate, userId: number) {
-  // 1. Submit biometric proof to SpacetimeDB
-  const proof = await fetch("/api/aaron/submit", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      user_id: userId,
-      encoding: template.astroEncoding,
-      astro_knot: template.astroKnot,
-      hash: template.verificationHash,
-      durations: template.holdDurations,
-      confidence: 0.85,
-    }),
-  });
-
-  // 2. Verify proof server-side
-  const { proof_id } = await proof.json();
-  const verify = await fetch("/api/aaron/verify", {
-    method: "POST",
-    body: JSON.stringify({
-      proof_id,
-      nonce: template.sessionNonce,
-      sequence: template.gazeSequence.map(
-        t => t === "COG" ? 1 : t === "EMO" ? 2 : 3
-      ),
-      durations: template.holdDurations,
-      timestamp: template.timestamp,
-    }),
-  });
-
-  // 3. On-chain CSTB attestation (if verified)
-  if (verify.ok) {
-    console.log("AARON proof verified — ready for on-chain attestation");
-  }
-}
-```
-
-## Quick Start SDKs
-
-### TypeScript SDK
+## Quick Start — TypeScript
 
 ```typescript
-import { Aaron } from "@astroknots/sdk";
+const AARON = "https://aaron.jettoptics.ai";
 
-const aaron = new Aaron({ endpoint: "https://api.astroknots.space" });
-const proof = await aaron.attest({ gaze: "MEDIUM", x402: "0.05 OPTX" });
-console.log(proof.txSignature); // Solana transaction hash
+// 1. Create a gaze session
+const session = await fetch(`${AARON}/session`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ user_id: "your-user-id" }),
+}).then((r) => r.json());
+
+// 2. After gaze capture, verify the proof
+const result = await fetch(`${AARON}/verify`, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    session_id: session.session_id,
+    proof_hash: "<opaque-32-byte-hex>",
+    agt_sequence: ["COG", "EMO", "ENV"],
+    hold_durations_ms: [520, 480, 510],
+    confidence: 0.87,
+  }),
+}).then((r) => r.json());
+
+console.log(result.verified); // true → ready for on-chain attestation
 ```
 
-### Python SDK
+## Official SDKs
 
-```python
-from astroknots import Aaron
+The router ships client libraries in the repo:
 
-aaron = Aaron(endpoint="https://api.astroknots.space")
-proof = aaron.attest(gaze="MEDIUM", x402="0.05 OPTX")
-print(proof.tx_signature)  # Solana transaction hash
+| Language | Path |
+|----------|------|
+| TypeScript | `sdk/typescript/aaron-client.ts` |
+| Python | `sdk/python/aaron_client.py` |
+
+```typescript
+import { AaronClient } from "./sdk/typescript/aaron-client";
+
+const client = new AaronClient({ baseUrl: "https://aaron.jettoptics.ai" });
+const session = await client.createSession({ userId: "demo" });
+const verified = await client.verifySession({
+  sessionId: session.session_id,
+  proofHash: "...",
+  agtSequence: ["COG", "EMO", "ENV"],
+  holdDurationsMs: [500, 500, 500],
+  confidence: 0.9,
+});
 ```
 
-### Response Shape
+## MOJO Handshake (Mobile)
+
+For first-gaze AGT attestation from iOS, use the web-to-iOS handshake documented in [MOJO](/docs/dojo/mojo):
+
+- `POST /handshake/start` — generate QR payload
+- `POST /handshake/done` — MOJO submits verified gaze proof
+- `GET /handshake/status/{id}` — poll until complete
+
+## Response Shape
 
 ```json
 {
-  "status": "attested",
-  "proof_hash": "9f86d08...c150e04",
-  "tx_signature": "5KtR7g...xvN2mQ",
-  "tier": "PIONEER",
-  "x402_settled": true,
-  "timestamp": "2026-02-22T08:30:00Z"
+  "verified": true,
+  "session_id": "a1b2c3d4-...",
+  "proof_hash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08",
+  "agt_primary": "COG",
+  "confidence": 0.87,
+  "attestation_ready": true
 }
 ```
 
-> SDKs are in early alpha. Use the **curl/REST API** for production integrations.
+## Next Steps
+
+- [On-Chain Bridge](/docs/on-chain-bridge) — Anchor program instructions and TypeScript SDK
+- [SDK Reference](/docs/sdk) — `@jettoptx/auth` and `@jettoptx/chat` packages
+- [Edge Gateway](/docs/infrastructure/edge-gateway) — gated MCP access for production agents

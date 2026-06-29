@@ -1,0 +1,5 @@
+{
+  "title": "SDK Reference",
+  "icon": "Package",
+  "pages": ["index", "auth", "chat", "augment-registry"]
+}

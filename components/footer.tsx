@@ -124,20 +124,20 @@ export function SiteFooter() {
             <ul className="space-y-2.5">
               {[
                 {
+                  label: "jettoptx-sdk",
+                  href: "https://github.com/jettoptx/jettoptx-sdk",
+                },
+                {
                   label: "jettoptx-aaron-router",
                   href: "https://github.com/jettoptx/jettoptx-aaron-router",
                 },
                 {
-                  label: "jettoptx-cstb-depin",
-                  href: "https://github.com/jettoptx/jettoptx-cstb-depin",
+                  label: "jettoptx-poa-depin",
+                  href: "https://github.com/jettoptx/jettoptx-poa-depin",
                 },
                 {
                   label: "jettoptx-docs",
                   href: "https://github.com/jettoptx/jettoptx-docs",
-                },
-                {
-                  label: "hermes-xai-oauth-wsl",
-                  href: "https://github.com/jettoptx/hermes-xai-oauth-wsl",
                 },
               ].map((link) => (
                 <li key={link.label}>
@@ -210,7 +210,7 @@ export function SiteFooter() {
                 },
                 {
                   label: "Devnet Validation",
-                  href: "/docs/devnet-validation",
+                  href: "/docs/on-chain-bridge/devnet-validation",
                   ext: false,
                 },
                 {
@@ -252,7 +252,7 @@ export function SiteFooter() {
         <div className="mt-10 pt-6 border-t border-fd-border">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <p className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50">
-              Last updated: May 17, 2026 &mdash; v2.0.2
+              Last updated: June 29, 2026 &mdash; v2.1.0
             </p>
             <details className="group">
               <summary className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50 hover:text-orange-400 transition-colors cursor-pointer select-none">
@@ -260,6 +260,15 @@ export function SiteFooter() {
               </summary>
               <div className="mt-3 p-4 rounded-lg bg-fd-background/50 border border-fd-border max-w-lg">
                 <ul className="space-y-1.5 font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/70">
+                  <li><span className="text-orange-400">v2.1.0</span> &mdash; June 29, 2026
+                    <ul className="ml-3 mt-1 space-y-1">
+                      <li>&#x2022; Full ecosystem docs refinement: SDK section, Platform Access, Edge Gateway, Trading &amp; Mint pages</li>
+                      <li>&#x2022; <code>lib/moa-registry.ts</code> single source for MOA graph; removed triplicated node data</li>
+                      <li>&#x2022; 16-repo ecosystem map; JTX v2 + mainnet DePIN addresses; DOJO section renamed to DOJO Platform</li>
+                      <li>&#x2022; Crypto IP scrub: removed JOULE/astro_knot/TKDF from public protocol and messaging docs</li>
+                      <li>&#x2022; Privy-primary DOJO auth documented; Hermes API marked deprecated</li>
+                    </ul>
+                  </li>
                   <li><span className="text-orange-400">v2.0.2</span> &mdash; May 17, 2026
                     <ul className="ml-3 mt-1 space-y-1">
                       <li>&#x2022; Sidebar icons: <code>MessageCircle</code> (JettChat) and <code>Coins</code> (Token) were configured in <code>meta.json</code> but never imported in <code>lib/source.ts</code>; resolver silently returned undefined. Both added to the lucide-react imports and icon map.</li>

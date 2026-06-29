@@ -1,32 +1,41 @@
 ---
 title: JETT Auth
-description: Unified auth surface for JettChat — supports both xChat Native and Phantom Mode.
+description: Unified auth surface for JettChat — Privy for DOJO, @jettoptx/auth for custom integrations.
 icon: KeyRound
 ---
 
-**JETT Auth** is the unified authentication layer behind JettChat. It supports both modes the chat client ships with.
+**JETT Auth** is the unified authentication layer behind JettChat.
 
-## Two Modes, One Auth Core
+## Two Products, Two Auth Paths
+
+| Surface | Auth Provider | When to Use |
+|---------|---------------|-------------|
+| **DOJO** ([jettoptx.chat](https://jettoptx.chat)) | **Privy** + JTX gate | End users accessing the DOJO product |
+| **Custom integrations** | **`@jettoptx/auth`** from [jettoptx-sdk](/docs/sdk/auth) | Developers building xChat Native clients |
+
+The standalone [jettoptx-jettauth](https://github.com/jettoptx/jettoptx-jettauth) repo is **archived** — install from the SDK monorepo instead.
+
+## Two Chat Modes
 
 |  | xChat Native | Phantom Mode |
 |---|---|---|
-| Login | X/Twitter OAuth 2.0 PKCE | Jett Hub visual SSO + JTX gate |
+| Login | Privy / X OAuth (integrators) | Jett Hub visual SSO + JTX gate |
 | Biometric | AGT Gaze Triad (COG/EMO/ENV) | AGT Gaze Triad + Ping-Pong wake |
-| Session | Ed25519 JWT in `jettauth` cookie | PQC-wrapped session, hardware-bound |
+| Session | Ed25519 JWT (integrators) | PQC-wrapped session, hardware-bound |
 | Wipe trigger | Standard logout | Duress PIN → cryptographic wipe |
-| SDK | [`@jettoptx/auth`](https://github.com/jettoptx/joe-jettauth-optx) | [Secure-Legion/android](https://github.com/Secure-Legion/android) |
+| SDK | [`@jettoptx/auth`](/docs/sdk/auth) | [Secure-Legion/android](https://github.com/Secure-Legion/android) |
 
 Both modes verify gaze through the same [AGT pipeline](/docs/authentication/gaze).
 
 ## Access Flow (JETT Hub)
 
-After **Sign in with X**, the user picks any one of:
+After sign-in, the user picks any one of:
 
 - **Connect wallet · Hold 1 JTX** (cheapest sustained path)
 - **Pay $8.88 — no wallet needed** (Stripe)
 - **Pay with Tempo CLI · $8.88**
 
-Once gated, optional subscription tiers unlock more features (stake JTX *or* pay USD/mo):
+Once gated, optional subscription tiers unlock more features:
 
 | Tier | JTX stake | Duration | Subscription |
 |------|-----------|----------|--------------|
@@ -34,18 +43,20 @@ Once gated, optional subscription tiers unlock more features (stake JTX *or* pay
 | **DOJO** | 444 JTX | 2 Years | $28.88 / mo |
 | **SPACE COWBOY** | 1,111 JTX | Lifetime | $88.88 / mo |
 
-See [Token / Tiers](/docs/token/tiers) for the canonical table mirroring [astroknots.space/stake](https://www.astroknots.space/stake).
+See [Token / Tiers](/docs/token/tiers) and [Platform Access](/docs/getting-started/access).
 
-## xChat Native specifics
+## xChat Native (Integrators)
 
-X/Twitter OAuth 2.0 PKCE flow with the following scopes: `tweet.read`, `tweet.write`, `users.read`, `dm.read`, `dm.write`, `offline.access`. After exchange, the SDK issues an Ed25519 JWT into the `jettauth` httpOnly cookie. The JTX gate is enforced as middleware on protected routes.
+For custom apps outside DOJO, use `@jettoptx/auth`:
 
-Implementation: [`@jettoptx/auth`](https://github.com/jettoptx/joe-jettauth-optx) SDK.
+- X/Twitter OAuth 2.0 PKCE
+- Solana `signMessage` wallet proof
+- Ed25519 JWT in `jettauth` httpOnly cookie
+
+See [SDK / Auth](/docs/sdk/auth) for install and quickstart.
 
 ## Phantom Mode specifics
 
-Phantom Mode adds a Tor-only path with post-quantum cryptography (X25519 + ML-KEM-1024) and hardware-backed keys (StrongBox on Android, Secure Enclave / TEE elsewhere). The Jett Hub visual SSO replaces OAuth entirely — no third-party identity provider is contacted. A duress PIN, if entered at any auth surface, triggers a cryptographic wipe rather than unlocking the session.
+Phantom Mode adds a Tor-only path with post-quantum hybrid encryption and hardware-backed keys. The Jett Hub visual SSO replaces OAuth — no third-party identity provider is contacted.
 
-Tor topology uses a triple `.onion` hidden-service layout via [Secure-Legion/tor-hsservice-patched](https://github.com/Secure-Legion/tor-hsservice-patched), a Tor 0.40 fork with intro-point exposure for OnionBalance coordination across multi-device messaging.
-
-> **Status:** Phantom Mode is shipped. Implementation lives in [Secure-Legion/android](https://github.com/Secure-Legion/android); refer to that repo's release notes for current build status.
+Implementation: [Secure-Legion/android](https://github.com/Secure-Legion/android) (patent pending).

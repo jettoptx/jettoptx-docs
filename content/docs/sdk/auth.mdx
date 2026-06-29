@@ -1,0 +1,84 @@
+---
+title: "@jettoptx/auth"
+description: X OAuth PKCE + Solana signMessage + Ed25519 JWT for custom xChat Native integrations.
+icon: KeyRound
+---
+
+> **Note:** [jettoptx.chat](https://jettoptx.chat) (DOJO) uses **Privy** as its primary auth provider. Use `@jettoptx/auth` when building **custom integrations** outside the DOJO product — see [JETT Auth](/docs/authentication/jett-auth).
+
+The `@jettoptx/auth` package provides dual-mode authentication for xChat Native:
+
+```
+X OAuth 2.0 PKCE ──> X profile (identity verification)
+Solana signMessage ──> wallet ownership proof
+                  ↓
+        Ed25519 JWT (tweetnacl)
+                  ↓
+        HttpOnly session cookie ("jettauth")
+```
+
+Source: [jettoptx-sdk/packages/jettauth](https://github.com/jettoptx/jettoptx-sdk/tree/main/packages/jettauth)
+
+## Install
+
+```bash
+npm install @jettoptx/auth
+```
+
+Peer dependencies: `next@^14`, `react@^18`, `@solana/web3.js@^1.95`, `@solana/wallet-adapter-react@^0.15`
+
+## Exports
+
+| Entry Point | Import | Contents |
+|-------------|--------|----------|
+| Core | `@jettoptx/auth` | JWT, X OAuth, Solana auth, session, middleware |
+| React | `@jettoptx/auth/next` | AuthProvider, useAuth, useXOAuth, useSolanaAuth |
+| API | `@jettoptx/auth/api` | Next.js route handlers |
+
+## Quick Start
+
+### Wrap your app
+
+```tsx
+import { AuthProvider } from "@jettoptx/auth/next";
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  return <AuthProvider>{children}</AuthProvider>;
+}
+```
+
+### Use auth hooks
+
+```tsx
+import { useAuth, useXOAuth, useSolanaAuth } from "@jettoptx/auth/next";
+
+function LoginPage() {
+  const { isSignedIn, claims, signOut } = useAuth();
+  const { startXOAuth } = useXOAuth();
+  const { connectAndSign } = useSolanaAuth();
+  // ...
+}
+```
+
+### Wire API routes
+
+```ts
+import { createXAuthHandler } from "@jettoptx/auth/api";
+
+export const GET = createXAuthHandler({
+  clientId: process.env.X_CLIENT_ID!,
+  clientSecret: process.env.X_CLIENT_SECRET!,
+  redirectUri: `${process.env.NEXT_PUBLIC_APP_URL}/api/auth/x/callback`,
+});
+```
+
+## JWT Claims
+
+| Claim | Description |
+|-------|-------------|
+| `sub` | User identifier |
+| `x_handle` | X/Twitter username |
+| `wallet` | Solana public key (if connected) |
+| `jtx_balance` | Cached JTX gate status |
+
+See the full API in the [SDK repo README](https://github.com/jettoptx/jettoptx-sdk/blob/main/packages/jettauth/README.md).

@@ -1,0 +1,62 @@
+---
+icon: ShieldCheck
+title: Devnet Validation
+description: Devnet program IDs and validation checklist for OPTX integrators testing against Solana devnet.
+---
+
+## Devnet Validation
+
+OPTX maintains a **devnet** deployment for testing DePIN attestation flows, gaze proofs, and SDK integrations before mainnet. **Production integrations should target mainnet** — see [On-Chain Addresses](/docs/getting-started/on-chain-addresses).
+
+### Validation Overview
+
+| Component | Network | Status |
+|-----------|---------|--------|
+| $OPTX Token | Solana Devnet | Active |
+| DePIN Program | Solana Devnet | Active |
+| CSTB Trust | Solana Devnet | Active |
+| AARON Router | `aaron.jettoptics.ai` | Active |
+| Gaze Attestation | Edge + Devnet | Active |
+
+### Devnet Program Addresses
+
+| Program | Address |
+|---------|---------|
+| $OPTX Token | `DSyauRAZwUd2BrTk3P8k2yUxxvcx5X4BBg3Gh3VbeRG3` |
+| DePIN Program (devnet) | `91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq` |
+| $CSTB Token | `4waAAfTjqf5LNpj2TC5zoeiAgegVwKWoy4WiJgjdBkVL` |
+
+### Mainnet (canonical)
+
+| Program | Address |
+|---------|---------|
+| DePIN Program | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` |
+| jett_vault | `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7` |
+| $JTX v2 | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` |
+
+### Attestation Flow
+
+1. **Gaze Capture** — On-device iris tracking classifies AGT tensors (COG/EMO/ENV)
+2. **Proof Generation** — AARON router produces an opaque proof hash
+3. **Verify** — `POST /verify` on the AARON router confirms the session
+4. **On-Chain Submit** — Verified proofs anchor to the DePIN program via [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin) SDK
+
+### Running Against Devnet
+
+```bash
+git clone https://github.com/jettoptx/jettoptx-poa-depin.git
+cd jettoptx-poa-depin
+npm install
+# Use devnet feature flag — see README for anchor test commands
+anchor test -- --features devnet
+```
+
+### Devnet RPC
+
+```
+https://devnet.helius-rpc.com/?api-key=<your-api-key>
+```
+
+### Reporting Issues
+
+- GitHub Issues: [jettoptx/jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin/issues)

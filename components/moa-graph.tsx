@@ -2,261 +2,23 @@
 
 import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import Link from "next/link";
+import {
+  GROUP_LABELS,
+  GROUP_ORDER,
+  MOA_EDGES,
+  MOA_NODES,
+  type AgtKey,
+  type MoaNode,
+} from "@/lib/moa-registry";
 
-type AGT = "COG" | "EMO" | "ENV";
-
-interface DocNode {
-  id: string;
-  label: string;
-  group: string;
-  agt: AGT;
-  href: string;
-  description: string;
-  emo: number;
-  env: number;
-  cog: number;
-}
-
-interface Edge {
-  source: string;
-  target: string;
-}
-
-export const AGT_COLORS: Record<AGT, { color: string; label: string; dim: string }> = {
+export const AGT_COLORS: Record<AgtKey, { color: string; label: string; dim: string }> = {
   COG: { color: "#eab308", label: "Cognitive", dim: "rgba(234,179,8,0.12)" },
   EMO: { color: "#f43f5e", label: "Emotional", dim: "rgba(244,63,94,0.12)" },
   ENV: { color: "#60a5fa", label: "Environmental", dim: "rgba(96,165,250,0.12)" },
 };
 
-const GROUPS: Record<string, { label: string; order: number }> = {
-  "getting-started": { label: "Getting Started", order: 0 },
-  jettchat: { label: "JettChat", order: 0.5 },
-  authentication: { label: "Authentication", order: 1 },
-  token: { label: "Token", order: 1.5 },
-  protocol: { label: "Protocol — AARON", order: 2 },
-  astrojoe: { label: "AstroJOE — Agent OS", order: 3 },
-  architecture: { label: "Architecture Flows", order: 5 },
-  infrastructure: { label: "Infrastructure", order: 6 },
-  "on-chain-bridge": { label: "On-Chain Bridge", order: 7 },
-  reference: { label: "Reference", order: 8 },
-  dojo: { label: "DOJO", order: 9 },
-};
-
-const DOC_NODES: DocNode[] = [
-  // Getting Started
-  { id: "what-is-optx", label: "What is OPTX?", group: "getting-started", agt: "COG", href: "/docs/getting-started/what-is-optx", description: "Dual-mode JettChat overview, naming hierarchy, protocol primitives", emo: 25, env: 20, cog: 55 },
-  { id: "architecture-overview", label: "Architecture", group: "getting-started", agt: "COG", href: "/docs/getting-started/architecture", description: "Two JettChat modes (xChat Native + Phantom Mode) sharing AGT, JTX, Solana", emo: 15, env: 30, cog: 55 },
-  { id: "on-chain", label: "On-Chain Addresses", group: "getting-started", agt: "ENV", href: "/docs/getting-started/on-chain-addresses", description: "Solana program addresses, token mints, wallets", emo: 10, env: 80, cog: 10 },
-
-  // JettChat
-  { id: "jettchat", label: "JettChat", group: "jettchat", agt: "EMO", href: "/docs/jettchat", description: "Encrypted AI chat — two modes (xChat Native + Phantom Mode)", emo: 55, env: 25, cog: 20 },
-  { id: "xchat-native", label: "xChat Native", group: "jettchat", agt: "EMO", href: "/docs/jettchat/xchat-native", description: "X OAuth 2.0 PKCE + Solana JTX gating + Ed25519 JWT", emo: 60, env: 20, cog: 20 },
-  { id: "phantom-mode", label: "Phantom Mode", group: "jettchat", agt: "ENV", href: "/docs/jettchat/phantom-mode", description: "Tor + post-quantum (X25519 + ML-KEM-1024) + StrongBox/TEE + duress PIN", emo: 30, env: 55, cog: 15 },
-  { id: "jettchat-messaging", label: "Messaging Features", group: "jettchat", agt: "EMO", href: "/docs/jettchat/messaging", description: "E2EE messaging shared by both modes — gaze cursor, offline-first, groups, self-destruct", emo: 60, env: 25, cog: 15 },
-
-  // Authentication
-  { id: "jett-auth", label: "JETT Auth", group: "authentication", agt: "EMO", href: "/docs/authentication/jett-auth", description: "Unified auth surface — supports both xChat Native and Phantom Mode", emo: 55, env: 20, cog: 25 },
-  { id: "gaze", label: "Gaze Verification", group: "authentication", agt: "EMO", href: "/docs/authentication/gaze", description: "AGT biometric auth — iris tracking, tensor classification", emo: 55, env: 5, cog: 40 },
-  { id: "wallet", label: "Agent Wallet", group: "authentication", agt: "EMO", href: "/docs/authentication/wallet", description: "ERC-8004 soulbound wallet for computational identity (roadmap)", emo: 50, env: 40, cog: 10 },
-
-  // Token
-  { id: "token", label: "$JTX Token", group: "token", agt: "ENV", href: "/docs/token", description: "JettChat access + governance token on Solana mainnet", emo: 25, env: 50, cog: 25 },
-  { id: "token-tiers", label: "Tiers", group: "token", agt: "COG", href: "/docs/token/tiers", description: "Canonical 3-tier model (MOJO / DOJO / SPACE COWBOY) — stake or subscribe", emo: 20, env: 30, cog: 50 },
-  { id: "token-subscriptions", label: "Subscriptions", group: "token", agt: "COG", href: "/docs/token/subscriptions", description: "Wallet-less paths — Stripe + Tempo CLI", emo: 25, env: 20, cog: 55 },
-
-  // Protocol
-  { id: "aaron-protocol", label: "AARON Protocol", group: "protocol", agt: "COG", href: "/docs/protocol", description: "Biometric proof protocol and edge router", emo: 20, env: 15, cog: 65 },
-  { id: "biometric-proof", label: "Biometric Proof", group: "protocol", agt: "COG", href: "/docs/protocol/biometric-proof", description: "Gaze-derived cryptographic proofs", emo: 30, env: 15, cog: 55 },
-  { id: "how-it-works", label: "How It Works", group: "protocol", agt: "COG", href: "/docs/protocol/how-it-works", description: "AARON verification flow step-by-step", emo: 35, env: 10, cog: 55 },
-  { id: "client-integration", label: "Client Integration", group: "protocol", agt: "COG", href: "/docs/protocol/client-integration", description: "Integrating AARON into client applications", emo: 25, env: 30, cog: 45 },
-  { id: "aaron-arch", label: "AARON Architecture", group: "protocol", agt: "COG", href: "/docs/protocol/architecture", description: "Internal architecture of the AARON router", emo: 15, env: 25, cog: 60 },
-
-  // AstroJOE
-  { id: "astrojoe", label: "AstroJOE", group: "astrojoe", agt: "EMO", href: "/docs/astrojoe", description: "Intelligent agent orchestrating the OPTX ecosystem", emo: 45, env: 20, cog: 35 },
-  { id: "skills", label: "Skills System", group: "astrojoe", agt: "COG", href: "/docs/astrojoe/skills", description: "SKILL.md format, progressive disclosure, augments", emo: 20, env: 10, cog: 70 },
-  { id: "memory", label: "Memory", group: "astrojoe", agt: "COG", href: "/docs/astrojoe/memory", description: "SpacetimeDB memory — tables, reducers, API", emo: 10, env: 25, cog: 65 },
-  { id: "orchestration", label: "Orchestration", group: "astrojoe", agt: "COG", href: "/docs/astrojoe/orchestration", description: "Task lifecycle, DAG swarm coordination", emo: 15, env: 15, cog: 70 },
-  { id: "hedgehog-doc", label: "HEDGEHOG Gateway", group: "astrojoe", agt: "ENV", href: "/docs/astrojoe/hedgehog", description: "Multi-API AI gateway on edge hardware", emo: 20, env: 65, cog: 15 },
-  { id: "hermes-api", label: "Hermes API", group: "astrojoe", agt: "COG", href: "/docs/astrojoe/api", description: "Hermes OPTX API endpoints and configuration", emo: 10, env: 15, cog: 75 },
-  { id: "hermes-features", label: "Hermes v0.12.0", group: "astrojoe", agt: "COG", href: "/docs/astrojoe/hermes-features", description: "The Curator release — autonomous skill curator, +4 providers, ComfyUI + TouchDesigner-MCP bundled, ~57% TUI cold-start cut", emo: 10, env: 25, cog: 65 },
-
-  // Architecture Flows
-  { id: "arch-flows", label: "Architecture Flows", group: "architecture", agt: "COG", href: "/docs/architecture", description: "Mermaid diagrams for every major system flow", emo: 15, env: 20, cog: 65 },
-  { id: "task-lifecycle", label: "Task Lifecycle", group: "architecture", agt: "COG", href: "/docs/architecture/task-lifecycle", description: "Happy path: task creation to completion", emo: 15, env: 15, cog: 70 },
-  { id: "swarm-dag", label: "Swarm DAG", group: "architecture", agt: "COG", href: "/docs/architecture/swarm-dag", description: "Multi-agent DAG decomposition", emo: 30, env: 15, cog: 55 },
-  { id: "gaze-policy", label: "Gaze Policy", group: "architecture", agt: "EMO", href: "/docs/architecture/gaze-policy", description: "Gaze-gated task authorization flow", emo: 55, env: 15, cog: 30 },
-  { id: "bridge-flow", label: "Bridge Flow", group: "architecture", agt: "EMO", href: "/docs/architecture/bridge-flow", description: "XRPL → Wormhole → Solana pipeline", emo: 55, env: 35, cog: 10 },
-  { id: "agent-identity", label: "Agent Identity", group: "architecture", agt: "EMO", href: "/docs/architecture/agent-identity", description: "Identity sources → on-chain registration", emo: 65, env: 25, cog: 10 },
-  { id: "task-states", label: "Task States", group: "architecture", agt: "COG", href: "/docs/architecture/task-states", description: "State machine: Discovered → Completed/Failed", emo: 10, env: 10, cog: 80 },
-  { id: "topology", label: "Topology", group: "architecture", agt: "ENV", href: "/docs/architecture/topology", description: "Full network map of all OPTX services", emo: 15, env: 75, cog: 10 },
-
-  // On-Chain Bridge
-  { id: "bridge-hub", label: "On-Chain Bridge", group: "on-chain-bridge", agt: "EMO", href: "/docs/on-chain-bridge", description: "Solana-native bridge hub — EVM and XRPL bridging on roadmap", emo: 50, env: 40, cog: 10 },
-  { id: "solana-native", label: "Solana Native", group: "on-chain-bridge", agt: "EMO", href: "/docs/on-chain-bridge/solana-native", description: "Home chain — $OPTX, $JTX, $CSTB, Metaplex identity", emo: 45, env: 45, cog: 10 },
-
-  // Infrastructure
-  { id: "edge-mcp", label: "Edge MCP", group: "infrastructure", agt: "ENV", href: "/docs/infrastructure/edge", description: "HEDGEHOG on OPTX Validator Node edge compute", emo: 20, env: 70, cog: 10 },
-  { id: "depin", label: "DePIN", group: "infrastructure", agt: "ENV", href: "/docs/infrastructure/depin", description: "CSTB Trust DePIN attestation on Solana", emo: 15, env: 65, cog: 20 },
-
-  // Reference
-  { id: "api-ref", label: "API Reference", group: "reference", agt: "COG", href: "/docs/reference/api", description: "WebSocket RPC, REST endpoints, capabilities", emo: 5, env: 5, cog: 90 },
-  { id: "doc-index", label: "Index", group: "reference", agt: "COG", href: "/docs/reference", description: "Complete documentation index with AGT classification", emo: 10, env: 10, cog: 80 },
-  { id: "ecosystem", label: "Ecosystem Repos", group: "reference", agt: "ENV", href: "/docs/reference/ecosystem", description: "All jettoptx + Secure-Legion repos backing OPTX/JettChat", emo: 25, env: 60, cog: 15 },
-  { id: "changelog", label: "Changelog", group: "reference", agt: "COG", href: "/docs/reference/changelog", description: "Version history and release notes", emo: 10, env: 10, cog: 80 },
-
-  // DOJO
-  { id: "dojo", label: "DOJO", group: "dojo", agt: "ENV", href: "/docs/dojo", description: "Developer Operator Jett Optics — IDE training ground and augment marketplace", emo: 25, env: 45, cog: 30 },
-  { id: "mojo", label: "MOJO", group: "dojo", agt: "EMO", href: "/docs/dojo/mojo", description: "Mobile Jett Optics — wallet identity, biometrics, Jett Cursor & Widgets", emo: 50, env: 35, cog: 15 },
-  { id: "moa", label: "Map of Augments", group: "dojo", agt: "COG", href: "/docs/dojo/moa", description: "Cognitive cartography — semantic explorer for the documentation graph", emo: 30, env: 15, cog: 55 },
-];
-
-const DOC_EDGES: Edge[] = [
-  { source: "what-is-optx", target: "architecture-overview" },
-  { source: "what-is-optx", target: "on-chain" },
-  { source: "architecture-overview", target: "on-chain" },
-  { source: "gaze", target: "aaron-protocol" },
-  { source: "gaze", target: "biometric-proof" },
-  { source: "wallet", target: "on-chain" },
-  { source: "wallet", target: "agent-identity" },
-  { source: "aaron-protocol", target: "biometric-proof" },
-  { source: "aaron-protocol", target: "how-it-works" },
-  { source: "aaron-protocol", target: "client-integration" },
-  { source: "aaron-protocol", target: "aaron-arch" },
-  { source: "biometric-proof", target: "gaze" },
-  { source: "astrojoe", target: "skills" },
-  { source: "astrojoe", target: "memory" },
-  { source: "astrojoe", target: "orchestration" },
-  { source: "astrojoe", target: "hedgehog-doc" },
-  { source: "astrojoe", target: "hermes-api" },
-  { source: "astrojoe", target: "agent-identity" },
-  { source: "skills", target: "dojo" },
-  { source: "memory", target: "edge-mcp" },
-  { source: "orchestration", target: "task-lifecycle" },
-  { source: "orchestration", target: "swarm-dag" },
-  { source: "hedgehog-doc", target: "edge-mcp" },
-  { source: "hermes-api", target: "api-ref" },
-  { source: "arch-flows", target: "task-lifecycle" },
-  { source: "arch-flows", target: "swarm-dag" },
-  { source: "arch-flows", target: "gaze-policy" },
-  { source: "arch-flows", target: "bridge-flow" },
-  { source: "arch-flows", target: "agent-identity" },
-  { source: "arch-flows", target: "task-states" },
-  { source: "arch-flows", target: "topology" },
-  { source: "task-lifecycle", target: "task-states" },
-  { source: "gaze-policy", target: "gaze" },
-  { source: "gaze-policy", target: "aaron-protocol" },
-  { source: "agent-identity", target: "on-chain" },
-  { source: "edge-mcp", target: "topology" },
-  { source: "depin", target: "on-chain" },
-  { source: "dojo", target: "skills" },
-  { source: "dojo", target: "moa" },
-  { source: "dojo", target: "mojo" },
-  { source: "mojo", target: "astrojoe" },
-  { source: "mojo", target: "hedgehog-doc" },
-  { source: "bridge-hub", target: "solana-native" },
-  { source: "bridge-hub", target: "aaron-protocol" },
-  { source: "bridge-hub", target: "on-chain" },
-  { source: "solana-native", target: "on-chain" },
-  { source: "solana-native", target: "depin" },
-  { source: "solana-native", target: "agent-identity" },
-  { source: "doc-index", target: "api-ref" },
-  { source: "doc-index", target: "moa" },
-
-  // Cross-AGT edges (Grok-refined)
-  { source: "mojo", target: "depin" },
-  { source: "mojo", target: "aaron-arch" },
-  { source: "depin", target: "gaze" },
-  { source: "depin", target: "agent-identity" },
-  { source: "astrojoe", target: "bridge-hub" },
-  { source: "what-is-optx", target: "gaze" },
-  { source: "architecture-overview", target: "depin" },
-  { source: "aaron-protocol", target: "on-chain" },
-  { source: "aaron-arch", target: "on-chain" },
-  { source: "biometric-proof", target: "edge-mcp" },
-  { source: "how-it-works", target: "gaze" },
-  { source: "how-it-works", target: "on-chain" },
-  { source: "client-integration", target: "mojo" },
-  { source: "client-integration", target: "topology" },
-  { source: "aaron-arch", target: "topology" },
-  { source: "skills", target: "topology" },
-  { source: "orchestration", target: "topology" },
-  { source: "hermes-api", target: "on-chain" },
-  { source: "task-lifecycle", target: "agent-identity" },
-  { source: "task-lifecycle", target: "on-chain" },
-  { source: "swarm-dag", target: "astrojoe" },
-  { source: "swarm-dag", target: "hedgehog-doc" },
-  { source: "gaze-policy", target: "topology" },
-  { source: "bridge-flow", target: "on-chain" },
-  { source: "task-states", target: "gaze" },
-  { source: "task-states", target: "on-chain" },
-  { source: "topology", target: "bridge-hub" },
-  { source: "edge-mcp", target: "depin" },
-  { source: "depin", target: "architecture-overview" },
-  { source: "solana-native", target: "aaron-protocol" },
-  { source: "api-ref", target: "wallet" },
-  { source: "api-ref", target: "on-chain" },
-  { source: "doc-index", target: "wallet" },
-  { source: "doc-index", target: "topology" },
-  { source: "dojo", target: "edge-mcp" },
-  { source: "moa", target: "mojo" },
-  { source: "moa", target: "on-chain" },
-  { source: "architecture-overview", target: "hedgehog-doc" },
-  { source: "wallet", target: "aaron-protocol" },
-  { source: "gaze", target: "on-chain" },
-  { source: "hedgehog-doc", target: "orchestration" },
-  { source: "matrix", target: "astrojoe" },
-  { source: "matrix", target: "hedgehog-doc" },
-  { source: "changelog", target: "doc-index" },
-  { source: "changelog", target: "api-ref" },
-
-  // v2.0.0 dual-mode JettChat + Token + new auth surface
-  { source: "jettchat", target: "jett-auth" },
-  { source: "jettchat", target: "gaze" },
-  { source: "jettchat", target: "mojo" },
-  { source: "jettchat", target: "what-is-optx" },
-  { source: "jettchat", target: "token" },
-  { source: "jettchat", target: "jettchat-messaging" },
-  { source: "jettchat", target: "xchat-native" },
-  { source: "jettchat", target: "phantom-mode" },
-  { source: "xchat-native", target: "jett-auth" },
-  { source: "xchat-native", target: "on-chain" },
-  { source: "xchat-native", target: "wallet" },
-  { source: "phantom-mode", target: "jett-auth" },
-  { source: "phantom-mode", target: "gaze" },
-  { source: "phantom-mode", target: "edge-mcp" },
-  { source: "jettchat-messaging", target: "matrix" },
-  { source: "jettchat-messaging", target: "xchat-native" },
-  { source: "jettchat-messaging", target: "phantom-mode" },
-
-  // Token section connections
-  { source: "token", target: "on-chain" },
-  { source: "token", target: "depin" },
-  { source: "token", target: "jett-auth" },
-  { source: "token", target: "token-tiers" },
-  { source: "token", target: "token-subscriptions" },
-  { source: "token-tiers", target: "mojo" },
-  { source: "token-tiers", target: "jettchat" },
-  { source: "token-subscriptions", target: "token-tiers" },
-
-  // JETT Auth — unified surface
-  { source: "jett-auth", target: "gaze" },
-  { source: "jett-auth", target: "wallet" },
-  { source: "jett-auth", target: "what-is-optx" },
-
-  // Hermes v0.12.0 features
-  { source: "hermes-features", target: "astrojoe" },
-  { source: "hermes-features", target: "hermes-api" },
-  { source: "hermes-features", target: "hedgehog-doc" },
-  { source: "hermes-features", target: "edge-mcp" },
-  { source: "hermes-features", target: "changelog" },
-
-  // Ecosystem Repos
-  { source: "ecosystem", target: "doc-index" },
-  { source: "ecosystem", target: "what-is-optx" },
-  { source: "ecosystem", target: "astrojoe" },
-  { source: "ecosystem", target: "jettchat" },
-  { source: "ecosystem", target: "jett-auth" },
-];
+const DOC_NODES = MOA_NODES.filter((n) => n.group !== "root");
+const DOC_EDGES = MOA_EDGES;
 
 function getConnections(nodeId: string): string[] {
   const ids = new Set<string>();
@@ -268,14 +30,13 @@ function getConnections(nodeId: string): string[] {
 }
 
 export function MoaGraph() {
-  const [activeAgt, setActiveAgt] = useState<AGT | null>(null);
+  const [activeAgt, setActiveAgt] = useState<AgtKey | null>(null);
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
   const [hoveredNode, setHoveredNode] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const sectionRefs = useRef<Record<string, HTMLElement | null>>({});
 
-  // Keyboard shortcut: Escape clears filters
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -287,7 +48,6 @@ export function MoaGraph() {
     return () => window.removeEventListener("keydown", handler);
   }, []);
 
-  // Listen for MOA node selection to highlight the node in the list view
   useEffect(() => {
     const handler = (e: Event) => {
       const nodeId = (e as CustomEvent<string>).detail;
@@ -303,24 +63,27 @@ export function MoaGraph() {
   }, []);
 
   const grouped = useMemo(() => {
-    const map: Record<string, DocNode[]> = {};
+    const map: Record<string, MoaNode[]> = {};
     for (const n of DOC_NODES) {
       if (!map[n.group]) map[n.group] = [];
       map[n.group].push(n);
     }
-    return Object.entries(map)
-      .sort(([a], [b]) => (GROUPS[a]?.order ?? 99) - (GROUPS[b]?.order ?? 99));
+    return Object.entries(map).sort(
+      ([a], [b]) => (GROUP_ORDER[a] ?? 99) - (GROUP_ORDER[b] ?? 99)
+    );
   }, []);
 
   const filtered = useMemo(() => {
-    return grouped.map(([group, nodes]) => {
-      const filteredNodes = nodes.filter((n) => {
-        if (activeAgt && n.agt !== activeAgt) return false;
-        if (activeGroup && n.group !== activeGroup) return false;
-        return true;
-      });
-      return [group, filteredNodes] as [string, DocNode[]];
-    }).filter(([, nodes]) => nodes.length > 0);
+    return grouped
+      .map(([group, nodes]) => {
+        const filteredNodes = nodes.filter((n) => {
+          if (activeAgt && n.agt !== activeAgt) return false;
+          if (activeGroup && n.group !== activeGroup) return false;
+          return true;
+        });
+        return [group, filteredNodes] as [string, MoaNode[]];
+      })
+      .filter(([, nodes]) => nodes.length > 0);
   }, [grouped, activeAgt, activeGroup]);
 
   const totalFiltered = useMemo(() => filtered.reduce((s, [, n]) => s + n.length, 0), [filtered]);
@@ -335,25 +98,16 @@ export function MoaGraph() {
     sectionRefs.current[group]?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, []);
 
-  // Count nodes per group and AGT
   const groupCounts = useMemo(() => {
     const c: Record<string, number> = {};
     for (const n of DOC_NODES) c[n.group] = (c[n.group] || 0) + 1;
     return c;
   }, []);
 
-  const agtCounts = useMemo(() => {
-    const c: Record<AGT, number> = { COG: 0, EMO: 0, ENV: 0 };
-    for (const n of DOC_NODES) c[n.agt]++;
-    return c;
-  }, []);
-
   return (
     <div id="moa-knowledge-graph" className="flex w-full min-h-[600px] font-[family-name:var(--font-geist-mono)] text-sm border border-fd-border rounded-lg overflow-hidden bg-fd-background">
-      {/* ── Sidebar ── */}
       {sidebarOpen && (
         <aside className="w-[220px] min-w-[220px] border-r border-fd-border flex flex-col bg-fd-card/50">
-          {/* Sidebar header */}
           <div className="px-3 pt-3 pb-2 border-b border-fd-border/50">
             <div className="flex items-center justify-between mb-2">
               <span className="text-[11px] uppercase tracking-[0.12em] text-fd-muted-foreground/60 font-semibold">
@@ -367,9 +121,8 @@ export function MoaGraph() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5" /></svg>
               </button>
             </div>
-            {/* AGT Slash Filter */}
             <div className="flex gap-1">
-              {(["COG", "EMO", "ENV"] as AGT[]).map((agt) => {
+              {(["COG", "EMO", "ENV"] as AgtKey[]).map((agt) => {
                 const isActive = activeAgt === agt;
                 const c = AGT_COLORS[agt];
                 return (
@@ -384,10 +137,7 @@ export function MoaGraph() {
                       opacity: isActive ? 1 : 0.5,
                     }}
                   >
-                    <span
-                      className="w-1.5 h-1.5 rounded-full shrink-0"
-                      style={{ backgroundColor: c.color }}
-                    />
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: c.color }} />
                     /{agt.toLowerCase()}
                   </button>
                 );
@@ -395,38 +145,29 @@ export function MoaGraph() {
             </div>
           </div>
 
-
-          {/* Section Nav */}
           <div className="flex-1 overflow-y-auto px-3 py-2">
             <span className="text-[10px] uppercase tracking-[0.1em] text-fd-muted-foreground/40 block mb-1.5">Sections</span>
             <nav className="flex flex-col gap-0.5">
-              {grouped.map(([group]) => {
-                const g = GROUPS[group];
-                if (!g) return null;
-                return (
-                  <button
-                    key={group}
-                    onClick={() => scrollToGroup(group)}
-                    className="flex items-center justify-between px-1.5 py-1 rounded text-left text-[11px] text-fd-muted-foreground hover:text-fd-foreground hover:bg-fd-accent/30 transition-colors"
-                  >
-                    <span className="truncate">{g.label}</span>
-                    <span className="text-[10px] text-fd-muted-foreground/30 tabular-nums">{groupCounts[group]}</span>
-                  </button>
-                );
-              })}
+              {grouped.map(([group]) => (
+                <button
+                  key={group}
+                  onClick={() => scrollToGroup(group)}
+                  className="flex items-center justify-between px-1.5 py-1 rounded text-left text-[11px] text-fd-muted-foreground hover:text-fd-foreground hover:bg-fd-accent/30 transition-colors"
+                >
+                  <span className="truncate">{GROUP_LABELS[group] ?? group}</span>
+                  <span className="text-[10px] text-fd-muted-foreground/30 tabular-nums">{groupCounts[group]}</span>
+                </button>
+              ))}
             </nav>
           </div>
 
-          {/* Sidebar footer */}
           <div className="px-3 py-2 border-t border-fd-border/50 text-[10px] text-fd-muted-foreground/30">
             {DOC_NODES.length} nodes &middot; {DOC_EDGES.length} edges
           </div>
         </aside>
       )}
 
-      {/* ── Main Pane ── */}
       <main className="flex-1 min-w-0 flex flex-col">
-        {/* Top bar */}
         <div className="sticky top-0 z-10 bg-fd-background/95 backdrop-blur-sm border-b border-fd-border/50 px-5 py-3 flex items-center gap-3">
           {!sidebarOpen && (
             <button
@@ -439,24 +180,16 @@ export function MoaGraph() {
           )}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
-              <span className="text-fd-foreground font-semibold text-sm">jettoptx/optx-docs</span>
+              <span className="text-fd-foreground font-semibold text-sm">jettoptx/jettoptx-docs</span>
               <span className="text-fd-muted-foreground/30">/</span>
               <span className="text-fd-muted-foreground text-xs">Map of Augments</span>
             </div>
           </div>
           <div className="flex items-center gap-3 text-[11px] text-fd-muted-foreground/40 tabular-nums">
             <span>{totalFiltered} visible</span>
-            <span className="text-fd-muted-foreground/20">&middot;</span>
-            {(["COG", "EMO", "ENV"] as AGT[]).map((agt) => (
-              <span key={agt} className="flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: AGT_COLORS[agt].color, opacity: 0.6 }} />
-                <span>{agt}</span>
-              </span>
-            ))}
           </div>
         </div>
 
-        {/* Content */}
         <div className="flex-1 overflow-y-auto px-5 py-4">
           {filtered.length === 0 && (
             <div className="text-fd-muted-foreground/40 text-xs py-12 text-center">
@@ -464,113 +197,101 @@ export function MoaGraph() {
             </div>
           )}
 
-          {filtered.map(([group, nodes]) => {
-            const g = GROUPS[group];
-            if (!g) return null;
-            return (
-              <section
-                key={group}
-                ref={(el) => { sectionRefs.current[group] = el; }}
-                className="mb-6 last:mb-0"
-              >
-                {/* Section header */}
-                <div className="flex items-baseline gap-2 mb-2 pb-1.5 border-b border-fd-border/30">
-                  <h3 className="text-[13px] font-semibold text-fd-foreground tracking-wide uppercase">
-                    {g.label}
-                  </h3>
-                  <span className="text-[10px] text-fd-muted-foreground/30 tabular-nums">{nodes.length}</span>
-                </div>
+          {filtered.map(([group, nodes]) => (
+            <section
+              key={group}
+              ref={(el) => { sectionRefs.current[group] = el; }}
+              className="mb-6 last:mb-0"
+            >
+              <div className="flex items-baseline gap-2 mb-2 pb-1.5 border-b border-fd-border/30">
+                <h3 className="text-[13px] font-semibold text-fd-foreground tracking-wide uppercase">
+                  {GROUP_LABELS[group] ?? group}
+                </h3>
+                <span className="text-[10px] text-fd-muted-foreground/30 tabular-nums">{nodes.length}</span>
+              </div>
 
-                {/* Node list — dense chain */}
-                <div className="flex flex-col">
-                  {nodes.map((node) => {
-                    const agt = AGT_COLORS[node.agt];
-                    const isHovered = hoveredNode === node.id;
-                    const isSelected = selectedNodeId === node.id;
-                    const isConnected = connectedTo.has(node.id);
-                    const isDimmed = hoveredNode !== null && !isHovered && !isConnected;
-                    const connections = getConnections(node.id);
-                    const connectedNodes = connections.map((id) => DOC_NODES.find((n) => n.id === id)).filter(Boolean) as DocNode[];
+              <div className="flex flex-col">
+                {nodes.map((node) => {
+                  const agt = AGT_COLORS[node.agt];
+                  const isHovered = hoveredNode === node.id;
+                  const isSelected = selectedNodeId === node.id;
+                  const isConnected = connectedTo.has(node.id);
+                  const isDimmed = hoveredNode !== null && !isHovered && !isConnected;
+                  const connections = getConnections(node.id);
+                  const connectedNodes = connections
+                    .map((id) => DOC_NODES.find((n) => n.id === id))
+                    .filter(Boolean) as MoaNode[];
 
-                    return (
+                  return (
+                    <div
+                      key={node.id}
+                      id={`moa-node-${node.id}`}
+                      className="group relative"
+                      onMouseEnter={() => setHoveredNode(node.id)}
+                      onMouseLeave={() => setHoveredNode(null)}
+                    >
                       <div
-                        key={node.id}
-                        id={`moa-node-${node.id}`}
-                        className="group relative"
-                        onMouseEnter={() => setHoveredNode(node.id)}
-                        onMouseLeave={() => setHoveredNode(null)}
+                        className={`flex items-start gap-2.5 py-2 px-2 -mx-2 rounded transition-all duration-200${isSelected ? " moa-node-selected" : ""}`}
+                        style={{
+                          opacity: isDimmed ? 0.25 : 1,
+                          backgroundColor: isSelected ? "rgba(234,179,8,0.10)" : isHovered ? agt.dim : "transparent",
+                        }}
                       >
-                        <div
-                          className={`flex items-start gap-2.5 py-2 px-2 -mx-2 rounded transition-all duration-200${isSelected ? " moa-node-selected" : ""}`}
+                        <span
+                          className="w-1.5 h-1.5 rounded-full mt-[7px] shrink-0 transition-transform duration-150"
                           style={{
-                            opacity: isDimmed ? 0.25 : 1,
-                            backgroundColor: isSelected ? "rgba(234,179,8,0.10)" : isHovered ? agt.dim : "transparent",
+                            backgroundColor: agt.color,
+                            opacity: isHovered ? 1 : 0.5,
+                            transform: isHovered ? "scale(1.4)" : "scale(1)",
                           }}
-                        >
-                          {/* AGT dot */}
-                          <span
-                            className="w-1.5 h-1.5 rounded-full mt-[7px] shrink-0 transition-transform duration-150"
-                            style={{
-                              backgroundColor: agt.color,
-                              opacity: isHovered ? 1 : 0.5,
-                              transform: isHovered ? "scale(1.4)" : "scale(1)",
-                            }}
-                          />
-                          {/* Content */}
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-baseline gap-2 flex-wrap">
-                              <Link
-                                href={node.href}
-                                className="text-[13px] font-medium transition-colors hover:underline underline-offset-2 decoration-1"
-                                style={{
-                                  color: isHovered ? agt.color : undefined,
-                                  textDecorationColor: isHovered ? `${agt.color}44` : undefined,
-                                }}
-                              >
-                                {node.label}
-                              </Link>
-                              <span
-                                className="text-[9px] font-bold px-1 py-px rounded uppercase tracking-wider shrink-0"
-                                style={{
-                                  color: agt.color,
-                                  backgroundColor: agt.dim,
-                                  opacity: isHovered ? 1 : 0.6,
-                                }}
-                              >
-                                {node.agt}
-                              </span>
-                            </div>
-                            <p className="text-[11px] text-fd-muted-foreground/60 leading-relaxed mt-0.5">
-                              {node.description}
-                            </p>
-                            {/* Connected nodes — show on hover */}
-                            {isHovered && connectedNodes.length > 0 && (
-                              <div className="flex flex-wrap gap-x-2 gap-y-0.5 mt-1.5">
-                                <span className="text-[9px] text-fd-muted-foreground/30 uppercase tracking-wider mr-0.5">links</span>
-                                {connectedNodes.map((cn) => (
-                                  <Link
-                                    key={cn.id}
-                                    href={cn.href}
-                                    className="text-[10px] text-fd-muted-foreground/50 hover:text-fd-muted-foreground transition-colors"
-                                  >
-                                    {cn.label}
-                                  </Link>
-                                ))}
-                              </div>
-                            )}
+                        />
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-baseline gap-2 flex-wrap">
+                            <Link
+                              href={node.href}
+                              className="text-[13px] font-medium transition-colors hover:underline underline-offset-2 decoration-1"
+                              style={{
+                                color: isHovered ? agt.color : undefined,
+                                textDecorationColor: isHovered ? `${agt.color}44` : undefined,
+                              }}
+                            >
+                              {node.label}
+                            </Link>
+                            <span
+                              className="text-[9px] font-bold px-1 py-px rounded uppercase tracking-wider shrink-0"
+                              style={{ color: agt.color, backgroundColor: agt.dim, opacity: isHovered ? 1 : 0.6 }}
+                            >
+                              {node.agt}
+                            </span>
                           </div>
-                          {/* Edge count */}
-                          <span className="text-[10px] text-fd-muted-foreground/20 tabular-nums mt-[3px] shrink-0">
-                            {connections.length}
-                          </span>
+                          <p className="text-[11px] text-fd-muted-foreground/60 leading-relaxed mt-0.5">
+                            {node.description}
+                          </p>
+                          {isHovered && connectedNodes.length > 0 && (
+                            <div className="flex flex-wrap gap-x-2 gap-y-0.5 mt-1.5">
+                              <span className="text-[9px] text-fd-muted-foreground/30 uppercase tracking-wider mr-0.5">links</span>
+                              {connectedNodes.map((cn) => (
+                                <Link
+                                  key={cn.id}
+                                  href={cn.href}
+                                  className="text-[10px] text-fd-muted-foreground/50 hover:text-fd-muted-foreground transition-colors"
+                                >
+                                  {cn.label}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
                         </div>
+                        <span className="text-[10px] text-fd-muted-foreground/20 tabular-nums mt-[3px] shrink-0">
+                          {connections.length}
+                        </span>
                       </div>
-                    );
-                  })}
-                </div>
-              </section>
-            );
-          })}
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          ))}
         </div>
       </main>
     </div>

@@ -1,63 +1,56 @@
 ---
-icon: Globe
-title: Cross-Chain Bridge
-description: XRPL → Wormhole NTT → Solana pipeline with native USDC, guardian validation, and MPO Tempo x402 payments.
+icon: Share2
+title: Attestation Bridge Flow
+description: Solana-native flow from AARON gaze verification to on-chain AGT attestation PDAs.
 ---
 
 import { D2Diagram } from "@/components/d2-diagram";
 
-## Cross-Chain Bridge Flow (XRPL → Solana)
+## Solana-Native Attestation Flow
 
-The OPTX bridge connects XRPL and Solana ecosystems through Wormhole NTT with native USDC burn/mint — no wrapped tokens.
+OPTX is **Solana-native**. Gaze proofs verified by the AARON router are bridged to on-chain attestation PDAs via the `jtx_cstb_trust` program — no cross-chain wrapping required.
 
-<D2Diagram src="/diagrams/bridge-flow.svg" alt="Cross-Chain Bridge Flow — XRPL through Wormhole to Solana and back via MPO" caption="Cross-Chain Bridge Flow (XRPL → Solana)" />
+<D2Diagram src="/diagrams/bridge-flow.svg" alt="Gaze to AARON to Solana attestation flow" caption="Solana Attestation Bridge Flow" />
 
-| Node | Zone | Description |
-|------|------|-------------|
-| **r9** | <span style={{color:"#f43f5e"}}>XRPL</span> | Primary XRPL wallet |
-| **Xaman** | <span style={{color:"#f43f5e"}}>XRPL</span> | Payload signing — no seed exposure |
-| **TJ** | <span style={{color:"#f43f5e"}}>XRPL</span> | TraderJoe — 4 autonomous trading agents |
-| **USDC** | <span style={{color:"#f43f5e"}}>XRPL</span> | Circle USDC source |
-| **Guards** | <span style={{color:"#eab308"}}>Wormhole</span> | 19 guardian validator nodes |
-| **VAA** | <span style={{color:"#eab308"}}>Wormhole</span> | Verified Action Approval (13/19 quorum) |
-| **NTT** | <span style={{color:"#eab308"}}>Wormhole</span> | NTT Transceiver with `jett_vault` PDA |
-| **USDC** | <span style={{color:"#60a5fa"}}>Solana</span> | Circle USDC minted on Solana |
-| **AgenC** | <span style={{color:"#60a5fa"}}>Solana</span> | SubJOE agent coordination hub |
-| **SubJOE** | <span style={{color:"#60a5fa"}}>Solana</span> | Sub-agent executing DeFi ops |
-| **Vault** | <span style={{color:"#60a5fa"}}>Solana</span> | astroknots.space staking vault |
-| **MPO** | <span style={{color:"#60a5fa"}}>Solana</span> | MPO Tempo x402 agent payments → loops back to r9 |
+| Stage | Component | Description |
+|-------|-----------|-------------|
+| **Capture** | Client (MOJO / Web) | On-device iris tracking → AGT classification |
+| **Verify** | AARON Router | `POST /session` + `POST /verify` → opaque proof hash |
+| **Record** | SpacetimeDB | Session state + attestation events at `stdb.jettoptics.ai` |
+| **Anchor** | jtx_cstb_trust | On-chain AGT attestation PDA on Solana mainnet |
+| **Reward** | DePIN | CSTB trust score + $OPTX micropayments (x402) |
 
 ## Pipeline Stages
 
-### 1. XRPL Entry
-- **r9 Wallet**: Primary XRPL wallet with XRP + RLUSD + USDC
-- **Xaman Signing**: All transactions signed via Xaman (no seed exposure)
-- **TraderJoe Swarm**: 4 autonomous trading agents (passive LP, lag monitor, Hooks rebalancing, grid trading)
+### 1. Gaze Capture
 
-### 2. Wormhole NTT Bridge
-- **19 Guardian Nodes**: Validate cross-chain messages
-- **13/19 Quorum**: Required for VAA signature verification
-- **NTT Transceiver**: Custom OPTX transceiver with `jett_vault` PDA
-- **Native USDC**: Burn on source chain, mint on destination — no wrapped tokens
+- MediaPipe FaceLandmarker extracts iris landmarks on-device
+- AGT tensors (COG/EMO/ENV) classified from gaze vectors
+- Raw biometric data never leaves the device
 
-### 3. Solana Settlement
-- **AgenC Hub**: Coordinates SubJOE agents for DeFi operations
-- **MetaplexJOE Registry**: On-chain agent identity via Metaplex Core Assets
-- **Helius Webhooks**: Real-time monitoring of on-chain events
-- **astroknots Vault**: Primary DApp for staking and yield aggregation
+### 2. AARON Verification
 
-### 4. Payment Loop
-- **MPO Tempo x402**: Agent-to-agent payments via Circle USDC
-- Revenue flows back to XRPL wallet, completing the loop
+- Client submits opaque proof hash to `https://aaron.jettoptics.ai/verify`
+- Router validates session nonce, hold durations, and confidence threshold
+- Verified sessions emit SpacetimeDB events for agent workflows
 
-## TraderJoe Swarm (4 Agents)
+### 3. On-Chain Attestation
 
-| Agent | Strategy | Role |
-|-------|----------|------|
-| TraderJoe1 | Passive LP | Liquidity provision with auto-compounding |
-| TraderJoe2 | Lag Monitor | 30s oracle monitoring, latency detection |
-| TraderJoe3 | Hooks | Xahau Hooks rebalancing (paper mode) |
-| TraderJoe4 | Grid | 6% range, 10-level grid trading |
+- Bridge service submits attestation instruction to `jtx_cstb_trust`
+- Program ID (mainnet): `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF`
+- See [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin) SDK for integration
+
+### 4. Vault & Staking
+
+- **jett_vault** program: `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7`
+- Staking and yield via [astroknots.space](https://astroknots.space) and [jtx.astroknots.space](https://jtx.astroknots.space)
+
+## Retired Cross-Chain Paths
+
+EVM (LayerZero) and XRPL (Wormhole) bridge pages were retired in v2.0.0. OPTX focuses on Solana mainnet for all production attestations. See [Changelog](/docs/reference/changelog).
 
 ## Related
-- [On-Chain Bridge Hub](/docs/on-chain-bridge) — Solana-native bridge architecture (EVM/LayerZero retired in v2.0.0, on roadmap)
+
+- [On-Chain Bridge](/docs/on-chain-bridge) — program overview + TS SDK
+- [Biometric Proof](/docs/protocol/biometric-proof) — opaque proof format
+- [MOJO Handshake](/docs/dojo/mojo) — mobile attestation issuer
