@@ -14,15 +14,26 @@ Token-2022, 9 decimals. Legacy v1 (`9XpJiKEY…`) has revoked mint authority —
 
 ## What JTX does
 
-- **DOJO access** — Hold ≥1 JTX v2 to enter [jettoptx.chat](https://jettoptx.chat)
-- **Tier staking** — MOJO / DOJO / SPACE COWBOY via [Tiers](/docs/token/tiers)
-- **Space Cowboy NFT** — Mint via [jtx.astroknots.space/mint](https://jtx.astroknots.space/mint)
+- **DOJO entry** — Hold ≥1 JTX v2 to pass the [Platform Access](/docs/getting-started/access) gate at [jettoptx.chat](https://jettoptx.chat)
+- **Tier thresholds** — Higher balances map to `mojo`, `dojo`, and `spaceCowboy` codes — see [Access tiers](/docs/token/tiers)
+- **Space Cowboy NFT** — On-chain lifetime tier via [jtx.astroknots.space/mint](https://jtx.astroknots.space/mint)
 - **Governance** — Space Cowboy NFT holders vote on protocol direction
 - **Trading** — Freely tradeable on Jupiter / Meteora
 
-## Subscription tiers (fiat)
+## Access gating (developers)
 
-Wallet-less access via **Stripe** ($8.88 / $28.88 / $88.88 per month). See [Subscriptions](/docs/token/subscriptions).
+Integrators enforce tier from **JTX balance**, **subscription status**, or **NFT ownership** — not from hardcoded USD prices in app code.
+
+| Code tier | JTX balance (v2) |
+|-----------|------------------|
+| `basic` | ≥ 1 |
+| `mojo` | ≥ 12 |
+| `dojo` | ≥ 444 |
+| `spaceCowboy` | ≥ 1,111 **or** Space Cowboy NFT in wallet |
+
+Wallet-less checkout (Stripe, Tempo CLI) and live tier pricing live on **[astroknots.space/stake](https://astroknots.space/stake)** — not duplicated here.
+
+See [Tiers](/docs/token/tiers) for verification APIs and middleware patterns.
 
 ## Founder bypass
 

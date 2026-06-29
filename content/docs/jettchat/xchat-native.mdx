@@ -4,7 +4,7 @@ description: JettChat xChat Native mode — Privy in DOJO, @jettoptx/auth for cu
 icon: Twitter
 ---
 
-**xChat Native** is the original JettChat experience: sign in, connect a Solana wallet (or pay $8.88), get end-to-end encrypted chat with gaze cursor typing.
+**xChat Native** is the original JettChat experience: sign in, pass the JTX gate, get end-to-end encrypted chat with gaze cursor typing.
 
 ## DOJO vs Custom Integration
 
@@ -36,7 +36,7 @@ After sign-in, middleware enforces JTX access on protected routes:
 | `dojo` | ≥ 444 | DOJO subscription tier |
 | `spaceCowboy` | ≥ 1,111 | SPACE COWBOY subscription tier |
 
-Canonical mint: `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` (v2). A 30-day Stripe-backed gate is available at $8.88. See [Subscriptions](/docs/token/subscriptions).
+Canonical mint: `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` (v2). Wallet-less subscription entitlements use the same tier codes — pricing on [astroknots.space/stake](https://astroknots.space/stake).
 
 ## What's wired up
 
@@ -44,7 +44,7 @@ Canonical mint: `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` (v2). A 30-day Str
 - `@jettoptx/auth` for SDK integrators
 - Solana JTX balance check via Helius RPC
 - AGT Gaze Triad biometrics (shared with Phantom Mode)
-- Stripe and Tempo CLI fallback payment rails
+- Optional Stripe / Tempo CLI rails (product site — not hardcoded in integrator apps)
 
 ## Phantom Mode contrast
 
