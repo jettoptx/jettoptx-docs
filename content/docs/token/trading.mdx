@@ -1,0 +1,56 @@
+---
+title: JTX Trading & Mint
+description: Swap, NFT mint, and on-chain constants via jtx.astroknots.space.
+icon: TrendingUp
+---
+
+The **[jettoptx-jtx-trade](https://github.com/jettoptx/jettoptx-jtx-trade)** app is the public Solana builder UI at [jtx.astroknots.space](https://jtx.astroknots.space).
+
+## Features
+
+| Route | Feature |
+|-------|---------|
+| `/` | $JTX swap via Jupiter aggregator |
+| `/mint` | Space Cowboys NFT mint (1,111 supply) |
+| `/collection` | Minted NFT gallery |
+| `/admin/deploy` | LP bootstrap (deploy wallet gated) |
+
+## Canonical Addresses
+
+| Item | Address |
+|------|---------|
+| **$JTX v2** (canonical) | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` |
+| $JTX v1 (legacy) | `9XpJiKEYzq5yDo5pJzRfjSRMPL2yPfDQXgiN7uYtBhUj` |
+| DePIN program | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` |
+| jett_vault | `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7` |
+| Space Cowboys collection | `FFPeaPRugCzoATDhXG7ZaGk4woTBGsmHBugdpPcgi4EY` |
+| Meteora DLMM pool | `54ecLhTa8HZg1bhcDNWiddd8p7UN7jq4HLWeLr1sRHMz` |
+| Treasury (Squads) | `9WssADzftzptNnMHLzPZYAFApUfE7qLYChicH1Wh6YD7` |
+
+Source of truth: `src/lib/programConstants.ts` in the jtx-trade repo.
+
+## v1 → v2 Migration
+
+Legacy v1 JTX holders should follow the migration runbook in the repo:
+
+[jtx-v2-migration-runbook.md](https://github.com/jettoptx/jettoptx-jtx-trade/blob/main/docs/jtx-v2-migration-runbook.md)
+
+v2 is Token-2022, 9 decimals, mint authority retained for protocol governance.
+
+## Development
+
+```bash
+git clone https://github.com/jettoptx/jettoptx-jtx-trade.git
+cd jettoptx-jtx-trade
+npm install --legacy-peer-deps
+cp .env.example .env.local
+npm run dev
+```
+
+Stack: Vite + React 19, Anchor 0.30, Metaplex Core, Meteora DLMM.
+
+## Related
+
+- [Platform Access](/docs/getting-started/access) — buy JTX and enter DOJO
+- [On-Chain Addresses](/docs/getting-started/on-chain-addresses) — full address table
+- [On-Chain Bridge](/docs/on-chain-bridge) — Anchor program SDK

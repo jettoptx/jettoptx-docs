@@ -2,57 +2,7 @@
 
 import type { AnchorHTMLAttributes, HTMLAttributes } from "react";
 import { usePathname } from "next/navigation";
-
-/**
- * Maps doc paths to MOA node IDs.
- * Shared source of truth — keep in sync with augment-space-btn.tsx PATH_TO_NODE.
- */
-const PATH_TO_NODE: Record<string, string> = {
-  "/docs/getting-started/what-is-optx": "what-is-optx",
-  "/docs/getting-started/architecture": "architecture-overview",
-  "/docs/getting-started/on-chain-addresses": "on-chain",
-  "/docs/jettchat": "jettchat",
-  "/docs/jettchat/xchat-native": "xchat-native",
-  "/docs/jettchat/phantom-mode": "phantom-mode",
-  "/docs/jettchat/messaging": "jettchat-messaging",
-  "/docs/authentication/jett-auth": "jett-auth",
-  "/docs/authentication/gaze": "gaze",
-  "/docs/authentication/wallet": "wallet",
-  "/docs/token": "token",
-  "/docs/token/tiers": "token-tiers",
-  "/docs/token/subscriptions": "token-subscriptions",
-  "/docs/protocol": "aaron-protocol",
-  "/docs/protocol/biometric-proof": "biometric-proof",
-  "/docs/protocol/how-it-works": "how-it-works",
-  "/docs/protocol/client-integration": "client-integration",
-  "/docs/protocol/architecture": "aaron-arch",
-  "/docs/astrojoe": "astrojoe",
-  "/docs/astrojoe/skills": "skills",
-  "/docs/astrojoe/memory": "memory",
-  "/docs/astrojoe/orchestration": "orchestration",
-  "/docs/astrojoe/hedgehog": "hedgehog-doc",
-  "/docs/astrojoe/api": "hermes-api",
-  "/docs/astrojoe/hermes-features": "hermes-features",
-  "/docs/architecture": "arch-flows",
-  "/docs/architecture/task-lifecycle": "task-lifecycle",
-  "/docs/architecture/swarm-dag": "swarm-dag",
-  "/docs/architecture/gaze-policy": "gaze-policy",
-  "/docs/architecture/bridge-flow": "bridge-flow",
-  "/docs/architecture/agent-identity": "agent-identity",
-  "/docs/architecture/task-states": "task-states",
-  "/docs/architecture/topology": "topology",
-  "/docs/infrastructure/edge": "edge-mcp",
-  "/docs/infrastructure/depin": "depin",
-  "/docs/on-chain-bridge": "bridge-hub",
-  "/docs/on-chain-bridge/solana-native": "solana-native",
-  "/docs/reference/api": "api-ref",
-  "/docs/reference/changelog": "changelog",
-  "/docs/reference": "doc-index",
-  "/docs/reference/ecosystem": "ecosystem",
-  "/docs/dojo": "dojo",
-  "/docs/dojo/moa": "moa",
-  "/docs/dojo/mojo": "mojo",
-};
+import { PATH_TO_NODE } from "@/lib/moa-registry";
 
 /**
  * Custom MDX <a> component.

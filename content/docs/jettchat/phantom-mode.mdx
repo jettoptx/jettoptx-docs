@@ -17,7 +17,7 @@ Implementation: [`Secure-Legion/android`](https://github.com/Secure-Legion/andro
 | **Identity provider** | X/Twitter OAuth | None — no third-party IdP contacted |
 | **Auth surface** | OAuth + Solana wallet | Jett Hub visual SSO + JTX gate |
 | **Transport** | HTTPS | **Triple Tor `.onion` hidden services** |
-| **Asymmetric crypto** | TLS / Ed25519 | **X25519 + ML-KEM-1024** (post-quantum hybrid) |
+| **Asymmetric crypto** | TLS / Ed25519 | Post-quantum hybrid |
 | **Key storage** | Software-managed | **StrongBox** (Android) / Secure Enclave / TEE |
 | **Wake protocol** | Standard session resume | **Ping-Pong biometric wake** |
 | **Duress trigger** | None | **Duress PIN → cryptographic wipe** |
@@ -30,9 +30,7 @@ This means a single Phantom Mode identity can be reachable across multiple devic
 
 ## Post-quantum cryptography
 
-Session keys use a **hybrid construction**: classical X25519 ECDH combined with **ML-KEM-1024** (the NIST-standardized lattice KEM, FIPS 203). A future quantum adversary would need to break both to recover keys.
-
-This same construction is sometimes referred to as **TKDF** in the encryption SDK — TKDF is the SDK-layer name; Secure-Legion is the org-level brand wrapping the primitive plus Tor and hardware key storage.
+Session keys use a **hybrid post-quantum construction** combining classical and lattice-based key exchange. Algorithm details are documented in the [Secure-Legion/android](https://github.com/Secure-Legion/android) repository.
 
 ## Hardware-backed keys
 

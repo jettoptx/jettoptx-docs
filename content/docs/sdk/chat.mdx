@@ -1,0 +1,63 @@
+---
+title: "@jettoptx/chat"
+description: JettChat SDK — E2E messaging transports, channels, and integration patterns.
+icon: MessageSquare
+---
+
+The `@jettoptx/chat` package provides encrypted messaging primitives for building JettChat-compatible clients. Source: [jettoptx-sdk/packages/jettchat-sdk](https://github.com/jettoptx/jettoptx-sdk/tree/main/packages/jettchat-sdk).
+
+## Install
+
+```bash
+npm install @jettoptx/chat
+```
+
+Peer dependency: `@jettoptx/auth@>=0.1.0`
+
+## Encryption
+
+Messages are encrypted client-side using X25519 key exchange and NaCl SecretBox (ChaCha20-Poly1305). Phantom Mode adds a post-quantum hybrid layer — see [Phantom Mode](/docs/jettchat/phantom-mode) for the Secure-Legion stack. **Implementation details are not documented here** — integrate via the public SDK APIs.
+
+## Transports
+
+| Transport | Use Case |
+|-----------|----------|
+| WebSocket | Real-time JOE agent chat |
+| Federation Bridge | Optional Matrix-compatible inter-agent transport |
+| Activity Stream | X Activity API SSE events |
+
+## Quick Start — E2E Encryption
+
+```ts
+import {
+  generateKeyPair,
+  deriveSharedSecret,
+  encryptMessage,
+  decryptMessage,
+} from "@jettoptx/chat";
+
+const alice = generateKeyPair();
+const bob = generateKeyPair();
+
+const aliceShared = deriveSharedSecret(alice.secretKey, bob.publicKey);
+const bobShared = deriveSharedSecret(bob.secretKey, alice.publicKey);
+
+const payload = encryptMessage("hello from alice", aliceShared);
+const plaintext = decryptMessage(payload, bobShared);
+```
+
+## Channels & Identity
+
+```ts
+import { createChannel, sendMessage } from "@jettoptx/chat";
+
+// Requires authenticated session from @jettoptx/auth
+const channel = await createChannel({ name: "my-room", members: ["alice", "bob"] });
+await sendMessage(channel.id, { text: "Hello OPTX" });
+```
+
+## Related
+
+- [JettChat Overview](/docs/jettchat) — product modes and access flow
+- [Messaging Features](/docs/jettchat/messaging) — gaze cursor, offline-first, groups
+- [SDK Overview](/docs/sdk) — full monorepo layout

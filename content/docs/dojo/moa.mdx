@@ -34,7 +34,25 @@ AGT v3 is the current system — an SDK that lets agents classify, navigate, and
 - <span style={{color: "#f43f5e"}}>**EMO**</span> — Emotional. Relational pages about identity, personality, agent interaction, human-facing systems.
 - <span style={{color: "#60a5fa"}}>**ENV**</span> — Environmental. Spatial pages mapping networks, infrastructure, addresses, physical topology.
 
-Use the tensor filter in the sidebar to isolate one dimension and see which pages belong to it. The distribution reveals the shape of the system — <span style={{color: "#60a5fa"}}>ENV</span>-heavy means infrastructure-dense, <span style={{color: "#eab308"}}>COG</span>-heavy means architecturally complex, <span style={{color: "#f43f5e"}}>EMO</span>-heavy means agent-facing.
+Use the tensor filter in the sidebar to isolate one dimension and see which pages belong to it.
+
+## Two Augment Systems
+
+Do not conflate these:
+
+| System | Location | Maps |
+|--------|----------|------|
+| **Docs MOA** | This page + Augment Space overlay | Documentation pages (one node per MDX page) |
+| **JETT Augments 00–09** | `@jettoptx/jett-augment-registry` | Runtime agent lobes in DOJO / HEDGEHOG MCP |
+
+Docs MOA data lives in [`lib/moa-registry.ts`](https://github.com/jettoptx/jettoptx-docs/blob/main/lib/moa-registry.ts). Runtime augment topology is in the [SDK](/docs/sdk/augment-registry).
+
+| Digit | Runtime Augment | Related Docs |
+|-------|-----------------|--------------|
+| 01 Vision | COG gaze pipeline | [Gaze Auth](/docs/authentication/gaze) |
+| 05 Send | EMO messaging | [JettChat](/docs/jettchat) |
+| 06 Wealth | EMO token ops | [Token](/docs/token) |
+| 09 Warp | ENV bridge | [On-Chain Bridge](/docs/on-chain-bridge) |
 
 ## Jett Cursor
 

@@ -10,10 +10,8 @@ The following messaging features are available in **both** [xChat Native](/docs/
 
 All messages are encrypted client-side before leaving the device. The server never sees plaintext.
 
-- **xChat Native**: TLS to JettChat server + per-conversation E2EE keys (X25519 + AEAD).
-- **Phantom Mode**: Triple Tor onion + per-conversation **X25519 + ML-KEM-1024** hybrid (PQC).
-
-The SDK layer describes its construction as "X25519 + TKDF hybrid".
+- **xChat Native**: TLS to JettChat server + per-conversation E2E encryption.
+- **Phantom Mode**: Triple Tor onion + per-conversation post-quantum hybrid encryption.
 
 ## Gaze cursor typing
 

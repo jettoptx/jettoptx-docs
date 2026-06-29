@@ -1,0 +1,68 @@
+---
+title: Edge Gateway & MCP
+description: Cloudflare edge gateway — AARON routes and HEDGEHOG MCP at mcp.jettoptics.ai.
+icon: Cloud
+---
+
+The **[jettoptx-aaron-public](https://github.com/jettoptx/jettoptx-aaron-public)** repo (also known as `jettoptx-aaron-hedgehog`) deploys a gated **Cloudflare Worker** that fronts AARON attestation routes and the HEDGEHOG MCP gateway.
+
+## Hosts
+
+| Host | Purpose |
+|------|---------|
+| `aaron.jettoptics.ai` | AARON REST — session, verify, gaze, handshake |
+| `mcp.jettoptics.ai` | HEDGEHOG MCP — JOE Agentic OS tools |
+
+## Auth (Phase 0 → 1)
+
+| Phase | Behavior |
+|-------|----------|
+| **0 (now)** | Bearer token or `X-JOE-Token` header present → allow |
+| **1** | Validate token against SpacetimeDB + DOJO tier via Privy dashboard |
+
+Developers obtain **JOE API tokens** through a DOJO subscription at [jettoptx.chat/support](https://jettoptx.chat/support).
+
+## AARON Routes
+
+| Method | Path | Description |
+|--------|------|-------------|
+| POST | `/session` | Create gaze challenge |
+| POST | `/verify` | Submit proof hash |
+| POST | `/gaze/analyze` | AGT classification |
+| POST | `/handshake/*` | MOJO web-to-iOS handoff |
+
+See [AARON Protocol](/docs/protocol) for the full API.
+
+## MCP Tools (Phase 0)
+
+| Tool | Description |
+|------|-------------|
+| `hedgehog_health` | Gateway health check |
+| `jett_augment_status` | JETT Augments 00–09 with V/S/W hotkeys |
+
+Canonical augment data: `@jettoptx/jett-augment-registry` — see [Augment Registry](/docs/sdk/augment-registry).
+
+## Local Development
+
+```bash
+git clone https://github.com/jettoptx/jettoptx-aaron-public.git
+cd jettoptx-aaron-public
+npm install
+npx wrangler login
+npm run dev
+# MCP health: GET http://localhost:8787/health
+```
+
+## Deploy
+
+```bash
+npm run deploy
+```
+
+Secrets for Phase 1: `CF_ACCESS_CLIENT_ID`, `CF_ACCESS_CLIENT_SECRET`, `XAI_API_KEY` via `wrangler secret put`.
+
+## Related
+
+- [HEDGEHOG Gateway](/docs/astrojoe/hedgehog) — conceptual architecture on Jetson edge
+- [Edge MCP](/docs/infrastructure/edge) — HEDGEHOG on validator nodes
+- [Client Integration](/docs/protocol/client-integration) — AARON SDK quickstart

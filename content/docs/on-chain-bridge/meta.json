@@ -1,5 +1,4 @@
 {
   "title": "On-Chain Bridge",
-  "icon": "Share2",
-  "pages": ["index", "solana-native"]
+  "pages": ["index", "solana-native", "devnet-validation"]
 }

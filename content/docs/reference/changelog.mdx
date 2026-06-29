@@ -4,6 +4,39 @@ title: Changelog
 description: Version history and release notes for the OPTX ecosystem.
 ---
 
+## 2026-06-29 — v2.1.0: Ecosystem docs refinement
+
+### Added
+- **SDK Reference section** — `/docs/sdk`, `/docs/sdk/auth`, `/docs/sdk/chat`, `/docs/sdk/augment-registry`
+- **Platform Access** — `/docs/getting-started/access` (jettoptx-saas onboarding path)
+- **Edge Gateway** — `/docs/infrastructure/edge-gateway` (jettoptx-aaron-public)
+- **JTX Trading & Mint** — `/docs/token/trading` (jettoptx-jtx-trade)
+- **`lib/moa-registry.ts`** — single source for MOA nodes, edges, PATH_TO_NODE, PAGE_AGT, mobile SUB_PAGES
+- **`lib/platform-constants.ts`** — canonical addresses and GitHub URLs
+- **Devnet validation** moved to `/docs/on-chain-bridge/devnet-validation` (registered in sidebar)
+
+### Changed
+- **Ecosystem Repos** rewritten with full 16-repo developer map and public/internal classification
+- **Sidebar order** — developer-first: Getting Started → SDK → Auth → Protocol → On-Chain → JettChat → Token → DOJO
+- **DOJO section** renamed from "Jett Optical Encryption" to **DOJO Platform**
+- **JTX v2** (`JTXGnx83…`) and **mainnet DePIN** (`85sqs4up…`) addresses across all address pages
+- All GitHub links updated to `jettoptx-*` canonical repo names
+- **JETT Auth / xChat Native** — Privy-primary for DOJO; `@jettoptx/auth` for integrators
+- **Hermes API** — deprecation notice; points to upstream Hermes Agent
+- **Bridge Flow** — Solana-native attestation only (XRPL/LayerZero prose removed)
+- **MOA graph** — removed ghost matrix edges; fixed bridge-flow node description
+
+### Security
+- **Crypto IP scrub** — removed astro_knot, JOULE templates, gaze-derived encryption keys, TKDF/ML-KEM algorithm details from public protocol and messaging docs
+- AARON docs now describe opaque proof hashes only; no proprietary encoding exposed
+
+### Process
+- **DOCS Rules** and `docs-rules-content.ts` updated for `lib/moa-registry.ts` workflow
+- **Reference Index** — auto-generated from `lib/moa-registry.ts` via `DocIndexTable` component
+- **metadataBase** — corrected to `jettoptx.dev`
+
+---
+
 ## 2026-05-17 — v2.0.2: Light-mode burnt orange + sidebar icons + IP scrub + Matrix security scrub + gaze video
 
 ### Added

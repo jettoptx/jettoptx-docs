@@ -1,30 +1,28 @@
 ---
 title: $JTX Token
-description: $JTX is the governance and access token for JettChat — Solana mainnet, fixed supply, free-floating price.
+description: $JTX v2 is the governance and access token for JettChat — Solana mainnet Token-2022, fixed supply.
 icon: Coins
 ---
 
-**$JTX** is the JettChat governance and access token. It lives on **Solana mainnet** at:
+**$JTX v2** is the canonical JettChat governance and access token on **Solana mainnet**:
 
 ```
-9XpJiKEYzq5yDo5pJzRfjSRMPL2yPfDQXgiN7uYtBhUj
+JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe
 ```
 
-SPL token, 9 decimals. **Total supply: 4,400,000 JTX. Mint authority revoked.**
-
-## No price peg
-
-JTX has **no artificial price floor, ceiling, or dollar peg**. Its price floats freely on Solana DEXes (Jupiter, Raydium). Supply is fixed and deflationary — JTX is permanently removed from circulation whenever a Space Cowboy NFT is minted.
+Token-2022, 9 decimals. Legacy v1 (`9XpJiKEY…`) has revoked mint authority — see [Trading & Mint](/docs/token/trading) for migration.
 
 ## What JTX does
 
-- **Space Cowboy NFT minting** — Burn 1,111 JTX to mint one of 1,111 Space Cowboy NFTs (lifetime platform access + governance rights). JTX goes to treasury permanently.
-- **Governance** — Space Cowboy NFT holders vote on protocol direction, feature priority, and treasury allocation.
-- **Trading** — Freely tradeable on Solana DEXes.
+- **DOJO access** — Hold ≥1 JTX v2 to enter [jettoptx.chat](https://jettoptx.chat)
+- **Tier staking** — MOJO / DOJO / SPACE COWBOY via [Tiers](/docs/token/tiers)
+- **Space Cowboy NFT** — Mint via [jtx.astroknots.space/mint](https://jtx.astroknots.space/mint)
+- **Governance** — Space Cowboy NFT holders vote on protocol direction
+- **Trading** — Freely tradeable on Jupiter / Meteora
 
 ## Subscription tiers (fiat)
 
-JettChat access is primarily gated by **Stripe subscription** ($8.88 / $28.88 / $88.88 per month). No wallet required. See [Subscriptions](/docs/token/subscriptions) for details.
+Wallet-less access via **Stripe** ($8.88 / $28.88 / $88.88 per month). See [Subscriptions](/docs/token/subscriptions).
 
 ## Founder bypass
 
@@ -32,4 +30,9 @@ The founder wallet `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` is auto-tiered
 
 ## On-chain program
 
-The Anchor program backing $JTX/$CSTB compute-trust bonding lives at [jettoptx/joe-jtx-cstb-depin](https://github.com/jettoptx/joe-jtx-cstb-depin).
+Anchor programs and TS SDK: [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin)
+
+| Program | Mainnet ID |
+|---------|------------|
+| jtx_cstb_trust | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` |
+| jett_vault | `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7` |

@@ -1,58 +1,75 @@
 ---
 title: Ecosystem Repos
-description: Public repos in the jettoptx and Secure-Legion GitHub orgs that back OPTX and JettChat.
+description: All 16 jettoptx repos mapped to documentation sections — public developer surface vs internal.
 icon: Boxes
 ---
 
-The OPTX / JettChat platform is split across two GitHub orgs. This page lists every **public** repository so readers know where to look.
-
-- **`jettoptx`** — the umbrella org for OPTX, JettChat (xChat Native), AARON, JOE, and supporting infrastructure.
-- **`Secure-Legion`** — the org for Phantom Mode (Tor + post-quantum messaging, patent pending) and its Tor patches.
-
-Additional private repos back production services (xChat Native UI, E2E encryption SDK, JOE agentic core, and others) but are not listed here.
+The OPTX platform spans **16 repositories** in the `jettoptx` org plus **Secure-Legion** for Phantom Mode. This page maps each repo to its docs section and access level.
 
 ---
 
-## `jettoptx` org
+## Public Developer Surface
 
-| Repo | Role |
-|------|------|
-| [`joe-docs`](https://github.com/jettoptx/joe-docs) | This documentation site (Next.js 16 + Fumadocs + MDX). Deployed at [jettoptx.dev/docs](https://jettoptx.dev/docs). |
-| [`joe-jettauth-optx`](https://github.com/jettoptx/joe-jettauth-optx) | The published `@jettoptx/auth` SDK — X OAuth 2.0 PKCE + Solana `signMessage` + Ed25519 JWT. See [JETT Auth](/docs/authentication/jett-auth). |
-| [`joe-aaron-router`](https://github.com/jettoptx/joe-aaron-router) | AARON gaze-verification router (FastAPI). Serves both JettChat modes. See [AARON Protocol](/docs/protocol). |
-| [`joe-optx-hermes-api`](https://github.com/jettoptx/joe-optx-hermes-api) | FastAPI bridge for [Hermes Agent](https://github.com/NousResearch/hermes-agent), MPP pay-per-request. See [Hermes OPTX API](/docs/astrojoe/api). |
-| [`joe-jtx-cstb-depin`](https://github.com/jettoptx/joe-jtx-cstb-depin) | Anchor program for $JTX/$CSTB compute-trust bonding on Solana. See [Token / JTX](/docs/token). |
-
----
-
-## `Secure-Legion` org
-
-| Repo | Role |
-|------|------|
-| [`Secure-Legion/android`](https://github.com/Secure-Legion/android) | **Phantom Mode** runtime — Tor private messaging app with post-quantum cryptography, private payments, metadata resistance. Patent pending. See [JettChat → Phantom Mode](/docs/jettchat/phantom-mode). |
-| [`Secure-Legion/tor-hsservice-patched`](https://github.com/Secure-Legion/tor-hsservice-patched) | Fork of `tor-hsservice` 0.40 with intro-point exposure for OnionBalance coordination. Backs the **triple `.onion`** topology in Phantom Mode. |
-| [`Secure-Legion/.github`](https://github.com/Secure-Legion) | Org profile. |
+| Repo | Docs Section | Description |
+|------|--------------|-------------|
+| [jettoptx-docs](https://github.com/jettoptx/jettoptx-docs) | This site | Next.js 16 + Fumadocs + MDX at [jettoptx.dev](https://jettoptx.dev) |
+| [jettoptx-sdk](https://github.com/jettoptx/jettoptx-sdk) | [SDK Reference](/docs/sdk) | **Canonical** — `@jettoptx/auth`, `@jettoptx/chat`, augment registry |
+| [jettoptx-aaron-router](https://github.com/jettoptx/jettoptx-aaron-router) | [AARON Protocol](/docs/protocol) | FastAPI gaze attestation router + Python/TS SDKs |
+| [jettoptx-aaron-public](https://github.com/jettoptx/jettoptx-aaron-public) | [Edge Gateway](/docs/infrastructure/edge-gateway) | Cloudflare edge — AARON routes + HEDGEHOG MCP |
+| [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin) | [On-Chain Bridge](/docs/on-chain-bridge) | Anchor programs (`jtx_cstb_trust`, `jett_vault`) + TS SDK |
+| [jettoptx-jettchat-app](https://github.com/jettoptx/jettoptx-jettchat-app) | [JettChat](/docs/jettchat) | DOJO product at jettoptx.chat (integration patterns only) |
+| [jettoptx-mojo](https://github.com/jettoptx/jettoptx-mojo) | [MOJO](/docs/dojo/mojo) | iOS first-gaze AGT attestation + handshake spec |
+| [jettoptx-saas](https://github.com/jettoptx/jettoptx-saas) | [Platform Access](/docs/getting-started/access) | astroknots.space waitlist + JTX gate |
+| [jettoptx-jtx-trade](https://github.com/jettoptx/jettoptx-jtx-trade) | [Trading & Mint](/docs/token/trading) | jtx.astroknots.space swap + NFT mint |
+| [jettoptx-jettauth](https://github.com/jettoptx/jettoptx-jettauth) | [SDK / Auth](/docs/sdk/auth) | **Archived** → use jettoptx-sdk |
 
 ---
 
-## Cross-org reference map
+## Secure-Legion (Phantom Mode)
 
-Use this when you're trying to figure out where a feature lives:
-
-| Feature | Location |
-|---------|----------|
-| xChat Native UI | Private — see [xChat Native docs](/docs/jettchat/xchat-native) |
-| Published `@jettoptx/auth` SDK | [`jettoptx/joe-jettauth-optx`](https://github.com/jettoptx/joe-jettauth-optx) |
-| E2E messaging SDK + TKDF | Private — see [Messaging docs](/docs/jettchat/messaging) |
-| Phantom Mode runtime | [`Secure-Legion/android`](https://github.com/Secure-Legion/android) |
-| Triple `.onion` topology | [`Secure-Legion/tor-hsservice-patched`](https://github.com/Secure-Legion/tor-hsservice-patched) |
-| AARON gaze-verification router | [`jettoptx/joe-aaron-router`](https://github.com/jettoptx/joe-aaron-router) |
-| JOE agentic core | Private — see [AstroJOE docs](/docs/astrojoe) |
-| Hermes API bridge | [`jettoptx/joe-optx-hermes-api`](https://github.com/jettoptx/joe-optx-hermes-api) |
-| $JTX / $CSTB DePIN program | [`jettoptx/joe-jtx-cstb-depin`](https://github.com/jettoptx/joe-jtx-cstb-depin) |
+| Repo | Docs Section | Description |
+|------|--------------|-------------|
+| [Secure-Legion/android](https://github.com/Secure-Legion/android) | [Phantom Mode](/docs/jettchat/phantom-mode) | Tor + post-quantum messenger (patent pending) |
+| [Secure-Legion/tor-hsservice-patched](https://github.com/Secure-Legion/tor-hsservice-patched) | [Phantom Mode](/docs/jettchat/phantom-mode) | Triple `.onion` topology |
 
 ---
 
-## Companion documentation PRs
+## Internal / Omit from Primary Docs
 
-The 2026-04-30 dual-mode overhaul shipped as a coordinated set of PRs across these repos. See the [Changelog](/docs/reference/changelog) for the full PR table.
+| Repo | Treatment |
+|------|-----------|
+| **jettoptx-knot-crypto** | Proprietary IP — never documented publicly |
+| **jettoptx-context** | Private agent brain — omit entirely |
+| **jettoptx-core** | JOE runtime on Jetson — high-level concepts in [JOE](/docs/astrojoe) only |
+| **jettoptx-aeon** | Internal ops fork of Aeon — omit from public docs |
+| **jettoptx-hermes-api** | Deprecated public mirror — see [Hermes API](/docs/astrojoe/api) |
+| **jettoptx-nousvis** | Optional observability plugin — mention only if using NousViz |
+
+---
+
+## Cross-Repo Developer Map
+
+| Task | Start Here |
+|------|------------|
+| Get platform access | [jettoptx-saas](/docs/getting-started/access) → buy JTX → jettoptx.chat |
+| Install SDKs | [jettoptx-sdk](/docs/sdk) |
+| Gaze attestation | [jettoptx-aaron-router](/docs/protocol/client-integration) |
+| On-chain programs | [jettoptx-poa-depin](/docs/on-chain-bridge) |
+| Mobile handshake | [jettoptx-mojo](/docs/dojo/mojo) |
+| MCP / edge API | [jettoptx-aaron-public](/docs/infrastructure/edge-gateway) |
+| Augment topology | `@jettoptx/jett-augment-registry` in SDK |
+
+---
+
+## Canonical URLs
+
+| Surface | URL |
+|---------|-----|
+| Docs | https://jettoptx.dev/docs |
+| DOJO | https://jettoptx.chat |
+| AARON | https://aaron.jettoptics.ai |
+| HEDGEHOG MCP | https://mcp.jettoptics.ai |
+| Access / Waitlist | https://astroknots.space |
+| Trading | https://jtx.astroknots.space |
+
+See [Changelog](/docs/reference/changelog) for release history.

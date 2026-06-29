@@ -29,29 +29,29 @@ export const AGENT_RULES: DocsRule[] = [
     id: "moa-node",
     title: "3. Add MOA Graph Node",
     description:
-      "Add a node to NODES_DATA in components/moa-visual.tsx. Required fields: id (kebab-case unique), label (short display name), group (section key matching GROUP_LABELS), agt ('COG'|'EMO'|'ENV'), radius (11-22, larger = more important), href (doc path), description (one sentence), subLabels (3-4 keyword tags), emo/env/cog (scores summing to 100).",
-    files: ["components/moa-visual.tsx"],
+      "Add a node to MOA_NODES in lib/moa-registry.ts. Required fields: id (kebab-case unique), label, group (section key matching GROUP_LABELS), agt ('COG'|'EMO'|'ENV'), radius (11-22), href (doc path), description, subLabels (3-4 tags), emo/env/cog (sum to 100). PATH_TO_NODE and PAGE_AGT are derived automatically.",
+    files: ["lib/moa-registry.ts"],
   },
   {
     id: "moa-edges",
     title: "4. Add MOA Graph Edges",
     description:
-      "Add edges to EDGES in components/moa-visual.tsx for every meaningful cross-reference. Format: { source: 'node-id', target: 'node-id' }. This is the MOC (Map of Context) — it defines how knowledge connects. Every new page should have at least 2 edges: one to its section parent and one cross-section link.",
-    files: ["components/moa-visual.tsx"],
+      "Add edges to MOA_EDGES in lib/moa-registry.ts for every meaningful cross-reference. Format: { source: 'node-id', target: 'node-id' }. Every new page needs at least 2 edges. MOBILE_SUB_PAGES is derived from MOA_NODES by group.",
+    files: ["lib/moa-registry.ts"],
   },
   {
     id: "mobile-sidebar",
-    title: "5. Register in Mobile Sidebar",
+    title: "5. Mobile Sidebar",
     description:
-      "Add an entry to SUB_PAGES in components/mobile-sidebar.tsx under the parent section key. Each entry needs: label (display name), href (doc path), agt ('COG'|'EMO'|'ENV'). This makes the page reachable from the mobile accordion nav.",
-    files: ["components/mobile-sidebar.tsx"],
+      "MOBILE_SUB_PAGES in lib/moa-registry.ts is auto-derived from MOA_NODES by group. If adding a NEW top-level section, add its landing href key to MOBILE_SUB_PAGES and update NAV_SECTIONS in components/mobile-sidebar.tsx.",
+    files: ["lib/moa-registry.ts", "components/mobile-sidebar.tsx"],
   },
   {
     id: "path-mapping",
-    title: "6. Add PATH_TO_NODE Mapping",
+    title: "6. PATH_TO_NODE Mapping",
     description:
-      "Add a path-to-nodeId entry in PATH_TO_NODE in components/augment-space-btn.tsx. This maps the doc URL to the MOA graph node ID so the augment space highlights the correct node when viewing that page.",
-    files: ["components/augment-space-btn.tsx"],
+      "PATH_TO_NODE is auto-derived from MOA_NODES in lib/moa-registry.ts. augment-space-btn.tsx and mdx-link.tsx import it — no manual duplicate needed.",
+    files: ["lib/moa-registry.ts"],
   },
   {
     id: "meta-json",
@@ -96,13 +96,13 @@ export const HUMAN_RULES: DocsRule[] = [
     id: "h-register",
     title: "3. Register the Page",
     description:
-      "Update 3 files after creating content: (1) moa-visual.tsx — add a graph node + edges, (2) mobile-sidebar.tsx — add to SUB_PAGES for mobile nav, (3) augment-space-btn.tsx — add to PATH_TO_NODE for augment space highlighting.",
+      "Update lib/moa-registry.ts: add MOA_NODES entry + MOA_EDGES. PATH_TO_NODE, PAGE_AGT, and mobile SUB_PAGES derive automatically.",
   },
   {
     id: "h-template",
     title: "4. Use as a Template",
     description:
-      "joe-docs is designed to be forked. Replace MDX files in content/docs/, customize the MOA graph nodes in components/moa-visual.tsx, update lib/source.ts for your nav structure, and deploy to Vercel. The AGT tensor system, MOA knowledge graph, and mobile sidebar all adapt automatically.",
+      "jettoptx-docs is designed to be forked. Replace MDX files in content/docs/, customize MOA_NODES in lib/moa-registry.ts, update lib/source.ts for your nav structure, and deploy to Vercel.",
   },
   {
     id: "h-changelog",

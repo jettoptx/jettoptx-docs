@@ -106,7 +106,7 @@ export function DocsRulesPanel() {
           )}
           {activeTab === "humans" && (
             <p className="text-[9px] md:text-xs text-fd-muted-foreground/70 leading-relaxed px-1 pb-1">
-              Quick guide for developers contributing to OPTX docs or using joe-docs as a template for your own project.
+              Quick guide for developers contributing to OPTX docs or using jettoptx-docs as a template for your own project.
             </p>
           )}
 

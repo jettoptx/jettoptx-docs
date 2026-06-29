@@ -11,7 +11,7 @@ icon: BookOpen
 
 Both modes share the same core: **JETT Auth** with the **AGT** Gaze Triad (COG/EMO/ENV), **Jett Hub** visual SSO (primary in Phantom Mode), **JTX** token gating, and end-to-end encrypted messaging with gaze-cursor typing.
 
-**Phantom Mode adds:** triple Tor `.onion` hidden services, X25519 + ML-KEM-1024 post-quantum cryptography, StrongBox/TEE-backed keys, Ping-Pong biometric wake protocol, and a duress PIN that triggers cryptographic wipe. Implementation: [Secure-Legion/android](https://github.com/Secure-Legion/android).
+**Phantom Mode adds:** triple Tor `.onion` hidden services, post-quantum hybrid encryption, StrongBox/TEE-backed keys, Ping-Pong biometric wake protocol, and a duress PIN that triggers cryptographic wipe. Implementation: [Secure-Legion/android](https://github.com/Secure-Legion/android).
 
 ## Core Primitives
 
@@ -26,7 +26,7 @@ Both modes share the same core: **JETT Auth** with the **AGT** Gaze Triad (COG/E
 
 | Name | Full Form | Role |
 |------|-----------|------|
-| **JETT Auth** | Joule Encryption Temporal Template Auth | Biometric gaze signature — the identity layer |
+| **JETT Auth** | Jett Encryption Temporal Template Auth | Biometric gaze signature — the identity layer |
 | **OPT&#x1D54F;** | Optical Program Technologic &#x1D54F;tension | Secure bridge from JETT Auth to on-chain proofs |
 | **AARON** | Asynchronous Audit RAG Optical Node | On-chain protocol + private edge router |
 | **OPTX** | Public Blockchain & Token Network | Solana mainnet token and protocol |

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   description:
     "Developer documentation for the OPTX spatial encryption platform — gaze biometrics, DePIN attestation, agent wallets, and cross-chain bridging.",
-  metadataBase: new URL("https://docs.optx.space"),
+  metadataBase: new URL("https://jettoptx.dev"),
   keywords: [
     "OPTX docs",
     "spatial encryption",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://docs.optx.space",
+    url: "https://jettoptx.dev/docs",
     siteName: "OPTX Docs",
     title: "OPTX Documentation",
     description:
@@ -89,14 +89,13 @@ export default function Layout({ children }: { children: ReactNode }) {
           search={{
             links: [
               ["Getting Started", "/docs/getting-started/what-is-optx"],
+              ["SDK", "/docs/sdk"],
               ["Gaze Auth", "/docs/authentication/gaze"],
               ["AARON Protocol", "/docs/protocol"],
-              ["Agent Identity", "/docs/architecture/agent-identity"],
+              ["Platform Access", "/docs/getting-started/access"],
               ["DOJO IDE", "/docs/dojo"],
               ["DePIN", "/docs/infrastructure/depin"],
               ["API Reference", "/docs/reference/api"],
-              ["iOS / ARKit", "/docs/authentication/gaze"],
-              ["Windows / Desktop", "/docs/getting-started/architecture"],
             ],
             options: {
               api: "/api/search",

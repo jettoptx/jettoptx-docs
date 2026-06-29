@@ -8,7 +8,8 @@ icon: Hash
 
 | Asset | Address | Network | Status |
 |-------|---------|---------|--------|
-| **$JTX Governance** | `9XpJiKEYzq5yDo5pJzRfjSRMPL2yPfDQXgiN7uYtBhUj` | **mainnet** | Live |
+| **$JTX v2 (canonical)** | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` | **mainnet** | Live — Token-2022, 9 dec |
+| **$JTX v1 (legacy)** | `9XpJiKEYzq5yDo5pJzRfjSRMPL2yPfDQXgiN7uYtBhUj` | mainnet | Revoked mint authority |
 | **$OPTX Utility** | `DSyauRAZwUd2BrTk3P8k2yUxxvcx5X4BBg3Gh3VbeRG3` | devnet | Testing |
 | **$CSTB Attestation** | `4waAAfTjqf5LNpj2TC5zoeiAgegVwKWoy4WiJgjdBkVL` | devnet | Testing |
 
@@ -16,13 +17,15 @@ icon: Hash
 
 | Program | Address | Network |
 |---------|---------|---------|
-| **CSTB DePIN** | `91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq` | devnet |
+| **DePIN (jtx_cstb_trust)** | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` | **mainnet** |
+| **jett_vault** | `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7` | **mainnet** |
+| DePIN (devnet) | `91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq` | devnet |
 
 ## Token Standards
 
-- **$OPTX** and **$CSTB** use the **Token-2022 (SPL)** standard with transfer hooks for DePIN reward distribution
-- **$JTX** is a standard SPL token on mainnet, used for [JettChat tier gating](/docs/token/tiers)
-- OPTX is **Solana-native**. See [On-Chain Bridge](/docs/on-chain-bridge) for attestation-only bridging policy.
+- **$JTX v2** and **$OPTX** use **Token-2022 (SPL)** on mainnet/devnet respectively
+- **$JTX v2** is the canonical governance + access gate token for [JettChat tiers](/docs/token/tiers)
+- OPTX is **Solana-native**. See [On-Chain Bridge](/docs/on-chain-bridge) for program SDK usage.
 
 ## Wallets
 
@@ -31,8 +34,8 @@ icon: Hash
 | **JOE Agent** | `EFvgELE1Hb4PC5tbPTAe8v1uEDGee8nwYBMCU42bZRGk` | Autonomous agent operations |
 | **Jetson Edge JOE** | `PJM2Y4xqCSqxX1g9AWN5ejy8s6o9SeGfUTbj2cKEycs` | Edge node operations |
 | **JTX-TRUST** | `HkJoo6829ANVxPNCVDURjZazRncWv1ht3WfyDc2GD5oH` | Trust keypair |
-| **Founder** | `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` | Protocol treasury (also founder-tier bypass on JettChat gating) |
-| **JettChat Auth Cookie Issuer** | See [`@jettoptx/auth`](https://github.com/jettoptx/joe-jettauth-optx) | Ed25519 JWT signing key — managed by the SDK, not exposed publicly |
+| **Founder** | `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` | Protocol treasury |
+| **Treasury (Squads)** | `9WssADzftzptNnMHLzPZYAFApUfE7qLYChicH1Wh6YD7` | Tri-authority treasury |
 
 ## Metaplex Agent Identity
 
@@ -44,5 +47,8 @@ AstroJOE is registered as a **Metaplex Core Asset** on Solana mainnet.
 | **Agent NFT ID** | `9116eaELxZheLwJNu73LxQVsuaiugH8e11onkEw4ku9R` |
 | **Agent Wallet** | `G8MxbW8LKEsvKvXRneCHpMASR4yDit7CzERW1ZfgPkqD` |
 | **Owner Authority** | `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` |
-| **Type** | Core Asset (EIP-8004 Registration v1) |
-| **x402 Protocol** | Supported |
+
+## Source Repos
+
+- Programs + TS SDK: [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin)
+- Trading UI constants: [jettoptx-jtx-trade](https://github.com/jettoptx/jettoptx-jtx-trade)
