@@ -6,7 +6,7 @@ icon: MessageCircle
 
 **JettChat** is the OPTX-native messaging client. It ships in two modes, each suited to a different threat model:
 
-- **[xChat Native](/docs/jettchat/xchat-native)** — sign in with X, hold 1 JTX (or pay $8.88), get end-to-end encrypted chat with gaze cursor typing. Faster onboarding for public networks.
+- **[xChat Native](/docs/jettchat/xchat-native)** — sign in with X, pass the JTX gate (≥1 JTX v2), get end-to-end encrypted chat with gaze cursor typing. Faster onboarding for public networks.
 - **[Phantom Mode](/docs/jettchat/phantom-mode)** — Secure-Legion stack: triple Tor `.onion`, post-quantum hybrid encryption, hardware-backed keys (StrongBox/TEE), Ping-Pong biometric wake, duress PIN with cryptographic wipe.
 
 Both modes share the same **[E2EE messaging primitives](/docs/jettchat/messaging)**: gaze cursor typing, offline-first delivery, group chats, self-destruct messages.
@@ -25,12 +25,8 @@ Both modes share the same **[E2EE messaging primitives](/docs/jettchat/messaging
 
 ## Access flow (JETT Hub)
 
-After **Sign in with X**, the user picks any one of:
+After **Sign in with X**, middleware enforces the JTX gate (≥1 JTX v2 on mainnet). Wallet-less checkout is available on [astroknots.space/stake](https://astroknots.space/stake).
 
-- **Connect wallet · Hold 1 JTX**
-- **Pay $8.88** via Stripe (no wallet)
-- **Pay $8.88** via Tempo CLI
-
-See [JETT Auth](/docs/authentication/jett-auth) for the full auth surface and [Token / Tiers](/docs/token/tiers) for subscription upgrades.
+See [JETT Auth](/docs/authentication/jett-auth) for the auth surface and [Access Tiers](/docs/token/tiers) for tier codes integrators should enforce.
 
 Product implementation: [jettoptx-jettchat-app](https://github.com/jettoptx/jettoptx-jettchat-app) (proprietary — integration patterns only in these docs).

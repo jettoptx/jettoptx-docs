@@ -1,31 +1,37 @@
 ---
-title: Tiers
-description: Canonical JettChat tier table — three subscription tiers (MOJO / DOJO / SPACE COWBOY). Fiat via Stripe or hold JTX (market price, no peg).
+title: Access Tiers
+description: JTX tier codes and balance thresholds for developers — verification patterns, not pricing.
 icon: Layers
 ---
 
-## Subscription tiers
+Tier access is enforced in middleware from **on-chain JTX balance**, **active subscription status**, or **Space Cowboy NFT ownership**. JTX has **no fixed dollar peg** — market price floats independently of any checkout flow.
 
-Tiers are accessible by **Stripe subscription** (fiat) or by holding JTX at market price.
-JTX has **no fixed dollar peg** — its price floats freely on open markets.
+**Live tier names, features, and checkout:** [astroknots.space/stake](https://astroknots.space/stake)
 
-| Tier | Subscription | JTX threshold | Headline unlocks |
-|------|-------------|---------------|-------------------|
-| **MOJO** *(Starter)* | $8.88 / mo | 12 JTX | Gaze auth (OPT𝕏), JetChat + custom emoji keyboard, limited OPTX earning, shared AI assistant |
-| **DOJO** *(Popular)* | $28.88 / mo | 444 JTX | 1 Hermes agent container (4 vCPU / 16 GB), 1.5M Grok output tokens/mo |
-| **SPACE COWBOY** *(Legendary)* | $88.88 / mo | 1,111 JTX | 3 Hermes containers, 8M Grok output tokens/mo, developer tools, governance voting |
+## Tier codes
 
-> **Space Cowboy NFT** — Alternatively, burn 1,111 JTX to mint a Space Cowboy NFT for **lifetime** access. Only 1,111 will ever exist. [Learn more →](/docs/token)
+| Code tier | JTX v2 held | Notes |
+|-----------|-------------|-------|
+| `basic` | ≥ 1 | Base JettChat / DOJO entry |
+| `mojo` | ≥ 12 | MOJO tier |
+| `dojo` | ≥ 444 | DOJO tier — JOE API tokens on edge gateway |
+| `spaceCowboy` | ≥ 1,111 **or** Space Cowboy NFT | Highest tier + governance |
 
-## Code-level enforcement
+Canonical mint: `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe`
 
-JettChat's middleware checks tier access via Stripe subscription status **or** Space Cowboy NFT ownership:
+## How apps verify tier
 
-| Code tier | Access method |
-|-----------|--------------|
-| `mojo` | Active Stripe MOJO subscription |
-| `dojo` | Active Stripe DOJO subscription |
-| `spaceCowboy` | Active Stripe SPACE COWBOY subscription **or** Space Cowboy NFT in wallet |
+**Wallet path** — read SPL Token-2022 balance via RPC (e.g. Helius) and compare against thresholds above.
+
+**Subscription path** — check active Stripe subscription status (or Tempo CLI entitlement) server-side; map product SKU to the same code tier enum. Wallet not required for this path.
+
+**NFT path** — `spaceCowboy` also grants when a Space Cowboy NFT is held. Mint mechanics: [Trading & Mint](/docs/token/trading).
+
+Example integrator flow in [xChat Native](/docs/jettchat/xchat-native). Session verification endpoint: `POST /api/verify-session` in [API Reference](/docs/reference/api).
+
+## Wallet-less access
+
+Users without a Solana wallet can still gate via Stripe or Tempo CLI on the marketing site. Developers only need to know that subscription status resolves to the same tier codes — see [Subscriptions](/docs/token/subscriptions) for a one-line pointer.
 
 ## Founder bypass
 

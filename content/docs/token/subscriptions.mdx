@@ -1,31 +1,19 @@
 ---
 title: Subscriptions
-description: Fiat subscription paths to JettChat — Stripe-powered, no wallet required. JTX price floats freely with no dollar peg.
+description: Wallet-less access pointer — live pricing and checkout live on astroknots.space.
 icon: CreditCard
 ---
 
-JettChat doesn't require a Solana wallet. Pay USD via Stripe and get full tier access.
+Developer docs describe **how** tier access is enforced, not **what** each tier costs in USD.
 
-## Subscription tiers — monthly billing
+## Where pricing lives
 
-| Tier | Price |
-|------|-------|
-| **MOJO** | $8.88 / mo |
-| **DOJO** | $28.88 / mo |
-| **SPACE COWBOY** | $88.88 / mo |
+Checkout, feature comparison, and monthly billing amounts are maintained on the product site:
 
-See [Tiers](/docs/token/tiers) for the full feature breakdown of each.
+**[astroknots.space/stake](https://astroknots.space/stake)**
 
-## No JTX price peg
+## What integrators need
 
-JTX has **no fixed dollar equivalence**. Subscription prices are set in USD via Stripe.
-JTX trades freely on Solana DEXes — its market price is determined by supply and demand, not pegged to any tier price.
-
-## Space Cowboy NFT — lifetime access
-
-Instead of a monthly subscription, you can burn **1,111 JTX** to mint a **Space Cowboy NFT** for lifetime Space Cowboy tier access. The JTX is transferred to the protocol treasury permanently. Only 1,111 NFTs will ever exist.
-
-## Cancellation
-
-Subscriptions can be cancelled at any time; access continues through the end of the billing period.
-Space Cowboy NFT holders retain access as long as the NFT is in their wallet — no expiry.
+- Subscription status (Stripe or Tempo CLI) maps to the same tier codes as JTX balance — see [Access Tiers](/docs/token/tiers)
+- Base entry still requires passing the JTX gate (≥1 JTX) **or** an active wallet-less subscription entitlement, depending on product surface
+- Do not hardcode dollar amounts in client apps — query subscription state server-side or link users to astroknots.space

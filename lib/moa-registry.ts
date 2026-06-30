@@ -73,13 +73,13 @@ export const MOA_NODES: MoaNode[] = [
   { id: "phantom-mode", label: "Phantom Mode", group: "jettchat", agt: "ENV", radius: 17, href: "/docs/jettchat/phantom-mode", description: "Secure-Legion stack: triple Tor .onion, post-quantum hybrid, hardware-backed keys", subLabels: ["Triple Tor", "Post-Quantum", "StrongBox/TEE", "Duress PIN"], emo: 30, env: 55, cog: 15 },
   { id: "jettchat-messaging", label: "Messaging", group: "jettchat", agt: "EMO", radius: 14, href: "/docs/jettchat/messaging", description: "E2EE messaging shared by both modes — gaze cursor, offline-first, groups", subLabels: ["Gaze Cursor", "Offline-First", "Groups", "Self-Destruct"], emo: 60, env: 25, cog: 15 },
 
-  { id: "jett-auth", label: "JETT Auth", group: "authentication", agt: "EMO", radius: 19, href: "/docs/authentication/jett-auth", description: "Unified auth surface — Privy for DOJO, @jettoptx/auth for integrators", subLabels: ["JETT Hub Flow", "1 JTX or $8.88", "AGT Triad", "Both Modes"], emo: 55, env: 20, cog: 25 },
+  { id: "jett-auth", label: "JETT Auth", group: "authentication", agt: "EMO", radius: 19, href: "/docs/authentication/jett-auth", description: "Unified auth surface — Privy for DOJO, @jettoptx/auth for integrators", subLabels: ["JETT Hub Flow", "≥1 JTX Gate", "AGT Triad", "Both Modes"], emo: 55, env: 20, cog: 25 },
   { id: "gaze", label: "Gaze Auth", group: "authentication", agt: "EMO", radius: 22, href: "/docs/authentication/gaze", description: "AGT biometric authentication via iris tracking and gaze vectors", subLabels: ["MediaPipe", "COG/EMO/ENV", "Iris Tracking", "Gaze PIN"], emo: 55, env: 5, cog: 40 },
   { id: "wallet", label: "Agent Wallet", group: "authentication", agt: "EMO", radius: 17, href: "/docs/authentication/wallet", description: "ERC-8004 soulbound agent wallet (roadmap)", subLabels: ["ERC-8004 (Roadmap)", "x402 Protocol", "Soulbound NFT", "Secure Enclave"], emo: 50, env: 40, cog: 10 },
 
   { id: "token", label: "$JTX Token", group: "token", agt: "ENV", radius: 18, href: "/docs/token", description: "JettChat access + governance token on Solana mainnet (v2 canonical)", subLabels: ["Solana Mainnet", "Token-2022", "DePIN Earn", "Governance"], emo: 25, env: 50, cog: 25 },
-  { id: "token-tiers", label: "Tiers", group: "token", agt: "COG", radius: 14, href: "/docs/token/tiers", description: "Canonical 3-tier model (MOJO / DOJO / SPACE COWBOY) — stake or subscribe", subLabels: ["MOJO 12 JTX/1y", "DOJO 444 JTX/2y", "SPACE COWBOY 1111 JTX"], emo: 20, env: 30, cog: 50 },
-  { id: "token-subscriptions", label: "Subscriptions", group: "token", agt: "COG", radius: 13, href: "/docs/token/subscriptions", description: "Wallet-less paths — Stripe + Tempo CLI", subLabels: ["Stripe $8.88", "Tempo CLI", "30-day Gate"], emo: 25, env: 20, cog: 55 },
+  { id: "token-tiers", label: "Access Tiers", group: "token", agt: "COG", radius: 14, href: "/docs/token/tiers", description: "Tier codes and JTX balance thresholds for integrators", subLabels: ["basic/mojo/dojo", "Balance Check", "verify-session", "astroknots.space"], emo: 20, env: 30, cog: 50 },
+  { id: "token-subscriptions", label: "Subscriptions", group: "token", agt: "COG", radius: 11, href: "/docs/token/subscriptions", description: "Pointer — live pricing at astroknots.space/stake", subLabels: ["astroknots.space", "Not in sidebar", "Tier codes only"], emo: 15, env: 15, cog: 70 },
   { id: "token-trading", label: "Trading & Mint", group: "token", agt: "ENV", radius: 14, href: "/docs/token/trading", description: "JTX swap, Space Cowboys NFT mint, and on-chain program constants", subLabels: ["Jupiter Swap", "Meteora DLMM", "v1→v2 Migration", "jtx-trade"], emo: 30, env: 55, cog: 15 },
 
   { id: "aaron-protocol", label: "AARON", group: "protocol", agt: "COG", radius: 22, href: "/docs/protocol", description: "Asynchronous Audit RAG Optical Node — gaze attestation router and Solana bridge", subLabels: ["Session Flow", "Gaze Verify", "SpacetimeDB", "Entropy Scoring"], emo: 20, env: 15, cog: 65 },
@@ -93,8 +93,8 @@ export const MOA_NODES: MoaNode[] = [
   { id: "memory", label: "Memory", group: "astrojoe", agt: "COG", radius: 15, href: "/docs/astrojoe/memory", description: "SpacetimeDB-backed persistent memory with importance scoring", subLabels: ["Categories", "Importance Score", "Full-Text Search", "Subscriptions"], emo: 10, env: 25, cog: 65 },
   { id: "orchestration", label: "Orchestration", group: "astrojoe", agt: "COG", radius: 15, href: "/docs/astrojoe/orchestration", description: "Task lifecycle management with DAG workflows and swarm decomposition", subLabels: ["DAG Workflows", "Swarm Agents", "State Machine", "Gaze-Gated"], emo: 15, env: 15, cog: 70 },
   { id: "hedgehog-doc", label: "HEDGEHOG", group: "astrojoe", agt: "ENV", radius: 17, href: "/docs/astrojoe/hedgehog", description: "Multi-API AI gateway — Grok primary, MCP context bridge on edge", subLabels: ["Grok Gateway", "MCP Server", "12 Tools", "Edge Proxy"], emo: 20, env: 65, cog: 15 },
-  { id: "hermes-api", label: "Hermes API", group: "astrojoe", agt: "COG", radius: 14, href: "/docs/astrojoe/api", description: "Historical Hermes OPTX API bridge — deprecated public mirror", subLabels: ["Deprecated", "SSE Streaming", "Sessions", "Upstream Hermes"], emo: 10, env: 15, cog: 75 },
-  { id: "hermes-features", label: "Hermes Features", group: "astrojoe", agt: "COG", radius: 14, href: "/docs/astrojoe/hermes-features", description: "Hermes Agent capabilities — link to upstream NousResearch releases", subLabels: ["Autonomous Curator", "Skill System", "Multi-Provider", "Agent OS"], emo: 10, env: 25, cog: 65 },
+  { id: "hermes-api", label: "Hermes API", group: "astrojoe", agt: "COG", radius: 14, href: "/docs/astrojoe/api", description: "jettoptx-hermes-api v0.4 bridge — SSE, tasks, Tempo billing to Hermes v0.17 gateway", subLabels: ["v0.4 Bridge", "SSE Streaming", "SpacetimeDB", "Upstream :8642"], emo: 10, env: 15, cog: 75 },
+  { id: "hermes-features", label: "Hermes Integration", group: "astrojoe", agt: "COG", radius: 14, href: "/docs/astrojoe/hermes-features", description: "Hermes Agent v0.17 integration — native gateway, MCP, bridge split", subLabels: ["v0.17.0", "/v1/runs", "Skills Hub", "MCP"], emo: 10, env: 25, cog: 65 },
 
   { id: "arch-flows", label: "Flows", group: "architecture", agt: "COG", radius: 17, href: "/docs/architecture", description: "Architecture flow diagrams across the full OPTX stack", subLabels: ["Mermaid Diagrams", "Data Flows", "System Maps"], emo: 15, env: 20, cog: 65 },
   { id: "task-lifecycle", label: "Task Life", group: "architecture", agt: "COG", radius: 12, href: "/docs/architecture/task-lifecycle", description: "Task creation through completion with state transitions", subLabels: ["Create → Claim → Execute", "Completion Proofs"], emo: 15, env: 15, cog: 70 },
@@ -322,7 +322,7 @@ export const MOBILE_SUB_PAGES: Record<string, { label: string; href: string; agt
     href: n.href,
     agt: n.agt,
   })),
-  "/docs/token": MOA_NODES.filter((n) => n.group === "token").map((n) => ({
+  "/docs/token": MOA_NODES.filter((n) => n.group === "token" && n.id !== "token-subscriptions").map((n) => ({
     label: n.navLabel ?? n.label,
     href: n.href,
     agt: n.agt,

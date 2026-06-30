@@ -59,9 +59,9 @@ Core platform capabilities available to integrated applications:
 | **POST** | `/api/verify-session` | Verify subscription and access tier |
 | **GET** | `/api/attestation/status` | Check CSTB attestation progress |
 
-## Hermes OPTX API (v0.2.0)
+## Hermes OPTX API (v0.4.0)
 
-The enhanced API bridge for Hermes Agent and Workspace. All endpoints are payment-gated via MPP when enabled.
+FastAPI bridge for Hermes Agent v0.12+ (target v0.17). Proxies `/v1/*` to upstream gateway; adds tasks, SpacetimeDB memory, and Tempo billing. Payment-gated via MPP when enabled.
 
 ### Sessions
 
