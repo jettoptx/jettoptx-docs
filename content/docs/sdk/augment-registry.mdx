@@ -11,7 +11,7 @@ The `@jettoptx/jett-augment-registry` package defines the **runtime augment topo
 | **Docs MOA** | Documentation pages (this site's knowledge graph) |
 | **JETT Augments 00–09** | Runtime agent lobes in DOJO, MOJO, and HEDGEHOG MCP |
 
-Source: [jettoptx-sdk/packages/jett-augment-registry](https://github.com/jettoptx/jettoptx-sdk/tree/main/packages/jett-augment-registry)
+Canonical source: [`augment-topology.json`](https://github.com/jettoptx/jettoptx-sdk/blob/main/packages/jett-augment-registry/augment-topology.json) in [jettoptx-sdk/packages/jett-augment-registry](https://github.com/jettoptx/jettoptx-sdk/tree/main/packages/jett-augment-registry).
 
 ## Install
 
@@ -34,36 +34,38 @@ const mcpStatus = augmentStatusPayload();
 
 ## Augments 00–09
 
-| Digit | Name | AGT | Role |
-|-------|------|-----|------|
-| 00 | Core | — | Session anchor (south pole) |
-| 01 | Vision | COG | Strategic foresight, gaze pipeline |
-| 02 | Shield | COG | Security, policy enforcement |
-| 03 | Weights | COG | Model routing, inference |
-| 04 | Vibe | EMO | Social, community, federation channels |
-| 05 | Send | EMO | Messaging, notifications |
-| 06 | Wealth | EMO | Token ops, DePIN rewards |
-| 07 | Vector | ENV | Infrastructure, deployment |
-| 08 | Search | ENV | Retrieval, RAG, knowledge |
-| 09 | Warp | ENV | Cross-chain, bridge flows |
+Folder names in the SDK repo follow `1-Vision`, `2-Send`, … `9-Vector` (digit **00** = `0-Core`).
+
+| Digit | Folder | Name | AGT | HEAT | Role |
+|-------|--------|------|-----|------|------|
+| 00 | `0-Core` | Core | — | — | Session homeostasis, command routing, settings hub (south pole) |
+| 01 | `1-Vision` | Vision | COG | V | Strategic foresight, gaze-model control, ARKit pipeline |
+| 02 | `2-Send` | Send | EMO | S | Outbound messaging — JettChat E2E, X broadcast |
+| 03 | `3-Warp` | Warp | ENV | W | Meta-navigator — MOA routing, mesh capability discovery |
+| 04 | `4-Shield` | Shield | COG | S | Zero-trust security — JTX gate, Phantom Mode, gaze verify |
+| 05 | `5-Vibe` | Vibe | EMO | V | Personality and creativity — AstroJOE soul, social hub |
+| 06 | `6-Search` | Search | ENV | S | Discovery — diagnostics, MCP search, docs RAG |
+| 07 | `7-Weights` | Weights | COG | W | Model routing and AGT calibration — Grok gateway |
+| 08 | `8-Wealth` | Wealth | EMO | W | Economic intelligence — JTX, Stripe, DePIN wallets |
+| 09 | `9-Vector` | Vector | ENV | V | Swarm orchestration — Hermes/AgenC, compute dispatch |
+
+Digit **00 Core** has no HEAT hotkey.
 
 ## HEAT Hotkeys (V / S / W)
 
-Per-lobe position macros for agent prompting:
+Each AGT lobe has three position macros — **V** (first), **S** (second), **W** (third) — mapped to the augments above:
 
-| Lobe | V | S | W |
-|------|---|---|---|
-| COG | Vision | Shield | Weights |
-| EMO | Vibe | Send | Wealth |
-| ENV | Vector | Search | Warp |
-
-Digit **00 Core** has no hotkey.
+| Lobe | V (1st) | S (2nd) | W (3rd) |
+|------|---------|---------|---------|
+| COG | 01 Vision | 04 Shield | 07 Weights |
+| EMO | 05 Vibe | 02 Send | 08 Wealth |
+| ENV | 09 Vector | 06 Search | 03 Warp |
 
 ## Not an Augment
 
-These are infrastructure planes, not augment digits:
+These are infrastructure planes, not augment digits (see `infrastructure` in `augment-topology.json`):
 
-- **SpacetimeDB** — operational plane (chat reducers, auth, devlogs)
+- **SpacetimeDB** — operational plane (chat reducers, auth, devlogs) at `stdb.jettoptics.ai`
 - **Helix Cloud** (planned) — knowledge plane (MOA graph, vector RAG)
 - **Federation transport** — optional inter-agent messaging plane (not an augment digit)
 
@@ -73,10 +75,13 @@ The edge gateway exposes augment status via `jett_augment_status` MCP tool. See 
 
 ## Related Docs
 
-| Augment topic | Doc page |
-|---------------|----------|
-| Gaze / Vision | [Gaze Auth](/docs/authentication/gaze) |
-| Messaging / Send | [JettChat](/docs/jettchat) |
-| Token / Wealth | [Token](/docs/token) |
-| Bridge / Warp | [On-Chain Bridge](/docs/on-chain-bridge) |
+| Augment | Doc page |
+|---------|----------|
+| 01 Vision | [Gaze Auth](/docs/authentication/gaze) |
+| 02 Send | [JettChat](/docs/jettchat) |
+| 03 Warp | [Map of Augments](/docs/dojo/moa) |
+| 04 Shield | [JETT Auth](/docs/authentication/jett-auth) |
+| 08 Wealth | [Token](/docs/token) |
+| 07 Weights | [HEDGEHOG](/docs/astrojoe/hedgehog) |
+| 09 Vector | [Orchestration](/docs/astrojoe/orchestration) |
 | Docs knowledge graph | [Map of Augments](/docs/dojo/moa) |
