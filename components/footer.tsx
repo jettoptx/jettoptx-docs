@@ -260,6 +260,11 @@ export function SiteFooter() {
               </summary>
               <div className="mt-3 p-4 rounded-lg bg-fd-background/50 border border-fd-border max-w-lg">
                 <ul className="space-y-1.5 font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/70">
+                  <li><span className="text-orange-400">v2.1.4</span> &mdash; June 29, 2026
+                    <ul className="ml-3 mt-1 space-y-1">
+                      <li>&#x2022; Mobile sidebar: fixed duplicate Devnet and DOCS Rules entries</li>
+                    </ul>
+                  </li>
                   <li><span className="text-orange-400">v2.1.3</span> &mdash; June 29, 2026
                     <ul className="ml-3 mt-1 space-y-1">
                       <li>&#x2022; Augment registry 00&#x2013;09 table aligned to jettoptx-sdk <code>augment-topology.json</code></li>
