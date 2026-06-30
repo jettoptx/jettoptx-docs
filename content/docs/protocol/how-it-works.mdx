@@ -24,9 +24,11 @@ The MPP protocol enables autonomous agents to pay for AARON attestation services
 
 Program: `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7`
 
-## 3c. USDC Bridge: XRP to Solana
+## 3c. USDC Bridge: XRP to Solana (roadmap)
 
-Cross-chain settlement bridges USDC between **XRP Ledger** (via Xahau hooks) and **Solana**. Agent payments originating on XRP are bridged to SOL-side USDC and deposited into the vault program's `donate_usdc_agent` instruction. The bridge uses **Wormhole/DeBridge** for trustless cross-chain transfers, with Xahau hooks triggering automatic settlement.
+> **Status:** Production OPTX attestations are **Solana-native** today. Cross-chain USDC settlement is on the roadmap — see [On-Chain Bridge](/docs/on-chain-bridge).
+
+When implemented, cross-chain settlement will bridge USDC between **XRP Ledger** (via Xahau hooks) and **Solana**. Agent payments originating on XRP would be bridged to SOL-side USDC and deposited into the vault program's `donate_usdc_agent` instruction.
 
 ## 3d. Vault NFT Receipts
 
@@ -40,15 +42,9 @@ Every donation (SOL or USDC) generates an on-chain **DonorReceipt PDA**. The rec
 
 These receipts serve as **NFT claim tickets** for the OPTX airdrop. Vault PDA: `CQmBrff4a9MouY4eQTAPKXKprtvfHZDNSkNCQhRR38tP`.
 
-## 3e. Xahau Hooks (XRP Settlement)
+## 3e. Xahau Hooks (roadmap)
 
-Xahau hooks on the XRP Ledger enable **programmable settlement** for cross-chain payments. When an agent or user initiates a payment on XRP, the hook automatically:
-
-1. Validates the payment amount against USDC rates
-2. Triggers the bridge to Solana
-3. Calls `donate_usdc_agent` on the vault program
-
-This enables XRP-native users and XRP liquidity pools (XAH/mXRP/MAG/RLUSD) to participate in the vault.
+Planned Xahau hooks on the XRP Ledger would enable **programmable settlement** for cross-chain payments — validating amounts, triggering the Solana bridge, and calling `donate_usdc_agent` on the vault program. Not live in current production flows.
 
 ## 4. Staked Tiers via Layer 3
 

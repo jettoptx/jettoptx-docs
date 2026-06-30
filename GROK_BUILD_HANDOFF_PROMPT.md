@@ -1,3 +1,5 @@
+> **INTERNAL ONLY** — Agent handoff prompt. Not published on jettoptx.dev; do not add to MDX content or public routes.
+
 # GROK BUILD HANDOFF PROMPT — Jett Optics Neuromorphic Interface
 
 **Project**: Jett Optics (OPTX) — Neuromorphic Gaze Interface + Adaptive Gaze Tensor (AGT) + Dual Token Economy
