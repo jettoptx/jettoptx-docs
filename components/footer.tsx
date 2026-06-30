@@ -252,7 +252,7 @@ export function SiteFooter() {
         <div className="mt-10 pt-6 border-t border-fd-border">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <p className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50">
-              Last updated: June 29, 2026 &mdash; v2.1.1
+              Last updated: June 29, 2026 &mdash; v2.1.2
             </p>
             <details className="group">
               <summary className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50 hover:text-orange-400 transition-colors cursor-pointer select-none">
@@ -260,6 +260,11 @@ export function SiteFooter() {
               </summary>
               <div className="mt-3 p-4 rounded-lg bg-fd-background/50 border border-fd-border max-w-lg">
                 <ul className="space-y-1.5 font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/70">
+                  <li><span className="text-orange-400">v2.1.2</span> &mdash; June 29, 2026
+                    <ul className="ml-3 mt-1 space-y-1">
+                      <li>&#x2022; Hermes docs aligned to upstream v0.17.0; jettoptx-hermes-api v0.4 bridge + README refresh</li>
+                    </ul>
+                  </li>
                   <li><span className="text-orange-400">v2.1.1</span> &mdash; June 29, 2026
                     <ul className="ml-3 mt-1 space-y-1">
                       <li>&#x2022; Trimmed subscription USD pricing from developer docs; tier codes + JTX thresholds only</li>

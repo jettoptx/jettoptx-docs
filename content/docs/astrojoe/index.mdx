@@ -6,7 +6,7 @@ description: "Agent j(OS)H — the primary intelligent agent in the OPTX Agentic
 
 import { D2Diagram } from "@/components/d2-diagram";
 
-**JOE** (Jett Optics Engine) is the jOSH Operating Environment — the primary intelligent agent in the OPTX ecosystem. It runs on [Hermes Agent](https://github.com/NousResearch/hermes-agent) with Grok 4.20 via the HEDGEHOG gateway, backed by SpacetimeDB for persistent memory and real-time state. JOE is **dual-instance**: a primary edge node (running AARON + HEDGEHOG + SpacetimeDB) and a secondary containerized instance for redundancy. The [hermes-optx-api v0.3.0](/docs/astrojoe/api) provides SSE streaming chat, Tempo wallet billing, and gateway capability probing.
+**JOE** (Jett Optics Engine) is the jOSH Operating Environment — the primary intelligent agent in the OPTX ecosystem. It runs on [Hermes Agent v0.17](https://github.com/NousResearch/hermes-agent/releases/tag/v2026.6.19) with Grok via the HEDGEHOG gateway, backed by SpacetimeDB for persistent memory and real-time state. JOE is **dual-instance**: a primary edge node (AARON + HEDGEHOG + SpacetimeDB) and a secondary containerized instance for redundancy. [jettoptx-hermes-api v0.4.0](/docs/astrojoe/api) bridges JettChat SSE, task orchestration, and Tempo billing to the native Hermes gateway.
 
 
 ## Architecture
@@ -17,16 +17,17 @@ import { D2Diagram } from "@/components/d2-diagram";
 
 | Capability | Service | Description |
 |-----------|---------|-------------|
-| **SSE Streaming Chat** | hermes-optx-api | Real-time token streaming via Server-Sent Events |
-| **Task Orchestration** | hermes-optx-api | Create, claim, execute, complete tasks with DAG workflows |
-| **Tempo Billing** | hermes-optx-api | Metered HEDGEHOG API calls, escrow, on-chain wallet |
+| **SSE Streaming Chat** | [hermes-optx-api](/docs/astrojoe/api) | JettChat SSE envelope → Hermes `/api/sessions/*/chat/stream` |
+| **Async agent runs** | Hermes gateway | `/v1/runs` + lifecycle SSE (v0.17+) |
+| **Task Orchestration** | [hermes-optx-api](/docs/astrojoe/api) | Create, claim, execute, complete tasks with DAG workflows |
+| **Tempo Billing** | [hermes-optx-api](/docs/astrojoe/api) | Metered HEDGEHOG API calls, escrow, on-chain wallet |
 | **Memory** | SpacetimeDB | Persistent memory with categories, importance scoring, and full-text search |
 | **Gaze Verification** | AARON Router | Manage gaze sessions, analyze AGT tensors (COG/EMO/ENV) |
 | **Web Search** | HEDGEHOG | Search web and X/Twitter via Grok 4.20 multi-agent |
 | **Messaging** | Federation transport | Optional Matrix-compatible inter-agent communication |
-| **Swarm Coordination** | hermes-optx-api | Decompose goals into parallel/sequential/DAG subtasks |
+| **Swarm Coordination** | [hermes-optx-api](/docs/astrojoe/api) | Decompose goals into parallel/sequential/DAG subtasks |
 
-> AstroJOE ships with **58 tools** and **101 built-in skills** across 20 categories.
+> AstroJOE uses Hermes Agent's [Skills Hub](https://hermes-agent.nousresearch.com/docs/) and custom `SKILL.md` files under `~/.hermes/skills/`. Skill count grows with upstream releases — see [Skills](/docs/astrojoe/skills).
 
 ## Identity
 
@@ -52,4 +53,5 @@ AstroJOE is direct, efficient, and slightly witty. It takes initiative — it do
 - **[Memory](/docs/astrojoe/memory)** — SpacetimeDB-backed persistent memory
 - **[Orchestration](/docs/astrojoe/orchestration)** — Task lifecycle and swarm coordination
 - **[HEDGEHOG Gateway](/docs/astrojoe/hedgehog)** — Multi-API AI gateway
-- **[hermes-optx-api](/docs/astrojoe/api)** — Enhanced API bridge
+- **[Hermes Integration](/docs/astrojoe/hermes-features)** — v0.17 upstream + bridge architecture
+- **[Hermes OPTX API](/docs/astrojoe/api)** — bridge endpoints (jettoptx-hermes-api)
