@@ -302,12 +302,12 @@ export function MobileSidebar() {
           <button
             onClick={() => window.dispatchEvent(new CustomEvent("docs-rules-toggle"))}
             className={`flex items-center ${expanded ? "gap-2.5 px-3" : "justify-center"} w-full h-9 transition-all duration-150 hover:bg-[var(--fd-accent)] text-[var(--fd-muted-foreground)] hover:text-[var(--fd-foreground)]`}
-            aria-label="DOCS Rules"
+            aria-label="Open rules panel"
           >
             <BookOpen size={15} strokeWidth={1.75} className="shrink-0" aria-hidden="true" />
             {expanded && (
               <span className="font-[family-name:var(--font-geist-mono)] text-[13px] font-medium">
-                DOCS Rules
+                Rules Panel
               </span>
             )}
           </button>

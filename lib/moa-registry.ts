@@ -347,10 +347,7 @@ export const MOBILE_SUB_PAGES: Record<string, { label: string; href: string; agt
     href: n.href,
     agt: n.agt,
   })),
-  "/docs/on-chain-bridge": [
-    ...MOA_NODES.filter((n) => n.group === "on-chain-bridge"),
-    ...MOA_NODES.filter((n) => n.id === "devnet-validation"),
-  ].map((n) => ({
+  "/docs/on-chain-bridge": MOA_NODES.filter((n) => n.group === "on-chain-bridge").map((n) => ({
     label: n.navLabel ?? n.label,
     href: n.href,
     agt: n.agt,
@@ -360,10 +357,9 @@ export const MOBILE_SUB_PAGES: Record<string, { label: string; href: string; agt
     href: n.href,
     agt: n.agt,
   })),
-  "/docs/reference/api": [
-    ...MOA_NODES.filter((n) => n.group === "reference"),
-    ...MOA_NODES.filter((n) => n.id === "docs-rules"),
-  ].map((n) => ({
+  "/docs/reference/api": MOA_NODES.filter(
+    (n) => n.group === "reference" && n.id !== "docs-rules"
+  ).map((n) => ({
     label: n.navLabel ?? n.label,
     href: n.href,
     agt: n.agt,
