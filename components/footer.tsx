@@ -23,7 +23,7 @@ export function SiteFooter() {
             </div>
             <p className="font-[family-name:var(--font-geist-mono)] text-sm text-fd-muted-foreground leading-relaxed max-w-xs mb-4">
               Privacy-preserving spatial encryption for the agentic web. Gaze
-              biometrics, DePIN attestation, and cross-chain bridging on Solana.
+              biometrics, DePIN attestation, and Solana-native on-chain proofs.
             </p>
             <p className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50">
               MIT Licensed &mdash; &copy; 2026 Jett Optics
@@ -252,7 +252,7 @@ export function SiteFooter() {
         <div className="mt-10 pt-6 border-t border-fd-border">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <p className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50">
-              Last updated: June 29, 2026 &mdash; v2.1.4
+              Last updated: June 29, 2026 &mdash; v2.1.5
             </p>
             <details className="group">
               <summary className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50 hover:text-orange-400 transition-colors cursor-pointer select-none">
@@ -260,6 +260,12 @@ export function SiteFooter() {
               </summary>
               <div className="mt-3 p-4 rounded-lg bg-fd-background/50 border border-fd-border max-w-lg">
                 <ul className="space-y-1.5 font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/70">
+                  <li><span className="text-orange-400">v2.1.5</span> &mdash; June 29, 2026
+                    <ul className="ml-3 mt-1 space-y-1">
+                      <li>&#x2022; Architecture index + API reference: Solana-native attestation wording (removed stale LayerZero/XRPL bridge blurbs)</li>
+                      <li>&#x2022; Protocol how-it-works: XRP USDC bridge sections marked roadmap-only</li>
+                    </ul>
+                  </li>
                   <li><span className="text-orange-400">v2.1.4</span> &mdash; June 29, 2026
                     <ul className="ml-3 mt-1 space-y-1">
                       <li>&#x2022; Mobile sidebar: fixed duplicate Devnet and DOCS Rules entries</li>
