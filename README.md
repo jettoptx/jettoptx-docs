@@ -58,6 +58,6 @@ npm run build
 
 ## Current Version
 
-**v2.1.0** — Full ecosystem docs refinement (16-repo map, SDK section, MOA registry consolidation, crypto IP scrub, JTX v2 addresses).
+**v2.1.6** — Repo-wide IP disclosure scrub (diagrams, gaze docs, ecosystem table, privacy page, internal handoff banner).
 
 MIT — use it, fork it, ship it.

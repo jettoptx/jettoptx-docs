@@ -80,7 +80,7 @@ export default function PrivacyPage() {
           </h2>
           <ul className="list-disc pl-5 space-y-2">
             <li>End-to-end encryption for all biometric data pipelines.</li>
-            <li>Quantum-resistant cryptographic primitives (Kyber, Dilithium) for key exchange and signatures.</li>
+            <li>Quantum-resistant cryptographic primitives for key exchange and signatures.</li>
             <li>Zero-knowledge proof generation for privacy-preserving attestation.</li>
             <li>Regular security audits and dependency scanning.</li>
             <li>SOC 2 Type I controls alignment for access management, change control, and incident response.</li>

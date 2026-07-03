@@ -1,5 +1,7 @@
 # GROK BUILD HANDOFF PROMPT — Jett Optics Neuromorphic Interface
 
+> **INTERNAL ONLY — NOT PUBLIC DOCUMENTATION.** This file is operator context for build agents. Do not cite proprietary encryption or polynomial implementation details in public docs. Public-facing copy may reference **polynomials** only.
+
 **Project**: Jett Optics (OPTX) — Neuromorphic Gaze Interface + Adaptive Gaze Tensor (AGT) + Dual Token Economy
 **Date**: 2026-05-20
 **Strict Constraint**: Use **ONLY existing repositories** in the jettoptx GitHub org. No new repos. Only refine, upgrade, conform, or modulate **current skills and connectors**.
@@ -31,7 +33,7 @@ HEDGEHOG is the mandatory central MCP (Model Context Protocol) gateway. All gaze
   - Bottom-right zone → Environmental
   - Top zone → Cognitive
 - Supports hold-and-swipe gesture for explicit instant classification (overrides spatial inference).
-- Timestamp every capture (initial 2.22s window, later shrink to 1.11s after sufficient training data). Use timestamps for resonance in JetOptimal Encryption.
+- Timestamp every capture (initial 2.22s window, later shrink to 1.11s after sufficient training data). Use timestamps for session binding in proprietary polynomial encryption.
 
 ### 2. PIN-Triggered Batching + SpaceTimeDB
 - 6-digit PIN entry triggers batch capture: gaze vectors + gaze-centered screenshot/frame + biometric snapshot.
@@ -65,7 +67,7 @@ Refine existing patterns in `jettoptx-context/.agents/skills/` and `jettoptx-cor
 
 - Add/Modulate: `adaptive-gaze-tensor` skill (3D→2D projection + zone classification + swipe override)
 - Add/Modulate: `jet-cursor-visual-feedback` module
-- Add/Modulate: `pin-swipe-batch-capture` skill (with timestamp resonance for encryption)
+- Add/Modulate: `pin-swipe-batch-capture` skill (with timestamp binding for session proofs)
 - Add/Modulate: `hedgehog-mcp-connector` (central registration point)
 - Add/Modulate: `biometrics-fusion-pvalue` skill
 - Add/Modulate: `dual-token-economy` + subscription engine (in core + on-chain)
