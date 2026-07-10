@@ -134,7 +134,7 @@ const response = await fetch("/api/wallet/tempo/call", {
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
     caller_id: "EFvgELE1Hb4PC5tbPTAe8v1uEDGee8nwYBMCU42bZRGk",
-    model: "grok-4.20-multi-agent-beta-0309",
+    model: "grok-4.5",
     prompt: "Analyze this gaze pattern for authentication",
     max_tokens: 2048,
     tools: ["web_search"],
@@ -190,7 +190,7 @@ Create (locked) → Task Completed → Release (gaze-verified) → On-chain sett
 | **xAI inference** | ~$0.003 per 1K tokens (Grok 4.20) |
 | **OPTX margin** | $0.08 per call (flat) |
 | **Payment token** | $OPTX (Solana devnet) |
-| **Supported models** | `grok-4.20-multi-agent-beta-0309`, `grok-4.20-0309-reasoning`, `grok-4-1-fast-reasoning` |
+| **Supported models** | `grok-4.5`, `grok-4.5`, `grok-4-1-fast-reasoning` |
 
 ---
 

@@ -75,10 +75,13 @@ GET /v1/models        — List available models
 
 ## Model Routing
 
+> **Chat-safe default:** Jetson HEDGEHOG uses `grok-4.5`. The older multi-agent model id returns HTTP 400 on `/v1/chat/completions` and is remapped server-side.
+
+
 | Priority | Model | Use Case |
 |----------|-------|----------|
-| **Primary** | `grok-4.20-multi-agent-beta-0309` | Web search, X search, research, spatial reasoning |
-| **Fallback** | `grok-4.20-0309-reasoning` | Complex reasoning without multi-agent tools |
+| **Primary** | `grok-4.5` | Web search, X search, research, spatial reasoning |
+| **Fallback** | `grok-4.5` | Complex reasoning without multi-agent tools |
 | **Chat** | `grok-3-fast` | Standard chat completions (AgenC, Hermes) |
 
 ## Multi-Agent Fallback
