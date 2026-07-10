@@ -252,7 +252,7 @@ export function SiteFooter() {
         <div className="mt-10 pt-6 border-t border-fd-border">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <p className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50">
-              Last updated: July 3, 2026 &mdash; v2.1.6
+              Last updated: July 9, 2026 &mdash; v2.2.0
             </p>
             <details className="group">
               <summary className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50 hover:text-orange-400 transition-colors cursor-pointer select-none">
@@ -260,6 +260,13 @@ export function SiteFooter() {
               </summary>
               <div className="mt-3 p-4 rounded-lg bg-fd-background/50 border border-fd-border max-w-lg">
                 <ul className="space-y-1.5 font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/70">
+                  <li><span className="text-orange-400">v2.2.0</span> &mdash; July 9, 2026
+                    <ul className="ml-3 mt-1 space-y-1">
+                      <li>&#x2022; <strong>Platform ship day:</strong> MOJO iOS build 64 submitted to TestFlight; Proof-of-Attention earn rail live end-to-end (sealed claims &rarr; tiered earn &rarr; durable totals); unified identity (Privy DID canonical, server-stamped chat labels + ghost mode); image messages via edge upload &rarr; IPFS pointers</li>
+                      <li>&#x2022; #JTX Global greenfielded for beta; node-key gate &mdash; reading open, posting holds 1 JTX (free first-gaze claim planned; buy at <code>jtx.astroknots.space/buy</code>)</li>
+                      <li>&#x2022; Pre-publication IP/security audit of this repo (04-Shield + 06-Scan via HEDGEHOG): tracked files clean; crypto-IP scrub posture confirmed</li>
+                    </ul>
+                  </li>
                   <li><span className="text-orange-400">v2.1.6</span> &mdash; July 3, 2026
                     <ul className="ml-3 mt-1 space-y-1">
                       <li>&#x2022; Repo-wide IP scrub: protocol diagram, gaze docs, ecosystem table, privacy page, internal handoff banner</li>

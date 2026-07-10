@@ -6,6 +6,20 @@ description: Version history and release notes for the OPTX ecosystem.
 
 ---
 
+## 2026-07-09 — v2.2.0: Platform ship day — MOJO TestFlight + PoA earn rail + unified identity
+
+### Platform
+- **MOJO iOS build 64** submitted to TestFlight — the beta pipeline is live
+- **Proof-of-Attention earn rail** live end-to-end: sealed attention claims → tiered earn (free / subscriber / staked / DOJO) → durable per-user totals ($OPTX accounted in 6-decimal micro-units, never floats)
+- **Unified identity**: Privy DID is the canonical user key with alias resolution (social handle, email, embedded + imported wallets); chat labels are now **server-stamped** by the v2 send reducers — clients can no longer write a wrong name — with an opt-in **ghost mode** (pseudonymous wallet-short label; identity key unchanged)
+- **Media rail**: image messages upload through the AARON edge → IPFS; the database stores https gateway pointers only, never blobs
+- **#JTX Global** greenfielded for beta. Node-key gate: reading is open to everyone; posting holds ≥1 JTX — free first-gaze claim planned, or buy at [jtx.astroknots.space/buy](https://jtx.astroknots.space/buy)
+
+### Security
+- **Pre-publication IP/security audit of this repo** (JOE augments 04-Shield + 06-Scan via HEDGEHOG): tracked files clean of secrets/private endpoints; prior crypto-IP scrub posture confirmed (proprietary polynomial/TKDF internals remain undisclosed); one historical low-risk finding accepted per Shield review
+
+---
+
 ## 2026-07-03 — v2.1.6: Repo-wide IP disclosure scrub
 
 ### Security

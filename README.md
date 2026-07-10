@@ -58,6 +58,6 @@ npm run build
 
 ## Current Version
 
-**v2.1.6** — Repo-wide IP disclosure scrub (diagrams, gaze docs, ecosystem table, privacy page, internal handoff banner).
+**v2.2.0** — Platform ship day: MOJO iOS build 64 → TestFlight, Proof-of-Attention earn rail live, unified identity (server-stamped labels + ghost mode), media rail, #JTX node-key gate. Pre-publication IP/security audit passed (04-Shield + 06-Scan via HEDGEHOG).
 
 MIT — use it, fork it, ship it.
