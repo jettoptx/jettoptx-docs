@@ -27,7 +27,7 @@ The proof hash binds the session nonce, AGT sequence, hold durations, and timest
 1. **Create session** — `POST https://aaron.jettoptics.ai/session` returns a challenge with target AGT positions.
 2. **Capture gaze** — client records iris vectors and classifies each hold into COG, EMO, or ENV.
 3. **Verify** — `POST /verify` submits the proof hash and session metadata.
-4. **Attest** — verified sessions are written to SpacetimeDB and optionally bridged to the `jtx_cstb_trust` program on Solana.
+4. **Attest** — verified sessions are written to SpacetimeDB and optionally bridged to the PoA DePIN program on Solana.
 
 See [How It Works](/docs/protocol/how-it-works) for the step-by-step flow and [Client Integration](/docs/protocol/client-integration) for SDK examples.
 

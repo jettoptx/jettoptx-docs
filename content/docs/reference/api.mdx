@@ -21,14 +21,14 @@ Connect to the **JOE agent** via the DOJO Connections tab. Authentication requir
 {
   content: "JOE's response text",
   tensor: "COG/EMO/ENV classification",
-  cstb_score: 0.85,  // CSTB attestation score
+  poa_score: 0.85,  // Proof-of-Attention attestation score
 }
 
 // Wallet queries (admin only)
 { type: "wallet_status" }   // → balances + attestation
 { type: "wallet_metadata" } // → ERC-8004 agent identity
 { type: "x402_policy" }     // → payment policy
-{ type: "bridge_status" }   // → LayerZero bridge info
+{ type: "bridge_status" }   // → Solana attestation / vault status
 ```
 
 ## Platform Capabilities
@@ -57,7 +57,7 @@ Core platform capabilities available to integrated applications:
 | **POST** | `/api/gaze/store` | Submit gaze tensor data for attestation |
 | **GET** | `/api/gaze/history` | Retrieve gaze session history |
 | **POST** | `/api/verify-session` | Verify subscription and access tier |
-| **GET** | `/api/attestation/status` | Check CSTB attestation progress |
+| **GET** | `/api/attestation/status` | Check PoA attestation progress |
 
 ## Hermes OPTX API (v0.4.0)
 

@@ -1,77 +1,50 @@
 ---
-title: CSTB Trust DePIN Protocol
-description: On-chain attestation, reward distribution, attestation flow, and the Anchor DePIN program.
+title: Proof-of-Attention DePIN
+description: On-chain gaze attestation, OPTX reward distribution, and the Anchor PoA DePIN programs in jettoptx-poa-depin.
 icon: Shield
 ---
 
-**[CompuStable (CSTB)](https://x.com/Compustable)** is the on-chain attestation layer that verifies gaze biometric proofs. The **DePIN** (Decentralized Physical Infrastructure Network) distributes **$OPTX** rewards to validated gaze sessions.
+**Proof-of-Attention (PoA)** is the Solana DePIN rail that anchors verified gaze sessions on-chain and distributes **$OPTX** rewards. Programs and the TypeScript SDK live in **[jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin)**.
+
+> **Naming note:** The Anchor crate is still published as `jtx_cstb_trust` (historical program name). That is an on-chain identifier only — **CompuStable / $CSTB is not a user-facing product surface**. Compute micropayments use external **$SGL** (x402 Singularity Layer) where applicable; see [jtx.astroknots.space](https://jtx.astroknots.space).
 
 ## Reward Distribution
 
 | Share | Recipient | Description |
 |-------|-----------|-------------|
-| **60%** | Provider | User who contributes gaze data |
+| **60%** | Provider | User who contributes verified gaze / attention |
 | **30%** | Client | Application requesting verification |
-| **10%** | Protocol | CSTB treasury for operations |
+| **10%** | Protocol | Treasury for network operations |
 
 ## Attestation Flow
 
 ```text
-1. User starts gaze training session in DOJO
-2. Camera captures eye movement at 60fps
-3. Proprietary classifier maps gaze → AGT tensors (COG/EMO/ENV)
-4. Minimum gaze data collected (quality threshold)
-5. Edge compute stores tensors in real-time database
-6. JOE Agent validates session integrity
-7. CSTB program on Solana creates attestation PDA
-8. $OPTX minted to user's wallet (60% of reward pool)
-9. Attestation hash stored on-chain for future verification
+1. User starts gaze training / session (MOJO or DOJO)
+2. On-device capture classifies gaze → AGT tensors (COG/EMO/ENV)
+3. Quality thresholds met (duration, entropy, difficulty)
+4. AARON Router verifies opaque proof (raw biometrics never leave device)
+5. SpacetimeDB records session + attestation events
+6. PoA program on Solana creates / updates attestation PDA
+7. $OPTX reward path settles for validated sessions
+8. Attestation hash remains on-chain for later verification
 
-Requirements:
-  - Min gaze duration: configurable (governance parameter)
-  - Min entropy: configurable (governance parameter)
-  - Difficulty target: configurable (governance parameter)
-  - AGT constraint: COG + EMO + ENV must normalize to unity
+Requirements (governance parameters):
+  - Min gaze duration
+  - Min entropy
+  - Difficulty target
+  - AGT constraint: COG + EMO + ENV normalize to unity
 ```
 
-## Anchor Program
+## Programs
 
-```rust
-use anchor_lang::prelude::*;
-
-#[program]
-pub mod cstb_depin {
-    use super::*;
-
-    pub fn create_attestation(
-        ctx: Context<CreateAttestation>,
-        gaze_hash: [u8; 32],
-        agt_weights: [u16; 3],  // [COG, EMO, ENV]
-        gaze_duration_cs: u32,
-        entropy: u16,
-    ) -> Result<()> {
-        require!(gaze_duration_cs >= MIN_GAZE_CS, CSTBError::InsufficientGaze);
-        require!(entropy >= MIN_ENTROPY, CSTBError::InsufficientEntropy);
-        require!(
-            agt_weights.iter().sum::<u16>() == AGT_NORMALIZATION,
-            CSTBError::InvalidAGTWeights
-        );
-
-        let attestation = &mut ctx.accounts.attestation;
-        attestation.authority = ctx.accounts.user.key();
-        attestation.gaze_hash = gaze_hash;
-        attestation.agt_weights = agt_weights;
-        attestation.timestamp = Clock::get()?.unix_timestamp;
-        attestation.verified = true;
-
-        Ok(())
-    }
-}
-```
+| Program | Network | Address |
+|---------|---------|---------|
+| PoA DePIN (`jtx_cstb_trust`) | **mainnet** | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` |
+| PoA trust (devnet) | devnet | `79nQsecDspUWxvAMyJvK36EUty4yEoP5ssLvHZuNiugF` |
+| `jett_vault` | **mainnet** | `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7` |
 
 ## Source Code
 
-The CSTB Trust DePIN program is open source:
-
-- [JTX-CSTB.TRUST.DEPIN on GitHub](https://github.com/jettoptx/JTX-CSTB.TRUST.DEPIN) — Anchor program for on-chain gaze attestation and $OPTX reward distribution.
-- [@Compustable on X](https://x.com/Compustable) — Official CompuStable updates and announcements.
+- [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin) — Anchor programs + TS SDK
+- [On-Chain Addresses](/docs/getting-started/on-chain-addresses) — mint and program index
+- [Attestation Bridge Flow](/docs/architecture/bridge-flow) — AARON → Solana PDA path

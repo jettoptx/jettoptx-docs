@@ -22,7 +22,7 @@ HEDGEHOG is the mandatory central MCP (Model Context Protocol) gateway. All gaze
 - `jettoptx-mojo` — Refine mobile app with ARKit/ARCore bootstrap + home-screen widget for quick emoji tagging.
 - `jettoptx-jettauth` — Extend auth for gaze + token gating via HEDGEHOG.
 - `jettoptx-hermes-api` — Modulate for agent spawning harness that routes through HEDGEHOG.
-- `jettoptx-cstb-depin` — Upgrade on-chain logic for OPTX utility + JTX premium tokens and biofeedback rewards.
+- `jettoptx-poa-depin` — Upgrade on-chain logic for OPTX utility + JTX premium tokens and Proof-of-Attention rewards.
 
 ## Refined Architecture (All Modules Modulated to HEDGEHOG)
 

@@ -8,7 +8,7 @@ import { D2Diagram } from "@/components/d2-diagram";
 
 ## Solana-Native Attestation Flow
 
-OPTX is **Solana-native**. Gaze proofs verified by the AARON router are bridged to on-chain attestation PDAs via the `jtx_cstb_trust` program — no cross-chain wrapping required.
+OPTX is **Solana-native**. Gaze proofs verified by the AARON router are bridged to on-chain attestation PDAs via the PoA DePIN program (`jtx_cstb_trust` crate name) — no cross-chain wrapping required.
 
 <D2Diagram src="/diagrams/bridge-flow.svg" alt="Gaze to AARON to Solana attestation flow" caption="Solana Attestation Bridge Flow" />
 
@@ -17,8 +17,8 @@ OPTX is **Solana-native**. Gaze proofs verified by the AARON router are bridged 
 | **Capture** | Client (MOJO / Web) | On-device iris tracking → AGT classification |
 | **Verify** | AARON Router | `POST /session` + `POST /verify` → opaque proof hash |
 | **Record** | SpacetimeDB | Session state + attestation events at `stdb.jettoptics.ai` |
-| **Anchor** | jtx_cstb_trust | On-chain AGT attestation PDA on Solana mainnet |
-| **Reward** | DePIN | CSTB trust score + $OPTX micropayments (x402) |
+| **Anchor** | PoA DePIN | On-chain AGT attestation PDA on Solana mainnet |
+| **Reward** | DePIN | PoA trust score + $OPTX / x402 micropayments |
 
 ## Pipeline Stages
 
@@ -36,7 +36,7 @@ OPTX is **Solana-native**. Gaze proofs verified by the AARON router are bridged 
 
 ### 3. On-Chain Attestation
 
-- Bridge service submits attestation instruction to `jtx_cstb_trust`
+- Bridge service submits attestation instruction to the PoA DePIN program
 - Program ID (mainnet): `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF`
 - See [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin) SDK for integration
 

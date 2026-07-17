@@ -1,33 +1,30 @@
 ---
 icon: Fingerprint
 title: Agent Identity
-description: On-chain agent registration, multi-chain wallets, Metaplex NFT identity, and xSPECTAR soul binding.
+description: On-chain agent registration, Solana wallets, Metaplex NFT identity, and biometric attestations.
 ---
 
 import { D2Diagram } from "@/components/d2-diagram";
 
 ## Agent Identity & Registration
 
-AstroJOE has a multi-layered identity spanning on-chain registration, soul-bound NFTs, and biometric attestations.
+AstroJOE has a multi-layered identity spanning on-chain registration, Metaplex NFT identity, and biometric attestations. **Production identity is Solana-native.**
 
-<D2Diagram src="/diagrams/agent-identity.svg" alt="Agent Identity Hierarchy — SOUL, NFT, xSPECTAR, Gaze to on-chain PDA and multi-chain wallets" caption="Agent Identity & Registration" />
+<D2Diagram src="/diagrams/agent-identity.svg" alt="Agent Identity Hierarchy — SOUL, NFT, Gaze to on-chain PDA and Solana wallets" caption="Agent Identity & Registration" />
 
 | Node | Layer | Description |
 |------|-------|-------------|
 | **SOUL** | <span style={{color:"#eab308"}}>Identity</span> | SOUL.md — AstroJOE personality + capabilities |
 | **Hermes** | <span style={{color:"#eab308"}}>Identity</span> | Hermes Agent container (brain) |
 | **NFT** | <span style={{color:"#eab308"}}>Identity</span> | Metaplex Core Asset on Solana |
-| **xSPEC** | <span style={{color:"#eab308"}}>Identity</span> | xSPECTAR soul-bound NFTs on XRPL |
-| **Gaze** | <span style={{color:"#eab308"}}>Identity</span> | Biometric gaze attestation |
+| **Gaze** | <span style={{color:"#eab308"}}>Identity</span> | Biometric gaze attestation (AGT) |
 | **AARON** | <span style={{color:"#eab308"}}>Identity</span> | AARON Router — gaze verification |
 | **PDA** | <span style={{color:"#60a5fa"}}>On-Chain</span> | Agent Program Derived Address |
 | **Skills** | <span style={{color:"#60a5fa"}}>On-Chain</span> | On-chain skill registry |
 | **Rep** | <span style={{color:"#60a5fa"}}>On-Chain</span> | On-chain reputation score |
-| **Wallets** | <span style={{color:"#60a5fa"}}>On-Chain</span> | Multi-chain wallet index |
-| **SOL** | <span style={{color:"#f43f5e"}}>Wallet</span> | Solana wallet |
-| **ETH** | <span style={{color:"#f43f5e"}}>Wallet</span> | ETH / Base wallet |
-| **MPX** | <span style={{color:"#f43f5e"}}>Wallet</span> | Metaplex identity wallet |
-| **XRP** | <span style={{color:"#f43f5e"}}>Wallet</span> | XRPL wallet |
+| **SOL** | <span style={{color:"#f43f5e"}}>Wallet</span> | Solana operational wallet |
+
+> XRPL / xSPECTAR soul-NFT identity and multi-EVM wallet indexes from earlier docs are **not** part of the current production auth path. See [On-Chain Bridge](/docs/on-chain-bridge) for the Solana-only stance.
 
 ## Metaplex Agent NFT
 
@@ -37,27 +34,11 @@ AstroJOE is registered as a **Metaplex Core Asset** on Solana mainnet with EIP-8
 |-------|-------|
 | **Agent Page** | [metaplex.com/agents/9116ea...](https://www.metaplex.com/agents/9116eaELxZheLwJNu73LxQVsuaiugH8e11onkEw4ku9R) |
 | **Agent NFT ID** | `9116eaELxZheLwJNu73LxQVsuaiugH8e11onkEw4ku9R` |
-| **Agent Wallet** | `G8MxbW8LKEsvKvXRneCHpMASR4yDit7CzERW1ZfgPkqD` |
-| **Owner Authority** | `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` |
 | **Type** | Core Asset (EIP-8004 Registration v1) |
 | **x402 Protocol** | Supported |
 | **Description** | On-chain AI research agent for Solana, DeFi, and NFT ecosystems |
 
-## Multi-Chain Wallets
-
-| Chain | Address | Purpose |
-|-------|---------|---------|
-| **Solana** (operational) | `EFvgELE1Hb4PC5tbPTAe8v1uEDGee8nwYBMCU42bZRGk` | Primary agent wallet |
-| **Solana** (Metaplex) | `G8MxbW8LKEsvKvXRneCHpMASR4yDit7CzERW1ZfgPkqD` | NFT identity wallet |
-| **ETH/Base** | `0xB06c9B91Fa4B460551880459dc35803DC7567b93` | EVM operations |
-| **XRPL** | `rq9mNYMKhzy9EgmBmwfWKn6fs5qgPpVmk` | TraderJoe swarm wallet |
-| **Solana** (founder) | `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` | Owner authority |
-
-## xSPECTAR Soul NFTs
-
-SubJOE agents use xSPECTAR NFTs on XRPL as on-chain identity and staking primitives:
-- TokenID `001822B0...` — Primary soul binding
-- TokenID `5EA0FBF4...` — Secondary soul binding
+Operational wallet addresses are listed on [On-Chain Addresses](/docs/getting-started/on-chain-addresses).
 
 ## SOUL.md (System Prompt)
 
@@ -67,11 +48,12 @@ The `SOUL.md` file defines AstroJOE's personality, knowledge, capabilities, and 
 
 Gaze attestations in SpacetimeDB provide a biometric identity layer:
 - Each gaze session produces a SHA-256 hash of the gaze data
-- Entropy score (0-1585) measures pattern uniqueness
+- Entropy score measures pattern uniqueness
 - COG/EMO/ENV tensor classification adds behavioral context
 - Attestations are immutable once stored
+- Optional on-chain anchor via [Proof-of-Attention DePIN](/docs/infrastructure/depin)
 
 ## Related
 - [Gaze Verification](/docs/authentication/gaze) — How gaze auth works
-- [ERC-8004 Agent Wallet](/docs/authentication/wallet) — Soulbound wallet spec
-- [On-Chain Addresses](/docs/getting-started/on-chain-addresses) — All token and program addresses
+- [ERC-8004 Agent Wallet](/docs/authentication/wallet) — Soulbound wallet spec (roadmap)
+- [On-Chain Addresses](/docs/getting-started/on-chain-addresses) — Token and program addresses
