@@ -12,51 +12,33 @@ AARON captures biometric tensors on-device using **MediaPipe face landmarks**. R
 
 ## 2. Opaque Proof to Solana
 
-A **32-byte verification hash** is computed from the gaze sequence, hold durations, and session nonce. This hash is submitted on-chain via the CSTB DePIN program. Validators confirm the proof without ever seeing raw biometric data.
+A **32-byte verification hash** is computed from the gaze sequence, hold durations, and session nonce. This hash is submitted on-chain via the **Proof-of-Attention DePIN** program in [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin). Validators confirm the proof without ever seeing raw biometric data.
 
 ## 3a. x402 Unlocks Action
 
-Payment attestation triggers domain registration, NFT mint, or agent delegation via micropayment. The **x402 protocol** settles OPTX payments atomically alongside the biometric proof.
+Payment attestation triggers domain registration, NFT mint, or agent delegation via micropayment. The **x402 protocol** settles payments atomically alongside the biometric proof on the Solana rail (`aaron.jettoptics.ai`).
 
 ## 3b. Machine-to-Machine Payments (MPP)
 
-The MPP protocol enables autonomous agents to pay for AARON attestation services using **USDC**. Agent wallets (like JOE) submit x402 micropayments that are atomically settled alongside proof verification. Each agent payment creates an **AgentAcquisition PDA** on-chain, linking the payment to the authenticated user.
+The MPP protocol enables autonomous agents to pay for AARON attestation services using **USDC** on Solana. Agent wallets submit x402 micropayments that are atomically settled alongside proof verification. Each agent payment can create an **AgentAcquisition PDA** on-chain, linking the payment to the authenticated user.
 
-Program: `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7`
+Vault program: `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7`
 
-## 3c. USDC Bridge: XRP to Solana
+## 3c. Vault donations & receipts (Solana)
 
-Cross-chain settlement bridges USDC between **XRP Ledger** (via Xahau hooks) and **Solana**. Agent payments originating on XRP are bridged to SOL-side USDC and deposited into the vault program's `donate_usdc_agent` instruction. The bridge uses **Wormhole/DeBridge** for trustless cross-chain transfers, with Xahau hooks triggering automatic settlement.
+Production settlement is **Solana-native**. Donations (SOL or USDC) generate on-chain **DonorReceipt** PDAs via `jett_vault`. Cross-chain XRP / Xahau / Wormhole paths from earlier docs are **retired** — see [On-Chain Bridge](/docs/on-chain-bridge).
 
-## 3d. Vault NFT Receipts
+Receipt fields typically include donation amount, payment method, claim status, and any JTX / OPTX entitlements configured for the campaign.
 
-Every donation (SOL or USDC) generates an on-chain **DonorReceipt PDA**. The receipt records:
+## 4. Access tiers
 
-- Donation amount
-- JTX tokens entitled at $8/token
-- OPTX multiplier (2x in Phase 1)
-- Payment method
-- Claim status
+**$JTX v2** on Solana mainnet gates product access (DOJO / JettChat tiers). **$OPTX** (devnet today) is the PoA reward / utility token. Higher stake or subscription tier → lower x402 fees + priority compute where enabled.
 
-These receipts serve as **NFT claim tickets** for the OPTX airdrop. Vault PDA: `CQmBrff4a9MouY4eQTAPKXKprtvfHZDNSkNCQhRR38tP`.
+| Code tier | JTX v2 held | Notes |
+|-----------|-------------|-------|
+| `basic` | ≥ 1 | Entry gate |
+| `mojo` | ≥ 12 | MOJO tier |
+| `dojo` | ≥ 444 | DOJO tier |
+| `spaceCowboy` | ≥ 1,111 **or** Space Cowboy NFT | Top tier + governance |
 
-## 3e. Xahau Hooks (XRP Settlement)
-
-Xahau hooks on the XRP Ledger enable **programmable settlement** for cross-chain payments. When an agent or user initiates a payment on XRP, the hook automatically:
-
-1. Validates the payment amount against USDC rates
-2. Triggers the bridge to Solana
-3. Calls `donate_usdc_agent` on the vault program
-
-This enables XRP-native users and XRP liquidity pools (XAH/mXRP/MAG/RLUSD) to participate in the vault.
-
-## 4. Staked Tiers via Layer 3
-
-**$OPTX** staking determines access tiers. Higher stake = lower x402 fees + priority compute.
-
-| Tier | Stake Required | Benefits |
-|------|---------------|----------|
-| **Explorer** | 0 OPTX | Basic access |
-| **Pioneer** | 100 OPTX | Reduced fees |
-| **Architect** | 1,000 OPTX | Priority compute |
-| **Founder** | 10,000 OPTX | Full access + governance |
+Live pricing and checkout: [astroknots.space/stake](https://astroknots.space/stake). Canonical mint: [On-Chain Addresses](/docs/getting-started/on-chain-addresses).

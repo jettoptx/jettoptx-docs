@@ -1,7 +1,7 @@
 ---
 icon: Zap
 title: Solana Native
-description: Home chain operations — $OPTX, $JTX, $CSTB tokens, DePIN staking, and Metaplex agent identity.
+description: Home chain operations — $OPTX, $JTX v2, Proof-of-Attention DePIN staking, and Metaplex agent identity.
 ---
 
 import { D2Diagram } from "@/components/d2-diagram";
@@ -13,15 +13,17 @@ Solana is the home chain for OPTX. All verification, staking, and agent identity
 | Token | Standard | Purpose | Network |
 |-------|----------|---------|---------|
 | **$JTX v2** | Token-2022 (SPL) | Governance + DOJO access gate | **Mainnet** |
-| **$OPTX** | Token-2022 (SPL) | Utility — DePIN rewards, gaze attestations | Devnet |
-| **$CSTB** | Token-2022 (SPL) | Attestation — DePIN validator staking | Devnet |
+| **$OPTX** | Token-2022 (SPL) | Utility — PoA rewards, gaze attestations | Devnet |
+| **$JTX v1** | SPL (legacy) | Revoked mint authority — do not integrate | Mainnet |
 
 ### Token-2022 Transfer Hooks
 
-$OPTX and $CSTB use **transfer hooks** — programmable logic that executes on every token transfer. This enables:
+$OPTX uses **transfer hooks** — programmable logic that executes on every token transfer. This enables:
 
-- **DePIN reward distribution** on validator attestation
+- **PoA reward distribution** on validator attestation
 - **Gaze attestation stamps** embedded in transfer metadata
+
+> A legacy on-chain field named `cstb_mint` may still appear in program account layouts. It is **not** a user-facing CompuStable product. Compute micropayments use external **$SGL** where applicable.
 
 ## Metaplex Agent Identity
 
@@ -30,31 +32,29 @@ AstroJOE is registered as a **Metaplex Core Asset** on mainnet — the on-chain 
 | Field | Value |
 |-------|-------|
 | **Agent NFT** | `9116eaELxZheLwJNu73LxQVsuaiugH8e11onkEw4ku9R` |
-| **Agent Wallet** | `G8MxbW8LKEsvKvXRneCHpMASR4yDit7CzERW1ZfgPkqD` |
-| **Owner** | `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` |
 | **Standard** | Core Asset (EIP-8004 Registration v1) |
 | **x402 Protocol** | Supported |
 
-## DePIN Staking (CSTB Trust)
+## DePIN Staking (Proof-of-Attention)
 
-<D2Diagram src="/diagrams/depin-staking.svg" alt="DePIN Staking Cycle — Validator Node to AARON to CSTB stake to OPTX rewards" caption="DePIN Staking Cycle" />
+<D2Diagram src="/diagrams/depin-staking.svg" alt="DePIN Staking Cycle — Validator Node to AARON to PoA stake to OPTX rewards" caption="DePIN Staking Cycle" />
 
 | Node | Description |
 |------|-------------|
-| **Node** | DePIN Validator Node (edge compute, gaze proofs) |
-| **AARON** | AARON Router — validates attestations on Solana |
-| **CSTB** | $CSTB stake locked by validator in CSTB Trust |
-| **OPTX** | $OPTX rewards minted via Token-2022 transfer hooks |
+| **Node** | DePIN validator / edge compute (gaze proofs) |
+| **AARON** | AARON Router — validates attestations |
+| **PoA** | Proof-of-Attention program + stake / trust PDAs |
+| **OPTX** | $OPTX rewards for validated sessions |
 
-Validators stake $CSTB to participate in the DePIN network. AARON validates their attestations (gaze proofs, uptime, edge compute availability), and rewards flow back as $OPTX through Token-2022 transfer hooks.
+Validators participate via the PoA DePIN programs. AARON validates attestations (gaze proofs, uptime, edge availability); rewards flow as $OPTX.
 
 ## Program Addresses
 
 | Program | Address | Network |
 |---------|---------|---------|
-| **DePIN (jtx_cstb_trust)** | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` | **Mainnet** |
+| **PoA DePIN (`jtx_cstb_trust`)** | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` | **Mainnet** |
 | **jett_vault** | `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7` | **Mainnet** |
-| DePIN (devnet) | `91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq` | Devnet |
+| DePIN (legacy devnet ID) | `91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq` | Devnet |
 | **$JTX v2** | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` | **Mainnet** |
 
 ## RPC Configuration
@@ -69,5 +69,5 @@ Mainnet: https://mainnet.helius-rpc.com/?api-key=<key>
 ## Related
 
 - [On-Chain Addresses](/docs/getting-started/on-chain-addresses) — Complete address index
-- [CSTB Trust DePIN](/docs/infrastructure/depin) — Validator staking protocol
+- [Proof-of-Attention DePIN](/docs/infrastructure/depin) — Validator staking protocol
 - [Agent Identity](/docs/architecture/agent-identity) — Metaplex registration flow

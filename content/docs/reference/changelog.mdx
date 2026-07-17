@@ -6,6 +6,20 @@ description: Version history and release notes for the OPTX ecosystem.
 
 ---
 
+## 2026-07-17 — v2.2.1: Architecture realignment — kill stale production deploy drift
+
+### Critical
+- **Production incident:** Vercel `joe-docs` had been redeployed from branch `augment-6-docs-local` (`2fd4f94`, 2026-07-15), which diverged from `main` on 2026-05-26 and re-published pre–JTX-v2 architecture. Production is restored to `main` with this release.
+
+### Fixed (canonical truth from the 15 jettoptx repos)
+- **$JTX** — docs assert **v2** `JTXGnx83…Zjoe` (Token-2022, 9 dec); v1 `9XpJiKEY…` labeled legacy/revoked only
+- **DePIN** — CompuStable / CSTB Trust product framing removed; pages now describe **Proof-of-Attention** via [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin) (Anchor crate name `jtx_cstb_trust` kept as historical on-chain ID only)
+- **Xahau / XRPL / Wormhole / LayerZero** — removed from “how it works” as live paths; Solana-native settlement only
+- **Ghost OPTX mint** `4r9WoPsR…` purged from wallet examples → `DSyauRAZ…`
+- MOA registry, bridge pages, API reference, and agent-identity pages aligned to Solana-first / PoA naming
+
+---
+
 ## 2026-07-09 — v2.2.0: Platform ship day — MOJO TestFlight + PoA earn rail + unified identity
 
 ### Platform
