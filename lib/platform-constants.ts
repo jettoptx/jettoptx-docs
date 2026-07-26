@@ -8,6 +8,8 @@ export const CSTB_MINT_DEVNET_LEGACY = "4waAAfTjqf5LNpj2TC5zoeiAgegVwKWoy4WiJgjd
 /** @deprecated Use CSTB_MINT_DEVNET_LEGACY — kept for import compatibility */
 export const CSTB_MINT_DEVNET = CSTB_MINT_DEVNET_LEGACY;
 
+/** Anchor crate/module for the PoA trust program (renamed from jtx_cstb_trust). */
+export const POA_TRUST_CRATE = "jtx_optx_devnet_poa_trustjoe";
 export const DEPIN_PROGRAM_MAINNET = "85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF";
 /** Active PoA trust program on devnet (config PDA initialized). */
 export const POA_TRUST_DEVNET = "79nQsecDspUWxvAMyJvK36EUty4yEoP5ssLvHZuNiugF";

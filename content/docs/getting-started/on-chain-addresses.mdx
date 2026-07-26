@@ -12,13 +12,13 @@ icon: Hash
 | **$JTX v1 (legacy)** | `9XpJiKEYzq5yDo5pJzRfjSRMPL2yPfDQXgiN7uYtBhUj` | mainnet | Revoked mint authority |
 | **$OPTX Utility** | `DSyauRAZwUd2BrTk3P8k2yUxxvcx5X4BBg3Gh3VbeRG3` | devnet | Testing |
 
-> Ghost mints `4r9WoPsR…` / `4r9WxVWB…` are **invalid** — never integrate them. Legacy on-chain `cstb_mint` account fields are not a user-facing CompuStable product.
+> Ghost mints `4r9WoPsR…` / `4r9WxVWB…` are **invalid** — never integrate them. Legacy on-chain `cstb_mint` account fields are unused layout slots — **not** a CompuStable / $CSTB product.
 
 ## Program Addresses
 
 | Program | Address | Network |
 |---------|---------|---------|
-| **PoA DePIN (`jtx_cstb_trust`)** | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` | **mainnet** |
+| **PoA DePIN (`jtx_optx_devnet_poa_trustjoe`)** | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` | **mainnet** |
 | **jett_vault** | `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7` | **mainnet** |
 | PoA trust (devnet) | `79nQsecDspUWxvAMyJvK36EUty4yEoP5ssLvHZuNiugF` | devnet |
 | DePIN (legacy ID) | `91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq` | devnet |
@@ -53,4 +53,5 @@ AstroJOE is registered as a **Metaplex Core Asset** on Solana mainnet.
 ## Source Repos
 
 - Programs + TS SDK: [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin)
+- Third-party audit brief: [docs/AUDIT.md](https://github.com/jettoptx/jettoptx-poa-depin/blob/main/docs/AUDIT.md)
 - Trading UI constants: [jettoptx-jtx-trade](https://github.com/jettoptx/jettoptx-jtx-trade)
