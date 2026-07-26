@@ -45,7 +45,7 @@ Full map: [Ecosystem Repos](https://jettoptx.dev/docs/reference/ecosystem)
 
 | Token | Address |
 |-------|---------|
-| $JTX v2 | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` |
+| $JTX v2 (Jett Optics) | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` |
 | DePIN mainnet | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` |
 
 ## Scripts

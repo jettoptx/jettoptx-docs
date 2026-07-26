@@ -1,5 +1,6 @@
 /** Canonical on-chain and platform URLs — single source for docs. */
 
+/** $JTX v2 "Jett Optics" — Token-2022, 9 dec (on-chain name updated 2026-07-26). */
 export const JTX_MINT_V2 = "JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe";
 export const JTX_MINT_V1_LEGACY = "9XpJiKEYzq5yDo5pJzRfjSRMPL2yPfDQXgiN7uYtBhUj";
 export const OPTX_MINT_DEVNET = "DSyauRAZwUd2BrTk3P8k2yUxxvcx5X4BBg3Gh3VbeRG3";
