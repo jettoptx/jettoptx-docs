@@ -18,10 +18,25 @@ icon: Hash
 
 | Program | Address | Network |
 |---------|---------|---------|
-| **PoA DePIN (`jtx_cstb_trust`)** | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` | **mainnet** |
-| **jett_vault** | `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7` | **mainnet** |
-| PoA trust (devnet) | `79nQsecDspUWxvAMyJvK36EUty4yEoP5ssLvHZuNiugF` | devnet |
-| DePIN (legacy ID) | `91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq` | devnet |
+| **PoA Trust** (crate path `jtx_cstb_trust` — legacy name) | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` | **mainnet** |
+| **Jett Vault** (`jett_vault`) | `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7` | **mainnet** |
+| PoA Trust (devnet) | `79nQsecDspUWxvAMyJvK36EUty4yEoP5ssLvHZuNiugF` | devnet |
+| Jett Vault (devnet) | `ExjFkkX3Zogyb5uBeaff8FdKZbjjVHcCHgcaQiP3qQDS` | devnet |
+
+Source: [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin)
+
+### BPF upgrade authority (mainnet)
+
+| Field | Value |
+|-------|--------|
+| **Authority (both programs)** | `9WssADzftzptNnMHLzPZYAFApUfE7qLYChicH1Wh6YD7` |
+| **Control** | Squads **2-of-3** multisig vault |
+| **PoA transfer** | [tx `4PDYvJX…oks1`](https://explorer.solana.com/tx/4PDYvJX1q1sFzc9SggFj6AR9UXsPyUkBxDwmZoJWi93udcWDE3viD9HGqUECQ97KSS9x58T636tuKTGVBrQWoks1) (2026-07-26) |
+
+```bash
+solana program show 85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF --url mainnet-beta
+# Authority: 9WssADzftzptNnMHLzPZYAFApUfE7qLYChicH1Wh6YD7
+```
 
 ## Token Standards
 
@@ -33,11 +48,11 @@ icon: Hash
 
 | Entity | Address | Purpose |
 |--------|---------|---------|
-| **JOE Agent** | `EFvgELE1Hb4PC5tbPTAe8v1uEDGee8nwYBMCU42bZRGk` | Autonomous agent operations |
+| **NEW_JOE (ops)** | `GtAkS5tYaqi6XQrinuFyqKQkK29SFQsUY9gQ2XpLXLwq` | Live agent / ops wallet (`astro.knots.sol`) |
+| **Treasury (Squads)** | `9WssADzftzptNnMHLzPZYAFApUfE7qLYChicH1Wh6YD7` | Multisig treasury + **program upgrade authority** |
+| **Founder** | `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` | Protocol founder |
 | **Jetson Edge JOE** | `PJM2Y4xqCSqxX1g9AWN5ejy8s6o9SeGfUTbj2cKEycs` | Edge node operations |
-| **JTX-TRUST** | `HkJoo6829ANVxPNCVDURjZazRncWv1ht3WfyDc2GD5oH` | Trust keypair |
-| **Founder** | `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` | Protocol treasury |
-| **Treasury (Squads)** | `9WssADzftzptNnMHLzPZYAFApUfE7qLYChicH1Wh6YD7` | Tri-authority treasury |
+| **EFvg (retired)** | `EFvgELE1Hb4PC5tbPTAe8v1uEDGee8nwYBMCU42bZRGk` | Burned ops key — **do not use** |
 
 ## Metaplex Agent Identity
 
