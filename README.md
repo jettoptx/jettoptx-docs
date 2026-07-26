@@ -58,6 +58,6 @@ npm run build
 
 ## Current Version
 
-**v2.2.1** — Architecture realignment: restore production to `main` after `augment-6-docs-local` drift; JTX v2 + PoA DePIN + Solana-native settlement; CompuStable/Xahau/ghost-mint prose removed.
+**v2.2.2** — PoA trust audit package: docs align to `jtx_optx_devnet_poa_trustjoe` + `jett_vault` in `jettoptx-poa-depin`; CompuStable/$CSTB stubbed (legacy `cstb_mint` only); audit brief linked.
 
 MIT — use it, fork it, ship it.
