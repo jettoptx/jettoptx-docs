@@ -60,4 +60,4 @@ npm run build
 
 **v2.2.2** — PoA trust audit package: docs align to `jtx_optx_devnet_poa_trustjoe` + `jett_vault` in `jettoptx-poa-depin`; CompuStable/$CSTB stubbed (legacy `cstb_mint` only); audit brief linked.
 
-MIT — use it, fork it, ship it.
+APACHE — use it, fork it, ship it.
