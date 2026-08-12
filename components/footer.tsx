@@ -252,7 +252,7 @@ export function SiteFooter() {
         <div className="mt-10 pt-6 border-t border-fd-border">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <p className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50">
-              Last updated: July 26, 2026 &mdash; v2.2.2
+              Last updated: August 12, 2026 &mdash; v2.2.3
             </p>
             <details className="group">
               <summary className="font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/50 hover:text-orange-400 transition-colors cursor-pointer select-none">
@@ -260,6 +260,11 @@ export function SiteFooter() {
               </summary>
               <div className="mt-3 p-4 rounded-lg bg-fd-background/50 border border-fd-border max-w-lg">
                 <ul className="space-y-1.5 font-[family-name:var(--font-geist-mono)] text-xs text-fd-muted-foreground/70">
+                  <li><span className="text-orange-400">v2.2.3</span> &mdash; August 12, 2026
+                    <ul className="ml-3 mt-1 space-y-1">
+                      <li>&#x2022; <strong>Security scrub:</strong> removed founder/ops/personal wallets and Owner Authority from public MDX; tier allowlist described without pubkeys; deleted INTERNAL <code>GROK_BUILD_HANDOFF_PROMPT.md</code>; kept program IDs, mints, Squads treasury</li>
+                    </ul>
+                  </li>
                   <li><span className="text-orange-400">v2.2.2</span> &mdash; July 26, 2026
                     <ul className="ml-3 mt-1 space-y-1">
                       <li>&#x2022; <strong>PoA audit package:</strong> docs align to <code>jtx_optx_devnet_poa_trustjoe</code> + <code>jett_vault</code> in <code>jettoptx-poa-depin</code>; CompuStable/$CSTB stubbed (legacy <code>cstb_mint</code> layout only); audit brief linked</li>

@@ -33,6 +33,6 @@ Example integrator flow in [xChat Native](/docs/jettchat/xchat-native). Session 
 
 Users without a Solana wallet can still gate via Stripe or Tempo CLI on the marketing site. Developers only need to know that subscription status resolves to the same tier codes — see [Subscriptions](/docs/token/subscriptions) for a one-line pointer.
 
-## Founder bypass
+## Configured allowlist
 
-`FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` is auto-tiered to `spaceCowboy`. See [On-Chain Addresses](/docs/getting-started/on-chain-addresses).
+Optional server-side `<configured-allowlist>` entries can force a tier code (e.g. `spaceCowboy`) without embedding addresses in client or public docs. Keep allowlist pubkeys in private deployment config.
