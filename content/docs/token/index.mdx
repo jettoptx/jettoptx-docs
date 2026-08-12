@@ -35,9 +35,9 @@ Wallet-less checkout (Stripe, Tempo CLI) and live tier pricing live on **[astrok
 
 See [Tiers](/docs/token/tiers) for verification APIs and middleware patterns.
 
-## Founder bypass
+## Configured allowlist
 
-The founder wallet `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` is auto-tiered to `spaceCowboy` regardless of balance. See [On-Chain Addresses](/docs/getting-started/on-chain-addresses).
+A server-side `<configured-allowlist>` can grant a fixed tier (e.g. `spaceCowboy`) regardless of balance. Pubkeys are **not** published in public docs — configure them in deployment env / private operator runbook.
 
 ## On-chain program
 

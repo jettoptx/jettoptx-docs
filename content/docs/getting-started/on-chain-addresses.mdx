@@ -32,7 +32,6 @@ Source: [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin) · 
 | **Authority (both programs)** | `9WssADzftzptNnMHLzPZYAFApUfE7qLYChicH1Wh6YD7` |
 | **Control** | Squads **2-of-3** multisig vault |
 | **PoA transfer** | [tx `4PDYvJX…oks1`](https://explorer.solana.com/tx/4PDYvJX1q1sFzc9SggFj6AR9UXsPyUkBxDwmZoJWi93udcWDE3viD9HGqUECQ97KSS9x58T636tuKTGVBrQWoks1) (2026-07-26) |
-| **Planned next** | JOE wallet `GtAkS5tYaqi6XQrinuFyqKQkK29SFQsUY9gQ2XpLXLwq` (`astro.knots.sol`) |
 
 ```bash
 solana program show 85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF --url mainnet-beta
@@ -45,15 +44,13 @@ solana program show 85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF --url mainnet-b
 - **$JTX v2** is the canonical governance + access gate token for [JettChat tiers](/docs/token/tiers)
 - OPTX is **Solana-native**. See [On-Chain Bridge](/docs/on-chain-bridge) for program SDK usage.
 
-## Wallets
+## Public treasury
 
 | Entity | Address | Purpose |
 |--------|---------|---------|
-| **NEW_JOE (ops)** | `GtAkS5tYaqi6XQrinuFyqKQkK29SFQsUY9gQ2XpLXLwq` | Live agent / ops wallet (`astro.knots.sol`) |
 | **Treasury (Squads)** | `9WssADzftzptNnMHLzPZYAFApUfE7qLYChicH1Wh6YD7` | Multisig treasury + **program upgrade authority** |
-| **Founder** | `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` | Protocol founder |
-| **Jetson Edge JOE** | `PJM2Y4xqCSqxX1g9AWN5ejy8s6o9SeGfUTbj2cKEycs` | Edge node operations |
-| **EFvg (retired)** | `EFvgELE1Hb4PC5tbPTAe8v1uEDGee8nwYBMCU42bZRGk` | Burned ops key — **do not use** |
+
+Ops, founder, and edge-node wallets are **not published** in public docs. Integrators should use program IDs and token mints above; internal key material lives in the private operator runbook.
 
 ## Metaplex Agent Identity
 
@@ -63,8 +60,8 @@ AstroJOE is registered as a **Metaplex Core Asset** on Solana mainnet.
 |-------|-------|
 | **Agent Page** | [metaplex.com/agents/9116ea...](https://www.metaplex.com/agents/9116eaELxZheLwJNu73LxQVsuaiugH8e11onkEw4ku9R) |
 | **Agent NFT ID** | `9116eaELxZheLwJNu73LxQVsuaiugH8e11onkEw4ku9R` |
-| **Agent Wallet** | `G8MxbW8LKEsvKvXRneCHpMASR4yDit7CzERW1ZfgPkqD` |
-| **Owner Authority** | `FEUwuvXbbSYTCEhhqgAt2viTsEnromNNDsapoFvyfy3H` |
+
+Owner authority and operational wallets are omitted from public docs.
 
 ## Source Repos
 
