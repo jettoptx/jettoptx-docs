@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./house-type.css";
 import { RootProvider } from "fumadocs-ui/provider/next";
 import { Orbitron, Geist_Mono, Geist, Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
