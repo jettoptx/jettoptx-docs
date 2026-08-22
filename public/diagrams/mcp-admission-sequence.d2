@@ -1,0 +1,47 @@
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 200
+    sketch: true
+  }
+}
+
+shape: sequence_diagram
+
+CLI: "MCP client\nGrok / Cursor / Hermes"
+EDGE: "aaron-public\n(PUBLIC edge)"
+AAR: "AARON origin\n(PRIVATE)"
+POA: "PoA Trust\n85sqs4up…"
+DAE: "AgenC daemon\nloopback"
+USR: "MOJO phone"
+
+CLI -> EDGE: "initialize + Bearer JWT"
+EDGE -> AAR: "introspect token"
+AAR -> AAR: "JWT live + AARON session?"
+
+AAR -> DAE: "no identity" {
+  style.stroke-dash: 3
+}
+DAE -> CLI: "ADMISSION_IDENTITY_REQUIRED\ntools/list = []" {
+  style.stroke-dash: 3
+}
+
+AAR -> POA: "initiate_handshake"
+POA -> AAR: "handshake PDA"
+AAR -> DAE: "bindAdmission(joe:twin, wallet, cid)"
+DAE -> CLI: "tools/list (bound subset)"
+
+CLI -> DAE: "tools/call read"
+DAE -> CLI: "ok — JWT bound"
+
+CLI -> DAE: "tools/call mutate / LIVE"
+DAE -> AAR: "POST /jett/totp/challenge\ntype=approve_action origin=agenc"
+AAR -> USR: "jettmojo://approve?cid=…"
+USR -> AAR: "TOTP + 4-digit gaze"
+AAR -> AAR: "AGT entropy ≥ 750?"
+AAR -> POA: "submit_gaze + finalize_attestation"
+POA -> AAR: "attestation PDA"
+AAR -> DAE: "verified + approval_id"
+DAE -> CLI: "execute under sandbox + audit"
+
+# Luke 18:31

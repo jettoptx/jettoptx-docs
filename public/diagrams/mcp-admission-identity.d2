@@ -1,0 +1,197 @@
+vars: {
+  d2-config: {
+    layout-engine: elk
+    theme-id: 200
+    sketch: true
+  }
+}
+
+direction: right
+
+classes: {
+  client: {
+    style: {
+      fill: "#0a1028"
+      stroke: "#60a5fa"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#93c5fd"
+    }
+  }
+  public: {
+    style: {
+      fill: "#1c1007"
+      stroke: "#f97316"
+      stroke-width: 2
+      border-radius: 10
+      font-color: "#fb923c"
+      shadow: true
+    }
+  }
+  private: {
+    style: {
+      fill: "#1a0a0a"
+      stroke: "#f43f5e"
+      stroke-width: 2
+      border-radius: 10
+      font-color: "#fb7185"
+    }
+  }
+  chain: {
+    shape: hexagon
+    style: {
+      fill: "#0a1a0a"
+      stroke: "#22c55e"
+      stroke-width: 2
+      font-color: "#4ade80"
+    }
+  }
+  db: {
+    shape: cylinder
+    style: {
+      fill: "#1a1508"
+      stroke: "#eab308"
+      stroke-width: 2
+      font-color: "#fbbf24"
+    }
+  }
+  gate: {
+    shape: diamond
+    style: {
+      fill: "#1a1a1a"
+      stroke: "#f97316"
+      stroke-width: 2
+      font-color: "#fdba74"
+    }
+  }
+  phone: {
+    style: {
+      fill: "#0a141a"
+      stroke: "#06b6d4"
+      stroke-width: 2
+      border-radius: 8
+      font-color: "#22d3ee"
+    }
+  }
+  legacy: {
+    style: {
+      fill: "#1a1a1a"
+      stroke: "#888"
+      stroke-width: 1
+      stroke-dash: 4
+      border-radius: 8
+      font-color: "#aaa"
+    }
+  }
+}
+
+title: "MCP admission identity — Jett Auth + AARON + PoA (not a token-hold gate)" {
+  near: top-center
+  shape: text
+  style: {
+    font-size: 26
+    font-color: "#fb923c"
+    bold: true
+  }
+}
+
+clients: "MCP clients" {
+  class: client
+  grok: "Grok Build / Hermes" { class: client }
+  cursor: "Cursor / VS Code" { class: client }
+  gateway: "agentgateway (optional edge)" { class: client }
+}
+
+public_edge: "PUBLIC  jettoptx-*" {
+  class: public
+  style.fill: "#140c06"
+  aaron_public: "jettoptx-aaron-public\naaron.jettoptics.ai\nmcp.jettoptics.ai" { class: public }
+  introspect: "token introspect\nidentity · wallet · attestation" { class: public }
+  docs: "jettoptx-docs\nMCP admission spec" { class: client }
+  xwealth: "jettoptx-xwealth\napprove_action mint" { class: public }
+  aaron_public -> introspect: "Bearer / OAuth"
+}
+
+phone: "MOJO SEND-02" {
+  class: phone
+  qr: "jettmojo://approve?cid=..." { class: phone }
+  gaze: "TOTP then 4-digit gaze\nAGT COG / EMO / ENV" { class: phone }
+  qr -> gaze
+}
+
+private_origin: "PRIVATE  joe-* / AARON origin" {
+  class: private
+  style.fill: "#140808"
+  jett_auth: "Jett Auth JWT\nX OAuth + signMessage" { class: private }
+  aaron: "AARON Router\n/session /gaze /handshake\n/jett/totp/challenge" { class: private }
+  stdb: "SpacetimeDB jettchat" { class: db }
+  billing: "Wealth-08 billing (optional)\nStripe / Space Cowboy NFT\nJTX hold = legacy" { class: legacy }
+  jett_auth -> aaron: "session claims"
+  aaron -> stdb: "operational identity"
+}
+
+loopback: "AgenC daemon (loopback)" {
+  class: private
+  bind: "session.mcp.bindAdmission" { class: private }
+  fail: "ADMISSION_IDENTITY_REQUIRED\ntools/list empty" { class: gate }
+  tools: "tools/list + tools/call\npermission · sandbox · audit" { class: private }
+  bind -> fail: "unbound"
+  bind -> tools: "PoA identity bound"
+}
+
+chain: "ON-CHAIN  jettoptx-poa-depin" {
+  class: chain
+  style.fill: "#061206"
+  handshake: "initiate_handshake" { class: chain }
+  agt: "submit_gaze_attestation\nentropy floor 750" { class: chain }
+  finalize: "finalize_attestation\nPDA = admission ticket" { class: chain }
+  vault: "Jett Vault\nescrow / stake (not MCP entry)" { class: chain }
+  handshake -> agt
+  agt -> finalize
+  finalize -> vault: "optional CPI"
+}
+
+clients -> public_edge.aaron_public: "MCP HTTP\nAuthorization: Bearer" {
+  style.stroke: "#60a5fa"
+  style.animated: true
+}
+
+public_edge.introspect -> private_origin.aaron: "proxy\nno secrets in git" {
+  style.stroke: "#f97316"
+}
+
+private_origin.aaron -> loopback.bind: "joe twinId + wallet + handshake PDA" {
+  style.stroke: "#f43f5e"
+  style.animated: true
+}
+
+private_origin.aaron -> chain.handshake: "opaque AGT hash" {
+  style.stroke: "#22c55e"
+}
+
+phone.gaze -> private_origin.aaron: "approve-complete\nstatus = verified" {
+  style.stroke: "#06b6d4"
+  style.animated: true
+}
+
+public_edge.xwealth -> phone.qr: "mint QR" {
+  style.stroke: "#f97316"
+  style.stroke-dash: 3
+}
+
+loopback.tools -> phone.qr: "mutating / LIVE tool" {
+  style.stroke: "#06b6d4"
+  style.stroke-dash: 3
+}
+
+note: "Admission ticket = Jett Auth session + PoA finalize PDA.\\nJTX token-hold is legacy billing, not this kernel.\\nEnv / MCP_API_KEY is never execution auth. Daemon 7766 stays loopback." {
+  near: bottom-center
+  shape: text
+  style: {
+    font-size: 14
+    font-color: "#888"
+    italic: true
+  }
+}
+
+# Luke 18:31

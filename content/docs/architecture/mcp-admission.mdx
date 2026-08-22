@@ -1,0 +1,55 @@
+---
+icon: Shield
+title: MCP Admission Identity
+description: Wireframe for AgenC ADMISSION_IDENTITY_REQUIRED — Jett Auth, AARON, PoA Trust, and MOJO gaze as the native admission kernel.
+---
+
+import { D2Diagram } from "@/components/d2-diagram";
+
+AgenC inbound MCP stays fail-closed (`ADMISSION_IDENTITY_REQUIRED`) until the session is bound to a native OPTX identity. Environment keys and a static `MCP_API_KEY` are not that identity.
+
+**JTX token-hold is not the admission ticket.** Holding ≥1 JTX is a legacy Wealth-08 billing path. MCP entry is Jett Auth (X + `signMessage`) plus an AARON session, proven on-chain by PoA `finalize_attestation`. Stripe / Space Cowboy NFT remain optional billing, not this kernel.
+
+## System wireframe
+
+<D2Diagram
+  src="/diagrams/mcp-admission-identity.svg"
+  alt="MCP admission identity — clients through public AARON edge, private origin, AgenC loopback bind, PoA Trust, MOJO gaze"
+  caption="MCP admission identity — OPTX Auth + AARON + PoA"
+/>
+
+| Color | Plane | What lives there |
+|---|---|---|
+| Blue | MCP clients | Grok Build, Hermes, Cursor, optional agentgateway |
+| Orange | Public `jettoptx-*` | `jettoptx-aaron-public`, docs, xwealth QR mint |
+| Red | Private origin | Jett Auth JWT, AARON Router, AgenC daemon bind |
+| Yellow | Ops DB | SpacetimeDB `jettchat` |
+| Green | On-chain | PoA Trust `85sqs4up…` (PDA ticket) + Jett Vault escrow |
+| Gray dashed | Legacy billing | JTX hold / Stripe / Space Cowboy NFT — Wealth-08, not MCP bind |
+| Cyan | Phone | MOJO SEND-02 `jettmojo://approve` |
+
+## Sequence — bind, then tools
+
+<D2Diagram
+  src="/diagrams/mcp-admission-sequence.svg"
+  alt="Sequence: Bearer introspect, ADMISSION_IDENTITY_REQUIRED if unbound, handshake, bindAdmission, gaze for mutating tools"
+  caption="Fail closed until bindAdmission — gaze only for mutate / LIVE"
+/>
+
+## Proof ladder
+
+| MCP class | Required proof | AARON type |
+|---|---|---|
+| Unbound session | none → `tools/list` empty | — |
+| Read (resources / prompts) | Jett Auth JWT + live AARON session | `login` |
+| Mutate (files / shell) | `approve_action` verified or PoA `finalize_attestation` (entropy ≥ 750) | `approve_action` |
+| LIVE spend / policy | MOJO QR, wait `verified` | `approve_action` |
+| Solana tx | unsigned tx on phone | `sign_tx` |
+
+## Public vs private
+
+- **Public:** [jettoptx-aaron-public](https://github.com/jettoptx/jettoptx-aaron-public) (edge + introspect), [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin) (chain), [jettoptx-docs](https://github.com/jettoptx/jettoptx-docs) (this page), [jettoptx-xwealth](https://github.com/jettoptx/jettoptx-xwealth) (QR mint).
+- **Private:** Jett Auth JWT signing, AARON origin verify, daemon `bindAdmission`.
+- Daemon port `7766` stays loopback. Agentgateway may terminate JWT at the cluster edge; it does not replace admission.
+
+Related: [Gaze-Gated Policy](/docs/architecture/gaze-policy) · [Attestation Bridge](/docs/architecture/bridge-flow) · [JETT Auth](/docs/authentication/jett-auth)
