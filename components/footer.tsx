@@ -16,7 +16,7 @@ import {
 } from "@/lib/house-links";
 
 const titleClass =
-  "mb-4 font-[family-name:var(--font-orbitron)] text-sm font-semibold tracking-widest uppercase text-fd-foreground";
+  "mb-4 font-[family-name:var(--font-orbitron)] text-sm tracking-[0.08em] uppercase text-fd-foreground";
 const ghClass =
   "group inline-flex items-center gap-2.5 text-[11px] font-mono uppercase tracking-widest text-fd-muted-foreground transition-colors hover:text-orange-400";
 
@@ -34,7 +34,7 @@ export function SiteFooter() {
                 height={56}
                 className="h-14 w-14 rounded-md object-contain"
               />
-              <span className="font-[family-name:var(--font-orbitron)] text-xl font-bold tracking-wider">
+              <span className="font-[family-name:var(--font-orbitron)] text-lg tracking-[0.08em]">
                 <span style={{ color: "var(--color-orange-500)" }}>OPTX</span>
                 {" "}Docs
               </span>
@@ -75,7 +75,7 @@ export function SiteFooter() {
                   <span className="font-mono text-xs text-fd-muted-foreground group-hover:text-orange-400">
                     {item.num}
                   </span>
-                  <span className="font-[family-name:var(--font-orbitron)] text-sm tracking-wider text-fd-muted-foreground group-hover:text-fd-foreground">
+                  <span className="font-[family-name:var(--font-orbitron)] text-sm tracking-[0.08em] text-fd-muted-foreground group-hover:text-fd-foreground">
                     {item.label}
                   </span>
                 </a>
@@ -128,7 +128,7 @@ export function SiteFooter() {
               rel="noopener noreferrer"
               className="group flex items-center justify-between rounded-md border border-fd-border px-5 py-4 text-sm font-semibold text-fd-foreground hover:border-orange-500/60"
             >
-              <span className="font-[family-name:var(--font-orbitron)] tracking-wider">
+              <span className="font-[family-name:var(--font-orbitron)] tracking-[0.08em]">
                 OPEN JTX.CHAT
               </span>
               <ArrowUpRight size={16} />
