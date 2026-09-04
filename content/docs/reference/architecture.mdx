@@ -1,0 +1,38 @@
+---
+title: Architecture appendix
+description: Folded system architecture - edge to chain, tasks, topology. Operator deep dive.
+icon: Workflow
+---
+
+This appendix folds the former architecture cluster into one reference page. Start/Build do not teach rails here.
+
+## End-to-end shape
+
+OPTX runs from device and edge into optional Solana attestation:
+
+1. Device gaze capture and local processing
+2. Opaque proof hashes to AARON for verify
+3. Optional on-chain bridge / DePIN programs
+
+Gaze vectors are processed on-device; only opaque proof hashes leave the device for attestation.
+
+## Topics (former separate pages)
+
+| Topic | Former path |
+|-------|-------------|
+| Overview | `/docs/getting-started/architecture`, `/docs/architecture` |
+| AARON router arch | `/docs/protocol/architecture` |
+| Swarm / DAG | `/docs/architecture/swarm-dag` |
+| Task lifecycle / states | `/docs/architecture/task-lifecycle`, `task-states` |
+| Gaze policy | `/docs/architecture/gaze-policy` |
+| Bridge flow | `/docs/architecture/bridge-flow` |
+| Agent identity | `/docs/architecture/agent-identity` |
+| Topology | `/docs/architecture/topology` |
+
+Deep diagrams may remain on redirected legacy URLs during migration; prefer this appendix from Reference.
+
+## Related
+
+- [AARON how it works](/docs/protocol/how-it-works)
+- [On-chain bridge](/docs/on-chain-bridge)
+- [On-chain addresses](/docs/getting-started/on-chain-addresses)

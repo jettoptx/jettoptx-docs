@@ -1,13 +1,5 @@
 {
-  "title": "JOE — Jett Optics Engine",
+  "title": "Hedgehog",
   "icon": "BrainCircuit",
-  "pages": [
-    "index",
-    "api",
-    "hermes-features",
-    "hedgehog",
-    "memory",
-    "orchestration",
-    "skills"
-  ]
+  "pages": ["hedgehog", "index"]
 }

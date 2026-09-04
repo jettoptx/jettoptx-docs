@@ -1,35 +1,37 @@
 ---
-title: What is OPTX?
-description: JettOptx (OPTX) powers JettChat in two modes — xChat Native and Phantom Mode. Gaze biometrics, JTX gating, and Solana-native attestation.
+title: What we build
+description: We Build Augments - digital extensions of yourself. OPTX Auth is the who.
 icon: BookOpen
 ---
 
-**JettOptx (OPTX)** powers **JettChat**, which now operates in two modes:
+## We Build Augments
 
-- **xChat Native** — original experience with X/Twitter OAuth and faster onboarding.
-- **Phantom Mode** — maximum-privacy experience powered by **Secure-Legion** (Tor + post-quantum crypto + hardware biometrics + Jett Hub).
+> An Augment is a digital extension of yourself. Not a skill. Not an application.
 
-Both modes share the same core: **JETT Auth** with the **AGT** Gaze Triad (COG/EMO/ENV), **Jett Hub** visual SSO (primary in Phantom Mode), **JTX** token gating, and end-to-end encrypted messaging with gaze-cursor typing.
+That is the product. Skills help an Augment. Apps are surfaces. The buyer word is **Augment**.
 
-**Phantom Mode adds:** triple Tor `.onion` hidden services, post-quantum hybrid encryption, StrongBox/TEE-backed keys, Ping-Pong biometric wake protocol, and a duress PIN that triggers cryptographic wipe. Implementation: [Secure-Legion/android](https://github.com/Secure-Legion/android).
+## OPTX Auth - It's you
 
-## Core Primitives
+Auth should feel like recognition, not a lecture:
 
-| Primitive | Description | Surface |
-|-----------|-------------|---------|
-| **Gaze Verification** | AGT biometric auth with 3-tensor classification ([COG/EMO/ENV](/docs/authentication/gaze)) | Both modes |
-| **JETT Auth** | Unified auth supporting [xChat Native + Phantom Mode](/docs/authentication/jett-auth) | Both modes |
-| **JTX Gating** | [Tier codes](/docs/token/tiers) on Solana mainnet (≥1 JTX for entry; higher balances for upgrades) | Both modes |
-| **PoA Attestation** | On-chain Proof-of-Attention with DePIN reward distribution | Both modes |
+- **It's you**
+- **Email, X, or wallet**
 
-## Naming Hierarchy
+Integrators use [`@jettoptx/auth`](/docs/sdk/auth). Deep protocol pages may say JETT Auth - Start and Build lead with **OPTX Auth**.
 
-| Name | Full Form | Role |
-|------|-----------|------|
-| **JETT Auth** | Jett Encryption Temporal Template Auth | Biometric gaze signature — the identity layer |
-| **OPT&#x1D54F;** | Optical Program Technologic &#x1D54F;tension | Secure bridge from JETT Auth to on-chain proofs |
-| **AARON** | Asynchronous Audit RAG Optical Node | On-chain protocol + private edge router |
-| **OPTX** | Public Blockchain & Token Network | Solana mainnet token and protocol |
-| **AGT** | Agentive Gaze Tensor | Biometric tensor system (COG/EMO/ENV) powering JETT Auth |
-| **HEDGEHOG** | Handshake Encrypted Delegated Gesture Envelope Handler Optical Gateway | Multi-API AI gateway on validator nodes |
-| **JOE** | jOSH Operating Environment | Autonomous AI agent on the validator network |
+Gaze vectors are processed on-device; only opaque proof hashes leave the device for attestation.
+
+## What you integrate
+
+| Piece | Job |
+|-------|-----|
+| **OPTX Auth** | Who you are - Email, X, or wallet |
+| **SDK** | `@jettoptx/auth`, `@jettoptx/chat`, Augment registry |
+| **AARON** | Prove / attest when you need it |
+| **$JTX** | Mainnet access - not the porch story |
+
+## Related
+
+- [Quickstart](/docs/getting-started/access)
+- [Doors](/docs/getting-started/doors)
+- [SDK overview](/docs/sdk)

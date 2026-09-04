@@ -1,58 +1,29 @@
 ---
-title: Platform Access
-description: Acquire JTX and enter DOJO — waitlist, staking gate, and onboarding path via astroknots.space.
-icon: DoorOpen
+title: Quickstart
+description: Install the SDK and OPTX Auth. First verify next.
+icon: Zap
 ---
 
-Before integrating with OPTX APIs, most developers need **platform access** — holding ≥1 **$JTX v2** on Solana mainnet unlocks [jettoptx.chat](https://jettoptx.chat) (DOJO).
+## 1. Install the SDK
 
-Source: [jettoptx-saas](https://github.com/jettoptx/jettoptx-saas) (astroknots.space marketing + access gate)
+Install packages from the jettoptx-sdk monorepo: auth and chat.
 
-## Access Paths
+## 2. OPTX Auth - Its you
 
-| Path | How | Result |
-|------|-----|--------|
-| **Buy JTX** | Jupiter / Meteora on [astroknots.space/stake](https://astroknots.space/stake) or [jtx.astroknots.space](https://jtx.astroknots.space) | Hold ≥1 JTX v2 |
-| **Enter DOJO** | Connect wallet at [astroknots.space/enter](https://astroknots.space/enter) | Redirect to jettoptx.chat |
-| **Wallet-less** | Checkout on [astroknots.space/stake](https://astroknots.space/stake) | Subscription maps to tier codes — see [Access Tiers](/docs/token/tiers) |
-| **Higher tiers** | JTX balance or NFT | `mojo` / `dojo` / `spaceCowboy` thresholds in [Access Tiers](/docs/token/tiers) |
+Lead with recognition: Email, X, or wallet. See the Auth package under Build (SDK).
 
-## Canonical JTX v2 Mint
+## 3. First verify
 
-```
-JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe
-```
+Use AARON client integration when you need attestation.
 
-Token-2022, 9 decimals, mainnet. Legacy v1 (`9XpJiKEY…`) has revoked mint authority — see [Trading & Mint](/docs/token/trading) for migration.
+Gaze vectors are processed on-device; only opaque proof hashes leave the device for attestation.
 
-## Developer Flow
+## 4. Optional - mainnet access
 
-```mermaid
-flowchart LR
-  BuyJTX[Buy JTX v2] --> Enter[astroknots.space/enter]
-  Enter --> DOJO[jettoptx.chat DOJO]
-  DOJO --> SDK[Install jettoptx-sdk]
-  SDK --> AARON[AARON session/verify]
-  AARON --> Chain[Optional on-chain attestation]
-```
+JTX unlocks mainnet surfaces when ready. Mints and program IDs stay in Reference - not on this porch.
 
-1. Acquire JTX v2 on mainnet
-2. Pass the `/enter` balance gate (≥1 JTX)
-3. Use DOJO at jettoptx.chat for JOE API tokens (DOJO tier)
-4. Install [SDK packages](/docs/sdk) for custom integrations
-5. Call [AARON](/docs/protocol/client-integration) for gaze attestation
+## Next
 
-## Waitlist API
-
-astroknots.space exposes a public waitlist endpoint:
-
-```
-POST /api/waitlist
-POST /api/jtx-check  — lightweight JTX balance verifier
-```
-
-## Related
-
-- [Token Overview](/docs/token) — governance and DePIN economics
-- [JETT Auth](/docs/authentication/jett-auth) — auth after access
-- [Edge Gateway](/docs/infrastructure/edge-gateway) — gated MCP for DOJO subscribers
+- Augment registry
+- Doors
+- What we build

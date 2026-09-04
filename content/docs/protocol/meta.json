@@ -1,11 +1,5 @@
 {
-  "title": "AARON Protocol",
+  "title": "Prove",
   "icon": "Cpu",
-  "pages": [
-    "index",
-    "how-it-works",
-    "biometric-proof",
-    "client-integration",
-    "architecture"
-  ]
+  "pages": ["index", "how-it-works", "client-integration", "biometric-proof"]
 }

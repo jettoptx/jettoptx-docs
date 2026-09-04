@@ -1,46 +1,39 @@
 ---
 icon: BookOpen
 title: OPTX Docs
-description: Developer documentation for the Jett Optics platform — SDK, AARON protocol, on-chain programs, and DOJO integration.
+description: We Build Augments — digital extensions of yourself. OPTX Auth, SDK, and AARON for builders.
 ---
 
-## Welcome to OPTX
+## We Build Augments
 
-OPTX is a gaze-authenticated platform on Solana. This documentation teaches developers how to integrate with the Jett Optics ecosystem — from acquiring JTX access to anchoring attestations on-chain.
+An **Augment** is a digital extension of yourself. Not a skill. Not an application.
 
-### Developer Quickstart
+**OPTX Auth** is the who: *It's you* — Email, X, or wallet. Package [`@jettoptx/auth`](/docs/sdk/auth) for integrators.
 
-1. [Platform Access](/docs/getting-started/access) — acquire JTX and enter DOJO
-2. [SDK Reference](/docs/sdk) — install `@jettoptx/auth`, `@jettoptx/chat`, augment registry
-3. [AARON Client Integration](/docs/protocol/client-integration) — create session, verify gaze proof
-4. [On-Chain Bridge](/docs/on-chain-bridge) — optional Solana attestation via poa-depin SDK
+**$JTX** is mainnet access when you need the live network. Deep operator addresses live under [Reference](/docs/reference) — not here.
 
-### Quick Links
+Gaze vectors are processed on-device; only opaque proof hashes leave the device for attestation.
 
-| Section | Description |
-|---------|-------------|
-| [What is OPTX?](/docs/getting-started/what-is-optx) | Core concepts and naming hierarchy |
-| [SDK Overview](/docs/sdk) | Canonical jettoptx-sdk monorepo |
-| [Gaze Verification](/docs/authentication/gaze) | AGT biometric auth (COG/EMO/ENV) |
-| [AARON Protocol](/docs/protocol) | Gaze attestation router |
-| [Ecosystem Repos](/docs/reference/ecosystem) | All 16 repos mapped to docs |
-| [API Reference](/docs/reference/api) | REST and WebSocket endpoints |
+### Start in three steps
 
-### AGT Tensor System
+1. [What we build](/docs/getting-started/what-is-optx) — Augment, Auth, product truth
+2. [Quickstart](/docs/getting-started/access) — install SDK, Auth "It's you", first verify
+3. [Augment registry](/docs/sdk/augment-registry) — install + one spotlight
 
-Every doc page is classified by **Agentive Gaze Tensor (AGT)**:
+### Build · Prove · Surfaces
 
-- <span style={{color: "#eab308"}}>**COG**</span> — Cognitive. Protocol specs, APIs, SDK reference.
-- <span style={{color: "#f43f5e"}}>**EMO**</span> — Emotional. Identity, auth, user-facing flows.
-- <span style={{color: "#60a5fa"}}>**ENV**</span> — Environmental. Infrastructure, addresses, topology.
+| Door | Go |
+|------|----|
+| [SDK](/docs/sdk) | `@jettoptx/auth`, `@jettoptx/chat`, Augment registry |
+| [AARON](/docs/protocol) | How attestation works + client integration |
+| [Doors](/docs/getting-started/doors) | Human · agent · builder surfaces |
 
-Use **Augment Space** in the sidebar to explore the interactive MOA knowledge graph.
+Optional crew map: **Augment Space** in the sidebar opens the [Map of Augments (docs)](/docs/dojo/moa) — a docs knowledge graph, not a product Augment.
 
 ---
 
-### Open Source
+### Open source
 
-The **AARON Router** — gaze-verification edge service for on-chain biometric attestation — is open source.
+The **AARON Router** — gaze-verification edge for on-chain attestation — is open source.
 
 [**`jettoptx/jettoptx-aaron-router`**](https://github.com/jettoptx/jettoptx-aaron-router)
-&middot; FastAPI &middot; Proof-of-Insight &middot; AGT pipeline &middot; Solana DePIN attestation

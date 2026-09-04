@@ -1,14 +1,5 @@
 {
-  "title": "Architecture Flows",
+  "title": "Architecture (archived)",
   "icon": "Workflow",
-  "pages": [
-    "index",
-    "agent-identity",
-    "bridge-flow",
-    "gaze-policy",
-    "swarm-dag",
-    "task-lifecycle",
-    "task-states",
-    "topology"
-  ]
+  "pages": []
 }
