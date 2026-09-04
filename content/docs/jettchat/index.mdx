@@ -1,32 +1,29 @@
 ---
 title: JettChat
-description: Encrypted AI chat with two modes — xChat Native (X OAuth + Solana) and Phantom Mode (Tor + post-quantum, hardware-backed).
+description: Encrypted AI chat surface - xChat Native and Phantom Mode on one page.
 icon: MessageCircle
 ---
 
-**JettChat** is the OPTX-native messaging client. It ships in two modes, each suited to a different threat model:
+**JettChat** is a chat surface on OPTX - not the product Augment itself.
 
-- **[xChat Native](/docs/jettchat/xchat-native)** — sign in with X, pass the JTX gate (≥1 JTX v2), get end-to-end encrypted chat with gaze cursor typing. Faster onboarding for public networks.
-- **[Phantom Mode](/docs/jettchat/phantom-mode)** — Secure-Legion stack: triple Tor `.onion`, post-quantum hybrid encryption, hardware-backed keys (StrongBox/TEE), Ping-Pong biometric wake, duress PIN with cryptographic wipe.
+## Two modes
 
-Both modes share the same **[E2EE messaging primitives](/docs/jettchat/messaging)**: gaze cursor typing, offline-first delivery, group chats, self-destruct messages.
-
-## Mode comparison
-
-|  | xChat Native | Phantom Mode |
+| | xChat Native | Phantom Mode |
 |---|---|---|
 | **Login** | Sign in with X (OAuth 2.0 PKCE) | Jett Hub visual SSO + JTX gate |
 | **Transport** | HTTPS | Triple Tor `.onion` |
 | **Crypto** | TLS + Ed25519 JWT | Post-quantum hybrid (PQC) |
 | **Keys** | Software-managed | StrongBox / Secure Enclave / TEE |
-| **Wake** | Standard session | Ping-Pong biometric + duress PIN with wipe |
 | **Best for** | Faster onboarding | Maximum metadata resistance |
-| **Repo** | Private | [`Secure-Legion/android`](https://github.com/Secure-Legion/android) |
 
-## Access flow (JETT Hub)
+Both modes share E2EE messaging: gaze cursor typing, offline-first delivery, groups, self-destruct.
 
-After **Sign in with X**, middleware enforces the JTX gate (≥1 JTX v2 on mainnet). Wallet-less checkout is available on [astroknots.space/stake](https://astroknots.space/stake).
+## Access
 
-See [JETT Auth](/docs/authentication/jett-auth) for the auth surface and [Access Tiers](/docs/token/tiers) for tier codes integrators should enforce.
+After sign-in, middleware may enforce a **JTX** mainnet gate when you need live access. Tier codes for integrators live under [Reference / Token](/docs/token/tiers) - not as a porch marketing grid.
 
-Product implementation: [jettoptx-jettchat-app](https://github.com/jettoptx/jettoptx-jettchat-app) (proprietary — integration patterns only in these docs).
+Auth feel on Start: **OPTX Auth** - Its you / Email, X, or wallet. Deep pages may say JETT Auth - see [authentication](/docs/authentication/jett-auth).
+
+SDK: [`@jettoptx/chat`](/docs/sdk/chat) and [`@jettoptx/auth`](/docs/sdk/auth).
+
+Product implementation: jettoptx-jettchat-app (proprietary - integration patterns only here).

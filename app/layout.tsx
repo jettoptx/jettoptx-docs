@@ -1,29 +1,20 @@
 import "./globals.css";
 import "./house-type.css";
 import { RootProvider } from "fumadocs-ui/provider/next";
-import { Orbitron, Geist_Mono, Geist, Space_Grotesk } from "next/font/google";
+import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
 
-const orbitron = Orbitron({
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
-  variable: "--font-orbitron",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm-plex-sans",
 });
 
-const geistMono = Geist_Mono({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
-});
-
-const geistSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-geist-sans",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  variable: "--font-space-grotesk",
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-ibm-plex-mono",
 });
 
 export const metadata: Metadata = {
@@ -32,18 +23,16 @@ export const metadata: Metadata = {
     template: "%s | OPTX Docs",
   },
   description:
-    "Developer documentation for the OPTX spatial encryption platform — gaze biometrics, DePIN attestation, agent wallets, and cross-chain bridging.",
+    "We build Augments — digital extensions of yourself. OPTX Auth, SDK, AARON attestation, and surfaces for builders.",
   metadataBase: new URL("https://jettoptx.dev"),
   keywords: [
     "OPTX docs",
-    "spatial encryption",
-    "DePIN",
+    "Augment",
+    "OPTX Auth",
     "gaze biometrics",
-    "AGT tensors",
     "AARON protocol",
-    "Solana DePIN",
-    "agent wallet",
-    "ERC-8004",
+    "JTX",
+    "jettoptx SDK",
   ],
   openGraph: {
     type: "website",
@@ -52,7 +41,7 @@ export const metadata: Metadata = {
     siteName: "OPTX Docs",
     title: "OPTX Documentation",
     description:
-      "Build with gaze-authenticated biometric verification, on-chain DePIN attestation, and cross-chain bridging.",
+      "We build Augments. OPTX Auth feels like you — Email, X, or wallet. Integrate with the SDK and prove with AARON.",
   },
   twitter: {
     card: "summary",
@@ -78,10 +67,10 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={`${orbitron.variable} ${geistMono.variable} ${geistSans.variable} ${spaceGrotesk.variable}`}
+      className={`${ibmPlexSans.variable} ${ibmPlexMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-[family-name:var(--font-geist-mono)] antialiased">
+      <body className="font-[family-name:var(--font-ibm-plex-sans)] antialiased house-body">
         <RootProvider
           theme={{
             defaultTheme: "dark",
@@ -89,13 +78,12 @@ export default function Layout({ children }: { children: ReactNode }) {
           }}
           search={{
             links: [
-              ["Getting Started", "/docs/getting-started/what-is-optx"],
+              ["What we build", "/docs/getting-started/what-is-optx"],
+              ["Quickstart", "/docs/getting-started/access"],
+              ["Doors", "/docs/getting-started/doors"],
               ["SDK", "/docs/sdk"],
-              ["Gaze Auth", "/docs/authentication/gaze"],
-              ["AARON Protocol", "/docs/protocol"],
-              ["Platform Access", "/docs/getting-started/access"],
-              ["DOJO IDE", "/docs/dojo"],
-              ["DePIN", "/docs/infrastructure/depin"],
+              ["OPTX Auth", "/docs/sdk/auth"],
+              ["AARON", "/docs/protocol"],
               ["API Reference", "/docs/reference/api"],
             ],
             options: {

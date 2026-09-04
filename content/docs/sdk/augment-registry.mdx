@@ -1,15 +1,15 @@
 ---
 title: Augment Registry
-description: JETT Augments 00–09 — runtime agent lobes, V/S/W hotkeys, and AGT topology.
+description: Runtime JETT Augments 00-09 — install and names/jobs. Distinct from Map of Augments (docs).
 icon: Grid3x3
 ---
 
-The `@jettoptx/jett-augment-registry` package defines the **runtime augment topology** for the JOE Agentic Operating System — distinct from the **docs MOA graph** on this site.
+**Product Augment** = digital extension of yourself. This page documents **runtime JETT Augments 00-09** (agent lobes in the SDK) — not the buyer product word, and not the docs graph.
 
 | System | What it maps |
 |--------|--------------|
-| **Docs MOA** | Documentation pages (this site's knowledge graph) |
-| **JETT Augments 00–09** | Runtime agent lobes in DOJO, MOJO, and HEDGEHOG MCP |
+| **Map of Augments (docs)** / Augment Space | Documentation knowledge graph on this site |
+| **JETT Augments 00-09** | Runtime agent lobes in DOJO, MOJO, and HEDGEHOG MCP |
 
 Canonical source: [`augment-topology.json`](https://github.com/jettoptx/jettoptx-sdk/blob/main/packages/jett-augment-registry/augment-topology.json) in [jettoptx-sdk/packages/jett-augment-registry](https://github.com/jettoptx/jettoptx-sdk/tree/main/packages/jett-augment-registry).
 
@@ -36,30 +36,22 @@ const mcpStatus = augmentStatusPayload();
 
 Folder names in the SDK repo follow `1-Vision`, `2-Send`, … `9-Vector` (digit **00** = `0-Core`).
 
-| Digit | Folder | Name | AGT | HEAT | Role |
-|-------|--------|------|-----|------|------|
-| 00 | `0-Core` | Core | — | — | Session homeostasis, command routing, settings hub (south pole) |
-| 01 | `1-Vision` | Vision | COG | V | Strategic foresight, gaze-model control, ARKit pipeline |
-| 02 | `2-Send` | Send | EMO | S | Outbound messaging — JettChat E2E, X broadcast |
-| 03 | `3-Warp` | Warp | ENV | W | Meta-navigator — MOA routing, mesh capability discovery |
-| 04 | `4-Shield` | Shield | COG | S | Zero-trust security — JTX gate, Phantom Mode, gaze verify |
-| 05 | `5-Vibe` | Vibe | EMO | V | Personality and creativity — AstroJOE soul, social hub |
-| 06 | `6-Search` | Search | ENV | S | Discovery — diagnostics, MCP search, docs RAG |
-| 07 | `7-Weights` | Weights | COG | W | Model routing and AGT calibration — Grok gateway |
-| 08 | `8-Wealth` | Wealth | EMO | W | Economic intelligence — JTX, Stripe, DePIN wallets |
-| 09 | `9-Vector` | Vector | ENV | V | Swarm orchestration — Hermes/AgenC, compute dispatch |
+| Digit | Folder | Name | Job |
+|-------|--------|------|-----|
+| 00 | `0-Core` | Core | Session routing and settings hub |
+| 01 | `1-Vision` | Vision | Strategic foresight and gaze pipeline |
+| 02 | `2-Send` | Send | Outbound messaging |
+| 03 | `3-Warp` | Warp | Navigation and capability discovery |
+| 04 | `4-Shield` | Shield | Security and verify gates |
+| 05 | `5-Vibe` | Vibe | Personality and social hub |
+| 06 | `6-Search` | Search | Discovery and docs RAG |
+| 07 | `7-Weights` | Weights | Model routing |
+| 08 | `8-Wealth` | Wealth | Economic intelligence |
+| 09 | `9-Vector` | Vector | Swarm orchestration |
 
-Digit **00 Core** has no HEAT hotkey.
+### Spotlight: Vision (01)
 
-## HEAT Hotkeys (V / S / W)
-
-Each AGT lobe has three position macros — **V** (first), **S** (second), **W** (third) — mapped to the augments above:
-
-| Lobe | V (1st) | S (2nd) | W (3rd) |
-|------|---------|---------|---------|
-| COG | 01 Vision | 04 Shield | 07 Weights |
-| EMO | 05 Vibe | 02 Send | 08 Wealth |
-| ENV | 09 Vector | 06 Search | 03 Warp |
+Vision is the foresight lobe — gaze pipeline and strategic control. Install the registry, then look up digit `01` for status payloads. Topology JSON and inside-crew hotkey maps stay in the package README.
 
 ## Not an Augment
 
