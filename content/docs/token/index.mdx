@@ -15,29 +15,11 @@ Token-2022, 9 decimals. Legacy v1 (`9XpJiKEY…`) has revoked mint authority —
 ## What JTX does
 
 - **DOJO entry** — Hold ≥1 JTX v2 to pass the [Platform Access](/docs/getting-started/access) gate at [jettoptx.chat](https://jettoptx.chat)
-- **Tier thresholds** — Higher balances map to `mojo`, `dojo`, and `spaceCowboy` codes — see [Access tiers](/docs/token/tiers)
-- **Space Cowboy NFT** — On-chain lifetime tier via [jtx.astroknots.space/mint](https://jtx.astroknots.space/mint)
+- **Space Cowboy NFT** — On-chain lifetime access via [jtx.astroknots.space/mint](https://jtx.astroknots.space/mint)
 - **Governance** — Space Cowboy NFT holders vote on protocol direction
 - **Trading** — Freely tradeable on Jupiter / Meteora
 
-## Access gating (developers)
-
-Integrators enforce tier from **JTX balance**, **subscription status**, or **NFT ownership** — not from hardcoded USD prices in app code.
-
-| Code tier | JTX balance (v2) |
-|-----------|------------------|
-| `basic` | ≥ 1 |
-| `mojo` | ≥ 12 |
-| `dojo` | ≥ 444 |
-| `spaceCowboy` | ≥ 1,111 **or** Space Cowboy NFT in wallet |
-
-Wallet-less checkout (Stripe, Tempo CLI) and live tier pricing live on **[astroknots.space/stake](https://astroknots.space/stake)** — not duplicated here.
-
-See [Tiers](/docs/token/tiers) for verification APIs and middleware patterns.
-
-## Configured allowlist
-
-A server-side `<configured-allowlist>` can grant a fixed tier (e.g. `spaceCowboy`) regardless of balance. Pubkeys are **not** published in public docs — configure them in deployment env / private operator runbook.
+Checkout and live pricing live on **[astroknots.space/stake](https://astroknots.space/stake)** — not duplicated here.
 
 ## On-chain program
 

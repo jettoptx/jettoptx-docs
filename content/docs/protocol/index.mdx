@@ -6,7 +6,7 @@ icon: Fingerprint
 
 **AARON** (Asynchronous Audit RAG Optical Node) is the gaze attestation router for the OPTX platform. It validates privacy-preserving gaze proofs from client devices, records session state in SpacetimeDB, and bridges verified attestations to Solana via the DePIN program.
 
-AARON connects **JETT Auth** (your biometric gaze signature) through the **OPT&#x1D54F;** secure bridge to the public **OPTX** blockchain on Solana. Private compute runs on edge hardware; only opaque proof hashes go on-chain.
+AARON connects **OPTX Auth** (your biometric gaze signature) through the **OPT&#x1D54F;** secure bridge to the public **OPTX** blockchain on Solana. Private compute runs on edge hardware; only opaque proof hashes go on-chain.
 
 ```bash
 curl https://aaron.jettoptics.ai/session \
@@ -18,11 +18,11 @@ curl https://aaron.jettoptics.ai/session \
 
 | Name | Full Form | Description |
 |------|-----------|-------------|
-| **JETT Auth** | Jett Encryption Temporal Template Auth | Biometric gaze signature + SSO on the validator node. The identity layer. |
-| **OPT&#x1D54F;** | Optical Program Technologic &#x1D54F;tension | The secure bridge that turns JETT Auth into verifiable on-chain proofs. |
+| **OPTX Auth** | Identity layer | Biometric gaze signature + SSO on the validator node. It's you. |
+| **OPT&#x1D54F;** | Optical Program Technologic &#x1D54F;tension | The secure bridge that turns OPTX Auth into verifiable on-chain proofs. |
 | **AARON** | Asynchronous Audit RAG Optical Node | On-chain protocol + private edge router. DePIN node that validates and routes. |
 | **OPTX** | The Public Blockchain & Token Network | The public-facing Solana mainnet token and protocol. |
-| **AGT** | Agentive Gaze Tensor | Biometric tensor system (COG/EMO/ENV) powering JETT Auth. |
+| **AGT** | Agentive Gaze Tensor | Biometric tensor system (COG/EMO/ENV) powering OPTX Auth. |
 
 ## What Does AARON Stand For?
 
@@ -32,7 +32,7 @@ curl https://aaron.jettoptics.ai/session \
 - **O** — **Optical**: Gaze biometrics via iris tracking. The camera becomes the key. Classification maps iris movement to COG/EMO/ENV tensor regions.
 - **N** — **Node**: Runs on OPTX Validator Nodes across Solana mainnet. Private compute that never exposes raw biometric data to the network.
 
-> **DePIN** = Decentralized Physical Infrastructure Network. AARON validates human identity through gaze via **JETT Auth**, bridges proofs through **OPT&#x1D54F;**, and earns $OPTX on the public network.
+> **DePIN** = Decentralized Physical Infrastructure Network. AARON validates human identity through gaze via **OPTX Auth**, bridges proofs through **OPT&#x1D54F;**, and earns $OPTX on the public network.
 
 ## For Humans
 
