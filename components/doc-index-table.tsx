@@ -137,7 +137,7 @@ export function DocIndexTable() {
               <AgtBadge agt="COG" />
             </td>
             <td>{counts.COG}</td>
-            <td>Protocol specs, SDK, architecture flows, APIs, token tiers</td>
+            <td>Protocol specs, SDK, architecture flows, APIs, token</td>
           </tr>
           <tr>
             <td>

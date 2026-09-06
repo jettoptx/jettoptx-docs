@@ -49,7 +49,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               className="rounded-md shrink-0 hidden dark:block w-9 h-9 md:w-12 md:h-12"
               style={{ objectFit: "contain" }}
             />
-            <span className="house-wordmark font-bold text-sm md:text-lg tracking-wider whitespace-nowrap">
+            <span className="house-wordmark font-normal text-sm md:text-lg tracking-wider whitespace-nowrap">
               <span style={{ color: "var(--color-orange-500)" }}>OPTX</span>{" "}
               <span className="opacity-60">DOCS</span>
             </span>

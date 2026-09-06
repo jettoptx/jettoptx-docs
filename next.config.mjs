@@ -7,7 +7,9 @@ const config = {
   reactStrictMode: true,
   async redirects() {
     return [
-      { source: "/docs/token/subscriptions", destination: "/docs/token/tiers", permanent: true },
+      { source: "/docs/authentication/jett-auth", destination: "/docs/authentication/optx-auth", permanent: true },
+      { source: "/docs/token/tiers", destination: "/docs/token", permanent: true },
+      { source: "/docs/token/subscriptions", destination: "/docs/token", permanent: true },
       { source: "/docs/architecture", destination: "/docs/reference/architecture", permanent: true },
       { source: "/docs/architecture/:path*", destination: "/docs/reference/architecture", permanent: true },
       { source: "/docs/getting-started/architecture", destination: "/docs/reference/architecture", permanent: true },

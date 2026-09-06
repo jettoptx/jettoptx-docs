@@ -50,7 +50,7 @@
 
 /* ═══ Typography — Bold headers like AgenC ═══ */
 
-/* Page title (h1) — Space Grotesk, large display */
+/* Page title (h1) — D-DIN Expanded display */
 .prose h1,
 [data-mdx] h1 {
   font-family: "D-DIN Expanded", var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif !important;
@@ -175,10 +175,15 @@
   display: none !important;
 }
 
-/* Body text — Geist Mono, larger, more readable */
+/* Article body — IBM Plex Sans. Mono only on code / charts. */
+.prose,
+[data-mdx] {
+  font-family: var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif;
+}
+
 .prose p,
 [data-mdx] p {
-  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", ui-monospace, monospace !important;
+  font-family: var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif !important;
   font-size: 0.9rem !important;
   line-height: 1.75 !important;
 }
@@ -196,7 +201,7 @@
 /* List items */
 .prose li,
 [data-mdx] li {
-  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", ui-monospace, monospace !important;
+  font-family: var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif !important;
   font-size: 0.85rem !important;
   line-height: 1.7 !important;
 }
@@ -250,7 +255,7 @@
   border: 1px solid rgba(181, 82, 0, 0.12) !important;
 }
 
-/* Code blocks — Geist Mono, shadcn-style */
+/* Code blocks — IBM Plex Mono */
 .prose pre,
 [data-mdx] pre {
   font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", ui-monospace, monospace !important;
@@ -300,13 +305,13 @@ nav[data-fd-sidebar] {
   font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", ui-monospace, monospace !important;
 }
 
-/* Sidebar group labels — D-DIN Expanded uppercase */
+/* Sidebar group labels — IBM Plex Sans uppercase */
 [data-fd-sidebar] [data-fd-sidebar-group-label],
 [data-fd-sidebar] .fd-sidebar-group-label {
-  font-family: "D-DIN Expanded", var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif !important;
+  font-family: var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif !important;
   font-size: 0.78rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.12em !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
 }
 
@@ -457,8 +462,20 @@ nav[aria-label="breadcrumb"] {
 }
 
 .prose table td {
-  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", ui-monospace, monospace !important;
+  font-family: var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif !important;
   font-size: 0.82rem !important;
+}
+
+.prose table td code,
+.prose table td pre {
+  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", ui-monospace, monospace !important;
+}
+
+.prose .mermaid,
+.prose [class*="d2"],
+[data-mdx] .mermaid,
+[data-mdx] [class*="d2"] {
+  font-family: var(--font-ibm-plex-mono), "IBM Plex Mono", ui-monospace, monospace;
 }
 
 .dark .prose table th {
@@ -804,11 +821,11 @@ aside#nd-sidebar > div:last-child button.augment-space-btn {
 
 /* ═══ Sidebar Section Titles — Orange with muted icons ═══ */
 
-/* Section header buttons (collapsible groups) — orange text */
+/* Section header buttons (collapsible groups) — orange IBM Plex Sans caps */
 aside#nd-sidebar button[aria-expanded] {
   color: var(--color-orange-500) !important;
-  font-family: "D-DIN Expanded", var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif !important;
-  font-weight: 700 !important;
+  font-family: var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif !important;
+  font-weight: 500 !important;
   font-size: 0.72rem !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
@@ -817,8 +834,8 @@ aside#nd-sidebar button[aria-expanded] {
 /* Section header buttons that are also links (JOE, etc.) */
 aside#nd-sidebar a[href^="/docs"]:has(svg[data-icon="true"]) {
   color: var(--color-orange-500) !important;
-  font-family: "D-DIN Expanded", var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif !important;
-  font-weight: 700 !important;
+  font-family: var(--font-ibm-plex-sans), "IBM Plex Sans", sans-serif !important;
+  font-weight: 500 !important;
   font-size: 0.72rem !important;
   letter-spacing: 0.08em !important;
   text-transform: uppercase !important;

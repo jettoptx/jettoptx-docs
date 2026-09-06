@@ -58,14 +58,14 @@ export const GROUP_ORDER: Record<string, number> = {
 export const MOA_NODES: MoaNode[] = [
   { id: "index", label: "OPTX", group: "root", agt: "COG", radius: 34, href: "/docs", description: "Docs home — Augments, OPTX Auth, thin Start tree", subLabels: ["What we build", "Quickstart", "Augment Space (docs)"], emo: 10, env: 10, cog: 80 },
 
-  { id: "what-is-optx", label: "What we build", group: "getting-started", agt: "COG", radius: 19, href: "/docs/getting-started/what-is-optx", description: "We build Augments — digital extension of yourself. OPTX Auth is the who.", subLabels: ["Augment", "OPTX Auth", "Its you"], emo: 35, env: 15, cog: 50 },
+  { id: "what-is-optx", label: "What we build", group: "getting-started", agt: "COG", radius: 19, href: "/docs/getting-started/what-is-optx", description: "We build Augments — digital extension of yourself. OPTX Auth is the who.", subLabels: ["Augment", "OPTX Auth", "It's you"], emo: 35, env: 15, cog: 50 },
   { id: "doors", label: "Doors", group: "getting-started", agt: "EMO", radius: 14, href: "/docs/getting-started/doors", description: "Human, agent, and builder doors — one screen", subLabels: ["Human", "Agent", "Builder", "MOJO"], emo: 45, env: 25, cog: 30 },
-  { id: "platform-access", label: "Quickstart", group: "getting-started", agt: "EMO", radius: 14, href: "/docs/getting-started/access", description: "Install SDK, OPTX Auth Its you, first verify — no token lecture first", subLabels: ["SDK install", "OPTX Auth", "First verify"], emo: 40, env: 25, cog: 35 },
+  { id: "platform-access", label: "Quickstart", group: "getting-started", agt: "EMO", radius: 14, href: "/docs/getting-started/access", description: "Install SDK, OPTX Auth It's you, first verify — no token lecture first", subLabels: ["SDK install", "OPTX Auth", "First verify"], emo: 40, env: 25, cog: 35 },
   { id: "architecture-overview", label: "Architecture appendix", group: "reference", agt: "COG", radius: 17, href: "/docs/reference/architecture", description: "Folded architecture appendix — edge to chain", subLabels: ["Jetson Edge", "Dual-Mode Chat", "Solana Native"], emo: 15, env: 30, cog: 55 },
   { id: "on-chain", label: "On-Chain", group: "getting-started", agt: "ENV", radius: 15, href: "/docs/getting-started/on-chain-addresses", description: "Solana program addresses, token mints, and wallet config", subLabels: ["$JTX v2", "DePIN Mainnet", "jett_vault", "Helius RPC"], emo: 10, env: 80, cog: 10 },
 
   { id: "sdk", label: "SDK Overview", group: "sdk", agt: "COG", radius: 18, href: "/docs/sdk", description: "Canonical jettoptx-sdk monorepo — auth, chat, and augment registry packages", subLabels: ["@jettoptx/auth", "@jettoptx/chat", "Augment Registry", "Install Guide"], emo: 15, env: 20, cog: 65 },
-  { id: "sdk-auth", label: "@jettoptx/auth", group: "sdk", agt: "EMO", radius: 15, href: "/docs/sdk/auth", description: "OPTX Auth package — Its you / Email, X, or wallet for custom integrations", subLabels: ["OPTX Auth", "Next.js Hooks", "JWT Claims"], emo: 55, env: 15, cog: 30 },
+  { id: "sdk-auth", label: "@jettoptx/auth", group: "sdk", agt: "EMO", radius: 15, href: "/docs/sdk/auth", description: "OPTX Auth package — It's you / Email, X, or wallet for custom integrations", subLabels: ["OPTX Auth", "Next.js Hooks", "JWT Claims"], emo: 55, env: 15, cog: 30 },
   { id: "sdk-chat", label: "@jettoptx/chat", group: "sdk", agt: "EMO", radius: 14, href: "/docs/sdk/chat", description: "JettChat SDK — transports, channels, and E2E messaging integration", subLabels: ["WebSocket", "Matrix Bridge", "Activity Stream", "Integration"], emo: 50, env: 25, cog: 25 },
   { id: "sdk-augment-registry", label: "Augment Registry", group: "sdk", agt: "COG", radius: 14, href: "/docs/sdk/augment-registry", description: "Runtime JETT Augments 00-09 — install and names/jobs (not docs MOA)", subLabels: ["Digits 00-09", "Vision spotlight", "Install"], emo: 20, env: 25, cog: 55 },
 
@@ -74,13 +74,11 @@ export const MOA_NODES: MoaNode[] = [
   { id: "phantom-mode", label: "Phantom Mode", group: "jettchat", agt: "ENV", radius: 17, href: "/docs/jettchat/phantom-mode", description: "Secure-Legion stack: triple Tor .onion, post-quantum hybrid, hardware-backed keys", subLabels: ["Triple Tor", "Post-Quantum", "StrongBox/TEE", "Duress PIN"], emo: 30, env: 55, cog: 15 },
   { id: "jettchat-messaging", label: "Messaging", group: "jettchat", agt: "EMO", radius: 14, href: "/docs/jettchat/messaging", description: "E2EE messaging shared by both modes — gaze cursor, offline-first, groups", subLabels: ["Gaze Cursor", "Offline-First", "Groups", "Self-Destruct"], emo: 60, env: 25, cog: 15 },
 
-  { id: "jett-auth", label: "JETT Auth", group: "authentication", agt: "EMO", radius: 19, href: "/docs/authentication/jett-auth", description: "Deep auth surface — Privy for DOJO, @jettoptx/auth for integrators (OPTX Auth on Start)", subLabels: ["OPTX Auth feel", "Email X wallet", "Deep JETT Auth"], emo: 55, env: 20, cog: 25 },
+  { id: "jett-auth", label: "OPTX Auth", group: "authentication", agt: "EMO", radius: 19, href: "/docs/authentication/optx-auth", description: "OPTX Auth — Privy for DOJO, @jettoptx/auth for integrators. It's you: Email, X, or wallet.", subLabels: ["OPTX Auth", "Email X wallet", "It's you"], emo: 55, env: 20, cog: 25 },
   { id: "gaze", label: "Gaze Auth", group: "authentication", agt: "EMO", radius: 22, href: "/docs/authentication/gaze", description: "AGT biometric authentication via iris tracking and gaze vectors", subLabels: ["MediaPipe", "COG/EMO/ENV", "Iris Tracking", "Gaze PIN"], emo: 55, env: 5, cog: 40 },
   { id: "wallet", label: "Agent Wallet", group: "authentication", agt: "EMO", radius: 17, href: "/docs/authentication/wallet", description: "ERC-8004 soulbound agent wallet (roadmap)", subLabels: ["ERC-8004 (Roadmap)", "x402 Protocol", "Soulbound NFT", "Secure Enclave"], emo: 50, env: 40, cog: 10 },
 
   { id: "token", label: "$JTX Token", group: "token", agt: "ENV", radius: 18, href: "/docs/token", description: "JettChat access + governance token on Solana mainnet (v2 canonical)", subLabels: ["Solana Mainnet", "Token-2022", "DePIN Earn", "Governance"], emo: 25, env: 50, cog: 25 },
-  { id: "token-tiers", label: "Access Tiers", group: "token", agt: "COG", radius: 14, href: "/docs/token/tiers", description: "Tier codes and JTX balance thresholds for integrators", subLabels: ["basic/mojo/dojo", "Balance Check", "verify-session", "astroknots.space"], emo: 20, env: 30, cog: 50 },
-  { id: "token-subscriptions", label: "Subscriptions", group: "token", agt: "COG", radius: 11, href: "/docs/token/tiers", description: "Access tier codes for integrators (subscriptions orphan removed)", subLabels: ["astroknots.space", "Not in sidebar", "Tier codes only"], emo: 15, env: 15, cog: 70 },
   { id: "token-trading", label: "Trading & Mint", group: "token", agt: "ENV", radius: 14, href: "/docs/token/trading", description: "JTX swap, Space Cowboys NFT mint, and on-chain program constants", subLabels: ["Jupiter Swap", "Meteora DLMM", "v1→v2 Migration", "jtx-trade"], emo: 30, env: 55, cog: 15 },
 
   { id: "aaron-protocol", label: "AARON", group: "protocol", agt: "COG", radius: 22, href: "/docs/protocol", description: "Asynchronous Audit RAG Optical Node — gaze attestation router and Solana bridge", subLabels: ["Session Flow", "Gaze Verify", "SpacetimeDB", "Entropy Scoring"], emo: 20, env: 15, cog: 65 },
@@ -256,12 +254,7 @@ export const MOA_EDGES: MoaEdge[] = [
   { source: "token", target: "on-chain" },
   { source: "token", target: "depin" },
   { source: "token", target: "jett-auth" },
-  { source: "token", target: "token-tiers" },
-  { source: "token", target: "token-subscriptions" },
   { source: "token", target: "token-trading" },
-  { source: "token-tiers", target: "mojo" },
-  { source: "token-tiers", target: "jettchat" },
-  { source: "token-subscriptions", target: "token-tiers" },
   { source: "token-trading", target: "on-chain" },
   { source: "token-trading", target: "platform-access" },
 
@@ -325,7 +318,7 @@ export const MOBILE_SUB_PAGES: Record<string, { label: string; href: string; agt
     href: n.href,
     agt: n.agt,
   })),
-  "/docs/token": MOA_NODES.filter((n) => n.group === "token" && n.id !== "token-subscriptions").map((n) => ({
+  "/docs/token": MOA_NODES.filter((n) => n.group === "token").map((n) => ({
     label: n.navLabel ?? n.label,
     href: n.href,
     agt: n.agt,

@@ -6,6 +6,15 @@
 
 @font-face {
   font-family: "D-DIN Expanded";
+  src: url("/fonts/D-DINExp.woff2") format("woff2"),
+    url("/fonts/D-DINExp.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "D-DIN Expanded";
   src: url("/fonts/D-DINExp-Bold.woff2") format("woff2"),
     url("/fonts/D-DINExp-Bold.woff") format("woff");
   font-weight: 700;
@@ -53,7 +62,7 @@
 
 .house-wordmark {
   font-family: "D-DIN Expanded", var(--font-ibm-plex-sans), sans-serif;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   white-space: nowrap;
