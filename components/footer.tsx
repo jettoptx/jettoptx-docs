@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -14,11 +13,11 @@ import {
   HOUSE_NAV,
   HOUSE_SOCIALS,
 } from "@/lib/house-links";
+import { BrandLogo } from "@/components/brand-logo";
 
-const titleClass =
-  "mb-4 font-[family-name:var(--font-orbitron)] text-sm tracking-[0.08em] uppercase text-fd-foreground";
+const titleClass = "mb-4 house-chrome text-sm text-fd-foreground";
 const ghClass =
-  "group inline-flex items-center gap-2.5 text-[11px] font-mono uppercase tracking-widest text-fd-muted-foreground transition-colors hover:text-orange-400";
+  "group inline-flex items-center gap-2.5 house-chrome text-[11px] text-fd-muted-foreground transition-colors hover:text-orange-400";
 
 export function SiteFooter() {
   return (
@@ -27,22 +26,13 @@ export function SiteFooter() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-12">
           <div className="flex flex-col lg:col-span-4">
             <Link href="/" className="flex items-center gap-3">
-              <Image
-                src="/techforce_OPTX.png"
-                alt="OPTX · Jett Optics"
-                width={56}
-                height={56}
-                className="h-14 w-14 rounded-md object-contain"
-              />
-              <span className="font-[family-name:var(--font-orbitron)] text-lg tracking-[0.08em]">
-                <span style={{ color: "var(--color-orange-500)" }}>OPTX</span>
-                {" "}Docs
-              </span>
+              <BrandLogo className="h-10 md:h-12" />
+              <span className="house-wordmark text-lg opacity-60">DOCS</span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-fd-muted-foreground">
               Developer docs for the Jett Optics agentic protocol on Solana.
             </p>
-            <div className="mt-5 inline-flex items-center gap-2 text-[10px] font-mono uppercase tracking-widest text-fd-muted-foreground">
+            <div className="mt-5 inline-flex items-center gap-2 house-chrome text-[10px] text-fd-muted-foreground">
               <Check size={12} className="text-orange-500" />
               Built on Solana
             </div>
@@ -58,7 +48,7 @@ export function SiteFooter() {
                 <ExternalLink size={12} />
               </a>
             </div>
-            <p className="mt-8 text-xs text-fd-muted-foreground/60">
+            <p className="mt-8 house-chrome text-xs text-fd-muted-foreground/60">
               &copy; {new Date().getFullYear()} JETT OPTICS
             </p>
           </div>
@@ -72,10 +62,10 @@ export function SiteFooter() {
                   href={item.href}
                   className="group flex items-center gap-3 py-1.5 text-sm"
                 >
-                  <span className="font-mono text-xs text-fd-muted-foreground group-hover:text-orange-400">
+                  <span className="house-chrome text-xs text-fd-muted-foreground group-hover:text-orange-400">
                     {item.num}
                   </span>
-                  <span className="font-[family-name:var(--font-orbitron)] text-sm tracking-[0.08em] text-fd-muted-foreground group-hover:text-fd-foreground">
+                  <span className="house-chrome text-sm text-fd-muted-foreground group-hover:text-fd-foreground">
                     {item.label}
                   </span>
                 </a>
@@ -92,7 +82,7 @@ export function SiteFooter() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/built inline-flex items-center gap-2.5 py-1 text-sm uppercase tracking-widest text-fd-muted-foreground hover:text-fd-foreground"
+                    className="group/built inline-flex items-center gap-2.5 py-1 house-chrome text-sm text-fd-muted-foreground hover:text-fd-foreground"
                   >
                     <span className="h-1.5 w-1.5 bg-orange-500" />
                     {item.name}
@@ -109,7 +99,7 @@ export function SiteFooter() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group/built inline-flex items-center gap-2.5 py-1 text-sm uppercase tracking-widest text-fd-muted-foreground hover:text-fd-foreground"
+                    className="group/built inline-flex items-center gap-2.5 py-1 house-chrome text-sm text-fd-muted-foreground hover:text-fd-foreground"
                   >
                     <span className="h-1.5 w-1.5 bg-orange-500" />
                     {item.name}
@@ -128,26 +118,26 @@ export function SiteFooter() {
               rel="noopener noreferrer"
               className="group flex items-center justify-between rounded-md border border-fd-border px-5 py-4 text-sm font-semibold text-fd-foreground hover:border-orange-500/60"
             >
-              <span className="font-[family-name:var(--font-orbitron)] tracking-[0.08em]">
+              <span className="house-wordmark">
                 OPEN JTX.CHAT
               </span>
               <ArrowUpRight size={16} />
             </a>
-            <p className="mt-3 text-[11px] font-mono uppercase tracking-widest text-fd-muted-foreground/70">
+            <p className="mt-3 house-chrome text-[11px] text-fd-muted-foreground/70">
               XDX · DMs · talk to JOE
             </p>
             <a
               href={HOUSE.GROUP_INVITE}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-fd-muted-foreground hover:text-orange-400"
+              className="mt-3 inline-flex items-center gap-1.5 house-chrome text-[11px] text-fd-muted-foreground hover:text-orange-400"
             >
               Join the Space Cowboys group
               <ArrowUpRight size={12} />
             </a>
             <a
               href={HOUSE.EMAIL}
-              className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-mono text-fd-muted-foreground hover:text-orange-400"
+              className="mt-5 inline-flex items-center gap-1.5 house-chrome text-[11px] text-fd-muted-foreground hover:text-orange-400"
             >
               <Check size={12} className="text-orange-500" />
               joe@jettoptics.ai
@@ -159,7 +149,7 @@ export function SiteFooter() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-fd-muted-foreground hover:text-orange-400"
+                  className="group inline-flex items-center gap-1.5 house-chrome text-[11px] text-fd-muted-foreground hover:text-orange-400"
                 >
                   {link.label}
                   <ArrowUpRight size={12} />

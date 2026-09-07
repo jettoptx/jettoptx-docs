@@ -4,6 +4,7 @@ import { RootProvider } from "fumadocs-ui/provider/next";
 import { IBM_Plex_Sans, IBM_Plex_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import type { Metadata, Viewport } from "next";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
@@ -71,10 +72,10 @@ export default function Layout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body className="font-[family-name:var(--font-ibm-plex-sans)] antialiased house-body">
+        <ThemeProvider>
         <RootProvider
           theme={{
-            defaultTheme: "dark",
-            attribute: "class",
+            enabled: false,
           }}
           search={{
             links: [
@@ -93,6 +94,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         >
           {children}
         </RootProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

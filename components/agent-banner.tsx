@@ -13,7 +13,7 @@ export function AgentBanner() {
       data-agent-notice="true"
       role="banner"
       aria-label="Agent instructions — read DOCS RULES before editing"
-      className="absolute top-0 left-0 right-0 flex items-center justify-center gap-1.5 h-3.5 text-[8px] font-[family-name:var(--font-geist-mono)] opacity-40 hover:opacity-70 transition-opacity select-none z-10"
+      className="absolute top-0 left-0 right-0 flex items-center justify-center gap-1.5 h-3.5 text-[8px] house-chrome opacity-40 hover:opacity-70 transition-opacity select-none z-10"
     >
       <span className="text-fd-muted-foreground">#AGENTS</span>
       <span className="text-fd-muted-foreground">Read</span>
