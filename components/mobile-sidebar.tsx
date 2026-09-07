@@ -4,7 +4,6 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
 import {
   Atom,
   Rocket,
@@ -66,13 +65,9 @@ function isActive(pathname: string, href: string): boolean {
 export function MobileSidebar() {
   const [expanded, setExpanded] = useState(false);
   const [dissolved, setDissolved] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
   const pathname = usePathname();
   const sidebarRef = useRef<HTMLDivElement>(null);
-  const { resolvedTheme, setTheme } = useTheme();
-
-  useEffect(() => { setMounted(true); }, []);
 
   const toggleAugment = useCallback(() => {
     window.dispatchEvent(new CustomEvent("augment-space-toggle"));
@@ -312,20 +307,20 @@ export function MobileSidebar() {
             )}
           </button>
 
-          {/* Theme toggle */}
+          {/* Theme toggle — same data-theme-toggle contract as header */}
           <button
-            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+            type="button"
+            data-theme-toggle="true"
             className={`flex items-center ${expanded ? "gap-2.5 px-3" : "justify-center"} w-full h-9 transition-all duration-150 hover:bg-[var(--fd-accent)] text-[var(--fd-muted-foreground)] hover:text-[var(--fd-foreground)]`}
-            aria-label="Toggle theme"
+            aria-label="Toggle light and dark theme"
+            title="Toggle theme"
           >
-            {!mounted || resolvedTheme === "dark" ? (
-              <Sun size={15} strokeWidth={1.75} className="shrink-0" aria-hidden="true" />
-            ) : (
-              <Moon size={15} strokeWidth={1.75} className="shrink-0" aria-hidden="true" />
-            )}
-            {expanded && mounted && (
-              <span className="font-[family-name:var(--font-geist-mono)] text-[13px] font-medium">
-                {resolvedTheme === "dark" ? "Light" : "Dark"}
+            <Sun size={15} strokeWidth={1.75} className="shrink-0 hidden dark:block" aria-hidden="true" />
+            <Moon size={15} strokeWidth={1.75} className="shrink-0 block dark:hidden" aria-hidden="true" />
+            {expanded && (
+              <span className="house-chrome text-[13px] font-medium">
+                <span className="hidden dark:inline">Light</span>
+                <span className="inline dark:hidden">Dark</span>
               </span>
             )}
           </button>

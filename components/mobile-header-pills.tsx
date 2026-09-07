@@ -37,15 +37,15 @@ export function MobileHeaderPills() {
     <div className="flex md:hidden items-center gap-2">
       <Link href="/docs/authentication/gaze#agt-tensors" className="flex items-center gap-1">
         <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: "#eab308" }} />
-        <span className="text-[9px] font-bold font-[family-name:var(--font-geist-mono)] text-[#eab308]">COG</span>
+        <span className="text-[9px] font-bold house-chrome text-[#eab308]">COG</span>
       </Link>
       <Link href="/docs/authentication/gaze#agt-tensors" className="flex items-center gap-1">
         <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: "#f43f5e" }} />
-        <span className="text-[9px] font-bold font-[family-name:var(--font-geist-mono)] text-[#f43f5e]">EMO</span>
+        <span className="text-[9px] font-bold house-chrome text-[#f43f5e]">EMO</span>
       </Link>
       <Link href="/docs/authentication/gaze#agt-tensors" className="flex items-center gap-1">
         <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: "#60a5fa" }} />
-        <span className="text-[9px] font-bold font-[family-name:var(--font-geist-mono)] text-[#60a5fa]">ENV</span>
+        <span className="text-[9px] font-bold house-chrome text-[#60a5fa]">ENV</span>
       </Link>
       {!augmentActive && (
         <>

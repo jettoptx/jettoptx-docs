@@ -64,7 +64,7 @@ export const AGENT_RULES: DocsRule[] = [
     id: "style-system",
     title: "8. Style & Naming Conventions",
     description:
-      "Fonts: D-DIN Expanded Regular for the OPTX DOCS wordmark; IBM Plex Sans for UI, sidebar titles (all caps, 500), and article body; IBM Plex Mono for code snippets and embedded charts only. OPTX Auth lockup is It's you (apostrophe) — never Its you. Colors: var(--color-orange-500) for accents (neon #FF6900 in dark mode, burnt brick rgb(220,78,31) in light mode — never hardcode the rgb literal), AGT tensor colors for classification. Use Lucide icons. Keep descriptions concise — one sentence per concept.",
+      "Fonts: D-DIN Expanded Regular for wordmarks and lockups (JETT OPT + DOCS); IBM Plex Sans ALL CAPS (house-chrome) for header/footer chrome — Built On, Socials, nav. IBM Plex Sans for article body; IBM Plex Mono for code snippets and embedded charts only. Never Geist Mono in header/footer chrome. Brand mark is the JETT OPT + Zia lockup (4 ray clusters, 2x2 dots, top-left gray) for both themes. OPTX Auth lockup is It's you (apostrophe) — never Its you. Colors: var(--color-orange-500) for accents (neon #FF6900 in dark mode, burnt brick rgb(220,78,31) in light mode — never hardcode the rgb literal), AGT tensor colors for classification. Use Lucide icons. Keep descriptions concise — one sentence per concept.",
   },
   {
     id: "changelog-currency",
