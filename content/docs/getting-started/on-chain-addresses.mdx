@@ -10,9 +10,19 @@ icon: Hash
 |-------|---------|---------|--------|
 | **$JTX v2 (canonical)** | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` | **mainnet** | Live — Token-2022, 9 dec |
 | **$JTX v1 (legacy)** | `9XpJiKEYzq5yDo5pJzRfjSRMPL2yPfDQXgiN7uYtBhUj` | mainnet | Revoked mint authority |
-| **$OPTX Utility** | `DSyauRAZwUd2BrTk3P8k2yUxxvcx5X4BBg3Gh3VbeRG3` | devnet | Testing |
+| **$OPTX Utility** | `DSyauRAZwUd2BrTk3P8k2yUxxvcx5X4BBg3Gh3VbeRG3` | devnet | Testing — gaze-attested credit mint |
+| **$OPTX Meme** | `BtaXqF4wbc2Ac8TigtmUPTrvbc1DUflsecbg9KAB1Utex` | **mainnet** | Live — StonkFun / Raydium, paired with JTO, 1% holder rewards in JTO |
 
 > Ghost mints `4r9WoPsR…` / `4r9WxVWB…` are **invalid** — never integrate them. Legacy on-chain `cstb_mint` account fields are unused layout slots — **not** a CompuStable / $CSTB product.
+
+### OPTX split (important)
+
+Two assets share the ticker. Do not conflate them:
+
+- **$OPTX Utility** (`DSyau…eRG3`) — devnet-only Token-2022 mint produced by the PoA program as gaze credits. 2.59 supply, 20 txs. Lab instrument, not tradeable.
+- **$OPTX Meme** (`BtaXqF4…1Utex`) — mainnet StonkFun launch, 1B supply, paired with **JTO**, 1% holder tax paid in JTO. This is the public ticker.
+
+The utility token the Rust team builds against will be a separate mint (planned: **OPTICS**). Until then, gate programs on **JTX v2**, not either OPTX mint.
 
 ## Program Addresses
 
@@ -40,9 +50,10 @@ solana program show 85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF --url mainnet-b
 
 ## Token Standards
 
-- **$JTX v2** and **$OPTX** use **Token-2022 (SPL)** on mainnet/devnet respectively
+- **$JTX v2** and **$OPTX Utility** use **Token-2022 (SPL)** on mainnet/devnet respectively
 - **$JTX v2** is the canonical governance + access gate token — see [$JTX Token](/docs/token)
-- OPTX is **Solana-native**. See [On-Chain Bridge](/docs/on-chain-bridge) for program SDK usage.
+- OPTX Utility is **Solana-native**. See [On-Chain Bridge](/docs/on-chain-bridge) for program SDK usage.
+- OPTX Meme is a standard Raydium LaunchLab mint — freely readable/writable by any Anchor program.
 
 ## Public treasury
 
