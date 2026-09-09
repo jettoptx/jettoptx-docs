@@ -43,10 +43,12 @@ Full map: [Ecosystem Repos](https://jettoptx.dev/docs/reference/ecosystem)
 
 ## Canonical On-Chain
 
-| Token | Address |
-|-------|---------|
-| $JTX v2 | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` |
-| DePIN mainnet | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` |
+| Token | Address | Network |
+|-------|---------|---------|
+| $JTX v2 | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` | mainnet |
+| $OPTX Utility | `DSyauRAZwUd2BrTk3P8k2yUxxvcx5X4BBg3Gh3VbeRG3` | devnet |
+| $OPTX Meme | `BtaXqF4wbc2Ac8TigtmUPTrvbc1DUflsecbg9KAB1Utex` | mainnet (StonkFun / JTO) |
+| DePIN mainnet | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` | mainnet |
 
 ## Scripts
 
@@ -58,6 +60,6 @@ npm run build
 
 ## Current Version
 
-**v2.2.2** — PoA trust audit package: docs align to `jtx_optx_devnet_poa_trustjoe` + `jett_vault` in `jettoptx-poa-depin`; CompuStable/$CSTB stubbed (legacy `cstb_mint` only); audit brief linked.
+**v2.2.3** — Added mainnet **$OPTX Meme** CA (`BtaXqF4…1Utex`, StonkFun/Raydium, paired with JTO) alongside the devnet utility mint; split documented in on-chain-addresses.
 
 APACHE — use it, fork it, ship it.
