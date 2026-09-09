@@ -3,6 +3,8 @@
 export const JTX_MINT_V2 = "JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe";
 export const JTX_MINT_V1_LEGACY = "9XpJiKEYzq5yDo5pJzRfjSRMPL2yPfDQXgiN7uYtBhUj";
 export const OPTX_MINT_DEVNET = "DSyauRAZwUd2BrTk3P8k2yUxxvcx5X4BBg3Gh3VbeRG3";
+/** Mainnet OPTX meme (StonkFun / Raydium, paired with JTO). Distinct from the devnet utility mint. */
+export const OPTX_MINT_MEME_MAINNET = "BtaXqF4wbc2Ac8TigtmUPTrvbc1DUflsecbg9KAB1Utex";
 /** Legacy on-chain layout field mint (devnet). Not a user-facing CompuStable product. */
 export const CSTB_MINT_DEVNET_LEGACY = "4waAAfTjqf5LNpj2TC5zoeiAgegVwKWoy4WiJgjdBkVL";
 /** @deprecated Use CSTB_MINT_DEVNET_LEGACY — kept for import compatibility */
@@ -26,6 +28,8 @@ export const PLATFORM_URLS = {
   stdb: "https://stdb.jettoptics.ai",
   access: "https://astroknots.space",
   trade: "https://jtx.astroknots.space",
+  optxMeme: "https://www.stonkfun.xyz/token/BtaXqF4wbc2Ac8TigtmUPTrvbc1DUflsecbg9KAB1Utex",
+  astroknots: "https://astroknots.space",
 } as const;
 
 export const GITHUB_REPOS = {
