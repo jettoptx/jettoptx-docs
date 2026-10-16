@@ -22,7 +22,7 @@ Two assets share the ticker. Do not conflate them:
 - **$OPTX Utility** (`DSyau…eRG3`) — devnet-only Token-2022 mint produced by the PoA program as gaze credits. 2.59 supply, 20 txs. Lab instrument, not tradeable.
 - **$OPTX Meme** (`BtaXqF4…1Utex`) — mainnet StonkFun launch, 1B supply, paired with **JTO**, 1% holder tax paid in JTO. This is the public ticker.
 
-The utility token the Rust team builds against will be a separate mint (planned: **OPTICS**). Until then, gate programs on **JTX v2**, not either OPTX mint.
+The utility token the Rust team builds against will be a separate mint (planned: **OPTICS**). Program references should use **JTX v2** or the utility mint as appropriate — not hold-threshold access tiers.
 
 ## Program Addresses
 
@@ -51,7 +51,7 @@ solana program show 85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF --url mainnet-b
 ## Token Standards
 
 - **$JTX v2** and **$OPTX Utility** use **Token-2022 (SPL)** on mainnet/devnet respectively
-- **$JTX v2** is the canonical governance + access gate token — see [$JTX Token](/docs/token)
+- **$JTX v2** is the canonical governance token — see [$JTX Token](/docs/token). Hold-threshold access tiers are deprecated.
 - OPTX Utility is **Solana-native**. See [On-Chain Bridge](/docs/on-chain-bridge) for program SDK usage.
 - OPTX Meme is a standard Raydium LaunchLab mint — freely readable/writable by any Anchor program.
 

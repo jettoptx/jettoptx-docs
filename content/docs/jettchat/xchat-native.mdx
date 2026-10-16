@@ -25,18 +25,9 @@ After the authorization-code exchange:
 2. On callback, the SDK exchanges the code for tokens.
 3. An **Ed25519 JWT** is signed by `@jettoptx/auth` and dropped into the `jettauth` httpOnly cookie.
 
-## JTX gate
+## Access after sign-in
 
-After sign-in, middleware enforces JTX access on protected routes:
-
-| Code tier | JTX held | Maps to |
-|-----------|---------|---------|
-| `basic` | ≥ 1 | Base entry — JettChat access |
-| `mojo` | ≥ 12 | MOJO subscription tier |
-| `dojo` | ≥ 444 | DOJO subscription tier |
-| `spaceCowboy` | ≥ 1,111 | SPACE COWBOY subscription tier |
-
-Canonical mint: `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` (v2). Wallet-less subscription entitlements use the same tier codes — pricing on [astroknots.space/stake](https://astroknots.space/stake).
+After sign-in, middleware enforces product access on protected routes. **Hold-threshold access tiers** (`basic` / `mojo` / `dojo` / `spaceCowboy` by JTX balance) are **deprecated** and are not documented as live product gates here. Current entitlements and checkout live on product surfaces — not as a public hold table.
 
 ## What's wired up
 
