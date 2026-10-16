@@ -28,7 +28,7 @@ export function SiteFooter() {
           <div className="flex flex-col lg:col-span-4">
             <Link href="/" className="flex items-center gap-3">
               <Image
-                src="/techforce_OPTX.png"
+                src="/brand/optx-footer-mark-128.png"
                 alt="OPTX · Jett Optics"
                 width={56}
                 height={56}
