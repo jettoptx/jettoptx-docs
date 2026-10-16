@@ -6,40 +6,38 @@ description: "Agent j(OS)H — the primary intelligent agent in the OPTX Agentic
 
 import { D2Diagram } from "@/components/d2-diagram";
 
-**JOE** (Jett Optics Engine) is the jOSH Operating Environment — the primary intelligent agent in the OPTX ecosystem. It runs on [Hermes Agent v0.17](https://github.com/NousResearch/hermes-agent/releases/tag/v2026.6.19) with Grok via the HEDGEHOG gateway, backed by SpacetimeDB for persistent memory and real-time state. JOE is **dual-instance**: a primary edge node (AARON + HEDGEHOG + SpacetimeDB) and a secondary containerized instance for redundancy. [jettoptx-hermes-api v0.4.0](/docs/astrojoe/api) bridges JettChat SSE, task orchestration, and Tempo billing to the native Hermes gateway.
+**JOE** (Jett Optics Engine) is the jOSH Operating Environment — the primary intelligent agent in the OPTX ecosystem. It runs with Grok via the HEDGEHOG gateway, backed by SpacetimeDB for persistent memory and real-time state. JOE is **dual-instance**: a primary edge node (AARON + HEDGEHOG + SpacetimeDB) and a secondary containerized instance for redundancy. The [JOE Agent API](/docs/astrojoe/api) bridges JettChat SSE, task orchestration, and metered billing.
 
 
 ## Architecture
 
-<D2Diagram src="/diagrams/hermes-optx-api.svg" alt="AstroJOE Architecture — User to JettChat to hermes-optx-api to Hermes Agent to HEDGEHOG to Grok" caption="AstroJOE Architecture Stack" />
+<D2Diagram src="/diagrams/joe-agent-api.svg" alt="AstroJOE Architecture — User to JettChat to Agent API to HEDGEHOG to Grok" caption="AstroJOE Architecture Stack" />
 
 ## What AstroJOE Does
 
 | Capability | Service | Description |
 |-----------|---------|-------------|
-| **SSE Streaming Chat** | [hermes-optx-api](/docs/astrojoe/api) | JettChat SSE envelope → Hermes `/api/sessions/*/chat/stream` |
-| **Async agent runs** | Hermes gateway | `/v1/runs` + lifecycle SSE (v0.17+) |
-| **Task Orchestration** | [hermes-optx-api](/docs/astrojoe/api) | Create, claim, execute, complete tasks with DAG workflows |
-| **Tempo Billing** | [hermes-optx-api](/docs/astrojoe/api) | Metered HEDGEHOG API calls, escrow, on-chain wallet |
+| **SSE Streaming Chat** | [JOE Agent API](/docs/astrojoe/api) | JettChat SSE envelope → session chat stream |
+| **Async agent runs** | Agent gateway | `/v1/runs` + lifecycle SSE |
+| **Task Orchestration** | [JOE Agent API](/docs/astrojoe/api) | Create, claim, execute, complete tasks with DAG workflows |
+| **Metered Billing** | [JOE Agent API](/docs/astrojoe/api) | Metered HEDGEHOG API calls, escrow, on-chain wallet |
 | **Memory** | SpacetimeDB | Persistent memory with categories, importance scoring, and full-text search |
 | **Gaze Verification** | AARON Router | Manage gaze sessions, analyze AGT tensors (COG/EMO/ENV) |
-| **Web Search** | HEDGEHOG | Search web and X/Twitter via Grok 4.20 multi-agent |
+| **Web Search** | HEDGEHOG | Search web and X/Twitter via Grok multi-agent |
 | **Messaging** | Federation transport | Optional Matrix-compatible inter-agent communication |
-| **Swarm Coordination** | [hermes-optx-api](/docs/astrojoe/api) | Decompose goals into parallel/sequential/DAG subtasks |
+| **Swarm Coordination** | [JOE Agent API](/docs/astrojoe/api) | Decompose goals into parallel/sequential/DAG subtasks |
 
-> AstroJOE uses Hermes Agent's [Skills Hub](https://hermes-agent.nousresearch.com/docs/) and custom `SKILL.md` files under `~/.hermes/skills/`. Skill count grows with upstream releases — see [Skills](/docs/astrojoe/skills).
+> AstroJOE uses a Skills Hub and custom `SKILL.md` files. Skill count grows with releases — see [Skills](/docs/astrojoe/skills).
 
 ## Identity
 
 | Field | Value |
 |-------|-------|
 | **Name** | AstroJOE |
-| **Email** | joe@jettoptics.ai |
 | **Matrix** | Active on federation transport |
-| **Metaplex Agent NFT** | [`9116eaELxZheLwJNu73LxQVsuaiugH8e11onkEw4ku9R`](https://www.metaplex.com/agents/9116eaELxZheLwJNu73LxQVsuaiugH8e11onkEw4ku9R) |
 | **Protocol** | EIP-8004 Registration v1, x402 Supported |
 
-Owner authority and personal / ops wallets are not published. Public agent API surface: [Hermes OPTX API](/docs/astrojoe/api).
+Owner authority, personal / ops wallets, and contact email are not published on the global docs chrome. Public agent API surface: [JOE Agent API](/docs/astrojoe/api).
 
 ## Personality
 
@@ -50,6 +48,5 @@ AstroJOE is direct, efficient, and slightly witty. It takes initiative — it do
 - **[Skills System](/docs/astrojoe/skills)** — SKILL.md format and available skills
 - **[Memory](/docs/astrojoe/memory)** — SpacetimeDB-backed persistent memory
 - **[Orchestration](/docs/astrojoe/orchestration)** — Task lifecycle and swarm coordination
-- **[HEDGEHOG Gateway](/docs/astrojoe/hedgehog)** — Multi-API AI gateway
-- **[Hermes Integration](/docs/astrojoe/hermes-features)** — v0.17 upstream + bridge architecture
-- **[Hermes OPTX API](/docs/astrojoe/api)** — bridge endpoints (jettoptx-hermes-api)
+- **[MCP (hedgehog)](/docs/astrojoe/hedgehog)** — MCP / multi-API AI gateway
+- **[JOE Agent API](/docs/astrojoe/api)** — bridge endpoints

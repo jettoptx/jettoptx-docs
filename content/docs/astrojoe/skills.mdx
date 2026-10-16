@@ -1,20 +1,20 @@
 ---
 icon: Wrench
 title: Skills System
-description: AstroJOE's SKILL.md-based tool system — procedural knowledge documents that enable real tool execution.
+description: AstroJOE's SKILL.md-based tool system â€” procedural knowledge documents that enable real tool execution.
 ---
 
 AstroJOE uses **SKILL.md** files as its tool system. Each skill is a procedural knowledge document that teaches the agent how to execute specific operations via the terminal (curl, python3, jq).
 
-Hermes Agent ships a large built-in skill library (categories include `software-development`, `devops`, `mcp`, `research`, and more) plus anything installed via the Skills Hub. Count changes with upstream releases � track [hermes-agent releases](https://github.com/NousResearch/hermes-agent/releases) rather than a pinned number in these docs.
+agent runtime ships a large built-in skill library (categories include `software-development`, `devops`, `mcp`, `research`, and more) plus anything installed via the Skills Hub. Count changes with upstream releases — track [agent-runtime releases](https://github.com/NousResearch/agent-runtime/releases) rather than a pinned number in these docs.
 
 ## How Skills Work
 
-Hermes Agent scans `~/.hermes/skills/` recursively for `SKILL.md` files. Skills follow a three-level progressive disclosure pattern:
+agent runtime scans `~/.agent/skills/` recursively for `SKILL.md` files. Skills follow a three-level progressive disclosure pattern:
 
-1. **Level 0** — `skills_list()`: Returns name, description, and category (~3k tokens)
-2. **Level 1** — `skill_view(name)`: Loads the full SKILL.md content on demand
-3. **Level 2** — `skill_view(name, path)`: Loads specific reference files individually
+1. **Level 0** â€” `skills_list()`: Returns name, description, and category (~3k tokens)
+2. **Level 1** â€” `skill_view(name)`: Loads the full SKILL.md content on demand
+3. **Level 2** â€” `skill_view(name, path)`: Loads specific reference files individually
 
 Skills are loaded **only when needed** for the current task, conserving context.
 
@@ -54,12 +54,12 @@ curl -s http://example.com/api ...
 ## Available Skills
 
 ### hedgehog-websearch
-Search the web and X/Twitter using Grok 4.20 multi-agent mode with built-in `web_search` and `x_search` tools via the HEDGEHOG gateway.
+Search the web and X/Twitter using Grok multi-agent mode with built-in `web_search` and `x_search` tools via the HEDGEHOG gateway.
 
 **Trigger**: User asks to search the web, look up current events, or check a website.
 
 ### spacetimedb-memory
-Full CRUD on the optx-cortex database — store/recall memories, manage agent state, query gaze attestations and session logs.
+Full CRUD on the optx-cortex database â€” store/recall memories, manage agent state, query gaze attestations and session logs.
 
 **Trigger**: User asks to remember something, recall context, or check agent state.
 
@@ -76,7 +76,7 @@ Send and receive messages through Matrix/Conduit federation via JOE WebSocket se
 **Trigger**: User asks to send a message to Matrix or relay information.
 
 ### agenc-tasks
-Orchestrate Solana agent swarms via AgenC — create/claim/complete tasks, policy checks, ZK proofs.
+Orchestrate Solana agent swarms via AgenC â€” create/claim/complete tasks, policy checks, ZK proofs.
 
 **Trigger**: User mentions tasks, swarm, orchestration, or AgenC.
 
@@ -89,9 +89,9 @@ Lightweight key-value memory via the HEDGEHOG service (separate from SpacetimeDB
 
 AstroJOE proactively updates its own configuration as infrastructure changes:
 
-- **SOUL.md** � Updates its identity document when new tools, skills, or gateways are added
-- **Skills** � Creates and modifies SKILL.md files to reflect new service endpoints or API changes
-- **Dev Logs** � Writes Obsidian-format session logs to the OPTX-Cortex vault after significant changes
+- **SOUL.md** — Updates its identity document when new tools, skills, or gateways are added
+- **Skills** — Creates and modifies SKILL.md files to reflect new service endpoints or API changes
+- **Dev Logs** — Writes Obsidian-format session logs to the OPTX-Cortex vault after significant changes
 
 This self-maintenance protocol ensures AstroJOE's operational knowledge stays current without manual intervention.
 
@@ -101,8 +101,8 @@ Place a new directory with a `SKILL.md` file in the skills mount:
 
 ```
 skills/
-├── my-new-skill/
-│   └── SKILL.md
+â”œâ”€â”€ my-new-skill/
+â”‚   â””â”€â”€ SKILL.md
 ```
 
 The skill will be discovered automatically on the next agent restart. Skills execute via the terminal backend (Docker container with curl, python3, jq).

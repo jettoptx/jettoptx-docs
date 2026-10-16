@@ -15,7 +15,7 @@ import { D2Diagram } from "@/components/d2-diagram";
 | <span style={{color: "#60a5fa"}}>**Devices**</span> | Desktop / Workstation, Mobile, Seekers |
 | <span style={{color: "#eab308"}}>**Tailscale**</span> | WireGuard encrypted mesh tunnels |
 | <span style={{color: "#f43f5e"}}>**Edge Node**</span> | K3s, SpacetimeDB, HEDGEHOG, AARON, optional federation transport |
-| <span style={{color: "#60a5fa"}}>**Orchestration**</span> | AstroJOE (Hermes Agent in Docker — dual-instance: edge-node primary + containerized secondary), Workspace UI, AgenC Coordinator |
+| <span style={{color: "#60a5fa"}}>**Orchestration**</span> | AstroJOE (agent runtime in Docker — dual-instance: edge-node primary + containerized secondary), Workspace UI, AgenC Coordinator |
 | <span style={{color: "#eab308"}}>**Cloud**</span> | Vercel, Convex, Solana, xAI Grok |
 
 ## Edge Node — Validator Services
@@ -31,8 +31,8 @@ import { D2Diagram } from "@/components/d2-diagram";
 
 | Service | Role |
 |---------|------|
-| **AstroJOE** | Primary agent brain — [Hermes Agent](https://github.com/NousResearch/hermes-agent) in Docker, Grok 4.20 via HEDGEHOG. Dual-instance: edge-node primary + containerized secondary. |
-| **Hermes Workspace** | Agent workspace UI |
+| **AstroJOE** | Primary agent brain — [agent runtime](https://github.com/NousResearch/agent-runtime) in Docker, Grok via HEDGEHOG. Dual-instance: edge-node primary + containerized secondary. |
+| **agent Workspace** | Agent workspace UI |
 | **AgenC Coordinator** | SubJOE agent swarm orchestration |
 
 ### AgenC Swarm Pattern
@@ -41,7 +41,7 @@ AgenC coordinates multi-agent task execution:
 
 ```
 AgenC Coordinator
-  ├── AstroJOE (primary brain, Hermes Agent)
+  ├── AstroJOE (primary brain, agent runtime)
   ├── Edge JOE (lightweight relay, edge node)
   └── TraderJOE (market swarm, paper trading)
        ↓

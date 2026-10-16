@@ -1,10 +1,10 @@
 ---
 title: API Reference
-description: WebSocket RPC, REST endpoints, Tempo Wallet billing, and platform capabilities for OPTX integration.
+description: WebSocket RPC, REST endpoints, and platform surfaces for OPTX integration.
 icon: Code2
 ---
 
-The OPTX platform exposes a **WebSocket API** for real-time agent communication, **REST endpoints** for frontend integration, and a **Tempo Wallet** for metered HEDGEHOG API billing.
+The OPTX platform exposes a **WebSocket API** for real-time agent communication and **REST endpoints** for frontend integration.
 
 ## WebSocket RPC (JOE Agent)
 
@@ -21,34 +21,13 @@ Connect to the **JOE agent** via the DOJO Connections tab. Authentication requir
 {
   content: "JOE's response text",
   tensor: "COG/EMO/ENV classification",
-  poa_score: 0.85,  // Proof-of-Attention attestation score
+  cstb_score: 0.85,  // CSTB attestation score
 }
-
-// Wallet queries (admin only)
-{ type: "wallet_status" }   // → balances + attestation
-{ type: "wallet_metadata" } // → ERC-8004 agent identity
-{ type: "x402_policy" }     // → payment policy
-{ type: "bridge_status" }   // → Solana attestation / vault status
 ```
 
 ## Platform Capabilities
 
-Core platform capabilities available to integrated applications:
-
-```json
-{
-  "capabilities": [
-    "gaze_data_storage",
-    "gaze_data_retrieval",
-    "gaze_pattern_analysis",
-    "context_awareness",
-    "ai_chat",
-    "usage_analytics",
-    "tempo_billing",
-    "task_escrow"
-  ]
-}
-```
+Integrated applications use documented REST and WebSocket surfaces (gaze attestation, chat, task orchestration). Capability probing for private gateways is not published here — see [MCP (hedgehog)](/docs/astrojoe/hedgehog) for the agent porch.
 
 ## REST Endpoints
 
@@ -57,11 +36,11 @@ Core platform capabilities available to integrated applications:
 | **POST** | `/api/gaze/store` | Submit gaze tensor data for attestation |
 | **GET** | `/api/gaze/history` | Retrieve gaze session history |
 | **POST** | `/api/verify-session` | Verify subscription and access tier |
-| **GET** | `/api/attestation/status` | Check PoA attestation progress |
+| **GET** | `/api/attestation/status` | Check CSTB attestation progress |
 
-## Hermes OPTX API (v0.4.0)
+## Agent API bridge
 
-FastAPI bridge for Hermes Agent v0.12+ (target v0.17). Proxies `/v1/*` to upstream gateway; adds tasks, SpacetimeDB memory, and Tempo billing. Payment-gated via MPP when enabled.
+Session, skills, memory, and task routes live behind the authenticated agent bridge. Public docs list the product surfaces only — not admin wallet types or internal capability dumps. See [JOE](/docs/astrojoe) and [MCP (hedgehog)](/docs/astrojoe/hedgehog).
 
 ### Sessions
 
@@ -114,47 +93,9 @@ FastAPI bridge for Hermes Agent v0.12+ (target v0.17). Proxies `/v1/*` to upstre
 
 ---
 
-## Tempo Wallet
+## Wallet & escrow
 
-The **Tempo Wallet** is the OPTX payment and billing layer. Every HEDGEHOG API call (Grok inference) is metered — the caller pays the xAI inference cost plus a **$0.08 OPTX margin** per call.
-
-### Metered API Billing
-
-| Method | Path | Description |
-|--------|------|-------------|
-| **POST** | `/api/wallet/tempo/call` | Metered HEDGEHOG call — pay-per-inference |
-| **GET** | `/api/wallet/tempo/usage` | Billing history and totals (per caller) |
-| **GET** | `/api/wallet/tempo/pricing` | Current pricing and supported models |
-
-#### Tempo Call Example
-
-```typescript
-const response = await fetch("/api/wallet/tempo/call", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    caller_id: "<caller-wallet-or-api-key>",
-    model: "grok-4.20-multi-agent-beta-0309",
-    prompt: "Analyze this gaze pattern for authentication",
-    max_tokens: 2048,
-    tools: ["web_search"],
-  }),
-});
-
-// Response includes billing receipt
-{
-  "call_id": "tempo-a1b2c3d4",
-  "result": { "role": "assistant", "content": "..." },
-  "usage": { "prompt_tokens": 150, "completion_tokens": 420, "total_tokens": 570 },
-  "billing": {
-    "xai_cost_usd": 0.00171,
-    "optx_margin_usd": 0.08,
-    "total_usd": 0.08171,
-    "token": "OPTX"
-  },
-  "latency_ms": 1240.5
-}
-```
+Metered inference billing and escrow settle on-chain with gaze verification. Exact margin and model SKUs are not published on the public docs site — use the live pricing endpoint in a signed-in environment.
 
 ### Wallet Status
 
@@ -183,15 +124,6 @@ Create (locked) → Task Completed → Release (gaze-verified) → On-chain sett
                 → TTL expired    → Expired → Refund
 ```
 
-### Pricing
-
-| Item | Cost |
-|------|------|
-| **xAI inference** | ~$0.003 per 1K tokens (Grok 4.20) |
-| **OPTX margin** | $0.08 per call (flat) |
-| **Payment token** | $OPTX (Solana devnet) |
-| **Supported models** | `grok-4.20-multi-agent-beta-0309`, `grok-4.20-0309-reasoning`, `grok-4-1-fast-reasoning` |
-
 ---
 
 ## System Endpoints
@@ -200,11 +132,10 @@ Create (locked) → Task Completed → Release (gaze-verified) → On-chain sett
 |--------|------|------|-------------|
 | **GET** | `/health` | None | Health check + upstream connectivity |
 | **GET** | `/api/gateway-status` | None | Feature flags and enhanced mode status |
-| **ALL** | `/v1/*` | MPP | Passthrough proxy to Hermes Agent |
+| **ALL** | `/v1/*` | MPP | Passthrough proxy to the agent gateway |
 
 ## Related
 
 - [AstroJOE](/docs/astrojoe) — Agent architecture
-- [Hermes API](/docs/astrojoe/api) — Hermes Agent sessions, skills, memory
-- [HEDGEHOG](/docs/astrojoe/hedgehog) — Edge AI gateway
+- [MCP (hedgehog)](/docs/astrojoe/hedgehog) — Edge AI / MCP porch
 - [On-Chain Addresses](/docs/getting-started/on-chain-addresses) — Token addresses

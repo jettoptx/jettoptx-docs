@@ -133,25 +133,6 @@ export function SiteFooter() {
               </span>
               <ArrowUpRight size={16} />
             </a>
-            <p className="mt-3 text-[11px] font-mono uppercase tracking-widest text-fd-muted-foreground/70">
-              XDX · DMs · talk to JOE
-            </p>
-            <a
-              href={HOUSE.GROUP_INVITE}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-fd-muted-foreground hover:text-orange-400"
-            >
-              Join the Space Cowboys group
-              <ArrowUpRight size={12} />
-            </a>
-            <a
-              href={HOUSE.EMAIL}
-              className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-mono text-fd-muted-foreground hover:text-orange-400"
-            >
-              <Check size={12} className="text-orange-500" />
-              joe@jettoptics.ai
-            </a>
             <div className="mt-6 flex flex-col gap-2.5 border-t border-fd-border pt-5">
               {HOUSE_LEGAL.map((link) => (
                 <a

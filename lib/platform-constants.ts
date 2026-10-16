@@ -43,5 +43,5 @@ export const GITHUB_REPOS = {
   saas: "https://github.com/jettoptx/jettoptx-saas",
   jtxTrade: "https://github.com/jettoptx/jettoptx-jtx-trade",
   jettauth: "https://github.com/jettoptx/jettoptx-jettauth",
-  hermesApi: "https://github.com/jettoptx/jettoptx-hermes-api",
+  joeAgentApi: "https://github.com/jettoptx/joe-agent-api",
 } as const;
