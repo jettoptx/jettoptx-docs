@@ -103,13 +103,13 @@ description: Version history and release notes for the OPTX ecosystem.
 
 ---
 
-## 2026-06-29 — v2.1.2: Hermes v0.17 alignment
+## 2026-06-29 — v2.1.2: agent v0.17 alignment
 
 ### Changed
-- **[Hermes Integration](/docs/astrojoe/hermes-features)** rewritten for upstream **Hermes Agent v0.17.0** (`v2026.6.19`) — native `/v1/runs`, `/v1/capabilities`, bridge vs gateway split
-- **[Hermes OPTX API](/docs/astrojoe/api)** reframed as active public bridge (jettoptx-hermes-api v0.4.0), not deprecated mirror
-- **jettoptx-hermes-api** README + capability probing updated for v0.12–v0.17 gateway surface
-- **Ecosystem** — hermes-api listed as public bridge targeting Hermes v0.17
+- **[agent Integration](/docs/astrojoe/agent-features)** rewritten for upstream **agent runtime v0.17.0** (`v2026.6.19`) — native `/v1/runs`, `/v1/capabilities`, bridge vs gateway split
+- **[JOE Agent API](/docs/astrojoe/api)** reframed as active public bridge (joe-agent-api v0.4.0), not deprecated mirror
+- **joe-agent-api** README + capability probing updated for v0.12–v0.17 gateway surface
+- **Ecosystem** — agent-api listed as public bridge targeting agent v0.17
 - **Skills** — unpinned stale v0.8.0 skill count; link to upstream Skills Hub
 
 ---
@@ -141,7 +141,7 @@ description: Version history and release notes for the OPTX ecosystem.
 - **JTX v2** (`JTXGnx83…`) and **mainnet DePIN** (`85sqs4up…`) addresses across all address pages
 - All GitHub links updated to `jettoptx-*` canonical repo names
 - **JETT Auth / xChat Native** — Privy-primary for DOJO; `@jettoptx/auth` for integrators
-- **Hermes API** — deprecation notice; points to upstream Hermes Agent
+- **agent API** — deprecation notice; points to upstream agent runtime
 - **Bridge Flow** — Solana-native attestation only (XRPL/LayerZero prose removed)
 - **MOA graph** — removed ghost matrix edges; fixed bridge-flow node description
 
@@ -165,8 +165,8 @@ description: Version history and release notes for the OPTX ecosystem.
 
 ### Changed
 - **Light-mode burnt orange theme.** Refactored 22 hardcoded `rgb(255, 105, 0)` usages to `var(--color-orange-500)` across `app/globals.css`, header (`app/docs/layout.tsx`), footer (`components/footer.tsx`), AGENTS banner (`components/agent-banner.tsx`), DOCS RULES panel (`components/docs-rules-panel.tsx`), and body links (`components/mdx-link.tsx`). Added `:root:not(.dark)` override to a burnt brick (`rgb(220, 78, 31)`) that matches the JETT OPTICS poster palette. Dark mode keeps the neon `#FF6900` via the `:root` default. `--color-orange-400` also overridden in light mode (`rgb(232, 105, 60)`) for matching link-hover states.
-- **Ecosystem repo links** updated to `jettoptx-*` canonical names (org rename from `joe-*` completed). GitHub still redirects the old slugs but the new links skip the hop. Order in the footer REPOS column: `jettoptx-aaron-router`, `jettoptx-cstb-depin`, `jettoptx-docs`, `hermes-xai-oauth-wsl` (the non-org-prefixed companion tool at the bottom).
-- **Ecosystem swap.** `jettoptx-hermes-api` (degraded) replaced by `hermes-xai-oauth-wsl` in the footer REPOS column and README ecosystem table.
+- **Ecosystem repo links** updated to `jettoptx-*` canonical names (org rename from `joe-*` completed). GitHub still redirects the old slugs but the new links skip the hop. Order in the footer REPOS column: `jettoptx-aaron-router`, `jettoptx-cstb-depin`, `jettoptx-docs`, `agent-xai-oauth-wsl` (the non-org-prefixed companion tool at the bottom).
+- **Ecosystem swap.** `joe-agent-api` (degraded) replaced by `agent-xai-oauth-wsl` in the footer REPOS column and README ecosystem table.
 
 ### Security
 - **IP scrub for public release.** Scrubbed proprietary polynomial terminology across `/docs/protocol/*` (struct fields, TS interfaces, reducer args) and reworded the ecosystem table row for the astroknots repo.
@@ -179,7 +179,7 @@ description: Version history and release notes for the OPTX ecosystem.
 - Every shipped change MUST update both the footer changelog block (`components/footer.tsx`) AND this long-form page in the same session — either in the same commit as the work or as an immediate follow-up. Applies to LLMs, VLMs, and human contributors equally.
 - Also fixed the stale "Last updated: April 30, 2026 — v2.0.0" line in the footer (now correctly reads v2.0.2).
 - Style rule #8 updated to warn against hardcoding `rgb(255, 105, 0)` — agents should use `var(--color-orange-500)` so the burnt-brick light-mode override cascades.
-- Brand-block GitHub icon (footer top-left, next to the OPTX wordmark + tagline) repointed from `jettoptx/optx-hermes-api` (a stale repo path that no longer existed) to the org root `https://github.com/jettoptx` — visitors land on the public repo list instead of a 404.
+- Brand-block GitHub icon (footer top-left, next to the OPTX wordmark + tagline) repointed from `jettoptx/optx-agent-api` (a stale repo path that no longer existed) to the org root `https://github.com/jettoptx` — visitors land on the public repo list instead of a 404.
 
 ---
 
@@ -221,7 +221,7 @@ description: Version history and release notes for the OPTX ecosystem.
 - **On-Chain Bridge** — EVM (`evm-layerzero`) and XRPL (`xrpl-wormhole`) pages retired pending re-implementation.
 - **Matrix federation** — reframed as **optional transport** for AstroJOE only; not part of JettChat dual-mode core.
 - **ERC-8004 Agent Wallet** — labeled **Roadmap**; design intent retained, no contract is deployed.
-- **Hermes versioning** — pinned `v0.8.0` references unpinned in prose; doc-site convention is now to link to [hermes-agent releases](https://github.com/NousResearch/hermes-agent/releases) rather than embed version numbers. Local canonical Hermes version is **v0.12.0** (NousResearch tag `2026.4.30`, "The Curator release"). See "Hermes v0.12.0 alignment" sub-entry below.
+- **agent versioning** — pinned `v0.8.0` references unpinned in prose; doc-site convention is now to link to [agent-runtime releases](https://github.com/NousResearch/agent-runtime/releases) rather than embed version numbers. Local canonical agent version is **v0.12.0** (NousResearch tag `2026.4.30`, "The Curator release"). See "agent v0.12.0 alignment" sub-entry below.
 - **JOE topology** — explicitly **dual-instance**: edge-node primary (runs AARON + HEDGEHOG + SpacetimeDB) + containerized secondary for redundancy.
 - **Docs domain** — README and intra-doc references updated from `optxspace.dev` → `jettoptx.dev` (canonical, per JETT Hub footer).
 
@@ -243,46 +243,46 @@ The dual-mode framing landed in coordinated PRs across public repos. All update 
 
 Additional private-repo PRs were shipped in the same batch but are not listed here.
 
-### Hermes v0.12.0 alignment
+### agent v0.12.0 alignment
 
-The OPTX deployment now tracks **Hermes Agent v0.12.0** (NousResearch tag `2026.4.30`) — *"The Curator release."* Released 2026-04-30 (1,096 commits, 550 PRs, 213 contributors since v0.11.0). Full feature breakdown in the new [Hermes v0.12.0 Features](/docs/astrojoe/hermes-features) page. Headline features that affect AstroJOE / JOE deployments on the [agent mesh](/docs/architecture/topology):
+The OPTX deployment now tracks **agent runtime v0.12.0** (NousResearch tag `2026.4.30`) — *"The Curator release."* Released 2026-04-30 (1,096 commits, 550 PRs, 213 contributors since v0.11.0). Full feature breakdown in the new [agent v0.12.0 Features](/docs/astrojoe/agent-features) page. Headline features that affect AstroJOE / JOE deployments on the [agent mesh](/docs/architecture/topology):
 
 - **Autonomous Curator** — background process grades, prunes, and consolidates the skill library without operator intervention. Aligns with the existing AstroJOE self-maintenance protocol.
-- **Self-improvement loop** substantially upgraded; review summaries surface in the TUI transcript and via `hermes curator status` (most-used + least-used skills).
+- **Self-improvement loop** substantially upgraded; review summaries surface in the TUI transcript and via `agent curator status` (most-used + least-used skills).
 - **Four new inference providers** added — broader fallback options on top of HEDGEHOG's Grok routing.
 - **Microsoft Teams + Yuanbao** added as the 18th and 19th messaging platforms (joining the existing Matrix/X/etc. set).
 - **Spotify + Google Meet** native integrations.
 - **ComfyUI + TouchDesigner-MCP** bundled by default — these MCP servers are now first-class for AstroJOE on the agent mesh without manual installation.
 - **Humanizer skill** ported from earlier branches.
-- **~57% TUI cold-start reduction** — perceptibly faster `hermes` launch on edge nodes.
+- **~57% TUI cold-start reduction** — perceptibly faster `agent` launch on edge nodes.
 
-Pinned version references in the docs site were unpinned in prose during this overhaul (link to [hermes-agent releases](https://github.com/NousResearch/hermes-agent/releases) instead). Where a version *is* required for a hard dependency claim, use **v0.12.0**.
+Pinned version references in the docs site were unpinned in prose during this overhaul (link to [agent-runtime releases](https://github.com/NousResearch/agent-runtime/releases) instead). Where a version *is* required for a hard dependency claim, use **v0.12.0**.
 
 ---
 
-## 2026-04-11 — Hermes v0.8.0 federation transport
+## 2026-04-11 — agent v0.8.0 federation transport
 
 ### Added
-- **Native federation transport** — AstroJOE auto-responds in the operator command room via Hermes built-in federation support
+- **Native federation transport** — AstroJOE auto-responds in the operator command room via agent built-in federation support
 - **Self-maintenance protocol** — AstroJOE now proactively updates SOUL.md, skills, and dev logs as infrastructure changes
-- **Hermes harness documentation** — SOUL.md includes full tool inventory, skill system, gateway config, MCP integrations
+- **agent harness documentation** — SOUL.md includes full tool inventory, skill system, gateway config, MCP integrations
 - **SOL funding scripts** — `scripts/fund-agents.sh` and `scripts/check-balances.sh` for agent wallet management
 - **Dev log automation** — AstroJOE writes Obsidian-format session logs to OPTX-Cortex vault
 
 ### Changed
-- **Hermes Agent v0.7.0 → v0.8.0** (NousResearch tag `v2026.4.8`)
+- **agent runtime v0.7.0 → v0.8.0** (NousResearch tag `v2026.4.8`)
 - **Matrix identity**: Agent handle reassigned (AstroJOE is the primary agent)
-- **HEDGEHOG MCP**: Removed from Hermes `mcp_servers` config (REST-only, no /mcp endpoint). LLM routing continues via `OPENAI_BASE_URL`. Custom skills (`hedgehog-websearch`, `hedgehog-memory`) handle tool access.
+- **HEDGEHOG MCP**: Removed from agent `mcp_servers` config (REST-only, no /mcp endpoint). LLM routing continues via `OPENAI_BASE_URL`. Custom skills (`hedgehog-websearch`, `hedgehog-memory`) handle tool access.
 - **Docker volume mount**: Config files now copied from read-only host mount into writable named volume at boot, enabling runtime config changes (e.g., `/sethome`)
 - **Edge JOE mention filter**: Strict `@joe:` prefix matching instead of broad keyword match
 
 ### Fixed
 - `/sethome` failing with `[Errno 16] Device or resource busy` — bind mount on named volume prevented atomic writes
-- Hermes dashboard showing "unknown" model — config.yaml not propagating into container
+- agent dashboard showing "unknown" model — config.yaml not propagating into container
 - `joe.ps1` launcher syntax errors — Unicode em-dashes replaced with ASCII
 
 ### Infrastructure
-- **AstroJOE**: Containerized orchestration host, Hermes (current release)
+- **AstroJOE**: Containerized orchestration host, agent (current release)
 - **Federation transport**: Optional inter-agent communication
 - **HEDGEHOG**: REST gateway on edge node
 

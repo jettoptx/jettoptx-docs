@@ -28,7 +28,7 @@ export function SiteFooter() {
           <div className="flex flex-col lg:col-span-4">
             <Link href="/" className="flex items-center gap-3">
               <Image
-                src="/techforce_OPTX.png"
+                src="/brand/optx-footer-mark-128.png"
                 alt="OPTX · Jett Optics"
                 width={56}
                 height={56}
@@ -123,35 +123,19 @@ export function SiteFooter() {
           <div className="lg:col-span-3">
             <h4 className={titleClass}>Get started</h4>
             <a
-              href={HOUSE.JTX_CHAT}
+              href={HOUSE.GROUP_INVITE}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center justify-between rounded-md border border-fd-border px-5 py-4 text-sm font-semibold text-fd-foreground hover:border-orange-500/60"
             >
               <span className="font-[family-name:var(--font-orbitron)] tracking-[0.08em]">
-                OPEN JTX.CHAT
+                JOIN X GROUP CHAT
               </span>
               <ArrowUpRight size={16} />
             </a>
             <p className="mt-3 text-[11px] font-mono uppercase tracking-widest text-fd-muted-foreground/70">
-              XDX · DMs · talk to JOE
+              SPACE COWBOYS · X CHAT
             </p>
-            <a
-              href={HOUSE.GROUP_INVITE}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-flex items-center gap-1.5 text-[11px] font-mono uppercase tracking-widest text-fd-muted-foreground hover:text-orange-400"
-            >
-              Join the Space Cowboys group
-              <ArrowUpRight size={12} />
-            </a>
-            <a
-              href={HOUSE.EMAIL}
-              className="mt-5 inline-flex items-center gap-1.5 text-[11px] font-mono text-fd-muted-foreground hover:text-orange-400"
-            >
-              <Check size={12} className="text-orange-500" />
-              joe@jettoptics.ai
-            </a>
             <div className="mt-6 flex flex-col gap-2.5 border-t border-fd-border pt-5">
               {HOUSE_LEGAL.map((link) => (
                 <a

@@ -15,8 +15,7 @@ export const HOUSE = {
   PRIVACY: "https://jettoptics.ai/privacy",
   SECURITY: "https://jettoptics.ai/security",
   GROUP_INVITE:
-    "https://x.com/messages/compose?recipient_id=1980015353108344832&text=" +
-    encodeURIComponent("I'd like to join the Space Cowboys group message"),
+    "https://x.com/i/chat/group_join/g2105035852711616791/OMQphx900G",
 } as const
 
 export const HOUSE_NAV = [

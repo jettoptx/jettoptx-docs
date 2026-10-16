@@ -4,7 +4,7 @@ title: Task Orchestration
 description: Task lifecycle, DAG workflows, swarm decomposition, and gaze-gated policy enforcement.
 ---
 
-AstroJOE uses **hermes-optx-api** for task orchestration — a native coordination layer backed by SpacetimeDB that replaces external runtime dependencies.
+AstroJOE uses **JOE Agent API** for task orchestration — a native coordination layer backed by SpacetimeDB that replaces external runtime dependencies.
 
 ## Task Lifecycle
 
@@ -91,7 +91,7 @@ When a task completes, the orchestrator automatically checks if any dependent ta
 Tasks with `gaze_required: true` require AARON Router gaze verification before claiming:
 
 1. Agent attempts to claim the task
-2. hermes-optx-api checks `gaze_required` flag
+2. JOE Agent API checks `gaze_required` flag
 3. If true, creates an AARON session with a QR challenge
 4. User performs gaze sequence (4-6 positions, ≥500ms hold)
 5. AARON classifies COG/EMO/ENV tensors and scores entropy

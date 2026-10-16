@@ -1,5 +1,9 @@
 {
-  "title": "Hedgehog",
+  "title": "JOE \u2014 Jett Optics Engine",
   "icon": "BrainCircuit",
-  "pages": ["hedgehog", "index"]
+  "pages": [
+    "index",
+    "hedgehog",
+    "api"
+  ]
 }

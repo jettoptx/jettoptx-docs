@@ -1,155 +1,49 @@
 ---
 icon: Code
-title: Hermes OPTX API
-description: FastAPI bridge between JettChat and Hermes Agent — SSE chat, SpacetimeDB memory, tasks, Tempo billing. Targets Hermes v0.17.
+title: JOE Agent API
+description: FastAPI bridge for JettChat — SSE chat, SpacetimeDB memory, tasks, and wallet billing.
 ---
-
-The **Hermes OPTX API** ([jettoptx-hermes-api](https://github.com/jettoptx/jettoptx-hermes-api) v0.4.0) is a FastAPI **sidecar** beside upstream [Hermes Agent](https://github.com/NousResearch/hermes-agent). Hermes v0.12+ provides native sessions, streaming, `/v1/runs`, and MCP via its gateway on port **8642**; this bridge on port **8643** adds JettChat SSE formatting, SpacetimeDB memory, task orchestration, and Tempo wallet billing.
-
-Integration guide: [Hermes Agent Integration](/docs/astrojoe/hermes-features) · Upstream tracked release: **v0.17.0** (`v2026.6.19`)
-
-## Architecture split
-
-| Concern | Owner |
-|---------|-------|
-| Sessions, `/v1/chat/completions`, `/v1/runs`, MCP config | **Hermes gateway** (:8642) |
-| JettChat SSE envelope, tasks, STDB memory, Tempo/MPP | **hermes-optx-api** (:8643) |
 
 import { D2Diagram } from "@/components/d2-diagram";
 
-<D2Diagram src="/diagrams/hermes-optx-api.svg" alt="Hermes OPTX API Architecture — JettChat to API sidecar to Hermes Agent with all endpoint routes" caption="Hermes OPTX API v0.4.0 — bridge + upstream gateway" />
+The **JOE Agent API** is a FastAPI sidecar that extends the agent runtime with enhanced endpoints for JettChat. Open source under the jettoptx org.
 
-## Gateway capability probing
+## Why a Sidecar?
 
-At startup the bridge probes upstream for `/v1/capabilities`, `/health/detailed`, and `/api/sessions`:
+JettChat expects `/api/sessions`, `/api/skills`, `/api/memory`, `/api/config`, and SSE streaming chat endpoints. The JOE Agent API sits alongside the agent as a sidecar — extending capabilities without modifying the core.
 
-```bash
-curl http://localhost:8643/api/gateway-status
-```
+## Architecture
 
-```json
-{
-  "status": "connected",
-  "mode": "enhanced-hermes",
-  "version": "0.4.0",
-  "upstream_version": "0.17.0",
-  "upstream_target": "0.17.0",
-  "features": {
-    "sessions_api_upstream": true,
-    "runs_api_upstream": true,
-    "capabilities_endpoint": true,
-    "health_detailed": true,
-    "chat_stream": true,
-    "tasks": true,
-    "wallet": true,
-    "tempo_billing": true,
-    "mcp_servers": true
-  }
-}
-```
+<D2Diagram src="/diagrams/joe-agent-api.svg" alt="JOE Agent API Architecture — JettChat to API sidecar to agent with endpoint routes" caption="JOE Agent API Architecture" />
 
-| Mode | Description |
-|------|-------------|
-| **enhanced-hermes** | Hermes v0.12+ gateway with sessions and/or capabilities |
-| **portable** | Basic `/health` only |
-| **disconnected** | Upstream unreachable; local bridge routes may still respond |
+## Key Endpoints
 
-## SSE Streaming Chat
+### SSE Streaming Chat
 
-Primary JettChat integration — wraps upstream session streaming in a fixed SSE event shape.
-
-### New Session + Stream
+The primary integration point for JettChat. Sends a user message and streams the response as Server-Sent Events.
 
 ```bash
-curl -N -X POST http://localhost:8643/api/sessions/new/chat/stream \
+curl -N -X POST http://localhost:8643/api/sessions/{id}/chat/stream \
   -H "Content-Type: application/json" \
-  -d '{"message": "What is OPTX?"}'
+  -d '{"message": "Tell me more"}'
 ```
 
-### Stream Into Existing Session
+### Gateway Status
 
-```bash
-curl -N -X POST http://localhost:8643/api/sessions/abc123/chat/stream \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Tell me more", "model": "grok-4.20-0309-reasoning"}'
-```
+At startup, the API probes the upstream agent and exposes detected capabilities at `/api/gateway-status` (high-level flags only — no admin wallet types or gaze storage capability dumps).
 
-### SSE Event Format
-
-| Event | Data | Description |
-|-------|------|-------------|
-| `session` | `{session_id, status}` | Session created or opened |
-| `content` | `{content, session_id}` | Token chunk |
-| `done` | `{session_id, status}` | Stream complete |
-| `error` | `{error, session_id}` | Error occurred |
-
-Upstream also exposes `POST /api/sessions/{id}/chat/stream` and `POST /v1/runs` + `GET /v1/runs/{id}/events` — proxied through `/v1/*` on the bridge when clients use port 8643.
-
-## Bridge endpoints (OPTX-specific)
-
-### Sessions · Skills · Config
+### Wallet
 
 | Method | Path | Description |
 |--------|------|-------------|
-| `GET` | `/api/sessions` | List sessions |
-| `POST` | `/api/sessions/new/chat/stream` | Create + stream |
-| `GET` | `/api/skills` | List skills |
-| `GET/POST` | `/api/config` | Read/update Hermes config |
+| `POST` | `/api/wallet/tempo/call` | Metered HEDGEHOG API call (pay-per-inference) |
+| `GET` | `/api/wallet/tempo/usage` | Billing history and totals |
+| `GET` | `/api/wallet/tempo/pricing` | Current pricing (authenticated) |
 
-### Memory (pluggable backend)
+Exact OPTX margin and model SKUs are not listed on public docs.
 
-| Method | Path | Description |
-|--------|------|-------------|
-| `POST` | `/api/memory` | Store |
-| `POST` | `/api/memory/search` | Search |
-| `GET` | `/api/memory/stats` | Health |
+## Related
 
-Backends: `holographic` (default), `sqlite`, `spacetimedb` — see [Memory](/docs/astrojoe/memory).
-
-### Tasks · Wallet
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `POST` | `/api/tasks` | Create task |
-| `POST` | `/api/tasks/swarm` | DAG decomposition |
-| `POST` | `/api/wallet/tempo/call` | Metered HEDGEHOG call |
-| `POST` | `/api/wallet/escrow/release` | Gaze-gated release |
-
-Full tables: [API Reference](/docs/reference/api#hermes-optx-api)
-
-### Passthrough
-
-| Method | Path | Description |
-|--------|------|-------------|
-| `*` | `/v1/*` | Proxy to Hermes gateway (streaming-aware) |
-| `GET` | `/health` | Bridge + upstream probe |
-
-## Authentication
-
-| Credential | Result |
-|------------|--------|
-| Valid `API_KEY` in `Authorization: Bearer` | Subscriber access |
-| Valid MPP payment credential | Pay-per-request (Tempo) |
-| No credential, nothing configured | Open access |
-
-## Configuration
-
-| Variable | Default | Description |
-|----------|---------|-------------|
-| `HERMES_AGENT_URL` | `http://localhost:8642` | Hermes gateway |
-| `HERMES_HOME` | `~/.hermes` | Skills + config path |
-| `OPTX_API_PORT` | `8643` | Bridge port |
-| `MEMORY_BACKEND` | `holographic` | Memory backend |
-| `HEDGEHOG_URL` | — | Metered inference gateway |
-
-## Installation
-
-```bash
-git clone https://github.com/jettoptx/jettoptx-hermes-api
-pip install -e .
-hermes-optx-api --hermes-url http://localhost:8642
-```
-
-Requires Hermes Agent **v0.12.0+** (target **v0.17.0**). Install upstream: [hermes-agent.nousresearch.com/docs](https://hermes-agent.nousresearch.com/docs/)
-
-{/* Luke 18:31 */}
+- [JOE](/docs/astrojoe) — Agent overview
+- [MCP (hedgehog)](/docs/astrojoe/hedgehog) — MCP / gateway porch
+- [API Reference](/docs/reference/api) — Platform REST + WS surfaces

@@ -23,7 +23,7 @@ Each memory has:
 - **key**: Unique identifier
 - **value**: Content (string, can contain JSON)
 - **importance**: 1-10 score for retrieval priority
-- **source**: Where it came from (`hermes`, `aaron`, `matrix`, etc.)
+- **source**: Where it came from (`agent`, `aaron`, `matrix`, etc.)
 - **owner**: Agent that owns this memory
 
 ## Reducers (Write Operations)
@@ -39,7 +39,7 @@ Each memory has:
 | `end_session` | session_id, summary | Close a session |
 | `process_matrix_message` | room_id, sender, body, direction | Bridge Matrix message |
 
-## API Endpoints (via [hermes-optx-api](/docs/astrojoe/api) v0.4.0)
+## API Endpoints (via [JOE Agent API](/docs/astrojoe/api) v0.4.0)
 
 ```
 POST   /api/memory          — Store a memory
@@ -52,7 +52,7 @@ GET    /api/memory/stats     — Memory statistics + backend health
 
 ## Memory Backends
 
-The hermes-optx-api supports pluggable memory backends:
+The JOE Agent API supports pluggable memory backends:
 
 | Backend | Description | Default |
 |---------|-------------|---------|
