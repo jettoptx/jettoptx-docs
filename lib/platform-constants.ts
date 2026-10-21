@@ -17,7 +17,6 @@ export const DEPIN_PROGRAM_MAINNET = "85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxX
 export const POA_TRUST_DEVNET = "79nQsecDspUWxvAMyJvK36EUty4yEoP5ssLvHZuNiugF";
 /** Legacy DePIN program ID on devnet — superseded by POA_TRUST_DEVNET for live config. */
 export const DEPIN_PROGRAM_DEVNET = "91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq";
-export const JETT_VAULT_MAINNET = "JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7";
 
 export const PLATFORM_URLS = {
   docs: "https://jettoptx.dev",

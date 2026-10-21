@@ -22,11 +22,3 @@ Payment attestation triggers domain registration, NFT mint, or agent delegation 
 
 The MPP protocol enables autonomous agents to pay for AARON attestation services using **USDC** on Solana. Agent wallets submit x402 micropayments that are atomically settled alongside proof verification. Each agent payment can create an **AgentAcquisition PDA** on-chain, linking the payment to the authenticated user.
 
-Vault program: `JTX5uXTiZ1M3hJkjv5Cp5F8dr3Jc7nhJbQjCFmgEYA7`
-
-## 3c. Vault donations & receipts (Solana)
-
-Production settlement is **Solana-native**. Donations (SOL or USDC) generate on-chain **DonorReceipt** PDAs via `jett_vault`. Cross-chain XRP / Xahau / Wormhole paths from earlier docs are **retired** — see [On-Chain Bridge](/docs/on-chain-bridge).
-
-Receipt fields typically include donation amount, payment method, claim status, and any JTX / OPTX entitlements configured for the campaign.
-
