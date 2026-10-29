@@ -47,7 +47,6 @@ Full map: [Ecosystem Repos](https://jettoptx.dev/docs/reference/ecosystem)
 |-------|---------|---------|
 | $JTX v2 | `JTXGnx83s2QZ2MwYkRD1cBKrqQKSdG5oe8vSYW5Zjoe` | mainnet |
 | $OPTX Utility | `DSyauRAZwUd2BrTk3P8k2yUxxvcx5X4BBg3Gh3VbeRG3` | devnet |
-| $OPTX Meme | `BtaXqF4wbc2Ac8TigtmUPTrvbc1DUflsecbg9KAB1Utex` | mainnet (StonkFun / JTO) |
 | DePIN mainnet | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` | mainnet |
 
 ## Scripts
@@ -60,6 +59,6 @@ npm run build
 
 ## Current Version
 
-**v2.2.3** — Added mainnet **$OPTX Meme** CA (`BtaXqF4…1Utex`, StonkFun/Raydium, paired with JTO) alongside the devnet utility mint; split documented in on-chain-addresses.
+**v2.2.4** — On-chain addresses list $JTX v2 and the devnet $OPTX Utility mint.
 
 APACHE — use it, fork it, ship it.
