@@ -26,7 +26,7 @@ jettoptx-docs/
 1. Create `content/docs/<section>/<page>.mdx` with frontmatter (`title`, `description`, `icon`)
 2. Register in section `meta.json` and root `content/docs/meta.json` if new section
 3. Add node + edges to `lib/moa-registry.ts` (PATH_TO_NODE and PAGE_AGT derive automatically)
-4. Update changelog in `components/footer.tsx` and `content/docs/reference/changelog.mdx`
+4. Update `content/docs/reference/changelog.mdx`. If the public version changes, bump **Current Version** below. The footer has no changelog. Remove any `next.config.mjs` redirect that covers the new path.
 
 See [/docs/rules](https://jettoptx.dev/docs/rules) for the full agent/human walkthrough.
 
@@ -59,6 +59,6 @@ npm run build
 
 ## Current Version
 
-**v2.2.4** — On-chain addresses list $JTX v2 and the devnet $OPTX Utility mint.
+**v2.2.5** — JOE Agent API, skills, memory, and orchestration pages render again. DOCS Rules match `meta.json` plus the single changelog.
 
 APACHE — use it, fork it, ship it.

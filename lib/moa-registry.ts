@@ -93,7 +93,6 @@ export const MOA_NODES: MoaNode[] = [
   { id: "orchestration", label: "Orchestration", group: "astrojoe", agt: "COG", radius: 15, href: "/docs/astrojoe/orchestration", description: "Task lifecycle management with DAG workflows and swarm decomposition", subLabels: ["DAG Workflows", "Swarm Agents", "State Machine", "Gaze-Gated"], emo: 15, env: 15, cog: 70 },
   { id: "hedgehog-doc", label: "HEDGEHOG", group: "astrojoe", agt: "ENV", radius: 17, href: "/docs/astrojoe/hedgehog", description: "Multi-API AI gateway — Grok primary, MCP context bridge on edge", subLabels: ["Grok Gateway", "MCP Server", "12 Tools", "Edge Proxy"], emo: 20, env: 65, cog: 15 },
   { id: "agent-api", label: "agent API", group: "astrojoe", agt: "COG", radius: 14, href: "/docs/astrojoe/api", description: "joe-agent-api v0.4 bridge — SSE, tasks, Tempo billing to agent v0.17 gateway", subLabels: ["v0.4 Bridge", "SSE Streaming", "SpacetimeDB", "Upstream :8642"], emo: 10, env: 15, cog: 75 },
-  { id: "agent-features", label: "agent Integration", group: "astrojoe", agt: "COG", radius: 14, href: "/docs/astrojoe/agent-features", description: "agent runtime v0.17 integration — native gateway, MCP, bridge split", subLabels: ["v0.17.0", "/v1/runs", "Skills Hub", "MCP"], emo: 10, env: 25, cog: 65 },
 
   { id: "arch-flows", label: "Flows", group: "architecture", agt: "COG", radius: 17, href: "/docs/reference/architecture", description: "Architecture flow diagrams across the full OPTX stack", subLabels: ["Mermaid Diagrams", "Data Flows", "System Maps"], emo: 15, env: 20, cog: 65 },
   { id: "task-lifecycle", label: "Task Life", group: "architecture", agt: "COG", radius: 12, href: "/docs/reference/architecture", description: "Task creation through completion with state transitions", subLabels: ["Create → Claim → Execute", "Completion Proofs"], emo: 15, env: 15, cog: 70 },
@@ -116,7 +115,7 @@ export const MOA_NODES: MoaNode[] = [
   { id: "doc-index", label: "Index", group: "reference", agt: "COG", radius: 15, href: "/docs/reference", description: "Complete documentation index — every page classified by AGT tensor", subLabels: ["55+ Pages", "AGT Classification", "MOA Graph"], emo: 10, env: 10, cog: 80 },
   { id: "ecosystem", label: "Ecosystem", group: "reference", agt: "ENV", radius: 14, href: "/docs/reference/ecosystem", description: "All 16 jettoptx repos mapped to docs sections", subLabels: ["16 Repos", "Public vs Internal", "SDK Canonical"], emo: 25, env: 60, cog: 15 },
   { id: "changelog", label: "Changelog", group: "reference", agt: "COG", radius: 12, href: "/docs/reference/changelog", description: "Version history and release notes for the OPTX platform", subLabels: ["Version History", "Breaking Changes", "Migration Notes"], emo: 10, env: 10, cog: 80 },
-  { id: "docs-rules", label: "DOCS Rules", group: "reference", agt: "COG", radius: 12, href: "/docs/reference", description: "How to edit OPTX docs — MOA registration, AGT classification, changelog", subLabels: ["Agent Rules", "MOA Registry", "MDX Structure"], emo: 10, env: 10, cog: 80 },
+  { id: "docs-rules", label: "DOCS Rules", group: "reference", agt: "COG", radius: 12, href: "/docs/rules", description: "How to edit OPTX docs — MOA registration, section meta.json, redirects, changelog", subLabels: ["Agent Rules", "MOA Registry", "meta.json"], emo: 10, env: 10, cog: 80 },
 
   { id: "dojo", label: "DOJO", group: "dojo", agt: "ENV", radius: 19, href: "/docs/dojo", description: "Developer Operator Jett Optics — IDE, augment marketplace, jettoptx.chat", subLabels: ["Augment Marketplace", "Skill Composition", "JettChat Product"], emo: 25, env: 45, cog: 30 },
   { id: "mojo", label: "MOJO", group: "dojo", agt: "EMO", radius: 15, href: "/docs/dojo/mojo", description: "iOS app — first-gaze AGT attestation issuer, AARON handshake, Privy wallet", subLabels: ["ARKit Gaze", "Handoff Spec", "AGT Attestation", "Universal Links"], emo: 50, env: 35, cog: 15 },
@@ -160,6 +159,8 @@ export const MOA_EDGES: MoaEdge[] = [
   { source: "orchestration", target: "task-lifecycle" },
   { source: "orchestration", target: "swarm-dag" },
   { source: "hedgehog-doc", target: "edge-mcp" }, { source: "agent-api", target: "api-ref" },
+  { source: "agent-api", target: "hedgehog-doc" },
+  { source: "agent-api", target: "changelog" },
   { source: "arch-flows", target: "task-lifecycle" },
   { source: "arch-flows", target: "swarm-dag" },
   { source: "arch-flows", target: "gaze-policy" },
@@ -261,12 +262,6 @@ export const MOA_EDGES: MoaEdge[] = [
   { source: "jett-auth", target: "gaze" },
   { source: "jett-auth", target: "wallet" },
   { source: "jett-auth", target: "what-is-optx" },
-
-  { source: "agent-features", target: "astrojoe" },
-  { source: "agent-features", target: "agent-api" },
-  { source: "agent-features", target: "hedgehog-doc" },
-  { source: "agent-features", target: "edge-mcp" },
-  { source: "agent-features", target: "changelog" },
 
   { source: "ecosystem", target: "doc-index" },
   { source: "ecosystem", target: "what-is-optx" },

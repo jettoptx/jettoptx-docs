@@ -21,9 +21,11 @@ Connect to the **JOE agent** via the DOJO Connections tab. Authentication requir
 {
   content: "JOE's response text",
   tensor: "COG/EMO/ENV classification",
-  cstb_score: 0.85,  // CSTB attestation score
+  cstb_score: 0.85,  // legacy score field — not a CompuStable / $CSTB product
 }
 ```
+
+`cstb_score` and `/api/attestation/status` keep legacy names. **CompuStable / $CSTB is not a product.** See [On-Chain Addresses](/docs/getting-started/on-chain-addresses).
 
 ## Platform Capabilities
 
@@ -35,8 +37,8 @@ Integrated applications use documented REST and WebSocket surfaces (gaze attesta
 |--------|------|-------------|
 | **POST** | `/api/gaze/store` | Submit gaze tensor data for attestation |
 | **GET** | `/api/gaze/history` | Retrieve gaze session history |
-| **POST** | `/api/verify-session` | Verify subscription and access tier |
-| **GET** | `/api/attestation/status` | Check CSTB attestation progress |
+| **POST** | `/api/verify-session` | Verify an authenticated session. Hold-threshold access tiers are deprecated. |
+| **GET** | `/api/attestation/status` | Attestation progress (legacy path; not a $CSTB product) |
 
 ## Agent API bridge
 
