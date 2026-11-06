@@ -6,6 +6,26 @@ description: Version history and release notes for the OPTX ecosystem.
 
 ---
 
+## 2026-11-06 — v2.2.5: JOE runbooks and contributor rules
+
+### Fixed
+- **JOE pages render again.** Permanent redirects had sent `/docs/astrojoe/api`, `/docs/astrojoe/skills`, `/docs/astrojoe/memory`, and `/docs/astrojoe/orchestration` to the HEDGEHOG porch even after those files were still the runbooks and the JOE overview linked them. The slugs are back in the JOE sidebar. HEDGEHOG links to them.
+- **`/docs/rules` renders again.** It had redirected to the reference index. The DOCS Rules graph node now points at `/docs/rules` instead of sharing `/docs/reference` with the index (shared `href` values overwrite `PATH_TO_NODE`).
+- **`/docs/astrojoe/agent-features`** has no page in this repo. It redirects to [JOE Agent API](/docs/astrojoe/api). The Map of Augments node for it is removed.
+- **API reference labels.** `cstb_score` and `/api/attestation/status` are documented as legacy names. CompuStable / $CSTB is not a product. `POST /api/verify-session` no longer describes hold-threshold access tiers.
+
+### Changed
+- **Contributor rules** (`/docs/rules` and `components/docs-rules-content.ts`) match the code: a page must be listed in section `meta.json`, redirects in `next.config.mjs` hide MDX, and the only changelog is `content/docs/reference/changelog.mdx` plus the README version line. The footer changelog block was removed with house chrome and is not a second surface.
+
+---
+
+## 2026-10-29 — v2.2.4: public meme mint removed
+
+### Removed
+- The public mainnet meme mint and its StonkFun URL are gone from the on-chain address table, the README canonical list, and `lib/platform-constants.ts` (`OPTX_MINT_MEME_MAINNET`, `PLATFORM_URLS.optxMeme`). Published addresses are **$JTX v2**, the devnet **$OPTX Utility** mint, and the PoA program IDs. Do not treat a meme ticker as the utility mint.
+
+---
+
 ## 2026-10-20 — jett_vault retired
 
 ### Removed

@@ -28,7 +28,7 @@ icon: Rocket  # Lucide icon name for sidebar
 ---
 ```
 
-Fumadocs auto-discovers pages from the file tree — no manual route config needed for sub-pages.
+Frontmatter does not put the page in the sidebar. Add the slug to that section's `meta.json` `pages` array. A file left out of the array can still be routed, but it stays off the sidebar. `next.config.mjs` redirects run first: a redirected path never shows its MDX file.
 
 ### 2. AGT Tensor Classification
 
@@ -82,13 +82,17 @@ No manual step — `augment-space-btn.tsx` and `mdx-link.tsx` import `PATH_TO_NO
 
 ### 7. Navigation Ordering
 
-Sub-pages are auto-discovered by Fumadocs. If adding a **new top-level section**, add its folder name to `content/docs/meta.json`:
+Add every page slug to its section `meta.json` `pages` array. Order in the array is sidebar order. If adding a **new top-level section**, add its folder name to `content/docs/meta.json`:
 
 ```json
 {
-  "pages": ["dojo", "getting-started", ..., "your-section"]
+  "pages": ["dojo", "getting-started", "...", "your-section"]
 }
 ```
+
+### Redirects override the page
+
+`redirects()` in `next.config.mjs` wins over the MDX route. Before you publish or restore a page, delete any redirect whose `source` is that path. Leave redirects in place for retired URLs only: Hermes features, `/docs/astrojoe/agent-features` (now the [JOE Agent API](/docs/astrojoe/api)), access-tier URLs, folded architecture pages, and the JettChat mode splits.
 
 ### 8. Style & Naming
 
@@ -100,18 +104,17 @@ Sub-pages are auto-discovered by Fumadocs. If adding a **new top-level section**
 
 ### 9. Changelog Currency (NON-NEGOTIABLE)
 
-**Every shipped change MUST be reflected in BOTH changelog surfaces in the same session.** Applies to LLMs, VLMs, and human contributors equally — no exceptions.
+**Every shipped change MUST update the changelog in the same session.** Applies to LLMs, VLMs, and human contributors equally.
 
-The two surfaces:
+The changelog is [`content/docs/reference/changelog.mdx`](/docs/reference/changelog), with `### Added`, `### Changed`, `### Fixed`, `### Security`, and `### Process` subsections as needed. When the public version changes, bump the **Current Version** line in `README.md` in the same change.
 
-1. **Footer changelog block** — the `<details><summary>Changelog</summary>` `<li>` entries in `components/footer.tsx`. Also bump the *"Last updated: &lt;date&gt; — v&lt;version&gt;"* line one level up.
-2. **Long-form page** — `content/docs/reference/changelog.mdx`, organized into `### Added`, `### Changed`, `### Security`, `### Process` subsections.
+The site footer is house chrome. It does not contain a changelog or a "Last updated" line. Do not add one back to `components/footer.tsx`.
 
-Either land the changelog update in the **same commit** as the work, or as an **immediate follow-up commit** before the session ends. Don't leave the visible changelog stale relative to the deployed app.
+Land the changelog update in the **same commit** as the work, or as an **immediate follow-up commit** before the session ends.
 
 **Versioning:**
 - Within the same calendar day, **extend the most recent version entry** with new bullets.
-- **Bump** (e.g. `v2.0.2` → `v2.0.3`) when crossing into a new day OR shipping a clearly distinct release.
+- **Bump** (e.g. `v2.2.4` → `v2.2.5`) when crossing into a new day OR shipping a clearly distinct release.
 
 ---
 
@@ -132,22 +135,18 @@ Pick the dominant cognitive dimension:
 
 ### Register the Page
 
-Update **3 files** after creating content:
-
 | File | What to Add |
 |------|-------------|
-| `components/moa-visual.tsx` | Graph node in `NODES_DATA` + edges in `EDGES` |
-| `components/mobile-sidebar.tsx` | Entry in `SUB_PAGES` under parent section |
-| `components/augment-space-btn.tsx` | Path-to-nodeId in `PATH_TO_NODE` |
+| Section `meta.json` | Page slug in `pages` (this puts it in the sidebar) |
+| `lib/moa-registry.ts` | `MOA_NODES` entry + at least two `MOA_EDGES` |
+| `content/docs/meta.json` | Folder name, only for a new top-level section |
+| `next.config.mjs` | Remove any redirect whose `source` is this path |
+
+`PATH_TO_NODE`, `PAGE_AGT`, and mobile `SUB_PAGES` are derived from `MOA_NODES`. Do not edit `components/moa-visual.tsx`, `components/augment-space-btn.tsx`, or a hand-maintained path map. A page that should open directly needs its own `href`. `PATH_TO_NODE` keeps the last node when several share a URL. The folded architecture nodes all use `/docs/reference/architecture` on purpose — that URL opens the appendix.
 
 ### Always Update the Changelog (Same Session)
 
-Every shipped change lands in **both** changelog surfaces — same commit or immediate follow-up. The two places:
-
-1. `components/footer.tsx` — the footer changelog block + the `Last updated: <date> — v<version>` line
-2. `content/docs/reference/changelog.mdx` — the long-form page
-
-Within a calendar day, extend the most recent version entry. Bump the version when crossing days or shipping a distinct release. No orphaned releases.
+Update `content/docs/reference/changelog.mdx` in the same commit or an immediate follow-up. Bump **Current Version** in `README.md` when the version changes. The footer has no changelog block.
 
 ### Using jettoptx-docs as a Template
 
@@ -169,5 +168,7 @@ When adding a new page, use this checklist:
 - [ ] Chose primary AGT tensor (COG/EMO/ENV)
 - [ ] Added node to `MOA_NODES` in `lib/moa-registry.ts`
 - [ ] Added edges to `MOA_EDGES` in `lib/moa-registry.ts` (min 2)
+- [ ] Listed the slug in the section `meta.json` `pages` array
 - [ ] (If new section) Updated `content/docs/meta.json` and `NAV_SECTIONS` in `mobile-sidebar.tsx`
-- [ ] **Updated both changelog surfaces** (footer block in `components/footer.tsx` + long-form `content/docs/reference/changelog.mdx`) and bumped *Last updated: &lt;date&gt; — v&lt;version&gt;*
+- [ ] Removed any `next.config.mjs` redirect for this path
+- [ ] Updated `content/docs/reference/changelog.mdx` and, if the version changed, the README **Current Version** line

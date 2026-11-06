@@ -16,7 +16,7 @@ export const AGENT_RULES: DocsRule[] = [
     id: "mdx-structure",
     title: "1. MDX Page Structure",
     description:
-      "Every doc page is an .mdx file in content/docs/<section>/. Each file MUST have frontmatter with three fields: title (page name), description (one-line summary), icon (Lucide icon name for sidebar). Fumadocs auto-discovers pages from the file tree — no manual route config.",
+      "Every doc page is an .mdx file in content/docs/<section>/. Each file MUST have frontmatter with three fields: title (page name), description (one-line summary), icon (Lucide icon name for sidebar). Add the slug to that section's meta.json pages array or the file stays off the sidebar. The file can still be routed without that entry.",
     files: ["content/docs/"],
   },
   {
@@ -57,8 +57,8 @@ export const AGENT_RULES: DocsRule[] = [
     id: "meta-json",
     title: "7. Navigation Ordering",
     description:
-      "Sub-pages are auto-discovered. If adding a NEW top-level section, add its folder name to the pages array in content/docs/meta.json. Order in the array determines sidebar ordering.",
-    files: ["content/docs/meta.json"],
+      "List every page slug in its section meta.json pages array. Order is sidebar order. Unlisted files can still be routed; they just stay out of the sidebar. New top-level sections also go in content/docs/meta.json. redirects() in next.config.mjs overrides the MDX route: delete a redirect before restoring that path. Retired URLs stay redirected (Hermes, agent-features → /docs/astrojoe/api, tiers, folded architecture, JettChat mode splits). A page that should open directly needs its own href — PATH_TO_NODE keeps the last node on a shared URL. Folded architecture nodes share /docs/reference/architecture on purpose.",
+    files: ["content/docs/meta.json", "next.config.mjs", "lib/moa-registry.ts"],
   },
   {
     id: "style-system",
@@ -70,8 +70,8 @@ export const AGENT_RULES: DocsRule[] = [
     id: "changelog-currency",
     title: "9. Changelog Currency (NON-NEGOTIABLE)",
     description:
-      "EVERY shipped change MUST be reflected in BOTH surfaces in the same session: (a) the footer changelog block in components/footer.tsx (the v2.x.y <li> entries inside the <details><summary>Changelog</summary>) AND (b) the long-form changelog at content/docs/reference/changelog.mdx. Either in the same commit as the work or as an immediate follow-up commit — never leave the visible changelog stale relative to the deployed app. Also update the 'Last updated: <date> — v<version>' line in components/footer.tsx. Within the same calendar day, extend the most recent version entry with new bullets; bump (e.g. v2.0.2 → v2.0.3) when crossing into a new day OR shipping a clearly distinct release. This rule applies to LLMs, VLMs, and human contributors equally.",
-    files: ["components/footer.tsx", "content/docs/reference/changelog.mdx"],
+      "EVERY shipped change MUST update content/docs/reference/changelog.mdx in the same session (Added / Changed / Fixed / Security / Process). When the public version changes, bump the Current Version line in README.md in the same change. The footer is house chrome and has no changelog — do not add one to components/footer.tsx. Within the same calendar day, extend the most recent version entry; bump (e.g. v2.2.4 → v2.2.5) when crossing into a new day OR shipping a clearly distinct release. Applies to LLMs, VLMs, and human contributors equally.",
+    files: ["content/docs/reference/changelog.mdx", "README.md"],
   },
 ];
 
@@ -96,7 +96,7 @@ export const HUMAN_RULES: DocsRule[] = [
     id: "h-register",
     title: "3. Register the Page",
     description:
-      "Update lib/moa-registry.ts: add MOA_NODES entry + MOA_EDGES. PATH_TO_NODE, PAGE_AGT, and mobile SUB_PAGES derive automatically.",
+      "List the slug in the section meta.json pages array so it shows in the sidebar, add a MOA_NODES entry plus at least two MOA_EDGES in lib/moa-registry.ts, and delete any next.config.mjs redirect for that path. PATH_TO_NODE, PAGE_AGT, and mobile SUB_PAGES derive from MOA_NODES. Do not hand-edit moa-visual.tsx or augment-space-btn.tsx.",
   },
   {
     id: "h-template",
@@ -108,6 +108,6 @@ export const HUMAN_RULES: DocsRule[] = [
     id: "h-changelog",
     title: "5. Always Update the Changelog",
     description:
-      "Same-session rule: every shipped change must land in BOTH the footer changelog block (components/footer.tsx) AND the long-form page (content/docs/reference/changelog.mdx). Also bump the 'Last updated: <date> — v<version>' line in the footer. No orphaned releases — if you ship it, document it the same day.",
+      "Same-session rule: update content/docs/reference/changelog.mdx when you ship. Bump the README Current Version line when the version changes. The footer has no changelog block.",
   },
 ];

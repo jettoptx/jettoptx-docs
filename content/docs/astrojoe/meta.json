@@ -4,6 +4,9 @@
   "pages": [
     "index",
     "hedgehog",
-    "api"
+    "api",
+    "skills",
+    "memory",
+    "orchestration"
   ]
 }
