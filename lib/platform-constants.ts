@@ -16,18 +16,6 @@ export const POA_TRUST_DEVNET = "79nQsecDspUWxvAMyJvK36EUty4yEoP5ssLvHZuNiugF";
 /** Legacy DePIN program ID on devnet — superseded by POA_TRUST_DEVNET for live config. */
 export const DEPIN_PROGRAM_DEVNET = "91SqqYLMi5zNsfMab6rnvipwJhDpN4FEMSLgu8F3bbGq";
 
-export const PLATFORM_URLS = {
-  docs: "https://jettoptx.dev",
-  dojo: "https://jettoptx.chat",
-  aaron: "https://aaron.jettoptics.ai",
-  hedgehog: "https://hedgehog.jettoptics.ai",
-  mcp: "https://mcp.jettoptics.ai",
-  stdb: "https://stdb.jettoptics.ai",
-  access: "https://astroknots.space",
-  trade: "https://jtx.astroknots.space",
-  astroknots: "https://astroknots.space",
-} as const;
-
 export const GITHUB_REPOS = {
   docs: "https://github.com/jettoptx/jettoptx-docs",
   sdk: "https://github.com/jettoptx/jettoptx-sdk",

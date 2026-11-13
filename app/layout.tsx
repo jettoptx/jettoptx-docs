@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   description:
     "We build Augments — digital extensions of yourself. OPTX Auth, SDK, AARON attestation, and surfaces for builders.",
-  metadataBase: new URL("https://jettoptx.dev"),
+  metadataBase: new URL("https://docs.jettoptics.si"),
   keywords: [
     "OPTX docs",
     "Augment",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://jettoptx.dev/docs",
+    url: "https://docs.jettoptics.si/docs",
     siteName: "OPTX Docs",
     title: "OPTX Documentation",
     description:
