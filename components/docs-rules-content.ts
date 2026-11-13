@@ -70,8 +70,8 @@ export const AGENT_RULES: DocsRule[] = [
     id: "changelog-currency",
     title: "9. Changelog Currency (NON-NEGOTIABLE)",
     description:
-      "EVERY shipped change MUST be reflected in BOTH surfaces in the same session: (a) the footer changelog block in components/footer.tsx (the v2.x.y <li> entries inside the <details><summary>Changelog</summary>) AND (b) the long-form changelog at content/docs/reference/changelog.mdx. Either in the same commit as the work or as an immediate follow-up commit — never leave the visible changelog stale relative to the deployed app. Also update the 'Last updated: <date> — v<version>' line in components/footer.tsx. Within the same calendar day, extend the most recent version entry with new bullets; bump (e.g. v2.0.2 → v2.0.3) when crossing into a new day OR shipping a clearly distinct release. This rule applies to LLMs, VLMs, and human contributors equally.",
-    files: ["components/footer.tsx", "content/docs/reference/changelog.mdx"],
+      "EVERY shipped change MUST update content/docs/reference/changelog.mdx and the README Current Version line in the same session. SiteFooter (components/footer.tsx) is house chrome and has no changelog block — do not add one. Within the same calendar day, extend the most recent version entry; bump (e.g. v2.2.4 → v2.2.5) when crossing into a new day OR shipping a clearly distinct release. This rule applies to LLMs, VLMs, and human contributors equally.",
+    files: ["content/docs/reference/changelog.mdx", "README.md"],
   },
 ];
 
@@ -108,6 +108,6 @@ export const HUMAN_RULES: DocsRule[] = [
     id: "h-changelog",
     title: "5. Always Update the Changelog",
     description:
-      "Same-session rule: every shipped change must land in BOTH the footer changelog block (components/footer.tsx) AND the long-form page (content/docs/reference/changelog.mdx). Also bump the 'Last updated: <date> — v<version>' line in the footer. No orphaned releases — if you ship it, document it the same day.",
+      "Same-session rule: every shipped change must land in content/docs/reference/changelog.mdx and the README Current Version line. The footer does not embed release notes. No orphaned releases — if you ship it, document it the same day.",
   },
 ];
