@@ -2,7 +2,7 @@
 
 Official developer documentation for the **Jett Optics / OPTX ecosystem** — [Next.js](https://nextjs.org) + [Fumadocs](https://fumadocs.vercel.app) + MDX.
 
-Live at **[jettoptx.dev/docs](https://jettoptx.dev/docs)**
+Live at **[docs.jettoptics.si/docs](https://docs.jettoptics.si/docs)**
 
 ## Project Structure
 
@@ -28,7 +28,7 @@ jettoptx-docs/
 3. Add node + edges to `lib/moa-registry.ts` (PATH_TO_NODE and PAGE_AGT derive automatically)
 4. Update changelog in `components/footer.tsx` and `content/docs/reference/changelog.mdx`
 
-See [/docs/rules](https://jettoptx.dev/docs/rules) for the full agent/human walkthrough.
+See [/docs/rules](https://docs.jettoptics.si/docs/rules) for the full agent/human walkthrough.
 
 ## Ecosystem Repos
 
@@ -39,7 +39,7 @@ See [/docs/rules](https://jettoptx.dev/docs/rules) for the full agent/human walk
 | [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin) | `/docs/on-chain-bridge` |
 | [jettoptx-aaron-public](https://github.com/jettoptx/jettoptx-aaron-public) | `/docs/infrastructure/edge-gateway` |
 
-Full map: [Ecosystem Repos](https://jettoptx.dev/docs/reference/ecosystem)
+Full map: [Ecosystem Repos](https://docs.jettoptics.si/docs/reference/ecosystem)
 
 ## Canonical On-Chain
 

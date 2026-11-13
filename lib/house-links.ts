@@ -1,19 +1,19 @@
 /** Canonical house URLs — keep in lockstep with JTX / saas / agency footers. */
 export const HOUSE = {
-  JETT_OPTICS: "https://jettoptics.ai",
-  AGENCY: "https://spacecowboys.agency",
-  BUY_JTX: "https://jtx.astroknots.space/buy",
-  SPACWBY: "https://jtx.astroknots.space/collection",
-  JTX_CHAT: "https://jtx.chat",
-  DOCS: "https://www.jettoptx.dev/docs",
+  JETT_OPTICS: "https://jettoptics.si",
+  AGENCY: "https://agency.jettoptics.si",
+  BUY_JTX: "https://space.jettoptics.si/buy",
+  SPACWBY: "https://space.jettoptics.si/collection",
+  APP: "https://agency.jettoptics.si/chat",
+  DOCS: "https://docs.jettoptics.si/docs",
   GITHUB: "https://github.com/jettoptx",
   AGENC_GITHUB: "https://github.com/tetsuo-ai/AgenC",
   X: "https://x.com/jettoptx",
   DISCORD: "https://discord.gg/bWtmWJM2X",
   EMAIL: "mailto:joe@jettoptics.ai",
-  TERMS: "https://jettoptics.ai/terms",
-  PRIVACY: "https://jettoptics.ai/privacy",
-  SECURITY: "https://jettoptics.ai/security",
+  TERMS: "https://jettoptics.si/terms",
+  PRIVACY: "https://jettoptics.si/privacy",
+  SECURITY: "https://jettoptics.si/security",
   GROUP_INVITE:
     "https://x.com/i/chat/group_join/g2105035852711616791/OMQphx900G",
 } as const
@@ -22,7 +22,7 @@ export const HOUSE_NAV = [
   { num: "01", label: "BUY $JTX", href: HOUSE.BUY_JTX },
   { num: "02", label: "AGENCY", href: HOUSE.AGENCY },
   { num: "03", label: "SPACWBY", href: HOUSE.SPACWBY },
-  { num: "04", label: "APP", href: HOUSE.JTX_CHAT },
+  { num: "04", label: "APP", href: HOUSE.APP },
   { num: "05", label: "DOCS", href: HOUSE.DOCS },
   { num: "06", label: "JETT OPTICS", href: HOUSE.JETT_OPTICS },
 ] as const
