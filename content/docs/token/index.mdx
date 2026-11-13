@@ -20,6 +20,29 @@ Token-2022, 9 decimals. Legacy v1 (`9XpJiKEY…`) has revoked mint authority —
 
 **Access tiers by JTX hold amount are deprecated.** Checkout and live product entitlements live on product surfaces — not duplicated as hold thresholds in these docs.
 
+## X Wealth
+
+**Augment 08 (Wealth)** has a public dry-run plugin: [jettoptx-xwealth](https://github.com/jettoptx/jettoptx-xwealth) (`@jettoptx/xwealth` 0.1.0). It is not a live payout rail.
+
+Constraints from `src/dry-run.ts`, `src/jtx-gate.ts`, and `src/x-money-link.ts`:
+
+- **No Privy.** Set `SOLANA_WALLET` to a mainnet pubkey. The gate is a read of $JTX v2 (`JTXGnx83…Zjoe`) via `getTokenAccountsByOwner`. Default minimum is **≥ 1** UI token. Override with `SOLANA_RPC_URL` (default public mainnet-beta).
+- **Parse, then dry-run.** Accepted input is a bare X handle or `https://x.com/i/money/pay/{handle}` / `…/transfer/{handle}` (also `twitter.com`). Other URLs are rejected.
+- **`--live` does not send.** `runDryRun` always returns `live: false` and `settle: false`, and adds a blocker that LIVE settle is not shipped. Exit `0` means a dry-run intent only.
+
+```bash
+git clone https://github.com/jettoptx/jettoptx-xwealth.git
+cd jettoptx-xwealth
+export SOLANA_WALLET='<pubkey that holds ≥1 JTX>'
+npm install
+npm run setup
+npm run dry-run -- --to https://x.com/i/money/pay/demo_user --amount 1
+```
+
+`npm run setup` is `check-wallet` + `check-jtx` and writes `~/.xwealth/session.json`. Do not commit keypair files. `XWEALTH_KEYPAIR` is an optional local signer check; the dry-run path does not require it and never prints the secret.
+
+AARON is not required for this gate. SpacetimeDB is not required.
+
 ## On-chain program
 
 Anchor programs and TS SDK: [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin)

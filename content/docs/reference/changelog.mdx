@@ -6,6 +6,20 @@ description: Version history and release notes for the OPTX ecosystem.
 
 ---
 
+## 2026-11-13 — v2.2.5: Edge gateway matches the public Worker
+
+### Changed
+- **[Edge Gateway](/docs/infrastructure/edge-gateway)** rewritten from `jettoptx-aaron-public` `main`. The old "any Bearer allows" Phase 0 note is gone. Page now covers the exact `.si` CORS origins (no `.si` wildcard), the JOE token gate, the six MCP tools, SuperGrok vs computer doors, the `GET /x402` catalog, and the MOJO `GET /v` deep link.
+- **[Client Integration](/docs/protocol/client-integration)** no longer tells integrators to call `POST /handshake/start` or `POST /handshake/done`. Those doors return `401` at the edge.
+- **[$JTX Token](/docs/token#x-wealth)** documents the public [jettoptx-xwealth](https://github.com/jettoptx/jettoptx-xwealth) dry-run (JTX ≥ 1, X Money link parse, LIVE settle not shipped). Ecosystem map includes that repo.
+- **Augment 08** on the registry page points at the X Wealth section. Edge MCP is listed as the six tools the Worker actually implements.
+
+### Fixed
+- **Docs search pitfall** — `jett_docs_search` still requests `docs.jettoptx.dev` and `www.jettoptx.dev`, which 404. Live search is `https://docs.jettoptics.si/api/search?query=` (`?q=` is empty).
+- **DOCS Rules** — changelog lives on this page and in the README version line. `SiteFooter` is house chrome and does not embed a changelog block. The human "register a page" steps point at `lib/moa-registry.ts` only.
+
+---
+
 ## 2026-10-20 — jett_vault retired
 
 ### Removed

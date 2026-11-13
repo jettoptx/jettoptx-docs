@@ -57,13 +57,18 @@ const verified = await client.verifySession({
 });
 ```
 
-## MOJO Handshake (Mobile)
+## MOJO entry (mobile)
 
-For first-gaze AGT attestation from iOS, use the web-to-iOS handshake documented in [MOJO](/docs/dojo/mojo):
+`POST /handshake/start` and `POST /handshake/done` on `aaron.jettoptics.ai` are edge-blocked (`401`, `{ "error": "unauthorized — temporarily disabled" }`). Do not call them.
 
-- `POST /handshake/start` — generate QR payload
-- `POST /handshake/done` — MOJO submits verified gaze proof
-- `GET /handshake/status/{id}` — poll until complete
+The public mobile door is the Worker deep link (opaque session id only, 8–128 URL-safe characters):
+
+```text
+GET https://mcp.jettoptics.ai/v?s={opaqueSessionId}
+→ 302 Location: jettmojo://verify?s={opaqueSessionId}
+```
+
+Invalid or missing `s` returns `400`. Details: [Edge Gateway](/docs/infrastructure/edge-gateway).
 
 ## Response Shape
 
