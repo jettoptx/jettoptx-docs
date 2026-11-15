@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <div className="flex items-center justify-between h-14 px-6">
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <Image
-              src="/optx-logo.png"
+              src="/brand/optx-mark-128.png"
               alt="OPTX"
               width={48}
               height={48}
@@ -42,7 +42,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               style={{ objectFit: "contain" }}
             />
             <Image
-              src="/optx-logo-dark.png"
+              src="/brand/logo-neon.png"
               alt="OPTX"
               width={48}
               height={48}
