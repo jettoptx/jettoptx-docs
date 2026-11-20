@@ -6,6 +6,17 @@ description: Version history and release notes for the OPTX ecosystem.
 
 ---
 
+## 2026-11-20 — v2.2.6: Trade app routes
+
+### Changed
+- **[Trading & Mint](/docs/token/trading)** matches `src/App.tsx` on the trade app. `/` is the landing. `/buy` and `/stonk` are SJTX (`6zmDH3…`). `/mint` redirects to `/collection#mint`, and `/collection` is the coming-soon page. `/pool` redirects to `/buy`.
+- **Chart vs trade links.** “View chart” opens `https://app.jtx.com/?mint=<SJTX>`. `JTX_TRADE` opens `https://app.jtx.com/ref/Jett` with no mint query.
+- **Addresses.** Candy Machine and Candy Guard from `collectionConfig.ts` are listed. The Meteora DLMM pool is gone from `programConstants.ts`.
+- **Hosts.** House door is [space.jettoptics.si](https://space.jettoptics.si). [jtx.astroknots.space](https://jtx.astroknots.space) still serves the same app title.
+- Ecosystem map and the Trading & Mint MOA node use the same route story.
+
+---
+
 ## 2026-10-20 — jett_vault retired
 
 ### Removed

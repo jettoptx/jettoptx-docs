@@ -1,21 +1,46 @@
 ---
 title: JTX Trading & Mint
-description: Swap, NFT mint, and on-chain constants via jtx.astroknots.space.
+description: Trade-app routes, SJTX chart links, and the Space Cowboys constants that the SPA still ships.
 icon: TrendingUp
 ---
 
-The **[jettoptx-jtx-trade](https://github.com/jettoptx/jettoptx-jtx-trade)** app is the public Solana builder UI at [jtx.astroknots.space](https://jtx.astroknots.space).
+The **[jettoptx-jtx-trade](https://github.com/jettoptx/jettoptx-jtx-trade)** app is the public Solana surface. This docs site’s house links use [space.jettoptics.si](https://space.jettoptics.si). [jtx.astroknots.space](https://jtx.astroknots.space) serves the same app title (checked 2026-11-20).
 
-## Features
+Route table below is `src/App.tsx` on `main`. Constants are `src/lib/programConstants.ts` and `src/lib/collectionConfig.ts`.
 
-| Route | Feature |
-|-------|---------|
-| `/` | $JTX swap via Jupiter aggregator |
-| `/mint` | Space Cowboys NFT mint (1,111 supply) |
-| `/collection` | Minted NFT gallery |
-| `/admin/deploy` | LP bootstrap (deploy wallet gated) |
+## Routes
 
-## Canonical Addresses
+| Path | What the SPA mounts |
+|------|---------------------|
+| `/` | Landing (`Index`). Hosts `mars.astroknots.space` and `marz.astroknots.space` redirect to `/marz`. |
+| `/buy` | SJTX page (`StonkBuy`). $JTX v2 is not the token this page trades. |
+| `/stonk` | SJTX hero, flywheel, and live ticker (`Stonk`). |
+| `/pool` | Redirect to `/buy`. |
+| `/mint` | Redirect to `/collection#mint`. |
+| `/collection` | Coming-soon page titled “Space Cowboys”. `Mint.tsx` and `Collection.tsx` are not mounted. |
+| `/agents` | Coming soon. |
+| `/marz` | Mars page. `/mars` redirects here. |
+| `/orphan` | Orphan page. |
+| `/authorize` | Authorize page. |
+| `/admin/deploy` | `AdminDeploy`. Wallet-gated operator page, not a public swap. |
+| `/contact` | Redirect to `/`. |
+
+## SJTX vs $JTX v2
+
+`/buy` and `/stonk` are **StonkJTX (SJTX)**, a StonkFun community token quoted in JTO. The governance mint stays **$JTX v2**.
+
+| Item | Value |
+|------|--------|
+| SJTX mint | `6zmDH3opJ1tekeFhfLaMWN1aMR9aNL3MYRUXYu4qTxr7` |
+| StonkFun | `https://www.stonkfun.xyz/token/6zmDH3opJ1tekeFhfLaMWN1aMR9aNL3MYRUXYu4qTxr7` |
+| View chart (`StonkFlywheel`) | `https://app.jtx.com/?mint=6zmDH3opJ1tekeFhfLaMWN1aMR9aNL3MYRUXYu4qTxr7` |
+| `JTX_TRADE` / `JTX_TRADE_SJTX` | `https://app.jtx.com/ref/Jett` |
+
+**Chart pitfall.** “View chart” on `/stonk` includes the SJTX mint query. Buttons that use `JTX_TRADE` (the “Trade on JTX” link on `/buy`, and “Trade JTX” on `StonkMemePanel`) open `https://app.jtx.com/ref/Jett` with **no** `mint` query, so they do not land on the SJTX chart.
+
+The `/stonk` footer states $SJTX has no intrinsic value and is not investment advice. These docs do not add a return claim.
+
+## Canonical addresses
 
 | Item | Address |
 |------|---------|
@@ -23,20 +48,21 @@ The **[jettoptx-jtx-trade](https://github.com/jettoptx/jettoptx-jtx-trade)** app
 | $JTX v1 (legacy) | `9XpJiKEYzq5yDo5pJzRfjSRMPL2yPfDQXgiN7uYtBhUj` |
 | DePIN program | `85sqs4upQiPrvk1NMuyfHVQoW1EGdgk8m2cQb7uMxXTF` |
 | Space Cowboys collection | `FFPeaPRugCzoATDhXG7ZaGk4woTBGsmHBugdpPcgi4EY` |
-| Meteora DLMM pool | `54ecLhTa8HZg1bhcDNWiddd8p7UN7jq4HLWeLr1sRHMz` |
+| Candy Machine v3 | `B1VKZRvaf5Q2H9a2jXXAP4Wf2tav7dXuQxsaYJXKxjZi` |
+| Candy Guard | `EM5SSJmdsx3bS4h5eVoA17AP6uBfGahZih31mF5uvMPJ` |
 | Treasury (Squads) | `9WssADzftzptNnMHLzPZYAFApUfE7qLYChicH1Wh6YD7` |
 
-Source of truth: `src/lib/programConstants.ts` in the jtx-trade repo.
+`programConstants.ts` does not list a Meteora DLMM pool. `/pool` redirects to `/buy`.
 
-## v1 → v2 Migration
+The repo README still describes a 1,111-supply Candy Machine paid in v2 $JTX into the Squads treasury. The running SPA does not mount that mint UI. `collectionConfig.ts` says mint flows go through the Candy Machine, not `createAsset`.
 
-Legacy v1 JTX holders should follow the migration runbook in the repo:
+## v1 → v2
+
+v2 is Token-2022, 9 decimals. v1 mint authority is revoked. Migration notes:
 
 [jtx-v2-migration-runbook.md](https://github.com/jettoptx/jettoptx-jtx-trade/blob/main/docs/jtx-v2-migration-runbook.md)
 
-v2 is Token-2022, 9 decimals, mint authority retained for protocol governance.
-
-## Development
+## Local development
 
 ```bash
 git clone https://github.com/jettoptx/jettoptx-jtx-trade.git
@@ -44,12 +70,17 @@ cd jettoptx-jtx-trade
 npm install --legacy-peer-deps
 cp .env.example .env.local
 npm run dev
+# http://localhost:5173
 ```
 
-Stack: Vite + React 19, Anchor 0.30, Metaplex Core, Meteora DLMM.
+Set `VITE_SOLANA_RPC_URL` and `VITE_PRIVY_APP_ID` (`VITE_PRIVY_CLIENT_ID` when the Privy app uses an app client). Allowlist `localhost` and the deployed hosts in the Privy dashboard, and enable Solana embedded wallets.
+
+**Local gallery pitfall.** The dev RPC fallback is a public node without DAS, so a collection read shows 0 NFTs. Production uses the keyless Helius Secure URL.
+
+Stack: Vite, Ionic React 8, Capacitor, React 19, `react-router` v6, Privy, Metaplex Core (`mpl-core`).
 
 ## Related
 
-- [Platform Access](/docs/getting-started/access) — buy JTX and enter DOJO
-- [On-Chain Addresses](/docs/getting-started/on-chain-addresses) — full address table
-- [On-Chain Bridge](/docs/on-chain-bridge) — Anchor program SDK
+- [Platform Access](/docs/getting-started/access)
+- [On-Chain Addresses](/docs/getting-started/on-chain-addresses)
+- [On-Chain Bridge](/docs/on-chain-bridge)

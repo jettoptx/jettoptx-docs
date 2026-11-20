@@ -59,6 +59,6 @@ npm run build
 
 ## Current Version
 
-**v2.2.4** — On-chain addresses list $JTX v2 and the devnet $OPTX Utility mint.
+**v2.2.6** — Trading docs match the trade app: SJTX on `/buy` and `/stonk`; Space Cowboys mint UI is not mounted.
 
 APACHE — use it, fork it, ship it.
