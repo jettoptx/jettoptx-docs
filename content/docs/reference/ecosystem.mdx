@@ -1,10 +1,10 @@
 ---
 title: Ecosystem Repos
-description: All 16 jettoptx repos mapped to documentation sections — public developer surface vs internal.
+description: jettoptx repos mapped to documentation sections — public developer surface vs internal.
 icon: Boxes
 ---
 
-The OPTX platform spans **16 repositories** in the `jettoptx` org plus **Secure-Legion** for Phantom Mode. This page maps each repo to its docs section and access level.
+The OPTX platform spans the `jettoptx` org plus **Secure-Legion** for Phantom Mode. This page maps each repo to its docs section and access level.
 
 ---
 
@@ -15,7 +15,8 @@ The OPTX platform spans **16 repositories** in the `jettoptx` org plus **Secure-
 | [jettoptx-docs](https://github.com/jettoptx/jettoptx-docs) | This site | Next.js 16 + Fumadocs + MDX at [docs.jettoptics.si](https://docs.jettoptics.si/docs) |
 | [jettoptx-sdk](https://github.com/jettoptx/jettoptx-sdk) | [SDK Reference](/docs/sdk) | **Canonical** — `@jettoptx/auth`, `@jettoptx/chat`, augment registry |
 | [jettoptx-aaron-router](https://github.com/jettoptx/jettoptx-aaron-router) | [AARON Protocol](/docs/protocol) | FastAPI gaze attestation router + Python/TS SDKs |
-| [jettoptx-aaron-public](https://github.com/jettoptx/jettoptx-aaron-public) | [Edge Gateway](/docs/infrastructure/edge-gateway) | Cloudflare edge — AARON routes + HEDGEHOG MCP |
+| [jettoptx-aaron-public](https://github.com/jettoptx/jettoptx-aaron-public) | [Edge Gateway](/docs/infrastructure/edge-gateway) | Cloudflare Worker — CORS, JOE token gate, six MCP tools, edge kill-switches |
+| [jettoptx-xwealth](https://github.com/jettoptx/jettoptx-xwealth) | [X Wealth](/docs/token#x-wealth) | Augment 08 dry-run — JTX ≥ 1 gate, X Money link parse. LIVE settle is not shipped |
 | [jettoptx-poa-depin](https://github.com/jettoptx/jettoptx-poa-depin) | [On-Chain Bridge](/docs/on-chain-bridge) | Anchor PoA DePIN + TS SDK |
 | [jettoptx-jettchat-app](https://github.com/jettoptx/jettoptx-jettchat-app) | [JettChat](/docs/jettchat) | DOJO product at dojo.jettoptics.si (integration patterns only) |
 | [jettoptx-mojo](https://github.com/jettoptx/jettoptx-mojo) | [MOJO](/docs/dojo/mojo) | iOS first-gaze AGT attestation + handshake spec |
@@ -57,6 +58,7 @@ The OPTX platform spans **16 repositories** in the `jettoptx` org plus **Secure-
 | On-chain programs | [jettoptx-poa-depin](/docs/on-chain-bridge) |
 | Mobile handshake | [jettoptx-mojo](/docs/dojo/mojo) |
 | MCP / edge API | [jettoptx-aaron-public](/docs/infrastructure/edge-gateway) |
+| X Money dry-run (Augment 08) | [jettoptx-xwealth](/docs/token#x-wealth) |
 | agent bridge | [joe-agent-api](/docs/astrojoe/api) + upstream [agent runtime](https://github.com/NousResearch/agent-runtime) |
 | Augment topology | `@jettoptx/jett-augment-registry` in SDK |
 

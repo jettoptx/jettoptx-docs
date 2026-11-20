@@ -26,7 +26,7 @@ jettoptx-docs/
 1. Create `content/docs/<section>/<page>.mdx` with frontmatter (`title`, `description`, `icon`)
 2. Register in section `meta.json` and root `content/docs/meta.json` if new section
 3. Add node + edges to `lib/moa-registry.ts` (PATH_TO_NODE and PAGE_AGT derive automatically)
-4. Update changelog in `components/footer.tsx` and `content/docs/reference/changelog.mdx`
+4. Update `content/docs/reference/changelog.mdx` and the README `Current Version` line (`SiteFooter` does not embed release notes)
 
 See [/docs/rules](https://docs.jettoptics.si/docs/rules) for the full agent/human walkthrough.
 
@@ -59,6 +59,6 @@ npm run build
 
 ## Current Version
 
-**v2.2.4** — On-chain addresses list $JTX v2 and the devnet $OPTX Utility mint.
+**v2.2.5** — Edge gateway matches the public Worker (CORS, JOE token, kill-switches). X Wealth dry-run is on the token page.
 
 APACHE — use it, fork it, ship it.

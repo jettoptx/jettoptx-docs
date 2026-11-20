@@ -1,48 +1,123 @@
 ---
 title: Edge Gateway & MCP
-description: Cloudflare edge gateway — AARON routes and HEDGEHOG MCP at mcp.jettoptics.ai.
+description: Cloudflare Worker in jettoptx-aaron-public — CORS, JOE token gate, public MCP tools, and edge kill-switches.
 icon: Cloud
 ---
 
-The **[jettoptx-aaron-public](https://github.com/jettoptx/jettoptx-aaron-public)** repo (also known as `jettoptx-aaron-hedgehog`) deploys a gated **Cloudflare Worker** that fronts AARON attestation routes and the HEDGEHOG MCP gateway.
+The **[jettoptx-aaron-public](https://github.com/jettoptx/jettoptx-aaron-public)** Worker (`jettoptx-aaron-hedgehog`) is the public edge in front of AARON and HEDGEHOG. It does CORS, request IDs, a JOE token gate, and a few doors that never reach origin. The FastAPI router itself stays on the Jetson (`AARON_ORIGIN`).
+
+Verified against `src/index.ts`, `src/lib/cors.ts`, `src/lib/auth-gate.ts`, and `wrangler.toml` on `main` (2026-11-13).
 
 ## Hosts
 
-| Host | Purpose |
-|------|---------|
-| `aaron.jettoptics.ai` | AARON REST — session, verify, gaze, handshake |
-| `mcp.jettoptics.ai` | HEDGEHOG MCP — JOE Agentic OS tools |
+| Host | What actually runs there |
+|------|--------------------------|
+| `mcp.jettoptics.ai/*` | This Worker (zone route) |
+| `aaron.jettoptics.ai` | Origin tunnel, **except** the exact zone routes below (catalog + kill-switches) |
+| `hedgehog.jettoptics.ai` | `HEDGEHOG_ORIGIN` — Worker proxies `/grok` and `/context` only after a JOE token |
 
-## Auth (Phase 0 → 1)
+`AARON_ORIGIN` in production vars is `https://aaron.jettoptics.ai`.
 
-| Phase | Behavior |
-|-------|----------|
-| **0 (now)** | Bearer token or `X-JOE-Token` header present → allow |
-| **1** | Validate token against SpacetimeDB + DOJO tier via Privy dashboard |
+## CORS
 
-Developers obtain **JOE API tokens** through a DOJO subscription at [dojo.jettoptics.si](https://dojo.jettoptics.si).
+`CORS_PROD_DOMAINS` is an allowlist. A matching `Origin` is reflected. Any other origin gets **no** `Access-Control-Allow-Origin` (never `*`).
 
-## AARON Routes
+**Exact** `*.jettoptics.si` entries (there is no `.si` wildcard):
 
-| Method | Path | Description |
-|--------|------|-------------|
-| POST | `/session` | Create gaze challenge |
-| POST | `/verify` | Submit proof hash |
-| POST | `/gaze/analyze` | AGT classification |
-| POST | `/handshake/*` | MOJO web-to-iOS handoff |
+| Origin |
+|--------|
+| `https://jettoptics.si` |
+| `https://dojo.jettoptics.si` |
+| `https://dev.jettoptics.si` |
+| `https://agency.jettoptics.si` |
 
-See [AARON Protocol](/docs/protocol) for the full API.
+Also allowed: `https://*.jettoptics.ai`, `https://jettoptx.chat`, `https://www.jettoptx.chat`, `https://*.jettoptx.chat`, `https://jettoptx.vercel.app`, `https://grok.com`, `https://*.grok.com`, `https://x.ai`, `https://*.x.ai`, `capacitor://localhost`, `http://localhost:*`.
 
-## MCP Tools (Phase 0)
+Browser calls from `https://docs.jettoptics.si` or `https://space.jettoptics.si` fail preflight. Add the exact origin to `CORS_PROD_DOMAINS`. Do not add `https://*.jettoptics.si`.
 
-| Tool | Description |
-|------|-------------|
-| `hedgehog_health` | Gateway health check |
-| `jett_augment_status` | JETT Augments 00–09 with V/S/W hotkeys |
+Allowed request headers include `Authorization`, `X-JOE-Token`, `X-PAYMENT`, `PAYMENT-SIGNATURE`, and `MCP-Protocol-Version`. Methods: `GET, POST, PUT, DELETE, OPTIONS`.
 
-Canonical augment data: `@jettoptx/jett-augment-registry` — see [Augment Registry](/docs/sdk/augment-registry).
+## Auth
 
-## Local Development
+A non-empty `Bearer` is not enough. `validateJoeToken` accepts only:
+
+| Credential | Header | Notes |
+|------------|--------|-------|
+| Worker secret `MCP_API_KEY` | `Authorization: Bearer` or `X-JOE-Token` | Static admin key |
+| SpacetimeDB `jtx_api_key` | either header | SHA-256 lookup at `SPACETIME_HTTP_URL`; revoked keys fail |
+| X OAuth access token | `Authorization: Bearer` only | Username must be in Worker secret `SHIELD4_ALLOWLIST_JSON`, and the billing gate must pass. Empty or invalid JSON fails closed for X OAuth. The admin key and DB keys still work. |
+
+`?key=` and `?token=` are rejected (`401`). Do not put credentials in the query string.
+
+**SuperGrok** (phone sheet cannot send `X-JOE-Token`): paste `https://mcp.jettoptics.ai/joe/hedgehog` and finish OAuth. That access token unlocks the six public tools at `/joe/hedgehog` and `/mcp` only. It does not unlock `/joe/mcp`, `/joe/ore`, `/mcp/jettchat`, or x402.
+
+Public with no token: `GET /health`, `GET /.well-known/joe-gateway`, OAuth discovery (`/.well-known/oauth-*`, `/oauth/*`), `GET /x402`, `GET /v`.
+
+Computer tokens are issued through DOJO / [jettoptx.chat/support](https://jettoptx.chat/support).
+
+## Doors
+
+| Door | Auth | Behavior |
+|------|------|----------|
+| `POST /session`, `POST /verify`, `/stdb`, `/agt`, `/x402/v1/*`, `/orphan/402` | Ungated at the edge | Proxied to `AARON_ORIGIN`. Payment and origin auth stay on the router. |
+| `GET /x402` | Public | Edge catalog only. Services: `chat` (0.01 USDC), `gaze_analyze` (0.005), `task` (0.05), `orphan_donate` (1.0). `payTo` `5ct4GDdvNV4GLEgQ595yegWH5Eyrp2hBGuabz2ZyCbyc` (`jtxfaucet.sol`). Asset is mainnet USDC `EPjFWdd5…`. `prima_title` is not in the catalog. |
+| `GET/POST /joe/mcp` (+ `/sse`) | JOE token, header only | Proxy to origin. A phone sheet cannot auth. |
+| `POST/GET /joe/hedgehog` | SuperGrok OAuth **or** JOE token | OAuth serves the six tools locally. A JOE token proxies to origin. |
+| `POST/GET /joe/ore/rpc`, `GET /joe/ore/subscribe` | JOE token | Proxy to origin. Paid Helius/gRPC stays on the router. Missing token is `401`, not `404`. `/joe/ore/extra` is not this door. |
+| `GET /mcp/jettchat` | JOE token | Census proxy. Exact path only. |
+| `POST /mcp` | JOE token or SuperGrok OAuth | HEDGEHOG MCP on the Worker |
+| `GET /v?s=` | Public | MOJO deep link. See below. |
+
+## Edge kill-switches
+
+These paths on `aaron.jettoptics.ai` are zone-routed to the Worker. They return **`401`** and are **not** proxied. A JOE token does not bypass them.
+
+| Paths | Body |
+|-------|------|
+| `/faucet/claim`, `/faucet/sol` | `{ "error": "faucet temporarily disabled" }` |
+| `/docs`, `/redoc`, `/openapi.json` | `{ "error": "docs temporarily disabled" }` |
+| `/jett/totp/enroll`, `/jett/totp/verify`, `/gaze/analyze`, `/poa/claim`, `/donations/claim`, `/handshake/start`, `/handshake/done`, `/hermesync/pair`, `/jett/challenge/scanned`, `/orphan/claim`, `/audit/devnet` | `{ "error": "unauthorized — temporarily disabled" }` |
+
+Still on origin (not killed): `/session`, `/jett/totp/challenge`, `/jett/challenge/create`, and `/docs/oauth2-redirect`.
+
+`POST /gaze/analyze` and `POST /handshake/start` + `/handshake/done` are not live integrator calls. Gaze verify is `POST /verify`. Mobile entry is the deep link below. See [Client Integration](/docs/protocol/client-integration).
+
+## MCP tools
+
+`tools/list` on this Worker is exactly these six. `jett_augment_status` reports `"registered"` (topology), not live mesh health.
+
+| Tool | Use |
+|------|-----|
+| `hedgehog_health` | Gateway liveness |
+| `jett_augment_status` | Augments 00–09 |
+| `jett_docs_search` | Docs search. Argument `query` (or `q`). HTTP call uses `?query=` |
+| `jett_augment_lookup` | One augment by `digit` or `name` |
+| `jett_edge_diagnose` | Hosts and tool list. `probe: false` skips outbound HEADs. Booleans only — no secret values |
+| `message_joe` | Text accept-and-ack. If `HEDGEHOG_INBOX_URL` and `HEDGEHOG_INBOX_KEY` are both set, the text is POSTed. If unset, the tool still acks and Joe is not woken |
+
+```bash
+curl -sS https://mcp.jettoptics.ai/mcp \
+  -H "Authorization: Bearer $JOE_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"jett_augment_lookup","arguments":{"digit":"06"}}}'
+```
+
+**Docs search pitfall.** The Worker still calls `https://docs.jettoptx.dev/api/search` and `https://www.jettoptx.dev/api/search`. Both return **404** (checked 2026-11-13). The live index is `https://docs.jettoptics.si/api/search?query=` (`?q=` returns `[]`). When those old hosts fail, the tool falls back to a short static index and can miss current pages.
+
+Protocol versions accepted on `initialize`: `2024-11-05`, `2025-03-26`, `2025-06-18`. Server name `jettoptx-aaron-hedgehog` `0.2.0`.
+
+## MOJO deep link
+
+Edge-only. Not proxied.
+
+```text
+GET https://mcp.jettoptics.ai/v?s={opaqueSessionId}
+→ 302 Location: jettmojo://verify?s={opaqueSessionId}
+```
+
+`s` must match `A-Za-z0-9_-` and be 8–128 characters. Missing or invalid → `400`. No secrets in the URL.
+
+## Local development
 
 ```bash
 git clone https://github.com/jettoptx/jettoptx-aaron-public.git
@@ -50,19 +125,14 @@ cd jettoptx-aaron-public
 npm install
 npx wrangler login
 npm run dev
-# MCP health: GET http://localhost:8787/health
+# GET http://localhost:8787/health
 ```
 
-## Deploy
-
-```bash
-npm run deploy
-```
-
-Secrets for Phase 1: `CF_ACCESS_CLIENT_ID`, `CF_ACCESS_CLIENT_SECRET`, `XAI_API_KEY` via `wrangler secret put`.
+`npm run deploy` publishes the Worker. Set secrets with `wrangler secret put` (never commit values): `MCP_API_KEY`, `SHIELD4_ALLOWLIST_JSON`, optional `MCP_OAUTH_SIGNING_KEY`, `HELIUS_MAINNET_RPC`, `CF_ACCESS_CLIENT_ID` + `CF_ACCESS_CLIENT_SECRET`, `HEDGEHOG_INBOX_URL` + `HEDGEHOG_INBOX_KEY` (aliases `JOE_INBOX_*`).
 
 ## Related
 
-- [HEDGEHOG Gateway](/docs/astrojoe/hedgehog) — conceptual architecture on Jetson edge
-- [Edge MCP](/docs/infrastructure/edge) — HEDGEHOG on validator nodes
-- [Client Integration](/docs/protocol/client-integration) — AARON SDK quickstart
+- [Client Integration](/docs/protocol/client-integration) — `POST /session` and `POST /verify`
+- [Augment Registry](/docs/sdk/augment-registry) — digits 00–09
+- [HEDGEHOG](/docs/astrojoe/hedgehog) — Jetson gateway, not this Worker
+- [X Wealth](/docs/token#x-wealth) — Augment 08 dry-run (separate repo)
