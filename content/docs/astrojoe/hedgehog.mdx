@@ -92,3 +92,12 @@ If the `/v1/responses` endpoint fails, HEDGEHOG automatically falls back to `/v1
 - Agents connect to HEDGEHOG via `OPENAI_BASE_URL` pointed at port 8811. Custom skills (`hedgehog-websearch`, `hedgehog-memory`) handle tool access through REST calls.
 - **Claude Code / Cursor** connects via MCP stdio — no HTTP involved.
 - There is no `/mcp` endpoint on the HTTP service; LLM routing continues via `OPENAI_BASE_URL`.
+
+## Related runbooks
+
+HEDGEHOG is the porch. These pages are the operator detail:
+
+- **[JOE Agent API](/docs/astrojoe/api)** — JettChat SSE sidecar, sessions, and metered billing (`localhost:8643`)
+- **[Skills](/docs/astrojoe/skills)** — `SKILL.md` disclosure levels and the skills mounted for this gateway
+- **[Memory](/docs/astrojoe/memory)** — `optx-cortex` tables, reducers, and backend limits
+- **[Orchestration](/docs/astrojoe/orchestration)** — task lifecycle, swarm DAG, gaze-gated claim

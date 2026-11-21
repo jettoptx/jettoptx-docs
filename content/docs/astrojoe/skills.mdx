@@ -1,7 +1,7 @@
 ---
 icon: Wrench
 title: Skills System
-description: AstroJOE's SKILL.md-based tool system â€” procedural knowledge documents that enable real tool execution.
+description: AstroJOE's SKILL.md-based tool system — procedural knowledge documents that enable real tool execution.
 ---
 
 AstroJOE uses **SKILL.md** files as its tool system. Each skill is a procedural knowledge document that teaches the agent how to execute specific operations via the terminal (curl, python3, jq).
@@ -12,9 +12,9 @@ agent runtime ships a large built-in skill library (categories include `software
 
 agent runtime scans `~/.agent/skills/` recursively for `SKILL.md` files. Skills follow a three-level progressive disclosure pattern:
 
-1. **Level 0** â€” `skills_list()`: Returns name, description, and category (~3k tokens)
-2. **Level 1** â€” `skill_view(name)`: Loads the full SKILL.md content on demand
-3. **Level 2** â€” `skill_view(name, path)`: Loads specific reference files individually
+1. **Level 0** — `skills_list()`: Returns name, description, and category (~3k tokens)
+2. **Level 1** — `skill_view(name)`: Loads the full SKILL.md content on demand
+3. **Level 2** — `skill_view(name, path)`: Loads specific reference files individually
 
 Skills are loaded **only when needed** for the current task, conserving context.
 
@@ -59,7 +59,7 @@ Search the web and X/Twitter using Grok multi-agent mode with built-in `web_sear
 **Trigger**: User asks to search the web, look up current events, or check a website.
 
 ### spacetimedb-memory
-Full CRUD on the optx-cortex database â€” store/recall memories, manage agent state, query gaze attestations and session logs.
+Full CRUD on the optx-cortex database — store/recall memories, manage agent state, query gaze attestations and session logs.
 
 **Trigger**: User asks to remember something, recall context, or check agent state.
 
@@ -76,7 +76,7 @@ Send and receive messages through Matrix/Conduit federation via JOE WebSocket se
 **Trigger**: User asks to send a message to Matrix or relay information.
 
 ### agenc-tasks
-Orchestrate Solana agent swarms via AgenC â€” create/claim/complete tasks, policy checks, ZK proofs.
+Orchestrate Solana agent swarms via AgenC — create/claim/complete tasks, policy checks, ZK proofs.
 
 **Trigger**: User mentions tasks, swarm, orchestration, or AgenC.
 
@@ -101,8 +101,8 @@ Place a new directory with a `SKILL.md` file in the skills mount:
 
 ```
 skills/
-â”œâ”€â”€ my-new-skill/
-â”‚   â””â”€â”€ SKILL.md
+└── my-new-skill/
+    └── SKILL.md
 ```
 
 The skill will be discovered automatically on the next agent restart. Skills execute via the terminal backend (Docker container with curl, python3, jq).

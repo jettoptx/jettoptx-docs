@@ -17,12 +17,8 @@ const config = {
       { source: "/docs/jettchat/xchat-native", destination: "/docs/jettchat", permanent: true },
       { source: "/docs/jettchat/phantom-mode", destination: "/docs/jettchat", permanent: true },
       { source: "/docs/jettchat/messaging", destination: "/docs/jettchat", permanent: true },
-      { source: "/docs/astrojoe/skills", destination: "/docs/astrojoe/hedgehog", permanent: true },
-      { source: "/docs/astrojoe/memory", destination: "/docs/astrojoe/hedgehog", permanent: true },
-      { source: "/docs/astrojoe/orchestration", destination: "/docs/astrojoe/hedgehog", permanent: true },
       { source: "/docs/astrojoe/hermes-features", destination: "/docs/astrojoe/hedgehog", permanent: true },
-      { source: "/docs/astrojoe/api", destination: "/docs/astrojoe/hedgehog", permanent: true },
-      { source: "/docs/rules", destination: "/docs/reference", permanent: true },
+      { source: "/docs/astrojoe/agent-features", destination: "/docs/astrojoe/api", permanent: true },
     ];
   },
 };
